@@ -207,8 +207,26 @@ def _cache_key(pdf_name, q_num):
     return f"{pdf_name}::{q_num}"
 
 
+def _extract_product_id(pdf_name):
+    """PDF 파일명에서 고유 식별자 추출 (버전/공통단어 제외).
+    예: 'FCSS_NST_SE-7.6 V13.35.pdf' → 'NST'
+        'FCSS_EFW_AD-7.6 V12.95.pdf' → 'EFW'
+    """
+    # FCSS 다음에 오는 첫 번째 세그먼트가 제품 식별자
+    m = re.search(r'FCSS[_\-]([A-Z]+)', pdf_name.upper())
+    if m:
+        return m.group(1)
+    # 폴백: 숫자/버전/공통단어 제외한 3글자 이상 대문자 세그먼트
+    segments = re.split(r'[\s_\-\.]+', pdf_name.upper())
+    skip = {'FCSS', 'PDF', 'V'}
+    for seg in segments:
+        if len(seg) >= 3 and seg.isalpha() and seg not in skip:
+            return seg
+    return None
+
+
 def _lookup_cache(pdf_name, q_num):
-    """Look up cache: exact key → 같은 PDF 계열(NST/EFW 등) 키워드 매칭."""
+    """Look up cache: exact key → 제품 식별자(NST/EFW) 기반 매칭."""
     # 1) 정확한 키
     key = _cache_key(pdf_name, q_num) if pdf_name else q_num
     if key in korean_cache:
@@ -216,15 +234,12 @@ def _lookup_cache(pdf_name, q_num):
     # 2) 파일명 없이 q_num만으로 검색
     if q_num in korean_cache:
         return korean_cache[q_num]
-    # 3) PDF 이름에서 핵심 식별자 추출 후 같은 계열 캐시 검색
-    #    예: "FCSS_NST_SE-7.6 V13.35.pdf" → ["NST", "SE"]
-    #        "FCSS_EFW_AD-7.6 V12.95.pdf" → ["EFW", "AD"]
+    # 3) 제품 식별자(NST/EFW 등)가 같은 캐시 항목만 검색
     if pdf_name:
-        keywords = [w for w in re.split(r'[\s_\-\.]+', pdf_name.upper()) if len(w) >= 2 and not w.isdigit()]
-        for k, v in korean_cache.items():
-            if k.endswith(f'::{q_num}'):
-                k_upper = k.upper()
-                if any(kw in k_upper for kw in keywords):
+        product_id = _extract_product_id(pdf_name)
+        if product_id:
+            for k, v in korean_cache.items():
+                if k.endswith(f'::{q_num}') and product_id in k.upper():
                     return v
     return None
 
@@ -1626,13 +1641,17 @@ function QuizScreen({ questions, onFinish, pdfPath }){
   const userAns = answers[q.num] || [];
   const ansCount = Object.keys(answers).length;
 
-  const toggle = letter => {
+  // answers는 항상 origLetter 기준으로 저장 (정답 비교용)
+  const toggle = displayLetter => {
+    const opt = opts.find(o => o.displayLetter === displayLetter);
+    if(!opt) return;
+    const origLetter = opt.origLetter;
     const cur = answers[q.num] || [];
     let next;
     if(q.is_multiple){
-      next = cur.includes(letter) ? cur.filter(x=>x!==letter) : [...cur, letter];
+      next = cur.includes(origLetter) ? cur.filter(x=>x!==origLetter) : [...cur, origLetter];
     } else {
-      next = cur.includes(letter) ? [] : [letter];
+      next = cur.includes(origLetter) ? [] : [origLetter];
     }
     setAnswers(prev=>({...prev, [q.num]: next.sort()}));
   };
@@ -1645,16 +1664,27 @@ function QuizScreen({ questions, onFinish, pdfPath }){
     onFinish(answers, timer);
   };
 
-  // 문제 번호 기반 시드로 선택지 순서 셔플 (같은 문제는 항상 같은 순서)
-  const opts = useMemo(() => {
-    const arr = Object.keys(q.options).sort();
-    let seed = (q.num * 1234567 + idx * 9999) >>> 0;
+  // 문제 번호 기반 시드로 선택지 순서 셔플 + 라벨 재배정
+  // opts: [{displayLetter:'A', origLetter:'C', text:'...'}, ...]
+  // origToDisplay: {C:'A', A:'B', ...} — 정답 체크용 역매핑
+  const {opts, origToDisplay} = useMemo(() => {
+    const labels = ['A','B','C','D','E'];
+    const origArr = Object.keys(q.options).sort();
+    let seed = (parseInt(q.num.replace(/\D/g,''),10) * 1234567 + idx * 9999) >>> 0;
     const rand = () => { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return (seed >>> 0) / 0xffffffff; };
-    for (let i = arr.length - 1; i > 0; i--) {
+    const shuffled = [...origArr];
+    for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(rand() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return arr;
+    const opts = shuffled.map((origLetter, i) => ({
+      displayLetter: labels[i],
+      origLetter,
+      text: q.options[origLetter]
+    }));
+    const origToDisplay = {};
+    opts.forEach(o => { origToDisplay[o.origLetter] = o.displayLetter; });
+    return {opts, origToDisplay};
   }, [q.num]);
 
   return(
@@ -1695,22 +1725,22 @@ function QuizScreen({ questions, onFinish, pdfPath }){
 
         {/* When ALL options are image-placeholders, load a "options area" exhibit */}
         {q.page_num > 0 && opts.length > 0 &&
-          opts.every(l => q.options[l] === '[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
+          opts.every(o => o.text === '[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
           <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} optsMode={true} />
         )}
 
-        {opts.map(letter=>(
-          <button key={letter} className={'opt'+(userAns.includes(letter)?' sel':'')}
-            onClick={()=>toggle(letter)}>
+        {opts.map(({displayLetter, origLetter, text})=>(
+          <button key={displayLetter} className={'opt'+(userAns.includes(origLetter)?' sel':'')}
+            onClick={()=>toggle(displayLetter)}>
             <span style={{fontWeight:'700',marginRight:'10px',
-              color:userAns.includes(letter)?'#60a5fa':'#64748b'}}>
-              {letter}.
+              color:userAns.includes(origLetter)?'#60a5fa':'#64748b'}}>
+              {displayLetter}.
             </span>
-            {q.options[letter] === '[옵션 텍스트가 Exhibit 이미지에 포함됨]'
+            {text === '[옵션 텍스트가 Exhibit 이미지에 포함됨]'
               ? <span style={{color:'#94a3b8',fontStyle:'italic',fontSize:'13px'}}>
                   (위 이미지 참조)
                 </span>
-              : q.options[letter]
+              : text
             }
           </button>
         ))}

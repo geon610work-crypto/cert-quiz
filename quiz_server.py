@@ -207,11 +207,33 @@ def _cache_key(pdf_name, q_num):
     return f"{pdf_name}::{q_num}"
 
 
-def generate_korean_explanation(q_num, question, explanation, options, answer=None, pdf_name=''):
-    """Generate Korean explanation via claude CLI or Anthropic SDK API key."""
+def _lookup_cache(pdf_name, q_num):
+    """Look up cache: exact key → 같은 PDF 계열(NST/EFW 등) 키워드 매칭."""
+    # 1) 정확한 키
     key = _cache_key(pdf_name, q_num) if pdf_name else q_num
     if key in korean_cache:
         return korean_cache[key]
+    # 2) 파일명 없이 q_num만으로 검색
+    if q_num in korean_cache:
+        return korean_cache[q_num]
+    # 3) PDF 이름에서 핵심 식별자 추출 후 같은 계열 캐시 검색
+    #    예: "FCSS_NST_SE-7.6 V13.35.pdf" → ["NST", "SE"]
+    #        "FCSS_EFW_AD-7.6 V12.95.pdf" → ["EFW", "AD"]
+    if pdf_name:
+        keywords = [w for w in re.split(r'[\s_\-\.]+', pdf_name.upper()) if len(w) >= 2 and not w.isdigit()]
+        for k, v in korean_cache.items():
+            if k.endswith(f'::{q_num}'):
+                k_upper = k.upper()
+                if any(kw in k_upper for kw in keywords):
+                    return v
+    return None
+
+
+def generate_korean_explanation(q_num, question, explanation, options, answer=None, pdf_name=''):
+    """Generate Korean explanation via claude CLI or Anthropic SDK API key."""
+    cached = _lookup_cache(pdf_name, q_num)
+    if cached:
+        return cached
 
     prompt = _build_prompt(q_num, question, explanation, options, answer or [])
 
@@ -989,7 +1011,7 @@ class QuizHandler(BaseHTTPRequestHandler):
 
             # Attach already-cached Korean explanations (may be None if not yet ready)
             for q in selected:
-                q['explanation_ko'] = korean_cache.get(_cache_key(pdf_name, q['num']))
+                q['explanation_ko'] = _lookup_cache(pdf_name, q['num'])
                 q['pdf_name'] = pdf_name  # pass to frontend for polling
             self.send_json({'questions': selected, 'total': len(all_q),
                             'has_fitz': HAS_FITZ})
@@ -1017,9 +1039,9 @@ class QuizHandler(BaseHTTPRequestHandler):
             # Poll whether background Korean generation is done for a question
             q_num    = params.get('num',  [''])[0]
             pdf_name = params.get('pdf',  [''])[0]
-            key      = _cache_key(pdf_name, q_num) if pdf_name else q_num
-            if key in korean_cache:
-                self.send_json({'ready': True, 'korean': korean_cache[key]})
+            cached   = _lookup_cache(pdf_name, q_num)
+            if cached:
+                self.send_json({'ready': True, 'korean': cached})
             else:
                 self.send_json({'ready': False})
 
@@ -1185,7 +1207,7 @@ select:focus{border-color:#3b82f6}
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const { useState, useEffect, useRef, useCallback } = React;
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
 /* ── ApiKeyBanner: shown when ANTHROPIC_API_KEY is not configured ── */
 function ApiKeyBanner() {
@@ -1623,7 +1645,17 @@ function QuizScreen({ questions, onFinish, pdfPath }){
     onFinish(answers, timer);
   };
 
-  const opts = Object.keys(q.options).sort();
+  // 문제 번호 기반 시드로 선택지 순서 셔플 (같은 문제는 항상 같은 순서)
+  const opts = useMemo(() => {
+    const arr = Object.keys(q.options).sort();
+    let seed = (q.num * 1234567 + idx * 9999) >>> 0;
+    const rand = () => { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return (seed >>> 0) / 0xffffffff; };
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [q.num]);
 
   return(
     <div className="container">
@@ -1733,9 +1765,9 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
   const correctN = results.filter(r=>r.correct).length;
   const total    = questions.length;
   const score    = Math.round(correctN/total*100);
-  const passed   = score >= 70;
+  const passed   = score >= 75;
   const wrongR   = results.filter(r=>!r.correct);
-  const sc       = score>=80?'#22c55e':score>=70?'#f59e0b':'#ef4444';
+  const sc       = score>=80?'#22c55e':score>=75?'#f59e0b':'#ef4444';
 
 
   return(
@@ -1759,7 +1791,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
             background:passed?'#14532d':'#450a0a',
             color:passed?'#86efac':'#fca5a5',
             fontSize:'13px',padding:'5px 14px'}}>
-            {passed?'✅ PASS':'❌ FAIL'} (기준 70%)
+            {passed?'✅ PASS':'❌ FAIL'} (기준 75%)
           </span>
           <span className="badge b-gray sm" style={{marginLeft:'8px',fontSize:'13px',padding:'5px 12px'}}>
             ⏱ {elapsed}

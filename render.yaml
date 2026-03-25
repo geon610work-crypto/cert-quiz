@@ -3,7 +3,7 @@ services:
     name: cert-quiz
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python quiz_server.py
+    startCommand: python quiz_server_cloud.py
     plan: free
     envVars:
       - key: PYTHON_VERSION

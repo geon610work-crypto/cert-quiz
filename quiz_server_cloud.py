@@ -135,13 +135,60 @@ def find_pdfs():
     return pdfs
 
 
-def extract_questions_from_pdf(pdf_path):
+# ─────────────────────────────────────────
+# OCR 오타 자동 수정 (FortiGate 시험 PDF 특화)
+# ─────────────────────────────────────────
+_OCR_FIXES = [
+    # Fortinet 브랜드명: 'b' → 'ti' OCR 오류
+    (re.compile(r'\bForbinet\b'), 'Fortinet'),   # Forbinet → Fortinet (별도 처리)
+    (re.compile(r'\bForb(Gate|OS|AP|Switch|Analyzer|Manager|SIEM|Client|Sandbox|Cloud|Guard|Token|Proxy|Web|Mail|View|DDo\w*)'), r'Forti\1'),
+    # 소문자 l ↔ 대문자 I 혼동 (가장 흔한 OCR 오류)
+    (re.compile(r'\blPsec\b'),    'IPsec'),
+    (re.compile(r'\blPv6\b'),     'IPv6'),
+    (re.compile(r'\blPv4\b'),     'IPv4'),
+    (re.compile(r'\blP\b'),       'IP'),
+    (re.compile(r'\blKEv2\b'),    'IKEv2'),
+    (re.compile(r'\blKEv1\b'),    'IKEv1'),
+    (re.compile(r'\blKE\b'),      'IKE'),
+    (re.compile(r'\blD\b'),       'ID'),
+    (re.compile(r'\blDs\b'),      'IDs'),
+    (re.compile(r'\blSP\b'),      'ISP'),
+    (re.compile(r'\bSSl\b'),      'SSL'),
+    (re.compile(r'\blnterface'),  'Interface'),
+    (re.compile(r'\blnternet'),   'Internet'),
+    (re.compile(r'\blnternal'),   'Internal'),
+    (re.compile(r'\blnbound'),    'Inbound'),
+    (re.compile(r'\blncoming'),   'Incoming'),
+    (re.compile(r'\bldentif'),    'Identif'),   # Identify/Identification/Identity
+    (re.compile(r'\bldP\b'),      'IdP'),
+    # CLI 소문자 컨텍스트: 'lp' → 'ip'
+    (re.compile(r'\blp proto\b'), 'ip proto'),
+    (re.compile(r'\blp addr'),    'ip addr'),
+    # 기타 일반 오류
+    (re.compile(r'\bdiagnase\b', re.IGNORECASE), 'diagnose'),
+    (re.compile(r'\bauthenflcation\b', re.IGNORECASE), 'authentication'),
+    (re.compile(r'\bauthentlcation\b', re.IGNORECASE), 'authentication'),
+    (re.compile(r'\bcertlflcate\b', re.IGNORECASE), 'certificate'),
+    (re.compile(r'\bpollcy\b', re.IGNORECASE), 'policy'),
+]
+
+def fix_ocr_text(text):
+    """PDF 텍스트 추출 후 자동 OCR 오타 수정 (FortiGate/네트워크 용어 특화)."""
+    for pattern, replacement in _OCR_FIXES:
+        text = pattern.sub(replacement, text)
+    return text
+
+
+def _extract_text_fitz(pdf_path):
+    """PyMuPDF로 텍스트 추출 (pdfplumber 대비 더 정확한 경우가 많음)."""
+    if not HAS_FITZ:
+        return None, {}
     full_text = ''
     page_map  = {}
-
-    with pdfplumber.open(pdf_path) as pdf:
-        for page_num, page in enumerate(pdf.pages, 1):
-            text = page.extract_text()
+    try:
+        doc = fitz.open(pdf_path)
+        for page_num, page in enumerate(doc, 1):
+            text = page.get_text('text')
             if not text:
                 continue
             lines = [l for l in text.split('\n')
@@ -150,6 +197,40 @@ def extract_questions_from_pdf(pdf_path):
             for m in re.finditer(r'NO\.(\d+)', page_text):
                 page_map[f'NO.{m.group(1)}'] = page_num
             full_text += page_text + '\n'
+        doc.close()
+        return full_text, page_map
+    except Exception as e:
+        print(f"  ⚠️  PyMuPDF 추출 실패: {e}")
+        return None, {}
+
+
+def extract_questions_from_pdf(pdf_path):
+    full_text = ''
+    page_map  = {}
+
+    # PyMuPDF로 먼저 시도 (더 정확한 경우가 많음)
+    if HAS_FITZ:
+        fitz_text, fitz_map = _extract_text_fitz(pdf_path)
+        if fitz_text and fitz_text.strip():
+            full_text = fitz_text
+            page_map  = fitz_map
+
+    # PyMuPDF 실패 또는 미설치 시 pdfplumber로 폴백
+    if not full_text.strip():
+        with pdfplumber.open(pdf_path) as pdf:
+            for page_num, page in enumerate(pdf.pages, 1):
+                text = page.extract_text(x_tolerance=2, y_tolerance=2)
+                if not text:
+                    continue
+                lines = [l for l in text.split('\n')
+                         if 'IT Certification Guaranteed' not in l]
+                page_text = '\n'.join(lines)
+                for m in re.finditer(r'NO\.(\d+)', page_text):
+                    page_map[f'NO.{m.group(1)}'] = page_num
+                full_text += page_text + '\n'
+
+    # OCR 오타 자동 수정 적용
+    full_text = fix_ocr_text(full_text)
 
     parts = re.split(r'(NO\.\d+)', full_text)
     questions = []
@@ -219,11 +300,16 @@ def parse_question(num, content, page_num):
         return None
 
     q_text      = re.sub(r'\s+', ' ', ' '.join(question_lines)).strip()
-    has_exhibit = bool(re.search(r'\bexhibits?\b', q_text, re.IGNORECASE))
-
     explanation = re.sub(r'\s+', ' ', ' '.join(explanation_lines)).strip()
     if len(explanation) > 2500:
         explanation = explanation[:2500] + '...'
+
+    # Exhibit 감지: 문제 or 설명에 "exhibit" 포함, 또는 출력 참조 패턴("from the output" 등)
+    has_exhibit = bool(
+        re.search(r'\bexhibits?\b', q_text, re.IGNORECASE) or
+        re.search(r'\bexhibits?\b', explanation, re.IGNORECASE) or
+        re.search(r'(?:from|refer to|shown in|based on)\s+the\s+(?:output|following|diagram|topology|table)', q_text, re.IGNORECASE)
+    )
 
     # How many to choose
     cm = re.search(r'choose\s+(\w+)', q_text, re.IGNORECASE)

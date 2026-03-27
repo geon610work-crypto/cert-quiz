@@ -1172,16 +1172,20 @@ function SelectScreen({ onStart }){
     if(f){ setFile(f); doUpload(f); }
   };
 
-  /* start quiz */
-  const start = async()=>{
+  /* start quiz (시험 모드) */
+  const start = async(mode='exam')=>{
     const pdfPath = tab==='server' ? sel : (uploaded && uploaded.path);
     if(!pdfPath) return;
     setLoading(true); setErr('');
     try{
-      const res  = await fetch('/api/quiz?path='+encodeURIComponent(pdfPath)+'&count='+count);
+      // 연습 모드는 전체 문제, 시험 모드는 count개
+      const url = mode==='practice'
+        ? '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count=9999'
+        : '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count='+count;
+      const res  = await fetch(url);
       const data = await res.json();
       if(data.error) throw new Error(data.error);
-      onStart(data.questions, data.total, pdfPath);
+      onStart(data.questions, data.total, pdfPath, mode);
     }catch(e){ setErr('오류: '+e.message); }
     finally{ setLoading(false); }
   };
@@ -1295,18 +1299,239 @@ function SelectScreen({ onStart }){
 
         {err && <p style={{color:'#ef4444',marginBottom:'12px',fontSize:'14px'}}>{err}</p>}
 
-        <button className="btn btn-primary" onClick={start}
-          disabled={loading || !canStart || (tab==='upload' && uploading)}
-          style={{width:'100%',padding:'13px',fontSize:'15px'}}>
-          {loading ? '⏳ 문제 불러오는 중...' : '🚀 시험 시작'}
-        </button>
+        <div style={{display:'flex',gap:'10px',marginBottom:'10px'}}>
+          <button className="btn btn-primary" onClick={()=>start('exam')}
+            disabled={loading || !canStart || (tab==='upload' && uploading)}
+            style={{flex:1,padding:'13px',fontSize:'15px'}}>
+            {loading ? '⏳ 불러오는 중...' : '🚀 시험 모드'}
+          </button>
+          <button className="btn" onClick={()=>start('practice')}
+            disabled={loading || !canStart || (tab==='upload' && uploading)}
+            style={{flex:1,padding:'13px',fontSize:'15px',background:'#7c3aed',borderColor:'#7c3aed'}}>
+            {loading ? '⏳ 불러오는 중...' : '🎯 연습 모드'}
+          </button>
+        </div>
       </div>
 
       <p className="muted sm" style={{textAlign:'center'}}>
         {tab==='server'
-          ? `${pdfs.length}개 서버 PDF 발견 · 랜덤으로 ${count}문제 출제됩니다`
-          : '업로드한 PDF에서 랜덤으로 문제를 출제합니다'}
+          ? `${pdfs.length}개 서버 PDF 발견 · 시험: ${count}문제 랜덤 출제 / 연습: 전체 문제`
+          : '업로드한 PDF에서 문제를 출제합니다'}
       </p>
+    </div>
+  );
+}
+
+/* ── PracticeScreen ── */
+function PracticeScreen({ questions, onExit, pdfPath }){
+  // pool: 아직 맞추지 못한 문제 인덱스 배열 (틀리면 유지, 맞으면 제거)
+  const [pool,      setPool]      = useState(()=>questions.map((_,i)=>i));
+  const [done,      setDone]      = useState(new Set());
+  const [curIdx,    setCurIdx]    = useState(()=>Math.floor(Math.random()*questions.length));
+  const [selected,  setSelected]  = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+  const [complete,  setComplete]  = useState(false);
+  const [streak,    setStreak]    = useState(0);
+  const [stats,     setStats]     = useState({correct:0, wrong:0});
+
+  const q = questions[curIdx];
+
+  const isCorrect = submitted &&
+    JSON.stringify([...selected].sort()) === JSON.stringify([...q.answer].sort());
+
+  // 선택지 셔플 (QuizScreen과 동일 로직)
+  const {opts, origToDisplay} = useMemo(()=>{
+    const labels = ['A','B','C','D','E'];
+    const origArr = Object.keys(q.options).sort();
+    let seed = (parseInt(q.num.replace(/\D/g,''),10)*1234567 + curIdx*9999) >>> 0;
+    const rand = ()=>{ seed=(seed*1664525+1013904223)&0xffffffff; return (seed>>>0)/0xffffffff; };
+    const shuffled = [...origArr];
+    for(let i=shuffled.length-1;i>0;i--){
+      const j=Math.floor(rand()*(i+1));
+      [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];
+    }
+    const opts = shuffled.map((orig,i)=>({displayLetter:labels[i], origLetter:orig, text:q.options[orig]}));
+    const origToDisplay={};
+    opts.forEach(o=>{origToDisplay[o.origLetter]=o.displayLetter;});
+    return {opts, origToDisplay};
+  }, [q.num]);
+
+  const toggle = origLetter => {
+    if(submitted) return;
+    if(q.is_multiple){
+      setSelected(prev=>prev.includes(origLetter)?prev.filter(x=>x!==origLetter):[...prev,origLetter]);
+    } else {
+      setSelected(prev=>prev.includes(origLetter)?[]:[origLetter]);
+    }
+  };
+
+  const submit = ()=>{
+    if(selected.length===0) return;
+    const correct = JSON.stringify([...selected].sort())===JSON.stringify([...q.answer].sort());
+    setSubmitted(true);
+    if(correct){
+      setStreak(s=>s+1);
+      setStats(s=>({...s, correct:s.correct+1}));
+      setDone(prev=>new Set([...prev, q.num]));
+    } else {
+      setStreak(0);
+      setStats(s=>({...s, wrong:s.wrong+1}));
+    }
+  };
+
+  const next = ()=>{
+    // 맞췄으면 pool에서 제거, 틀렸으면 유지
+    const newPool = isCorrect ? pool.filter(i=>i!==curIdx) : pool;
+    if(newPool.length===0){ setPool([]); setComplete(true); return; }
+    setPool(newPool);
+    const nextIdx = newPool[Math.floor(Math.random()*newPool.length)];
+    setCurIdx(nextIdx);
+    setSelected([]);
+    setSubmitted(false);
+  };
+
+  const total     = questions.length;
+  const doneCount = done.size;
+  const remaining = pool.length - (isCorrect&&!complete ? 1 : 0); // 맞춘 후 남은 수 미리 표시
+
+  // 완료 화면
+  if(complete){
+    return(
+      <div className="container">
+        <div className="card" style={{textAlign:'center',padding:'40px 24px'}}>
+          <div style={{fontSize:'64px',marginBottom:'16px'}}>🎉</div>
+          <h2 style={{marginBottom:'8px'}}>모든 문제 완료!</h2>
+          <p className="muted" style={{marginBottom:'6px'}}>
+            전체 <strong style={{color:'#e2e8f0'}}>{total}문제</strong>를 모두 맞혔습니다!
+          </p>
+          <p className="muted" style={{marginBottom:'20px'}}>
+            총 시도 {stats.correct+stats.wrong}회 &nbsp;·&nbsp;
+            정답 <span style={{color:'#22c55e'}}>{stats.correct}</span> &nbsp;/&nbsp;
+            오답 <span style={{color:'#ef4444'}}>{stats.wrong}</span>
+          </p>
+          <button className="btn btn-primary" onClick={onExit}
+            style={{padding:'12px 32px',fontSize:'15px'}}>
+            홈으로
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return(
+    <div className="container">
+      {/* 상단 바 */}
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'14px'}}>
+        <button onClick={onExit}
+          style={{background:'none',border:'1px solid #4b5563',color:'#9ca3af',
+            borderRadius:'6px',padding:'5px 12px',cursor:'pointer',fontSize:'13px'}}>
+          ← 홈
+        </button>
+        <div style={{display:'flex',gap:'8px',alignItems:'center',flexWrap:'wrap'}}>
+          {streak>=2 &&
+            <span className="badge" style={{background:'#7c3aed22',color:'#a78bfa',border:'1px solid #7c3aed'}}>
+              🔥 {streak}연속 정답
+            </span>}
+          <span className="badge" style={{background:'#14532d',color:'#86efac',border:'1px solid #22c55e'}}>
+            ✅ {doneCount}/{total}
+          </span>
+          <span className="badge b-gray sm">남은 {pool.length}문제</span>
+        </div>
+      </div>
+
+      {/* 진행 바 (초록) */}
+      <div className="prog-bar" style={{marginBottom:'16px'}}>
+        <div className="prog-fill"
+          style={{width:`${(doneCount/total)*100}%`, background:'#22c55e', transition:'width .4s'}} />
+      </div>
+
+      {/* 문제 카드 */}
+      <div className="card">
+        <div style={{display:'flex',gap:'8px',alignItems:'center',marginBottom:'12px',flexWrap:'wrap'}}>
+          <span className="badge b-blue">{q.num}</span>
+          <span className="badge" style={{background:'#7c3aed22',color:'#a78bfa',border:'1px solid #7c3aed',fontSize:'11px'}}>
+            🎯 연습 모드
+          </span>
+          {q.is_multiple && <span className="badge b-blue">복수 선택 ({q.num_to_choose}개)</span>}
+          {q.has_exhibit  && <span className="badge b-yellow">📊 Exhibit</span>}
+        </div>
+
+        {q.has_exhibit && q.page_num>0 &&
+          <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />}
+        {q.has_exhibit && q.page_num<=0 &&
+          <div className="exhibit-warn">
+            ⚠️ 이 문제는 <strong>Exhibit(그림/출력)</strong>을 참조하지만 페이지 정보를 찾을 수 없습니다.
+          </div>}
+
+        <p style={{fontSize:'15px',lineHeight:'1.85',marginBottom:'22px',whiteSpace:'pre-wrap'}}>
+          {q.question}
+        </p>
+
+        {/* 선택지 */}
+        {opts.map(({displayLetter, origLetter, text})=>{
+          let style = {width:'100%',textAlign:'left',marginBottom:'8px'};
+          let cls   = 'opt';
+          if(submitted){
+            const isAns = q.answer.includes(origLetter);
+            const isSel = selected.includes(origLetter);
+            if(isAns)          { style={...style,background:'#14532d',border:'2px solid #22c55e',color:'#86efac'}; }
+            else if(isSel)     { style={...style,background:'#450a0a',border:'2px solid #ef4444',color:'#fca5a5'}; }
+          } else {
+            if(selected.includes(origLetter)) cls='opt sel';
+          }
+          return(
+            <button key={displayLetter} className={cls} style={style}
+              onClick={()=>toggle(origLetter)} disabled={submitted}>
+              <span className="opt-label">{displayLetter}</span>
+              {text}
+            </button>
+          );
+        })}
+
+        {/* 확인 버튼 */}
+        {!submitted ? (
+          <button className="btn btn-primary" onClick={submit}
+            disabled={selected.length===0}
+            style={{marginTop:'12px',width:'100%',
+              opacity:selected.length===0?0.4:1,padding:'12px',fontSize:'15px'}}>
+            확인
+          </button>
+        ) : (
+          <div>
+            {/* 정답/오답 배너 */}
+            <div style={{
+              padding:'12px 16px',borderRadius:'8px',marginTop:'12px',
+              background: isCorrect?'#14532d':'#450a0a',
+              border:`1px solid ${isCorrect?'#22c55e':'#ef4444'}`,
+              color: isCorrect?'#86efac':'#fca5a5',
+              fontWeight:'600',fontSize:'15px'}}>
+              {isCorrect
+                ? '✅ 정답! 이 문제는 제외됩니다.'
+                : `❌ 오답! 정답: ${q.answer.map(a=>origToDisplay[a]||a).join(', ')}`}
+              {!isCorrect &&
+                <p style={{fontSize:'12px',marginTop:'4px',fontWeight:'400',opacity:0.85}}>
+                  이 문제는 나중에 다시 나옵니다
+                </p>}
+            </div>
+
+            {/* 해설 */}
+            {q.explanation &&
+              <div style={{marginTop:'12px',background:'#1e293b',border:'1px solid #334155',
+                borderRadius:'8px',padding:'14px'}}>
+                <p style={{fontWeight:'600',fontSize:'13px',color:'#94a3b8',marginBottom:'8px'}}>💡 해설</p>
+                <p style={{fontSize:'13px',lineHeight:'1.8',color:'#cbd5e1'}}>{q.explanation}</p>
+              </div>}
+
+            {/* 한국어 해석 */}
+            <KoreanExplain question={{...q, explanation_ko: q.explanation_ko}} />
+
+            <button className="btn btn-primary" onClick={next}
+              style={{marginTop:'14px',width:'100%',padding:'12px',fontSize:'15px'}}>
+              {pool.filter(i=>i!==curIdx).length===0 && isCorrect ? '완료 🎉' : '다음 문제 →'}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -1681,14 +1906,19 @@ function App(){
   const [answers,   setAnswers]   = useState({});
   const [elapsed,   setElapsed]   = useState('00:00');
   const [pdfPath,   setPdfPath]   = useState('');
+  const [mode,      setMode]      = useState('exam'); // 'exam' | 'practice'
 
-  const handleStart  = (qs, total, path) => { setQuestions(qs); setAnswers({}); setPdfPath(path); setScreen('quiz'); };
-  const handleFinish = (ans, t)          => { setAnswers(ans); setElapsed(t); setScreen('results'); };
-  const handleRetry  = ()                => setScreen('select');
+  const handleStart  = (qs, total, path, m='exam') => {
+    setQuestions(qs); setAnswers({}); setPdfPath(path); setMode(m);
+    setScreen(m==='practice' ? 'practice' : 'quiz');
+  };
+  const handleFinish = (ans, t) => { setAnswers(ans); setElapsed(t); setScreen('results'); };
+  const handleRetry  = ()       => setScreen('select');
 
-  if(screen==='select')  return <SelectScreen onStart={handleStart} />;
-  if(screen==='quiz')    return <QuizScreen   questions={questions} onFinish={handleFinish} pdfPath={pdfPath} />;
-  if(screen==='results') return <ResultsScreen questions={questions} answers={answers} elapsed={elapsed} onRetry={handleRetry} pdfPath={pdfPath} />;
+  if(screen==='select')   return <SelectScreen  onStart={handleStart} />;
+  if(screen==='practice') return <PracticeScreen questions={questions} onExit={handleRetry} pdfPath={pdfPath} />;
+  if(screen==='quiz')     return <QuizScreen     questions={questions} onFinish={handleFinish} pdfPath={pdfPath} />;
+  if(screen==='results')  return <ResultsScreen  questions={questions} answers={answers} elapsed={elapsed} onRetry={handleRetry} pdfPath={pdfPath} />;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);

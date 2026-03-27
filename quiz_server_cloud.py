@@ -1131,7 +1131,7 @@ function useTimer(){
 
 /* ── SelectScreen ── */
 function SelectScreen({ onStart }){
-  const [tab,      setTab]     = useState('server'); // 'server' | 'upload'
+  const [tab,      setTab]     = useState('upload'); // 'server' | 'upload'
   // server tab
   const [pdfs,    setPdfs]    = useState([]);
   const [sel,     setSel]     = useState('');
@@ -1482,7 +1482,7 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           return(
             <button key={displayLetter} className={cls} style={style}
               onClick={()=>toggle(origLetter)} disabled={submitted}>
-              <span className="opt-label">{displayLetter}</span>
+              <span style={{fontWeight:'700',marginRight:'10px',color:'#64748b'}}>{displayLetter}.</span>
               {text}
             </button>
           );

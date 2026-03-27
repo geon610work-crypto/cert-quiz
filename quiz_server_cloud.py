@@ -1379,7 +1379,8 @@ function QuizScreen({ questions, onFinish, pdfPath }){
 
 /* ── ResultsScreen ── */
 function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
-  const [expanded, setExpanded] = useState(null);
+  const [expanded,        setExpanded]        = useState(null);
+  const [expandedCorrect, setExpandedCorrect] = useState(null);
 
   const results = questions.map(q=>{
     const userAns = answers[q.num] || [];
@@ -1518,12 +1519,65 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
 
       {/* correct list */}
       {correctN > 0 && <>
-        <h3 style={{margin:'22px 0 10px',color:'#86efac'}}>✅ 맞힌 문제 ({correctN}개)</h3>
-        <div style={{display:'flex',flexWrap:'wrap',gap:'6px',marginBottom:'24px'}}>
-          {results.filter(r=>r.correct).map(r=>(
-            <span key={r.num} className="badge b-green">{r.num}</span>
-          ))}
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',margin:'22px 0 10px'}}>
+          <h3 style={{color:'#86efac'}}>✅ 맞힌 문제 ({correctN}개)</h3>
         </div>
+        <p className="muted sm" style={{marginBottom:'14px'}}>
+          클릭하면 해설을 다시 확인할 수 있어요.
+        </p>
+        {results.filter(r=>r.correct).map((r,i)=>(
+          <div key={i} className="card" style={{marginBottom:'10px'}}>
+            <div style={{cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}
+              onClick={()=>setExpandedCorrect(expandedCorrect===r.num?null:r.num)}>
+              <div style={{flex:1}}>
+                <div style={{display:'flex',gap:'6px',alignItems:'center',marginBottom:'8px',flexWrap:'wrap'}}>
+                  <span className="badge b-green">{r.num}</span>
+                  {r.has_exhibit && <span className="badge b-yellow">📊 Exhibit</span>}
+                  {r.is_multiple && <span className="badge b-blue">복수선택</span>}
+                </div>
+                <p style={{fontSize:'13px',lineHeight:'1.6',color:'#cbd5e1'}}>
+                  {r.question.length>160 ? r.question.slice(0,160)+'...' : r.question}
+                </p>
+                <div style={{marginTop:'10px',fontSize:'12px'}}>
+                  정답: {r.answer.map(a=><span key={a} className="badge b-green" style={{marginRight:'3px'}}>{a}</span>)}
+                </div>
+              </div>
+              <span className="muted" style={{marginLeft:'10px',fontSize:'18px'}}>
+                {expandedCorrect===r.num?'▲':'▼'}
+              </span>
+            </div>
+
+            {expandedCorrect===r.num && <>
+              <div className="divider" />
+              {r.has_exhibit && r.page_num > 0 &&
+                <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
+              }
+              {r.page_num > 0 && Object.keys(r.options).length > 0 &&
+                Object.values(r.options).every(v=>v==='[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
+                <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />
+              )}
+              <div style={{marginBottom:'12px'}}>
+                {Object.keys(r.options).sort().map(letter=>{
+                  const isCorr = r.answer.includes(letter);
+                  let cls = 'opt';
+                  if(isCorr) cls+=' correct';
+                  return(
+                    <div key={letter} className={cls} style={{cursor:'default'}}>
+                      <span style={{fontWeight:'700',marginRight:'8px'}}>
+                        {letter}. {isCorr?'✅ ':''}
+                      </span>
+                      {r.options[letter]==='[옵션 텍스트가 Exhibit 이미지에 포함됨]'
+                        ? <span style={{color:'#94a3b8',fontStyle:'italic',fontSize:'13px'}}>(위 이미지 참조)</span>
+                        : r.options[letter]
+                      }
+                    </div>
+                  );
+                })}
+              </div>
+              <KoreanExplain question={r} />
+            </>}
+          </div>
+        ))}
       </>}
 
       <button className="btn btn-primary" onClick={onRetry}

@@ -1537,7 +1537,7 @@ function PracticeScreen({ questions, onExit, pdfPath }){
 }
 
 /* ── QuizScreen ── */
-function QuizScreen({ questions, onFinish, pdfPath }){
+function QuizScreen({ questions, onFinish, onExit, pdfPath }){
   const [idx,     setIdx]     = useState(0);
   const [answers, setAnswers] = useState({});
   const timer = useTimer();
@@ -1598,6 +1598,10 @@ function QuizScreen({ questions, onFinish, pdfPath }){
       {/* top bar */}
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'14px'}}>
         <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
+          <button onClick={()=>{if(window.confirm('홈으로 돌아가면 진행 중인 시험이 초기화됩니다. 나가시겠습니까?')) onExit();}}
+            style={{background:'none',border:'1px solid #e2e8f0',borderRadius:'8px',padding:'4px 10px',cursor:'pointer',fontSize:'13px',color:'#64748b'}}>
+            ← 홈
+          </button>
           <span className="badge b-blue">{q.num}</span>
           <span className="muted sm">{idx+1} / {total}</span>
         </div>
@@ -1917,7 +1921,7 @@ function App(){
 
   if(screen==='select')   return <SelectScreen  onStart={handleStart} />;
   if(screen==='practice') return <PracticeScreen questions={questions} onExit={handleRetry} pdfPath={pdfPath} />;
-  if(screen==='quiz')     return <QuizScreen     questions={questions} onFinish={handleFinish} pdfPath={pdfPath} />;
+  if(screen==='quiz')     return <QuizScreen     questions={questions} onFinish={handleFinish} onExit={handleRetry} pdfPath={pdfPath} />;
   if(screen==='results')  return <ResultsScreen  questions={questions} answers={answers} elapsed={elapsed} onRetry={handleRetry} pdfPath={pdfPath} />;
 }
 

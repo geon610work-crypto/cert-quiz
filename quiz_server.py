@@ -676,6 +676,16 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
         # ── Dual-exhibit detection ────────────────────────────────────
         _pr_tmp2  = page.rect
         _min_top2 = _pr_tmp2.y0 + _pr_tmp2.height * 0.10   # skip header watermark
+
+        # Find y-position of any "Answer:" text between _min_top2 and q_y.
+        # Images BELOW the last Answer: line (but above q_y) belong to the
+        # PREVIOUS question's options — not to this question's exhibit.
+        _answer_barrier = _min_top2
+        if q_y_for_img is not None:
+            for _ah in page.search_for("Answer:"):
+                if _min_top2 < _ah.y0 < q_y_for_img:
+                    _answer_barrier = max(_answer_barrier, _ah.y1)
+
         above_xrefs = []
         if pos_xref is not None and q_y_for_img is not None:
             for img in img_list:
@@ -690,7 +700,9 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                     r2 = rects2[0]
                     a2 = r2.width * r2.height
                     if a2 >= 8000 and (r2.height / max(r2.width, 1)) >= 0.05:
-                        if _min_top2 < r2.y0 < q_y_for_img - 10:
+                        # Must be above q_y but BELOW any Answer: line from
+                        # the previous question (to avoid picking up prev Q options)
+                        if _answer_barrier < r2.y0 < q_y_for_img - 10:
                             above_xrefs.append((xref2, r2.y0))
 
         if chosen_xref is not None and not no_image_in_range:

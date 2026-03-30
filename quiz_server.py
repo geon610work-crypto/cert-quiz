@@ -15,7 +15,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
 # ─────────────────────────────────────────
-# CONFIG (Cloud 전용 — API 기능 없음)
+# CONFIG
 # ─────────────────────────────────────────
 WORKSPACE  = os.path.dirname(os.path.abspath(__file__))
 PORT       = int(os.environ.get('PORT', 5555))
@@ -23,6 +23,29 @@ IS_CLOUD   = os.environ.get('RENDER') or os.environ.get('RAILWAY_ENVIRONMENT') o
 UPLOAD_DIR = os.path.join(tempfile.gettempdir(), 'quiz_uploads')
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 MAX_UPLOAD_MB = 80
+ENV_FILE   = os.path.join(WORKSPACE, '.quiz_env')
+
+def _load_env_file():
+    """Load ANTHROPIC_API_KEY from .quiz_env file if present."""
+    if os.path.isfile(ENV_FILE):
+        with open(ENV_FILE) as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('ANTHROPIC_API_KEY='):
+                    key = line.split('=', 1)[1].strip().strip('"\'')
+                    if key:
+                        os.environ['ANTHROPIC_API_KEY'] = key
+                        print(f"  🔑 API key loaded from {ENV_FILE}")
+                        return
+
+def _save_api_key(key):
+    """Persist ANTHROPIC_API_KEY to .quiz_env file."""
+    with open(ENV_FILE, 'w') as f:
+        f.write(f'ANTHROPIC_API_KEY={key}\n')
+    os.environ['ANTHROPIC_API_KEY'] = key
+    print(f"  🔑 API key saved to {ENV_FILE}")
+
+_load_env_file()
 
 # ─────────────────────────────────────────
 # PDF Extraction
@@ -72,7 +95,111 @@ if os.path.isfile(_CACHE_FILE):
     except Exception as _e:
         print(f"  ⚠️  Failed to load korean_cache.json: {_e}")
 
-# Cloud 버전: API 기능 없음 — korean_cache.json 만 사용
+# Try to load Anthropic SDK (optional — CLI fallback is used when SDK fails)
+try:
+    import anthropic as _anthropic_sdk
+    HAS_ANTHROPIC = True
+except ImportError:
+    try:
+        _pip_install("anthropic")
+        _pip_install("httpx[socks]")
+        import anthropic as _anthropic_sdk
+        HAS_ANTHROPIC = True
+    except Exception:
+        HAS_ANTHROPIC = False
+
+
+def _build_prompt(q_num, question, explanation, options, answer):
+    opts_text  = '\n'.join(
+        f'{k}. {v}' for k, v in sorted(options.items())
+        if v != '[옵션 텍스트가 Exhibit 이미지에 포함됨]'
+    )
+    answer_str = ', '.join(answer) if answer else ''
+    p  = "당신은 FortiGate/네트워크 자격증 시험 전문가입니다. "
+    p += "아래 시험 문제의 정답 이유를 한국어로 설명해주세요.\n\n"
+    p += f"[문제 {q_num}]\n{question}\n"
+    if opts_text:   p += f"\n[선택지]\n{opts_text}\n"
+    if answer_str:  p += f"\n[정답] {answer_str}\n"
+    if explanation and explanation.strip():
+        p += f"\n[영문 해설 참고]\n{explanation}\n"
+    p += (
+        "\n주의사항:\n"
+        "- exhibit 이미지는 없어도 됩니다. 정답 보기와 FortiGate 기술 지식만으로 설명하세요.\n"
+        "- 핵심 개념과 정답 이유를 한국어 3~5문장으로 설명하세요.\n"
+        "- FortiGate, OSPF, BGP, IPsec, FSSO 등 기술 용어는 영어 그대로 사용하세요.\n"
+        "- 설명 텍스트만 출력하고 '해설:', '설명:' 같은 접두어는 붙이지 마세요."
+    )
+    return p
+
+
+def _find_claude_bin():
+    """Find claude CLI binary — works on macOS, Linux, and Windows."""
+    IS_WIN = sys.platform == 'win32'
+    home   = os.path.expanduser('~')
+
+    # 1. Try PATH lookup (where / where.exe)
+    lookup_cmd = ['where', 'claude'] if IS_WIN else ['which', 'claude']
+    try:
+        r = subprocess.run(lookup_cmd, capture_output=True, text=True, timeout=5)
+        first = r.stdout.strip().splitlines()[0] if r.stdout.strip() else ''
+        if r.returncode == 0 and first and os.path.isfile(first):
+            return first
+    except Exception:
+        pass
+
+    # 2. macOS/Linux: try login shell (sources ~/.zprofile, ~/.bash_profile)
+    if not IS_WIN:
+        for shell in ['zsh', 'bash']:
+            try:
+                r2 = subprocess.run(
+                    [shell, '-l', '-c', 'which claude'],
+                    capture_output=True, text=True, timeout=8
+                )
+                path = r2.stdout.strip().splitlines()[0] if r2.stdout.strip() else ''
+                if r2.returncode == 0 and path and os.path.isfile(path):
+                    return path
+            except Exception:
+                pass
+
+    # 3. Hardcoded candidates per platform
+    if IS_WIN:
+        appdata  = os.environ.get('APPDATA', '')
+        localapp = os.environ.get('LOCALAPPDATA', '')
+        candidates = [
+            # npm global on Windows: %APPDATA%\npm\claude.cmd
+            os.path.join(appdata,  'npm', 'claude.cmd'),
+            os.path.join(appdata,  'npm', 'claude'),
+            os.path.join(localapp, 'Programs', 'claude', 'claude.exe'),
+            os.path.join(home, 'AppData', 'Roaming', 'npm', 'claude.cmd'),
+            r'C:\Program Files\claude\claude.exe',
+        ]
+    else:
+        candidates = [
+            '/usr/local/bin/claude',
+            '/opt/homebrew/bin/claude',
+            os.path.join(home, '.local', 'bin', 'claude'),
+            os.path.join(home, 'bin', 'claude'),
+            '/usr/bin/claude',
+            os.path.join(home, '.npm-global', 'bin', 'claude'),
+            os.path.join(home, '.npm', 'bin', 'claude'),
+            '/usr/local/lib/node_modules/.bin/claude',
+        ]
+
+    # Ask npm where its global bin lives (cross-platform)
+    try:
+        npm_cmd = ['npm.cmd', 'bin', '-g'] if IS_WIN else ['npm', 'bin', '-g']
+        npm_r = subprocess.run(npm_cmd, capture_output=True, text=True, timeout=5)
+        if npm_r.returncode == 0 and npm_r.stdout.strip():
+            npm_bin = npm_r.stdout.strip().splitlines()[0]
+            for name in ('claude.cmd', 'claude'):
+                candidates.insert(0, os.path.join(npm_bin, name))
+    except Exception:
+        pass
+
+    for c in candidates:
+        if os.path.isfile(c):
+            return c
+    return None
 
 
 def _cache_key(pdf_name, q_num):
@@ -118,8 +245,120 @@ def _lookup_cache(pdf_name, q_num):
 
 
 def generate_korean_explanation(q_num, question, explanation, options, answer=None, pdf_name=''):
-    """Cloud 버전: 캐시 조회만 수행, API 호출 없음."""
-    return _lookup_cache(pdf_name, q_num)
+    """Generate Korean explanation via claude CLI or Anthropic SDK API key."""
+    cached = _lookup_cache(pdf_name, q_num)
+    if cached:
+        return cached
+
+    prompt = _build_prompt(q_num, question, explanation, options, answer or [])
+
+    # ── Method 1: claude CLI (works when run from user's own terminal) ──
+    claude_bin = _find_claude_bin()
+    print(f"  [explain] claude bin: {claude_bin!r}")
+    if claude_bin:
+        env_clean = {k: v for k, v in os.environ.items()
+                     if k not in ('CLAUDECODE', 'CLAUDE_CODE_DISABLE_BACKGROUND_TASKS')}
+        try:
+            r = subprocess.run(
+                [claude_bin, '-p', prompt, '--model', 'claude-haiku-4-5-20251001'],
+                capture_output=True, text=True, timeout=60, env=env_clean
+            )
+            print(f"  [explain] CLI rc={r.returncode} out={r.stdout[:60]!r} err={r.stderr[:80]!r}")
+            text = r.stdout.strip()
+            if text and r.returncode == 0:
+                korean_cache[key] = text
+                return text
+        except Exception as e:
+            print(f"  ⚠️  claude CLI failed ({q_num}): {e}")
+
+    # ── Method 2: Anthropic SDK with explicit API key ───────────────────
+    if HAS_ANTHROPIC:
+        api_key = os.environ.get('ANTHROPIC_API_KEY', '')
+        if api_key:
+            try:
+                client = _anthropic_sdk.Anthropic(api_key=api_key)
+                msg    = client.messages.create(
+                    model="claude-haiku-4-5-20251001",
+                    max_tokens=700,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                result = msg.content[0].text.strip()
+                korean_cache[key] = result
+                return result
+            except Exception as e:
+                print(f"  ⚠️  SDK API call failed ({q_num}): {e}")
+
+    # ── Method 3: requests library ───────────────────────────────────────
+    try:
+        import requests as _requests
+        import warnings as _warnings
+        _warnings.filterwarnings('ignore', message='Unverified HTTPS request')
+
+        api_key = os.environ.get('ANTHROPIC_API_KEY', '')
+        if not api_key:
+            raise ValueError("no api key")
+
+        proxies = {}
+        for var in ('HTTPS_PROXY', 'https_proxy', 'HTTP_PROXY', 'http_proxy'):
+            val = os.environ.get(var, '')
+            if val:
+                proxies = {'http': val, 'https': val}
+                break
+
+        resp = _requests.post(
+            'https://api.anthropic.com/v1/messages',
+            headers={
+                'x-api-key': api_key,
+                'anthropic-version': '2023-06-01',
+                'content-type': 'application/json',
+            },
+            json={
+                'model': 'claude-haiku-4-5-20251001',
+                'max_tokens': 700,
+                'messages': [{'role': 'user', 'content': prompt}]
+            },
+            proxies=proxies or None,
+            timeout=30,
+            verify=False,
+        )
+        if resp.status_code == 200:
+            result = resp.json()['content'][0]['text'].strip()
+            korean_cache[key] = result
+            return result
+        else:
+            print(f"  ⚠️  requests API failed ({q_num}): {resp.status_code} {resp.text[:100]}")
+    except Exception as e:
+        print(f"  ⚠️  requests method failed ({q_num}): {e}")
+
+    print(f"  ⚠️  All methods exhausted for {q_num}. claude={claude_bin!r} key={'set' if os.environ.get('ANTHROPIC_API_KEY') else 'unset'}")
+    return None
+
+
+def _bg_generate_all(questions, pdf_name=''):
+    """Background thread: pre-generate Korean explanations for selected questions.
+    Rate limit: Anthropic free tier allows 5 req/min → wait 13s between calls.
+    """
+    import time
+    print(f"  🔤 Background Korean generation started for {len(questions)} questions...")
+    for i, q in enumerate(questions):
+        q_num = q['num']
+        key   = _cache_key(pdf_name, q_num) if pdf_name else q_num
+        if key not in korean_cache:
+            try:
+                result = generate_korean_explanation(
+                    q_num, q['question'], q.get('explanation', ''),
+                    q.get('options', {}), q.get('answer', []),
+                    pdf_name=pdf_name,
+                )
+                if result:
+                    print(f"  ✅ Korean OK: {q_num} ({i+1}/{len(questions)})")
+                else:
+                    print(f"  ⚠️  Korean failed: {q_num}")
+            except Exception as e:
+                print(f"  ⚠️  Korean error ({q_num}): {e}")
+            if i < len(questions) - 1:
+                time.sleep(13)
+    print("  🔤 Background Korean generation complete.")
 
 
 def find_pdfs():
@@ -380,7 +619,6 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                         if m.y0 < next_q_y_for_img:
                             next_q_y_for_img = m.y0
                 # Detect if this is the second (or later) question on this page
-                # by checking if any NO.XX appears BEFORE our question position
                 for m in page.search_for("NO."):
                     if m.y0 < q_y_for_img - 20:
                         is_second_on_page = True
@@ -585,12 +823,9 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
             next_has_qs = _page_has_questions(doc[next_pg_idx]) if next_pg_idx < doc.page_count else True
 
             if no_image_in_range:
-                # Preferred order depends on whether this is the 2nd question on the page.
                 # When a page has [NO.A, NO.B]:
                 #   - NO.A's exhibit is on the PREV page (dedicated exhibit page)
                 #   - NO.B's exhibit is on the NEXT page (not the prev which belongs to NO.A)
-                # So if is_second_on_page: check NEXT first.
-                # Otherwise: check PREV first if it has no questions (dedicated exhibit page).
                 if is_second_on_page:
                     # This question's exhibit is on the NEXT page
                     if next_pg_idx < total_pages:
@@ -883,10 +1118,15 @@ class QuizHandler(BaseHTTPRequestHandler):
             pdf_name = os.path.basename(pdf_path)
             selected = random.sample(all_q, min(count, len(all_q)))
 
-            # Cloud 버전: 캐시에서 즉시 조회 (API 생성 없음)
+            # Start background Korean generation for ONLY the selected questions.
+            # Already-cached ones are skipped instantly inside _bg_generate_all.
+            t = threading.Thread(target=_bg_generate_all, args=(selected, pdf_name), daemon=True)
+            t.start()
+
+            # Attach already-cached Korean explanations (may be None if not yet ready)
             for q in selected:
                 q['explanation_ko'] = _lookup_cache(pdf_name, q['num'])
-                q['pdf_name'] = pdf_name
+                q['pdf_name'] = pdf_name  # pass to frontend for polling
             self.send_json({'questions': selected, 'total': len(all_q),
                             'has_fitz': HAS_FITZ})
 
@@ -908,6 +1148,20 @@ class QuizHandler(BaseHTTPRequestHandler):
                 self.send_json({'image': b64})
             else:
                 self.send_json({'error': 'render failed or PyMuPDF not available'}, 500)
+
+        elif path == '/api/explain_status':
+            # Poll whether background Korean generation is done for a question
+            q_num    = params.get('num',  [''])[0]
+            pdf_name = params.get('pdf',  [''])[0]
+            cached   = _lookup_cache(pdf_name, q_num)
+            if cached:
+                self.send_json({'ready': True, 'korean': cached})
+            else:
+                self.send_json({'ready': False})
+
+        elif path == '/api/keycheck':
+            key = os.environ.get('ANTHROPIC_API_KEY', '')
+            self.send_json({'has_key': bool(key)})
 
         else:
             self.send_json({'error': 'Not found'}, 404)
@@ -944,6 +1198,46 @@ class QuizHandler(BaseHTTPRequestHandler):
 
             print(f'  📤 Uploaded: {safe_name} → {dest}')
             self.send_json({'path': dest, 'name': safe_name})
+
+        elif path == '/api/explain':
+            # Korean explanation via Claude API
+            length = int(self.headers.get('Content-Length', 0))
+            if length == 0:
+                self.send_json({'error': 'no body'}, 400)
+                return
+            try:
+                payload  = json.loads(self.rfile.read(length).decode('utf-8'))
+                q_num    = payload.get('num', '')
+                question = payload.get('question', '')
+                expl     = payload.get('explanation', '')
+                options  = payload.get('options', {})
+                answer   = payload.get('answer', [])
+                korean   = generate_korean_explanation(q_num, question, expl, options, answer)
+                if korean:
+                    self.send_json({'korean': korean})
+                else:
+                    self.send_json({'error': 'unavailable'}, 503)
+            except Exception as e:
+                self.send_json({'error': str(e)}, 500)
+
+        elif path == '/api/setkey':
+            # Save ANTHROPIC_API_KEY entered from the UI
+            length = int(self.headers.get('Content-Length', 0))
+            if length == 0:
+                self.send_json({'error': 'no body'}, 400)
+                return
+            try:
+                payload = json.loads(self.rfile.read(length).decode('utf-8'))
+                key = payload.get('key', '').strip()
+                if not key:
+                    self.send_json({'error': '키가 비어 있습니다'}, 400)
+                    return
+                _save_api_key(key)
+                # Clear Korean cache so next quiz re-generates with new key
+                korean_cache.clear()
+                self.send_json({'ok': True})
+            except Exception as e:
+                self.send_json({'error': str(e)}, 500)
 
         else:
             self.send_json({'error': 'Not found'}, 404)
@@ -1029,6 +1323,72 @@ select:focus{border-color:#3b82f6}
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
+/* ── ApiKeyBanner: shown when ANTHROPIC_API_KEY is not configured ── */
+function ApiKeyBanner() {
+  const [hasKey,  setHasKey]  = useState(true);   // optimistic
+  const [key,     setKey]     = useState('');
+  const [saving,  setSaving]  = useState(false);
+  const [saved,   setSaved]   = useState(false);
+  const [err,     setErr]     = useState('');
+
+  useEffect(() => {
+    fetch('/api/keycheck')
+      .then(r => r.json())
+      .then(d => setHasKey(d.has_key))
+      .catch(() => {});
+  }, []);
+
+  if (hasKey || saved) return null;
+
+  const save = async () => {
+    if (!key.trim()) return;
+    setSaving(true); setErr('');
+    try {
+      const res  = await fetch('/api/setkey', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({key: key.trim()}),
+      });
+      const data = await res.json();
+      if (data.ok) { setSaved(true); setHasKey(true); }
+      else setErr(data.error || '저장 실패');
+    } catch(e) { setErr('저장 중 오류: ' + e.message); }
+    finally { setSaving(false); }
+  };
+
+  return (
+    <div className="key-banner">
+      <p style={{fontWeight:'700',fontSize:'14px',color:'#fbbf24',marginBottom:'6px'}}>
+        🔑 한국어 해석 기능 설정
+      </p>
+      <p style={{fontSize:'13px',color:'#d97706',marginBottom:'12px',lineHeight:'1.6'}}>
+        한국어 해석을 생성하려면 Anthropic API 키가 필요합니다.{' '}
+        <a href="https://console.anthropic.com/settings/keys" target="_blank"
+          style={{color:'#fbbf24'}}>console.anthropic.com</a>에서 발급 후 입력하세요.
+      </p>
+      <div style={{display:'flex',gap:'8px'}}>
+        <input
+          className="key-input"
+          type="password"
+          placeholder="sk-ant-api03-..."
+          value={key}
+          onChange={e => setKey(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && save()}
+        />
+        <button className="btn btn-primary" onClick={save}
+          disabled={saving || !key.trim()}
+          style={{flexShrink:0, padding:'9px 18px', fontSize:'13px'}}>
+          {saving ? '저장 중...' : '저장'}
+        </button>
+      </div>
+      {err && <p style={{color:'#ef4444',fontSize:'12px',marginTop:'6px'}}>{err}</p>}
+      <p style={{fontSize:'11px',color:'#78716c',marginTop:'8px'}}>
+        키는 서버 폴더의 .quiz_env 파일에 저장됩니다.
+      </p>
+    </div>
+  );
+}
+
 /* ── ExhibitImage: lazy-loads PDF page image from server ── */
 function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
   const [src,     setSrc]     = useState(null);
@@ -1113,9 +1473,48 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
   );
 }
 
-/* ── KoreanExplain: 캐시에서 즉시 표시 (Cloud 버전 — API 없음) ── */
+/* ── KoreanExplain: shows pre-generated Korean, or polls until ready ── */
 function KoreanExplain({ question }) {
-  const korean = question.explanation_ko || '';
+  const initial = question.explanation_ko || '';
+  const [state,  setState]  = useState(initial ? 'done' : 'loading');
+  const [korean, setKorean] = useState(initial);
+
+  useEffect(() => {
+    if (initial) return; // already have it from pre-generation
+    let cancelled = false;
+    let timerId   = null;
+
+    const poll = () => {
+      if (cancelled) return;
+      fetch('/api/explain_status?num=' + encodeURIComponent(question.num)
+           + (question.pdf_name ? '&pdf=' + encodeURIComponent(question.pdf_name) : ''))
+        .then(r => r.json())
+        .then(data => {
+          if (cancelled) return;
+          if (data.ready && data.korean) {
+            setKorean(data.korean);
+            setState('done');
+          } else {
+            // Not ready yet — retry in 4 seconds
+            timerId = setTimeout(poll, 4000);
+          }
+        })
+        .catch(() => {
+          if (!cancelled) timerId = setTimeout(poll, 6000);
+        });
+    };
+
+    poll();
+    return () => { cancelled = true; if (timerId) clearTimeout(timerId); };
+  }, [question.num]);
+
+  if (state === 'loading') return (
+    <div style={{marginTop:'12px',background:'#1e293b',border:'1px solid #334155',
+      borderRadius:'8px',padding:'12px',display:'flex',alignItems:'center',gap:'8px'}}>
+      <span style={{fontSize:'13px',color:'#94a3b8'}}>⏳ 한국어 해석 생성 중 (백그라운드)...</span>
+    </div>
+  );
+
   if (!korean) return null;
 
   const html = typeof marked !== 'undefined'
@@ -1189,13 +1588,12 @@ function SelectScreen({ onStart }){
     if(f){ setFile(f); doUpload(f); }
   };
 
-  /* start quiz (시험 모드) */
+  /* start quiz (시험 모드 or 연습 모드) */
   const start = async(mode='exam')=>{
     const pdfPath = tab==='server' ? sel : (uploaded && uploaded.path);
     if(!pdfPath) return;
     setLoading(true); setErr('');
     try{
-      // 연습 모드는 전체 문제, 시험 모드는 count개
       const url = mode==='practice'
         ? '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count=9999'
         : '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count='+count;
@@ -1223,6 +1621,8 @@ function SelectScreen({ onStart }){
         <h1>Certification Exam Quiz</h1>
         <p className="muted" style={{marginTop:'8px'}}>덤프 PDF에서 랜덤 문제를 뽑아 모의고사를 풀어보세요</p>
       </div>
+
+      <ApiKeyBanner />
 
       <div className="card">
         <h3 style={{marginBottom:'16px'}}>⚙️ 시험 설정</h3>
@@ -1341,7 +1741,6 @@ function SelectScreen({ onStart }){
 
 /* ── PracticeScreen ── */
 function PracticeScreen({ questions, onExit, pdfPath }){
-  // pool: 아직 맞추지 못한 문제 인덱스 배열 (틀리면 유지, 맞으면 제거)
   const [pool,      setPool]      = useState(()=>questions.map((_,i)=>i));
   const [done,      setDone]      = useState(new Set());
   const [curIdx,    setCurIdx]    = useState(()=>Math.floor(Math.random()*questions.length));
@@ -1356,7 +1755,6 @@ function PracticeScreen({ questions, onExit, pdfPath }){
   const isCorrect = submitted &&
     JSON.stringify([...selected].sort()) === JSON.stringify([...q.answer].sort());
 
-  // 선택지 셔플 (QuizScreen과 동일 로직)
   const {opts, origToDisplay} = useMemo(()=>{
     const labels = ['A','B','C','D','E'];
     const origArr = Object.keys(q.options).sort();
@@ -1397,7 +1795,6 @@ function PracticeScreen({ questions, onExit, pdfPath }){
   };
 
   const next = ()=>{
-    // 맞췄으면 pool에서 제거, 틀렸으면 유지
     const newPool = isCorrect ? pool.filter(i=>i!==curIdx) : pool;
     if(newPool.length===0){ setPool([]); setComplete(true); return; }
     setPool(newPool);
@@ -1409,9 +1806,7 @@ function PracticeScreen({ questions, onExit, pdfPath }){
 
   const total     = questions.length;
   const doneCount = done.size;
-  const remaining = pool.length - (isCorrect&&!complete ? 1 : 0); // 맞춘 후 남은 수 미리 표시
 
-  // 완료 화면
   if(complete){
     return(
       <div className="container">
@@ -1437,7 +1832,6 @@ function PracticeScreen({ questions, onExit, pdfPath }){
 
   return(
     <div className="container">
-      {/* 상단 바 */}
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'14px'}}>
         <button onClick={onExit}
           style={{background:'none',border:'1px solid #4b5563',color:'#9ca3af',
@@ -1456,13 +1850,11 @@ function PracticeScreen({ questions, onExit, pdfPath }){
         </div>
       </div>
 
-      {/* 진행 바 (초록) */}
       <div className="prog-bar" style={{marginBottom:'16px'}}>
         <div className="prog-fill"
           style={{width:`${(doneCount/total)*100}%`, background:'#22c55e', transition:'width .4s'}} />
       </div>
 
-      {/* 문제 카드 */}
       <div className="card">
         <div style={{display:'flex',gap:'8px',alignItems:'center',marginBottom:'12px',flexWrap:'wrap'}}>
           <span className="badge b-blue">{q.num}</span>
@@ -1484,15 +1876,14 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           {q.question}
         </p>
 
-        {/* 선택지 */}
         {opts.map(({displayLetter, origLetter, text})=>{
           let style = {width:'100%',textAlign:'left',marginBottom:'8px'};
           let cls   = 'opt';
           if(submitted){
             const isAns = q.answer.includes(origLetter);
             const isSel = selected.includes(origLetter);
-            if(isAns)          { style={...style,background:'#14532d',border:'2px solid #22c55e',color:'#86efac'}; }
-            else if(isSel)     { style={...style,background:'#450a0a',border:'2px solid #ef4444',color:'#fca5a5'}; }
+            if(isAns)      { style={...style,background:'#14532d',border:'2px solid #22c55e',color:'#86efac'}; }
+            else if(isSel) { style={...style,background:'#450a0a',border:'2px solid #ef4444',color:'#fca5a5'}; }
           } else {
             if(selected.includes(origLetter)) cls='opt sel';
           }
@@ -1505,7 +1896,6 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           );
         })}
 
-        {/* 확인 버튼 */}
         {!submitted ? (
           <button className="btn btn-primary" onClick={submit}
             disabled={selected.length===0}
@@ -1515,7 +1905,6 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           </button>
         ) : (
           <div>
-            {/* 정답/오답 배너 */}
             <div style={{
               padding:'12px 16px',borderRadius:'8px',marginTop:'12px',
               background: isCorrect?'#14532d':'#450a0a',
@@ -1531,7 +1920,6 @@ function PracticeScreen({ questions, onExit, pdfPath }){
                 </p>}
             </div>
 
-            {/* 해설 */}
             {q.explanation &&
               <div style={{marginTop:'12px',background:'#1e293b',border:'1px solid #334155',
                 borderRadius:'8px',padding:'14px'}}>
@@ -1539,7 +1927,6 @@ function PracticeScreen({ questions, onExit, pdfPath }){
                 <p style={{fontSize:'13px',lineHeight:'1.8',color:'#cbd5e1'}}>{q.explanation}</p>
               </div>}
 
-            {/* 한국어 해석 */}
             <KoreanExplain question={{...q, explanation_ko: q.explanation_ko}} />
 
             <button className="btn btn-primary" onClick={next}
@@ -1711,8 +2098,7 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
 
 /* ── ResultsScreen ── */
 function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
-  const [expanded,        setExpanded]        = useState(null);
-  const [expandedCorrect, setExpandedCorrect] = useState(null);
+  const [expanded, setExpanded] = useState(null);
 
   const results = questions.map(q=>{
     const userAns = answers[q.num] || [];
@@ -1851,65 +2237,12 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
 
       {/* correct list */}
       {correctN > 0 && <>
-        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',margin:'22px 0 10px'}}>
-          <h3 style={{color:'#86efac'}}>✅ 맞힌 문제 ({correctN}개)</h3>
+        <h3 style={{margin:'22px 0 10px',color:'#86efac'}}>✅ 맞힌 문제 ({correctN}개)</h3>
+        <div style={{display:'flex',flexWrap:'wrap',gap:'6px',marginBottom:'24px'}}>
+          {results.filter(r=>r.correct).map(r=>(
+            <span key={r.num} className="badge b-green">{r.num}</span>
+          ))}
         </div>
-        <p className="muted sm" style={{marginBottom:'14px'}}>
-          클릭하면 해설을 다시 확인할 수 있어요.
-        </p>
-        {results.filter(r=>r.correct).map((r,i)=>(
-          <div key={i} className="card" style={{marginBottom:'10px'}}>
-            <div style={{cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}
-              onClick={()=>setExpandedCorrect(expandedCorrect===r.num?null:r.num)}>
-              <div style={{flex:1}}>
-                <div style={{display:'flex',gap:'6px',alignItems:'center',marginBottom:'8px',flexWrap:'wrap'}}>
-                  <span className="badge b-green">{r.num}</span>
-                  {r.has_exhibit && <span className="badge b-yellow">📊 Exhibit</span>}
-                  {r.is_multiple && <span className="badge b-blue">복수선택</span>}
-                </div>
-                <p style={{fontSize:'13px',lineHeight:'1.6',color:'#cbd5e1'}}>
-                  {r.question.length>160 ? r.question.slice(0,160)+'...' : r.question}
-                </p>
-                <div style={{marginTop:'10px',fontSize:'12px'}}>
-                  정답: {r.answer.map(a=><span key={a} className="badge b-green" style={{marginRight:'3px'}}>{a}</span>)}
-                </div>
-              </div>
-              <span className="muted" style={{marginLeft:'10px',fontSize:'18px'}}>
-                {expandedCorrect===r.num?'▲':'▼'}
-              </span>
-            </div>
-
-            {expandedCorrect===r.num && <>
-              <div className="divider" />
-              {r.has_exhibit && r.page_num > 0 &&
-                <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
-              }
-              {r.page_num > 0 && Object.keys(r.options).length > 0 &&
-                Object.values(r.options).every(v=>v==='[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
-                <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />
-              )}
-              <div style={{marginBottom:'12px'}}>
-                {Object.keys(r.options).sort().map(letter=>{
-                  const isCorr = r.answer.includes(letter);
-                  let cls = 'opt';
-                  if(isCorr) cls+=' correct';
-                  return(
-                    <div key={letter} className={cls} style={{cursor:'default'}}>
-                      <span style={{fontWeight:'700',marginRight:'8px'}}>
-                        {letter}. {isCorr?'✅ ':''}
-                      </span>
-                      {r.options[letter]==='[옵션 텍스트가 Exhibit 이미지에 포함됨]'
-                        ? <span style={{color:'#94a3b8',fontStyle:'italic',fontSize:'13px'}}>(위 이미지 참조)</span>
-                        : r.options[letter]
-                      }
-                    </div>
-                  );
-                })}
-              </div>
-              <KoreanExplain question={r} />
-            </>}
-          </div>
-        ))}
       </>}
 
       <button className="btn btn-primary" onClick={onRetry}
@@ -1927,7 +2260,7 @@ function App(){
   const [answers,   setAnswers]   = useState({});
   const [elapsed,   setElapsed]   = useState('00:00');
   const [pdfPath,   setPdfPath]   = useState('');
-  const [mode,      setMode]      = useState('exam'); // 'exam' | 'practice'
+  const [mode,      setMode]      = useState('exam');
 
   const handleStart  = (qs, total, path, m='exam') => {
     setQuestions(qs); setAnswers({}); setPdfPath(path); setMode(m);

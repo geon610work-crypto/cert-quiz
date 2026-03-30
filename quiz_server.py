@@ -644,7 +644,7 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                 if area < 8000:
                     continue
                 # Skip very wide/flat banners (watermarks, page-wide headers)
-                if r.width > 0 and (r.height / r.width) < 0.08:
+                if r.width > 0 and (r.height / r.width) < 0.05:
                     continue
                 # Position-based: image top must be between q_y and next_q_y
                 if q_y_for_img is not None and next_q_y_for_img is not None:
@@ -689,7 +689,7 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                 if rects2:
                     r2 = rects2[0]
                     a2 = r2.width * r2.height
-                    if a2 >= 8000 and (r2.height / max(r2.width, 1)) >= 0.08:
+                    if a2 >= 8000 and (r2.height / max(r2.width, 1)) >= 0.05:
                         if _min_top2 < r2.y0 < q_y_for_img - 10:
                             above_xrefs.append((xref2, r2.y0))
 
@@ -1028,7 +1028,7 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
                 area = r.width * r.height
                 if area < 8000:
                     continue
-                if r.width > 0 and (r.height / r.width) < 0.08:
+                if r.width > 0 and (r.height / r.width) < 0.05:
                     continue
                 # Track only the LARGEST image's bottom (= main exhibit)
                 if area > largest_area:

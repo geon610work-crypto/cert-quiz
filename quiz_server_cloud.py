@@ -438,7 +438,9 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
         # ── Dual-exhibit detection ────────────────────────────────────
         # Some questions have exhibit1 ABOVE the question number and
         # exhibit2 BELOW it (e.g. "Refer to the exhibits").
-        # Collect any content images that sit between MIN_TOP and q_y-10.
+        # Collect any content images that sit between min_top and q_y-10.
+        _pr_tmp2  = page.rect
+        _min_top2 = _pr_tmp2.y0 + _pr_tmp2.height * 0.10   # skip header watermark
         above_xrefs = []
         if pos_xref is not None and q_y_for_img is not None:
             for img in img_list:
@@ -453,7 +455,7 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                     r2 = rects2[0]
                     a2 = r2.width * r2.height
                     if a2 >= 8000 and (r2.height / max(r2.width, 1)) >= 0.08:
-                        if MIN_TOP < r2.y0 < q_y_for_img - 10:
+                        if _min_top2 < r2.y0 < q_y_for_img - 10:
                             above_xrefs.append((xref2, r2.y0))
 
         if chosen_xref is not None and not no_image_in_range:

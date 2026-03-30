@@ -435,7 +435,68 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
         # If no image found in [q_y, next_q_y], signal to check adjacent pages
         no_image_in_range = (q_y_for_img is not None and pos_xref is None)
 
+        # ── Dual-exhibit detection ────────────────────────────────────
+        # Some questions have exhibit1 ABOVE the question number and
+        # exhibit2 BELOW it (e.g. "Refer to the exhibits").
+        # Collect any content images that sit between MIN_TOP and q_y-10.
+        above_xrefs = []
+        if pos_xref is not None and q_y_for_img is not None:
+            for img in img_list:
+                xref2 = img[0]
+                if xref2 == pos_xref:
+                    continue
+                try:
+                    rects2 = page.get_image_rects(xref2)
+                except Exception:
+                    rects2 = []
+                if rects2:
+                    r2 = rects2[0]
+                    a2 = r2.width * r2.height
+                    if a2 >= 8000 and (r2.height / max(r2.width, 1)) >= 0.08:
+                        if MIN_TOP < r2.y0 < q_y_for_img - 10:
+                            above_xrefs.append((xref2, r2.y0))
+
         if chosen_xref is not None and not no_image_in_range:
+            # If there are images both above AND below the question text,
+            # stitch them together vertically (dual-exhibit layout).
+            if above_xrefs and pos_xref is not None:
+                try:
+                    from PIL import Image as PILImage
+                    import io as _io
+                    def _xref_to_pil(xref_val):
+                        raw2 = doc.extract_image(xref_val)
+                        d2 = raw2['image']
+                        e2 = raw2.get('ext', 'jpeg').lower()
+                        if e2 not in ('jpeg', 'jpg'):
+                            px2 = fitz.Pixmap(doc, xref_val)
+                            if px2.alpha:
+                                px2 = fitz.Pixmap(fitz.csRGB, px2)
+                            d2 = px2.tobytes('jpeg')
+                        return PILImage.open(_io.BytesIO(d2)).convert('RGB')
+                    # Build list: above images (sorted by y) then below image
+                    ordered = sorted(above_xrefs, key=lambda x: x[1])
+                    pil_imgs = [_xref_to_pil(x[0]) for x in ordered]
+                    pil_imgs.append(_xref_to_pil(pos_xref))
+                    max_w = max(im.width for im in pil_imgs)
+                    gap = 8
+                    total_h = sum(im.height for im in pil_imgs) + gap * (len(pil_imgs) - 1)
+                    combined = PILImage.new('RGB', (max_w, total_h), (255, 255, 255))
+                    y_off = 0
+                    for im in pil_imgs:
+                        if im.width != max_w:
+                            scale = max_w / im.width
+                            im = im.resize((max_w, int(im.height * scale)), PILImage.LANCZOS)
+                        combined.paste(im, (0, y_off))
+                        y_off += im.height + gap
+                    buf = _io.BytesIO()
+                    combined.save(buf, format='JPEG', quality=85)
+                    doc.close()
+                    b64 = base64.b64encode(buf.getvalue()).decode('utf-8')
+                    image_cache[key] = b64
+                    return b64
+                except Exception:
+                    pass  # fall through to single-image path
+
             best_xref = chosen_xref  # reuse downstream code
             raw_img  = doc.extract_image(best_xref)
             img_data = raw_img['image']

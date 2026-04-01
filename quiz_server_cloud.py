@@ -1071,7 +1071,7 @@ def build_html():
 }
 [data-theme="light"]{
   --c0:#f1f5f9;--c1:#ffffff;--c2:#e2e8f0;--c3:#cbd5e1;--c4:#94a3b8;--c5:#64748b;--c6:#475569;--c7:#0f172a;
-  --ko-bg:#f0fdf4;--ko-border:#86efac;--ko-text:#166534;--ko-h:#16a34a;--ko-code:#15803d;
+  --ko-bg:#f8fafc;--ko-border:#3b82f6;--ko-text:#1e293b;--ko-h:#2563eb;--ko-code:#0369a1;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:var(--c0);color:var(--c7);min-height:100vh;transition:background .2s,color .2s}

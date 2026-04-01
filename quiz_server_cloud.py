@@ -1574,8 +1574,8 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
           })}
         </div>
 
-        {/* opts exhibit (이미지 선택지) */}
-        {q.has_exhibit && (
+        {/* opts exhibit (이미지 선택지) — 모든 선택지가 이미지일 때만 표시 */}
+        {opts.every(letter => q.options[letter] === '[옵션 텍스트가 Exhibit 이미지에 포함됨]') && opts.length > 0 && (
           <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} optsMode={true} />
         )}
 

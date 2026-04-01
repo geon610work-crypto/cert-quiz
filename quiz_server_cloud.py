@@ -976,7 +976,11 @@ class QuizHandler(BaseHTTPRequestHandler):
                 return
 
             pdf_name = os.path.basename(pdf_path)
-            selected = random.sample(all_q, min(count, len(all_q)))
+            order = params.get('order', [''])[0]
+            if order == '1':
+                selected = all_q
+            else:
+                selected = random.sample(all_q, min(count, len(all_q)))
 
             # Cloud 버전: 캐시에서 즉시 조회 (API 생성 없음)
             for q in selected:
@@ -1059,64 +1063,75 @@ def build_html():
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})()</script>
 <style>
+:root{
+  --c0:#0f172a;--c1:#1e293b;--c2:#334155;--c3:#475569;--c4:#64748b;--c5:#94a3b8;--c6:#cbd5e1;--c7:#e2e8f0;
+  --ko-bg:#0a1f10;--ko-border:#166534;--ko-text:#d1fae5;--ko-h:#4ade80;--ko-code:#86efac;
+}
+[data-theme="light"]{
+  --c0:#f1f5f9;--c1:#ffffff;--c2:#e2e8f0;--c3:#cbd5e1;--c4:#94a3b8;--c5:#64748b;--c6:#475569;--c7:#0f172a;
+  --ko-bg:#f0fdf4;--ko-border:#86efac;--ko-text:#166534;--ko-h:#16a34a;--ko-code:#15803d;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+body{font-family:'Inter',sans-serif;background:var(--c0);color:var(--c7);min-height:100vh;transition:background .2s,color .2s}
 ::-webkit-scrollbar{width:7px}
-::-webkit-scrollbar-track{background:#1e293b}
-::-webkit-scrollbar-thumb{background:#475569;border-radius:4px}
+::-webkit-scrollbar-track{background:var(--c1)}
+::-webkit-scrollbar-thumb{background:var(--c3);border-radius:4px}
 .container{max-width:820px;margin:0 auto;padding:24px 16px 60px}
-.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:28px;margin-bottom:16px}
+.card{background:var(--c1);border:1px solid var(--c2);border-radius:16px;padding:28px;margin-bottom:16px}
 .btn{padding:10px 22px;border-radius:10px;border:none;cursor:pointer;font-weight:600;font-size:14px;transition:all .2s}
 .btn-primary{background:#3b82f6;color:#fff}
 .btn-primary:hover{background:#2563eb}
-.btn-primary:disabled{background:#475569;cursor:not-allowed;opacity:.7}
-.btn-secondary{background:#334155;color:#e2e8f0}
-.btn-secondary:hover{background:#475569}
+.btn-primary:disabled{background:var(--c3);cursor:not-allowed;opacity:.7}
+.btn-secondary{background:var(--c2);color:var(--c7)}
+.btn-secondary:hover{background:var(--c3)}
 .btn-success{background:#22c55e;color:#fff}
 .btn-success:hover{background:#16a34a}
 .btn-danger{background:#ef4444;color:#fff}
 .btn-danger:hover{background:#dc2626}
-.prog-bar{height:6px;background:#334155;border-radius:3px;overflow:hidden;margin-bottom:20px}
+.prog-bar{height:6px;background:var(--c2);border-radius:3px;overflow:hidden;margin-bottom:20px}
 .prog-fill{height:100%;background:linear-gradient(90deg,#3b82f6,#8b5cf6);transition:width .3s}
-.opt{display:block;width:100%;text-align:left;padding:13px 16px;margin-bottom:9px;border-radius:10px;border:2px solid #334155;background:#0f172a;color:#e2e8f0;cursor:pointer;transition:all .15s;font-size:14px;line-height:1.6}
-.opt:hover{border-color:#3b82f6;background:#1e3a5f}
-.opt.sel{border-color:#3b82f6;background:#1e3a5f}
-.opt.correct{border-color:#22c55e!important;background:#14532d!important}
-.opt.wrong{border-color:#ef4444!important;background:#450a0a!important}
+.opt{display:block;width:100%;text-align:left;padding:13px 16px;margin-bottom:9px;border-radius:10px;border:2px solid var(--c2);background:var(--c0);color:var(--c7);cursor:pointer;transition:all .15s;font-size:14px;line-height:1.6}
+.opt:hover{border-color:#3b82f6;background:var(--c1)}
+.opt.sel{border-color:#3b82f6;background:var(--c1)}
+.opt.correct{border-color:#22c55e!important;background:rgba(34,197,94,0.12)!important}
+.opt.wrong{border-color:#ef4444!important;background:rgba(239,68,68,0.12)!important}
 .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700}
-.b-blue{background:#1e3a5f;color:#60a5fa}
-.b-green{background:#14532d;color:#86efac}
-.b-red{background:#450a0a;color:#fca5a5}
-.b-yellow{background:#451a03;color:#fcd34d}
-.b-gray{background:#334155;color:#94a3b8}
+.b-blue{background:rgba(59,130,246,0.15);color:#60a5fa}
+.b-green{background:rgba(34,197,94,0.15);color:#22c55e}
+.b-red{background:rgba(239,68,68,0.15);color:#f87171}
+.b-yellow{background:rgba(245,158,11,0.15);color:#fbbf24}
+.b-gray{background:var(--c2);color:var(--c5)}
 h1{font-size:26px;font-weight:700}
 h2{font-size:20px;font-weight:700}
 h3{font-size:16px;font-weight:600}
-.muted{color:#94a3b8}
+.muted{color:var(--c5)}
 .sm{font-size:13px}
-select{background:#0f172a;border:2px solid #334155;color:#e2e8f0;padding:10px 14px;border-radius:10px;font-size:14px;width:100%;cursor:pointer;outline:none}
+select{background:var(--c0);border:2px solid var(--c2);color:var(--c7);padding:10px 14px;border-radius:10px;font-size:14px;width:100%;cursor:pointer;outline:none}
 select:focus{border-color:#3b82f6}
-.divider{height:1px;background:#334155;margin:18px 0}
-.expl{background:#0f172a;border:1px solid #334155;border-left:3px solid #3b82f6;border-radius:8px;padding:14px;margin-top:10px;font-size:13px;line-height:1.8;color:#cbd5e1}
+.divider{height:1px;background:var(--c2);margin:18px 0}
+.expl{background:var(--c0);border:1px solid var(--c2);border-left:3px solid #3b82f6;border-radius:8px;padding:14px;margin-top:10px;font-size:13px;line-height:1.8;color:var(--c6)}
 .q-nav-btn{width:34px;height:34px;border-radius:7px;border:none;cursor:pointer;font-size:11px;font-weight:700;transition:all .15s}
-.exhibit-warn{background:#451a03;border:1px solid #92400e;border-radius:8px;padding:9px 13px;margin-bottom:14px;font-size:13px;color:#fcd34d}
-.key-banner{background:#1e1a00;border:1px solid #854d0e;border-radius:12px;padding:16px 20px;margin-bottom:16px}
-.key-input{background:#0f172a;border:2px solid #334155;color:#e2e8f0;padding:9px 13px;border-radius:8px;font-size:13px;width:100%;font-family:monospace;outline:none}
+.exhibit-warn{background:rgba(245,158,11,0.12);border:1px solid #92400e;border-radius:8px;padding:9px 13px;margin-bottom:14px;font-size:13px;color:#fcd34d}
+.key-banner{background:rgba(245,158,11,0.08);border:1px solid #854d0e;border-radius:12px;padding:16px 20px;margin-bottom:16px}
+.key-input{background:var(--c0);border:2px solid var(--c2);color:var(--c7);padding:9px 13px;border-radius:8px;font-size:13px;width:100%;font-family:monospace;outline:none}
 .key-input:focus{border-color:#f59e0b}
-.korean-expl h1,.korean-expl h2,.korean-expl h3{color:#4ade80;margin:12px 0 6px;font-size:14px}
+.korean-expl h1,.korean-expl h2,.korean-expl h3{color:var(--ko-h);margin:12px 0 6px;font-size:14px}
 .korean-expl p{margin-bottom:8px}
 .korean-expl ul,.korean-expl ol{padding-left:20px;margin-bottom:8px}
 .korean-expl li{margin-bottom:3px}
-.korean-expl code{background:#0a1f10;border:1px solid #166534;border-radius:4px;padding:1px 5px;font-family:monospace;font-size:13px;color:#86efac}
-.korean-expl pre{background:#0a1f10;border:1px solid #166534;border-radius:6px;padding:10px 12px;margin:8px 0;overflow-x:auto}
+.korean-expl code{background:var(--ko-bg);border:1px solid var(--ko-border);border-radius:4px;padding:1px 5px;font-family:monospace;font-size:13px;color:var(--ko-code)}
+.korean-expl pre{background:var(--ko-bg);border:1px solid var(--ko-border);border-radius:6px;padding:10px 12px;margin:8px 0;overflow-x:auto}
 .korean-expl pre code{background:none;border:none;padding:0;font-size:13px;line-height:1.6}
 .korean-expl table{border-collapse:collapse;width:100%;margin:8px 0;font-size:13px}
-.korean-expl th{background:#14532d;color:#86efac;padding:6px 10px;border:1px solid #166534;text-align:left}
-.korean-expl td{padding:5px 10px;border:1px solid #166534;color:#d1fae5}
-.korean-expl tr:nth-child(even) td{background:#0a1a0e}
-.korean-expl strong{color:#86efac;font-weight:600}
-.korean-expl blockquote{border-left:3px solid #166534;padding-left:12px;color:#a7f3d0;margin:8px 0}
+.korean-expl th{background:var(--ko-bg);color:var(--ko-code);padding:6px 10px;border:1px solid var(--ko-border);text-align:left}
+.korean-expl td{padding:5px 10px;border:1px solid var(--ko-border);color:var(--ko-text)}
+.korean-expl tr:nth-child(even) td{background:var(--ko-bg)}
+.korean-expl strong{color:var(--ko-code);font-weight:600}
+.korean-expl blockquote{border-left:3px solid var(--ko-border);padding-left:12px;color:var(--ko-text);margin:8px 0}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:9999;background:var(--c1);border:1px solid var(--c2);border-radius:50%;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 2px 8px rgba(0,0,0,.3);transition:background .2s,border .2s}
+.theme-toggle:hover{background:var(--c2)}
 </style>
 </head>
 <body>
@@ -1150,8 +1165,8 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
   const [zoomed, setZoomed] = useState(false);
 
   if (loading) return (
-    <div style={{textAlign:'center',padding:'16px',color:'#94a3b8',fontSize:'13px',
-      background:'#0f172a',borderRadius:'8px',marginBottom:'16px',border:'1px solid #334155'}}>
+    <div style={{textAlign:'center',padding:'16px',color:'var(--c5)',fontSize:'13px',
+      background:'var(--c0)',borderRadius:'8px',marginBottom:'16px',border:'1px solid #334155'}}>
       ⏳ Exhibit 로딩 중...
     </div>
   );
@@ -1164,7 +1179,7 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
   );
 
   const label = optsMode ? '📋 선택지' : '📊 Exhibit';
-  const borderColor = optsMode ? '#64748b' : '#475569';
+  const borderColor = optsMode ? 'var(--c4)' : 'var(--c3)';
 
   return (
     <>
@@ -1174,13 +1189,13 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
         overflow:'hidden', position:'relative',
       }}>
         <div style={{
-          background:'#0f172a', padding:'5px 10px',
+          background:'var(--c0)', padding:'5px 10px',
           display:'flex', justifyContent:'space-between', alignItems:'center',
           borderBottom:'1px solid #334155',
         }}>
-          <span style={{fontSize:'11px',color:optsMode?'#94a3b8':'#60a5fa',fontWeight:'600'}}>{label}</span>
+          <span style={{fontSize:'11px',color:optsMode?'var(--c5)':'#60a5fa',fontWeight:'600'}}>{label}</span>
           <button onClick={()=>setZoomed(true)}
-            style={{fontSize:'11px',background:'none',border:'none',color:'#94a3b8',
+            style={{fontSize:'11px',background:'none',border:'none',color:'var(--c5)',
               cursor:'pointer',padding:'2px 6px'}}>
             🔍 크게 보기
           </button>
@@ -1201,7 +1216,7 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
             style={{maxWidth:'100%', maxHeight:'100%', borderRadius:'8px',
               boxShadow:'0 0 40px rgba(0,0,0,0.8)'}} />
           <div style={{position:'absolute',top:'16px',right:'20px',
-            color:'#94a3b8',fontSize:'13px'}}>✕ 클릭하여 닫기</div>
+            color:'var(--c5)',fontSize:'13px'}}>✕ 클릭하여 닫기</div>
         </div>
       )}
     </>
@@ -1295,7 +1310,7 @@ function SelectScreen({ onStart }){
     try{
       // 연습/공부 모드는 전체 문제, 시험 모드는 count개
       const url = (mode==='practice' || mode==='study')
-        ? '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count=9999'
+        ? '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count=9999' + (mode==='study' ? '&order=1' : '')
         : '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count='+count;
       const res  = await fetch(url);
       const data = await res.json();
@@ -1311,7 +1326,7 @@ function SelectScreen({ onStart }){
     flex:1, padding:'10px', border:'none', cursor:'pointer', fontWeight:'600',
     fontSize:'14px', borderRadius:'8px', transition:'all .2s',
     background: active ? '#3b82f6' : 'transparent',
-    color:      active ? '#fff'    : '#94a3b8',
+    color:      active ? '#fff'    : 'var(--c5)',
   });
 
   return(
@@ -1326,7 +1341,7 @@ function SelectScreen({ onStart }){
         <h3 style={{marginBottom:'16px'}}>⚙️ 시험 설정</h3>
 
         {/* Tab switcher */}
-        <div style={{display:'flex',gap:'6px',background:'#0f172a',borderRadius:'10px',
+        <div style={{display:'flex',gap:'6px',background:'var(--c0)',borderRadius:'10px',
           padding:'4px',marginBottom:'20px'}}>
           <button style={tabStyle(tab==='server')} onClick={()=>{setTab('server');setErr('');}}>
             📁 서버 PDF
@@ -1339,14 +1354,14 @@ function SelectScreen({ onStart }){
         {/* Server PDF tab */}
         {tab==='server' && (
           pdfs.length > 0 ? <>
-            <label style={{display:'block',marginBottom:'7px',fontWeight:'600',fontSize:'13px',color:'#94a3b8'}}>
+            <label style={{display:'block',marginBottom:'7px',fontWeight:'600',fontSize:'13px',color:'var(--c5)'}}>
               📄 PDF 파일 선택
             </label>
             <select value={sel} onChange={e=>setSel(e.target.value)} style={{marginBottom:'18px'}}>
               {pdfs.map(p=><option key={p.path} value={p.path}>{p.rel}</option>)}
             </select>
           </> : (
-            <div style={{textAlign:'center',padding:'20px 0',color:'#94a3b8',fontSize:'13px',marginBottom:'8px'}}>
+            <div style={{textAlign:'center',padding:'20px 0',color:'var(--c5)',fontSize:'13px',marginBottom:'8px'}}>
               서버에 PDF 파일이 없습니다. "내 PC에서 업로드" 탭을 이용해 주세요.
             </div>
           )
@@ -1367,23 +1382,23 @@ function SelectScreen({ onStart }){
                   textAlign:'center',cursor:'pointer',transition:'border-color .2s',
                 }}
                 onMouseOver={e=>e.currentTarget.style.borderColor='#3b82f6'}
-                onMouseOut={e=>e.currentTarget.style.borderColor='#475569'}
+                onMouseOut={e=>e.currentTarget.style.borderColor='var(--c3)'}
               >
                 {uploading ? (
                   <div>
                     <div style={{fontSize:'32px',marginBottom:'8px'}}>⏳</div>
-                    <p style={{color:'#94a3b8',fontSize:'14px'}}>업로드 중...</p>
+                    <p style={{color:'var(--c5)',fontSize:'14px'}}>업로드 중...</p>
                   </div>
                 ) : (
                   <div>
                     <div style={{fontSize:'36px',marginBottom:'10px'}}>📤</div>
                     <p style={{fontWeight:'600',marginBottom:'4px'}}>클릭하여 PDF 선택</p>
-                    <p style={{color:'#94a3b8',fontSize:'13px'}}>최대 80MB · .pdf 파일만 지원</p>
+                    <p style={{color:'var(--c5)',fontSize:'13px'}}>최대 80MB · .pdf 파일만 지원</p>
                   </div>
                 )}
               </div>
             ) : (
-              <div style={{background:'#0f172a',borderRadius:'10px',padding:'14px 16px',
+              <div style={{background:'var(--c0)',borderRadius:'10px',padding:'14px 16px',
                 display:'flex',alignItems:'center',gap:'12px'}}>
                 <span style={{fontSize:'28px'}}>📄</span>
                 <div style={{flex:1,overflow:'hidden'}}>
@@ -1405,7 +1420,7 @@ function SelectScreen({ onStart }){
         )}
 
         {/* Count slider — always visible */}
-        <label style={{display:'block',marginBottom:'7px',fontWeight:'600',fontSize:'13px',color:'#94a3b8'}}>
+        <label style={{display:'block',marginBottom:'7px',fontWeight:'600',fontSize:'13px',color:'var(--c5)'}}>
           📝 문제 수: <span style={{color:'#3b82f6',fontWeight:'700'}}>{count}문제</span>
         </label>
         <input type="range" min="10" max="50" step="5" value={count}
@@ -1456,7 +1471,7 @@ function StudySelectScreen({ questions, pdfName, onSelect, onBack }){
         </h2>
       </div>
       <div className="card">
-        <p style={{color:'#94a3b8',fontSize:'13px',marginBottom:'16px'}}>
+        <p style={{color:'var(--c5)',fontSize:'13px',marginBottom:'16px'}}>
           📖 전체 {questions.length}문제 · 문제 번호를 클릭하여 학습하세요
         </p>
         <div style={{display:'flex',flexWrap:'wrap',gap:'8px'}}>
@@ -1464,12 +1479,12 @@ function StudySelectScreen({ questions, pdfName, onSelect, onBack }){
             <button key={i} onClick={()=>onSelect(i)}
               style={{
                 width:'44px',height:'44px',borderRadius:'10px',
-                background:'#334155',border:'1px solid #475569',
-                color:'#94a3b8',fontWeight:'600',fontSize:'13px',
+                background:'var(--c2)',border:'1px solid #475569',
+                color:'var(--c5)',fontWeight:'600',fontSize:'13px',
                 cursor:'pointer',transition:'all .15s',
               }}
               onMouseOver={e=>{e.currentTarget.style.background='#0d9488';e.currentTarget.style.color='#fff';e.currentTarget.style.borderColor='#0d9488';}}
-              onMouseOut={e=>{e.currentTarget.style.background='#334155';e.currentTarget.style.color='#94a3b8';e.currentTarget.style.borderColor='#475569';}}>
+              onMouseOut={e=>{e.currentTarget.style.background='var(--c2)';e.currentTarget.style.color='var(--c5)';e.currentTarget.style.borderColor='var(--c3)';}}>
               {q.num.replace('NO.','')}
             </button>
           ))}
@@ -1497,7 +1512,7 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
       <div style={{display:'flex',alignItems:'center',gap:'8px',padding:'16px 0',flexWrap:'wrap'}}>
         <button className="btn btn-secondary" onClick={onBack}
           style={{padding:'7px 12px',fontSize:'13px',flexShrink:0}}>← 목록</button>
-        <span style={{flex:1,textAlign:'center',fontWeight:'600',fontSize:'14px',color:'#94a3b8'}}>
+        <span style={{flex:1,textAlign:'center',fontWeight:'600',fontSize:'14px',color:'var(--c5)'}}>
           {q.num} / 전체 {total}
         </span>
         <button className="btn btn-secondary"
@@ -1542,15 +1557,15 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
               <div key={letter} style={{
                 padding:'10px 14px',borderRadius:'8px',
                 border: isAnswer?'1px solid #22c55e':'1px solid #334155',
-                background: isAnswer?'rgba(34,197,94,0.08)':'#0f172a',
+                background: isAnswer?'rgba(34,197,94,0.08)':'var(--c0)',
                 display:'flex',gap:'10px',alignItems:'flex-start',
               }}>
                 <span style={{fontWeight:'700',fontSize:'13px',flexShrink:0,
-                  minWidth:'18px',color:isAnswer?'#22c55e':'#64748b'}}>
+                  minWidth:'18px',color:isAnswer?'#22c55e':'var(--c4)'}}>
                   {letter}.
                 </span>
                 <span style={{fontSize:'14px',lineHeight:'1.6',flex:1,
-                  color:isAnswer?'#dcfce7':'#cbd5e1'}}>
+                  color:isAnswer?'#dcfce7':'var(--c6)'}}>
                   {isImgOpt?'(위 이미지 참조)':text}
                 </span>
                 {isAnswer&&<span style={{flexShrink:0,color:'#22c55e',fontSize:'14px'}}>✓</span>}
@@ -1576,9 +1591,9 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
               className="korean-expl" />
           </div>
         ) : (
-          <div style={{marginTop:'4px',background:'#1e293b',border:'1px dashed #475569',
+          <div style={{marginTop:'4px',background:'var(--c1)',border:'1px dashed #475569',
             borderRadius:'8px',padding:'14px',textAlign:'center',
-            color:'#64748b',fontSize:'13px'}}>
+            color:'var(--c4)',fontSize:'13px'}}>
             해석 준비 중
           </div>
         )}
@@ -1667,7 +1682,7 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           <div style={{fontSize:'64px',marginBottom:'16px'}}>🎉</div>
           <h2 style={{marginBottom:'8px'}}>모든 문제 완료!</h2>
           <p className="muted" style={{marginBottom:'6px'}}>
-            전체 <strong style={{color:'#e2e8f0'}}>{total}문제</strong>를 모두 맞혔습니다!
+            전체 <strong style={{color:'var(--c7)'}}>{total}문제</strong>를 모두 맞혔습니다!
           </p>
           <p className="muted" style={{marginBottom:'20px'}}>
             총 시도 {stats.correct+stats.wrong}회 &nbsp;·&nbsp;
@@ -1747,7 +1762,7 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           return(
             <button key={displayLetter} className={cls} style={style}
               onClick={()=>toggle(origLetter)} disabled={submitted}>
-              <span style={{fontWeight:'700',marginRight:'10px',color:'#64748b'}}>{displayLetter}.</span>
+              <span style={{fontWeight:'700',marginRight:'10px',color:'var(--c4)'}}>{displayLetter}.</span>
               {text}
             </button>
           );
@@ -1781,10 +1796,10 @@ function PracticeScreen({ questions, onExit, pdfPath }){
 
             {/* 해설 */}
             {q.explanation &&
-              <div style={{marginTop:'12px',background:'#1e293b',border:'1px solid #334155',
+              <div style={{marginTop:'12px',background:'var(--c1)',border:'1px solid #334155',
                 borderRadius:'8px',padding:'14px'}}>
-                <p style={{fontWeight:'600',fontSize:'13px',color:'#94a3b8',marginBottom:'8px'}}>💡 해설</p>
-                <p style={{fontSize:'13px',lineHeight:'1.8',color:'#cbd5e1'}}>{q.explanation}</p>
+                <p style={{fontWeight:'600',fontSize:'13px',color:'var(--c5)',marginBottom:'8px'}}>💡 해설</p>
+                <p style={{fontSize:'13px',lineHeight:'1.8',color:'var(--c6)'}}>{q.explanation}</p>
               </div>}
 
             {/* 한국어 해석 */}
@@ -1864,7 +1879,7 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'14px'}}>
         <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
           <button onClick={()=>{if(window.confirm('홈으로 돌아가면 진행 중인 시험이 초기화됩니다. 나가시겠습니까?')) onExit();}}
-            style={{background:'none',border:'1px solid #e2e8f0',borderRadius:'8px',padding:'4px 10px',cursor:'pointer',fontSize:'13px',color:'#64748b'}}>
+            style={{background:'none',border:'1px solid #e2e8f0',borderRadius:'8px',padding:'4px 10px',cursor:'pointer',fontSize:'13px',color:'var(--c4)'}}>
             ← 홈
           </button>
           <span className="badge b-blue">{q.num}</span>
@@ -1908,11 +1923,11 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
           <button key={displayLetter} className={'opt'+(userAns.includes(origLetter)?' sel':'')}
             onClick={()=>toggle(displayLetter)}>
             <span style={{fontWeight:'700',marginRight:'10px',
-              color:userAns.includes(origLetter)?'#60a5fa':'#64748b'}}>
+              color:userAns.includes(origLetter)?'#60a5fa':'var(--c4)'}}>
               {displayLetter}.
             </span>
             {text === '[옵션 텍스트가 Exhibit 이미지에 포함됨]'
-              ? <span style={{color:'#94a3b8',fontStyle:'italic',fontSize:'13px'}}>
+              ? <span style={{color:'var(--c5)',fontStyle:'italic',fontSize:'13px'}}>
                   (위 이미지 참조)
                 </span>
               : text
@@ -1944,8 +1959,8 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
             return(
               <button key={i} className="q-nav-btn" onClick={()=>setIdx(i)}
                 style={{
-                  background: cur?'#3b82f6': done?'#14532d':'#334155',
-                  color:      cur?'#fff':    done?'#86efac':'#94a3b8',
+                  background: cur?'#3b82f6': done?'#14532d':'var(--c2)',
+                  color:      cur?'#fff':    done?'#86efac':'var(--c5)',
                 }}>
                 {i+1}
               </button>
@@ -1989,7 +2004,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
         </div>
         <h2 style={{marginBottom:'6px'}}>{passed?'🎉 합격!':'😅 불합격'}</h2>
         <p className="muted">
-          {total}문제 중 <strong style={{color:'#e2e8f0'}}>{correctN}문제</strong> 정답 /
+          {total}문제 중 <strong style={{color:'var(--c7)'}}>{correctN}문제</strong> 정답 /
           오답 <strong style={{color:'#fca5a5'}}>{wrongR.length}문제</strong>
         </p>
         <div style={{marginTop:'10px'}}>
@@ -2040,7 +2055,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   {r.has_exhibit && <span className="badge b-yellow">📊 Exhibit</span>}
                   {r.is_multiple && <span className="badge b-blue">복수선택</span>}
                 </div>
-                <p style={{fontSize:'13px',lineHeight:'1.6',color:'#cbd5e1'}}>
+                <p style={{fontSize:'13px',lineHeight:'1.6',color:'var(--c6)'}}>
                   {r.question.length>160 ? r.question.slice(0,160)+'...' : r.question}
                 </p>
                 <div style={{marginTop:'10px',display:'flex',gap:'14px',fontSize:'12px',flexWrap:'wrap'}}>
@@ -2084,7 +2099,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                         {letter}. {isCorr?'✅ ':isUser?'❌ ':''}
                       </span>
                       {r.options[letter]==='[옵션 텍스트가 Exhibit 이미지에 포함됨]'
-                        ? <span style={{color:'#94a3b8',fontStyle:'italic',fontSize:'13px'}}>(위 이미지 참조)</span>
+                        ? <span style={{color:'var(--c5)',fontStyle:'italic',fontSize:'13px'}}>(위 이미지 참조)</span>
                         : r.options[letter]
                       }
                     </div>
@@ -2115,7 +2130,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   {r.has_exhibit && <span className="badge b-yellow">📊 Exhibit</span>}
                   {r.is_multiple && <span className="badge b-blue">복수선택</span>}
                 </div>
-                <p style={{fontSize:'13px',lineHeight:'1.6',color:'#cbd5e1'}}>
+                <p style={{fontSize:'13px',lineHeight:'1.6',color:'var(--c6)'}}>
                   {r.question.length>160 ? r.question.slice(0,160)+'...' : r.question}
                 </p>
                 <div style={{marginTop:'10px',fontSize:'12px'}}>
@@ -2147,7 +2162,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                         {letter}. {isCorr?'✅ ':''}
                       </span>
                       {r.options[letter]==='[옵션 텍스트가 Exhibit 이미지에 포함됨]'
-                        ? <span style={{color:'#94a3b8',fontStyle:'italic',fontSize:'13px'}}>(위 이미지 참조)</span>
+                        ? <span style={{color:'var(--c5)',fontStyle:'italic',fontSize:'13px'}}>(위 이미지 참조)</span>
                         : r.options[letter]
                       }
                     </div>
@@ -2168,6 +2183,21 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
   );
 }
 
+/* ── ThemeToggle ── */
+function ThemeToggle({ theme, setTheme }){
+  const toggle = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('theme', next); }catch(e){}
+  };
+  return (
+    <button className="theme-toggle" onClick={toggle} title={theme==='dark'?'라이트 모드':'다크 모드'}>
+      {theme === 'dark' ? '☀️' : '🌙'}
+    </button>
+  );
+}
+
 /* ── App ── */
 function App(){
   const [screen,    setScreen]    = useState('select');
@@ -2178,6 +2208,13 @@ function App(){
   const [pdfName,   setPdfName]   = useState('');
   const [mode,      setMode]      = useState('exam'); // 'exam' | 'practice' | 'study'
   const [studyIdx,  setStudyIdx]  = useState(0);
+  const [theme,     setTheme]     = useState(()=>{
+    try{ return localStorage.getItem('theme') || 'dark'; }catch(e){ return 'dark'; }
+  });
+
+  useEffect(()=>{
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const handleStart  = (qs, total, path, m='exam', name='') => {
     setQuestions(qs); setAnswers({}); setPdfPath(path); setPdfName(name); setMode(m);
@@ -2187,12 +2224,13 @@ function App(){
   const handleFinish = (ans, t) => { setAnswers(ans); setElapsed(t); setScreen('results'); };
   const handleRetry  = ()       => setScreen('select');
 
-  if(screen==='select')       return <SelectScreen       onStart={handleStart} />;
-  if(screen==='practice')     return <PracticeScreen     questions={questions} onExit={handleRetry} pdfPath={pdfPath} />;
-  if(screen==='quiz')         return <QuizScreen         questions={questions} onFinish={handleFinish} onExit={handleRetry} pdfPath={pdfPath} />;
-  if(screen==='results')      return <ResultsScreen      questions={questions} answers={answers} elapsed={elapsed} onRetry={handleRetry} pdfPath={pdfPath} />;
-  if(screen==='study-select') return <StudySelectScreen  questions={questions} pdfName={pdfName} onSelect={i=>{setStudyIdx(i);setScreen('study-detail');}} onBack={handleRetry} />;
-  if(screen==='study-detail') return <StudyDetailScreen  questions={questions} pdfPath={pdfPath} studyIdx={studyIdx} setStudyIdx={setStudyIdx} onBack={()=>setScreen('study-select')} />;
+  const toggle = <ThemeToggle theme={theme} setTheme={setTheme} />;
+  if(screen==='select')       return <>{toggle}<SelectScreen       onStart={handleStart} /></>;
+  if(screen==='practice')     return <>{toggle}<PracticeScreen     questions={questions} onExit={handleRetry} pdfPath={pdfPath} /></>;
+  if(screen==='quiz')         return <>{toggle}<QuizScreen         questions={questions} onFinish={handleFinish} onExit={handleRetry} pdfPath={pdfPath} /></>;
+  if(screen==='results')      return <>{toggle}<ResultsScreen      questions={questions} answers={answers} elapsed={elapsed} onRetry={handleRetry} pdfPath={pdfPath} /></>;
+  if(screen==='study-select') return <>{toggle}<StudySelectScreen  questions={questions} pdfName={pdfName} onSelect={i=>{setStudyIdx(i);setScreen('study-detail');}} onBack={handleRetry} /></>;
+  if(screen==='study-detail') return <>{toggle}<StudyDetailScreen  questions={questions} pdfPath={pdfPath} studyIdx={studyIdx} setStudyIdx={setStudyIdx} onBack={()=>setScreen('study-select')} /></>;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);

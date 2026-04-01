@@ -425,18 +425,17 @@ def _extract_text_fitz(pdf_path):
     full_text = ''
     page_map  = {}
     try:
-        doc = fitz.open(pdf_path)
-        for page_num, page in enumerate(doc, 1):
-            text = page.get_text('text')
-            if not text:
-                continue
-            lines = [l for l in text.split('\n')
-                     if 'IT Certification Guaranteed' not in l]
-            page_text = '\n'.join(lines)
-            for m in re.finditer(r'NO\.(\d+)', page_text):
-                page_map[f'NO.{m.group(1)}'] = page_num
-            full_text += page_text + '\n'
-        doc.close()
+        with fitz.open(pdf_path) as doc:
+            for page_num, page in enumerate(doc, 1):
+                text = page.get_text('text')
+                if not text:
+                    continue
+                lines = [l for l in text.split('\n')
+                         if 'IT Certification Guaranteed' not in l]
+                page_text = '\n'.join(lines)
+                for m in re.finditer(r'NO\.(\d+)', page_text):
+                    page_map[f'NO.{m.group(1)}'] = page_num
+                full_text += page_text + '\n'
         return full_text, page_map
     except Exception as e:
         print(f"  ⚠️  PyMuPDF 추출 실패: {e}")
@@ -588,6 +587,7 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
         return image_cache[key]
     if not HAS_FITZ or page_num <= 0:
         return None
+    doc = None
     try:
         doc  = fitz.open(pdf_path)
         page = doc[page_num - 1]
@@ -736,7 +736,6 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                         y_off += im.height + gap
                     buf = _io.BytesIO()
                     combined.save(buf, format='JPEG', quality=85)
-                    doc.close()
                     b64 = base64.b64encode(buf.getvalue()).decode('utf-8')
                     image_cache[key] = b64
                     return b64
@@ -753,7 +752,6 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                 if pix.alpha:
                     pix = fitz.Pixmap(fitz.csRGB, pix)
                 img_data = pix.tobytes('jpeg')
-            doc.close()
             b64 = base64.b64encode(img_data).decode('utf-8')
             image_cache[key] = b64
             return b64
@@ -930,7 +928,6 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                 if img_data:
                     b64 = base64.b64encode(img_data).decode('utf-8')
                     image_cache[key] = b64
-                    doc.close()
                     return b64
 
             # ── Pass 2: fallback vector render of adjacent page portion ──
@@ -953,7 +950,6 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                     img_bytes = pix.tobytes('jpeg')
                     b64 = base64.b64encode(img_bytes).decode('utf-8')
                     image_cache[key] = b64
-                    doc.close()
                     return b64
                 except Exception:
                     continue
@@ -971,22 +967,21 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                 pix = page.get_pixmap(matrix=mat, alpha=False)
             except Exception as full_err:
                 print(f"  ⚠️  Full page render failed (p{page_num}): {full_err}")
-                doc.close()
                 return None
 
         img_bytes = pix.tobytes('jpeg')
-        doc.close()
         b64 = base64.b64encode(img_bytes).decode('utf-8')
         image_cache[key] = b64
         return b64
 
     except Exception as e:
         print(f"  ⚠️  Exhibit render failed (p{page_num}): {e}")
+        return None
+    finally:
         try:
             doc.close()
         except Exception:
             pass
-        return None
 
 
 options_area_cache = {}
@@ -1009,6 +1004,7 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
         return options_area_cache[key]
     if not HAS_FITZ or page_num <= 0:
         return None
+    doc = None
     try:
         doc  = fitz.open(pdf_path)
         mat  = fitz.Matrix(dpi / 72, dpi / 72)
@@ -1064,7 +1060,6 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
                 break
 
         if crop_bottom - crop_top < 20:
-            doc.close()
             return None
 
         try:
@@ -1073,21 +1068,20 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
             img_bytes = pix.tobytes('jpeg')
         except Exception as e:
             print(f"  ⚠️  Options area render failed (p{opts_pg_idx+1}): {e}")
-            doc.close()
             return None
 
-        doc.close()
         b64 = base64.b64encode(img_bytes).decode('utf-8')
         options_area_cache[key] = b64
         return b64
 
     except Exception as e:
         print(f"  ⚠️  render_options_area_base64 failed: {e}")
+        return None
+    finally:
         try:
             doc.close()
         except Exception:
             pass
-        return None
 
 
 # ─────────────────────────────────────────

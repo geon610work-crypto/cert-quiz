@@ -1233,14 +1233,14 @@ function KoreanExplain({ question }) {
     : korean.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br/>');
 
   return (
-    <div style={{marginTop:'12px',background:'#0f2a1a',border:'1px solid #166534',
+    <div style={{marginTop:'12px',background:'var(--ko-bg)',border:'1px solid var(--ko-border)',
       borderRadius:'8px',padding:'14px'}}>
-      <p style={{fontWeight:'600',fontSize:'13px',color:'#4ade80',marginBottom:'10px'}}>
+      <p style={{fontWeight:'600',fontSize:'13px',color:'var(--ko-h)',marginBottom:'10px'}}>
         🇰🇷 한국어 해석
       </p>
       <div
         dangerouslySetInnerHTML={{__html: html}}
-        style={{fontSize:'14px',lineHeight:'1.85',color:'#d1fae5'}}
+        style={{fontSize:'14px',lineHeight:'1.85',color:'var(--ko-text)'}}
         className="korean-expl"
       />
     </div>
@@ -1565,7 +1565,7 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
                   {letter}.
                 </span>
                 <span style={{fontSize:'14px',lineHeight:'1.6',flex:1,
-                  color:isAnswer?'#dcfce7':'var(--c6)'}}>
+                  color:'var(--c7)'}}>
                   {isImgOpt?'(위 이미지 참조)':text}
                 </span>
                 {isAnswer&&<span style={{flexShrink:0,color:'#22c55e',fontSize:'14px'}}>✓</span>}
@@ -1581,13 +1581,13 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
 
         {/* 한국어 해석 */}
         {koreanHtml ? (
-          <div style={{marginTop:'4px',background:'#0f2a1a',border:'1px solid #166534',
+          <div style={{marginTop:'4px',background:'var(--ko-bg)',border:'1px solid var(--ko-border)',
             borderRadius:'8px',padding:'14px'}}>
-            <p style={{fontWeight:'600',fontSize:'13px',color:'#4ade80',marginBottom:'10px'}}>
+            <p style={{fontWeight:'600',fontSize:'13px',color:'var(--ko-h)',marginBottom:'10px'}}>
               🇰🇷 한국어 해석
             </p>
             <div dangerouslySetInnerHTML={{__html:koreanHtml}}
-              style={{fontSize:'14px',lineHeight:'1.85',color:'#d1fae5'}}
+              style={{fontSize:'14px',lineHeight:'1.85',color:'var(--ko-text)'}}
               className="korean-expl" />
           </div>
         ) : (

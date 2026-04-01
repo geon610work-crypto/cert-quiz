@@ -1264,20 +1264,23 @@ function SelectScreen({ onStart }){
     if(f){ setFile(f); doUpload(f); }
   };
 
-  /* start quiz (시험 모드) */
+  /* start quiz */
   const start = async(mode='exam')=>{
     const pdfPath = tab==='server' ? sel : (uploaded && uploaded.path);
+    const pdfName = tab==='server'
+      ? (pdfs.find(p=>p.path===sel)||{}).name||''
+      : (uploaded && uploaded.name)||'';
     if(!pdfPath) return;
     setLoading(true); setErr('');
     try{
-      // 연습 모드는 전체 문제, 시험 모드는 count개
-      const url = mode==='practice'
+      // 연습/공부 모드는 전체 문제, 시험 모드는 count개
+      const url = (mode==='practice' || mode==='study')
         ? '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count=9999'
         : '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count='+count;
       const res  = await fetch(url);
       const data = await res.json();
       if(data.error) throw new Error(data.error);
-      onStart(data.questions, data.total, pdfPath, mode);
+      onStart(data.questions, data.total, pdfPath, mode, pdfName);
     }catch(e){ setErr('오류: '+e.message); }
     finally{ setLoading(false); }
   };
@@ -1391,7 +1394,7 @@ function SelectScreen({ onStart }){
 
         {err && <p style={{color:'#ef4444',marginBottom:'12px',fontSize:'14px'}}>{err}</p>}
 
-        <div style={{display:'flex',gap:'10px',marginBottom:'10px'}}>
+        <div style={{display:'flex',gap:'10px',marginBottom:'8px'}}>
           <button className="btn btn-primary" onClick={()=>start('exam')}
             disabled={loading || !canStart || (tab==='upload' && uploading)}
             style={{flex:1,padding:'13px',fontSize:'15px'}}>
@@ -1403,6 +1406,12 @@ function SelectScreen({ onStart }){
             {loading ? '⏳ 불러오는 중...' : '🎯 연습 모드'}
           </button>
         </div>
+        <button className="btn" onClick={()=>start('study')}
+          disabled={loading || !canStart || (tab==='upload' && uploading)}
+          style={{width:'100%',padding:'13px',fontSize:'15px',
+            background:'#0d9488',borderColor:'#0d9488',marginBottom:'2px'}}>
+          {loading ? '⏳ 불러오는 중...' : '📖 공부 모드'}
+        </button>
       </div>
 
       <p className="muted sm" style={{textAlign:'center'}}>
@@ -1410,6 +1419,150 @@ function SelectScreen({ onStart }){
           ? `${pdfs.length}개 서버 PDF 발견 · 시험: ${count}문제 랜덤 출제 / 연습: 전체 문제`
           : '업로드한 PDF에서 문제를 출제합니다'}
       </p>
+    </div>
+  );
+}
+
+/* ── StudySelectScreen ── */
+function StudySelectScreen({ questions, pdfName, onSelect, onBack }){
+  return (
+    <div className="container">
+      <div style={{display:'flex',alignItems:'center',gap:'12px',padding:'20px 0 16px'}}>
+        <button className="btn btn-secondary" onClick={onBack}
+          style={{padding:'7px 12px',fontSize:'13px',flexShrink:0}}>← 홈</button>
+        <h2 style={{flex:1,fontSize:'17px',fontWeight:'700',
+          overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
+          {pdfName.replace(/\.pdf$/i,'')} — 공부 모드
+        </h2>
+      </div>
+      <div className="card">
+        <p style={{color:'#94a3b8',fontSize:'13px',marginBottom:'16px'}}>
+          📖 전체 {questions.length}문제 · 문제 번호를 클릭하여 학습하세요
+        </p>
+        <div style={{display:'flex',flexWrap:'wrap',gap:'8px'}}>
+          {questions.map((q,i)=>(
+            <button key={i} onClick={()=>onSelect(i)}
+              style={{
+                width:'44px',height:'44px',borderRadius:'10px',
+                background:'#334155',border:'1px solid #475569',
+                color:'#94a3b8',fontWeight:'600',fontSize:'13px',
+                cursor:'pointer',transition:'all .15s',
+              }}
+              onMouseOver={e=>{e.currentTarget.style.background='#0d9488';e.currentTarget.style.color='#fff';e.currentTarget.style.borderColor='#0d9488';}}
+              onMouseOut={e=>{e.currentTarget.style.background='#334155';e.currentTarget.style.color='#94a3b8';e.currentTarget.style.borderColor='#475569';}}>
+              {q.num.replace('NO.','')}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── StudyDetailScreen ── */
+function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }){
+  const q     = questions[studyIdx];
+  const total = questions.length;
+  const opts  = Object.keys(q.options).sort();
+
+  const koreanHtml = q.explanation_ko
+    ? (typeof marked !== 'undefined'
+        ? marked.parse(q.explanation_ko)
+        : q.explanation_ko.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br/>'))
+    : null;
+
+  return (
+    <div className="container">
+      {/* 네비게이션 바 */}
+      <div style={{display:'flex',alignItems:'center',gap:'8px',padding:'16px 0',flexWrap:'wrap'}}>
+        <button className="btn btn-secondary" onClick={onBack}
+          style={{padding:'7px 12px',fontSize:'13px',flexShrink:0}}>← 목록</button>
+        <span style={{flex:1,textAlign:'center',fontWeight:'600',fontSize:'14px',color:'#94a3b8'}}>
+          {q.num} / 전체 {total}
+        </span>
+        <button className="btn btn-secondary"
+          onClick={()=>setStudyIdx(i=>Math.max(0,i-1))}
+          disabled={studyIdx===0}
+          style={{padding:'7px 12px',fontSize:'13px',flexShrink:0,opacity:studyIdx===0?0.35:1}}>
+          ← 이전
+        </button>
+        <button className="btn btn-secondary"
+          onClick={()=>setStudyIdx(i=>Math.min(total-1,i+1))}
+          disabled={studyIdx===total-1}
+          style={{padding:'7px 12px',fontSize:'13px',flexShrink:0,opacity:studyIdx===total-1?0.35:1}}>
+          다음 →
+        </button>
+      </div>
+
+      <div className="card">
+        {/* Exhibit */}
+        {q.has_exhibit && (
+          <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
+        )}
+
+        {/* 문제 텍스트 */}
+        <div style={{marginBottom:'16px'}}>
+          {q.num_to_choose > 1 && (
+            <span style={{display:'inline-block',background:'#1d4ed8',color:'#bfdbfe',
+              fontSize:'11px',fontWeight:'700',padding:'2px 8px',borderRadius:'12px',
+              marginBottom:'8px'}}>
+              Choose {q.num_to_choose}
+            </span>
+          )}
+          <p style={{fontSize:'15px',lineHeight:'1.7',whiteSpace:'pre-wrap'}}>{q.question}</p>
+        </div>
+
+        {/* 선택지 */}
+        <div style={{display:'flex',flexDirection:'column',gap:'8px',marginBottom:'16px'}}>
+          {opts.map(letter=>{
+            const text     = q.options[letter];
+            const isAnswer = q.answer.includes(letter);
+            const isImgOpt = text==='[옵션 텍스트가 Exhibit 이미지에 포함됨]';
+            return (
+              <div key={letter} style={{
+                padding:'10px 14px',borderRadius:'8px',
+                border: isAnswer?'1px solid #22c55e':'1px solid #334155',
+                background: isAnswer?'rgba(34,197,94,0.08)':'#0f172a',
+                display:'flex',gap:'10px',alignItems:'flex-start',
+              }}>
+                <span style={{fontWeight:'700',fontSize:'13px',flexShrink:0,
+                  minWidth:'18px',color:isAnswer?'#22c55e':'#64748b'}}>
+                  {letter}.
+                </span>
+                <span style={{fontSize:'14px',lineHeight:'1.6',flex:1,
+                  color:isAnswer?'#dcfce7':'#cbd5e1'}}>
+                  {isImgOpt?'(위 이미지 참조)':text}
+                </span>
+                {isAnswer&&<span style={{flexShrink:0,color:'#22c55e',fontSize:'14px'}}>✓</span>}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* opts exhibit (이미지 선택지) */}
+        {q.has_exhibit && (
+          <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} optsMode={true} />
+        )}
+
+        {/* 한국어 해석 */}
+        {koreanHtml ? (
+          <div style={{marginTop:'4px',background:'#0f2a1a',border:'1px solid #166534',
+            borderRadius:'8px',padding:'14px'}}>
+            <p style={{fontWeight:'600',fontSize:'13px',color:'#4ade80',marginBottom:'10px'}}>
+              🇰🇷 한국어 해석
+            </p>
+            <div dangerouslySetInnerHTML={{__html:koreanHtml}}
+              style={{fontSize:'14px',lineHeight:'1.85',color:'#d1fae5'}}
+              className="korean-expl" />
+          </div>
+        ) : (
+          <div style={{marginTop:'4px',background:'#1e293b',border:'1px dashed #475569',
+            borderRadius:'8px',padding:'14px',textAlign:'center',
+            color:'#64748b',fontSize:'13px'}}>
+            해석 준비 중
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -2002,19 +2155,24 @@ function App(){
   const [answers,   setAnswers]   = useState({});
   const [elapsed,   setElapsed]   = useState('00:00');
   const [pdfPath,   setPdfPath]   = useState('');
-  const [mode,      setMode]      = useState('exam'); // 'exam' | 'practice'
+  const [pdfName,   setPdfName]   = useState('');
+  const [mode,      setMode]      = useState('exam'); // 'exam' | 'practice' | 'study'
+  const [studyIdx,  setStudyIdx]  = useState(0);
 
-  const handleStart  = (qs, total, path, m='exam') => {
-    setQuestions(qs); setAnswers({}); setPdfPath(path); setMode(m);
-    setScreen(m==='practice' ? 'practice' : 'quiz');
+  const handleStart  = (qs, total, path, m='exam', name='') => {
+    setQuestions(qs); setAnswers({}); setPdfPath(path); setPdfName(name); setMode(m);
+    if(m==='study'){ setStudyIdx(0); setScreen('study-select'); }
+    else setScreen(m==='practice' ? 'practice' : 'quiz');
   };
   const handleFinish = (ans, t) => { setAnswers(ans); setElapsed(t); setScreen('results'); };
   const handleRetry  = ()       => setScreen('select');
 
-  if(screen==='select')   return <SelectScreen  onStart={handleStart} />;
-  if(screen==='practice') return <PracticeScreen questions={questions} onExit={handleRetry} pdfPath={pdfPath} />;
-  if(screen==='quiz')     return <QuizScreen     questions={questions} onFinish={handleFinish} onExit={handleRetry} pdfPath={pdfPath} />;
-  if(screen==='results')  return <ResultsScreen  questions={questions} answers={answers} elapsed={elapsed} onRetry={handleRetry} pdfPath={pdfPath} />;
+  if(screen==='select')       return <SelectScreen       onStart={handleStart} />;
+  if(screen==='practice')     return <PracticeScreen     questions={questions} onExit={handleRetry} pdfPath={pdfPath} />;
+  if(screen==='quiz')         return <QuizScreen         questions={questions} onFinish={handleFinish} onExit={handleRetry} pdfPath={pdfPath} />;
+  if(screen==='results')      return <ResultsScreen      questions={questions} answers={answers} elapsed={elapsed} onRetry={handleRetry} pdfPath={pdfPath} />;
+  if(screen==='study-select') return <StudySelectScreen  questions={questions} pdfName={pdfName} onSelect={i=>{setStudyIdx(i);setScreen('study-detail');}} onBack={handleRetry} />;
+  if(screen==='study-detail') return <StudyDetailScreen  questions={questions} pdfPath={pdfPath} studyIdx={studyIdx} setStudyIdx={setStudyIdx} onBack={()=>setScreen('study-select')} />;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);

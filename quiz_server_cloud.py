@@ -103,13 +103,33 @@ if os.path.isfile(_CACHE_FILE):
 # Translation cache: {"PDF명::NO.XX": {"question": "...", "options": {"A": "...", ...}}}
 _TRANS_FILE = os.path.join(WORKSPACE, 'translation_cache.json')
 translation_cache = {}
+_trans_norm_index = {}   # 정규화된 키 인덱스 (언더스코어 통일)
+
+def _norm_pdf(name):
+    """UUID 접두어 제거 + 공백→언더스코어 정규화."""
+    name = re.sub(r'^[0-9a-f]{10}_', '', name)   # 업로드 UUID 접두어 제거
+    return name.replace(' ', '_')
+
 if os.path.isfile(_TRANS_FILE):
     try:
         with open(_TRANS_FILE, encoding='utf-8') as _f:
             translation_cache.update(json.load(_f))
+        # 정규화 인덱스 구축: 공백/언더스코어 차이를 흡수
+        for _k, _v in translation_cache.items():
+            if '::' in _k:
+                _fname, _qnum = _k.rsplit('::', 1)
+                _trans_norm_index[f"{_norm_pdf(_fname)}::{_qnum}"] = _v
         print(f"  🌐 Translation cache loaded: {len(translation_cache)} entries from translation_cache.json")
     except Exception as _e:
         print(f"  ⚠️  Failed to load translation_cache.json: {_e}")
+
+def _lookup_translation(pdf_name, q_num):
+    """번역 캐시 조회: 정확 일치 → 정규화 일치 순서로 탐색."""
+    key = f"{pdf_name}::{q_num}"
+    if key in translation_cache:
+        return translation_cache[key]
+    norm_key = f"{_norm_pdf(pdf_name)}::{q_num}"
+    return _trans_norm_index.get(norm_key, {})
 
 
 def _cache_key(pdf_name, q_num):
@@ -997,8 +1017,7 @@ class QuizHandler(BaseHTTPRequestHandler):
             for q in selected:
                 q['explanation_ko'] = _lookup_cache(pdf_name, q['num'])
                 q['pdf_name'] = pdf_name
-                trans_key = f"{pdf_name}::{q['num']}"
-                trans = translation_cache.get(trans_key, {})
+                trans = _lookup_translation(pdf_name, q['num'])
                 q['question_ko'] = trans.get('question') or None
                 q['options_ko']  = trans.get('options') or {}
             self.send_json({'questions': selected, 'total': len(all_q),

@@ -1,0 +1,3528 @@
+{
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.1": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "You must ensure that TCP port 8013 is not blocked along the way.",
+        "B": "You must ensure that the port for Neighbor Discovery has been changed.",
+        "C": "You must configure FortiGate in transparent mode.",
+        "D": "You must authorize the downstream FortiGate on the root FortiGate.",
+        "E": "You must enable FortiTelemetry on the receiving interlace of the upstream FortiGate."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.2": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "With the auxiliary session selling disabled, only auxiliary sessions are offloaded.",
+        "B": "With the auxiliary session setting enabled. ECMP traffic is accelerated to the NP6 processor.",
+        "C": "With the auxiliary session setting enabled. Iwo sessions are created in case of routing change.",
+        "D": "With the auxiliary session setting disabled, for each traffic path. FortiGate uses the same auxiliary"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.3": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The SSL certificate used for FSSO over SSL has expired.",
+        "B": "The connection was refused. There may be a mismatch of the TCP port.",
+        "C": "FortiGate cannot reach the IP address of the collector agent.",
+        "D": "The pro-shared key does not match",
+        "E": "The group filters do not match."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.4": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The port2 default static route will be injected into the forwarding information base (FIB).",
+        "B": "The port1 default static route will be injected into the FIB.",
+        "C": "Neither of the routes shown in the output will be injected into the FIB.",
+        "D": "Both default static routes shown in the output will be injected into the FIB."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.5": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Check whether TCP port 179 is blocked.",
+        "B": "Check if there is an active static route to the peer.",
+        "C": "Check whether both peers have an IP address within the same subnet.",
+        "D": "Check if IP protocol 89 is blocked."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.6": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "The output of a policy route table entry is shown. Which type of policy route does the output show?",
+      "options": {
+        "A": "A regular policy route, which is not associated with an active static route in the FIB",
+        "B": "An ISDB route",
+        "C": "An SD-WAN rule",
+        "D": "A regular policy route, which is associated with an active static route in the FIB"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.7": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The BGP state of the two BGP participants is OpenConfirm.",
+        "B": "The router ID of the neighbor is 100.64.2.254.",
+        "C": "The BGP neighbor is advertising the 10.20.30.40/24 network to the local router.",
+        "D": "The local router is advertising the 10.20.30.40/24 network to its BGP neighbor."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.8": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The workstation with IP 10.124.2.90 will be polled frequently using TCP port 445 to see if the user",
+        "B": "The logon event can be seen on the collector agent installed on Windows.",
+        "C": "FSSO is using DC agent mode to detect logon events.",
+        "D": "FSSO is using agentless polling mode to detect logon events."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.9": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The web filter cache has been cleared causing all websites to take longer to be rated.",
+        "B": "The SSL/TLS deep inspection was configured but the browsers do not have the FortiGate",
+        "C": "The webfilter-force-off setting has been enabled under config system fortiguard.",
+        "D": "The DNS server is unreachable, preventing URL resolution.",
+        "E": "The FortiGuard Web Filtering license has expired, causing FortiGate to apply the default block"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.10": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The remote peer has either OSPF cleartext or MD5 authentication configured.",
+        "B": "There is an OSPF authentication configuration mismatch.",
+        "C": "The local FortiGate does not have OSPF authentication configured",
+        "D": "The local FortiGate has either OSPF cleartext or MD5 authentication configured."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.11": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate allows the connection, based on the URL Filter configuration.",
+        "B": "FortiGate blocks the connection as an invalid URL.",
+        "C": "FortiGate exempts the connection, based on the Web Content Filter configuration.",
+        "D": "FortiGate blocks the connection, based on the FortiGuard category based filter configuration."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.12": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "diagnose sniffer packet any 'udp port 500'",
+        "B": "diagnose sniffer packet any 'lp proto 50'",
+        "C": "diagnose sniffer packet any 'udp port 4500'",
+        "D": "diagnose sniffer packet any 'ah'"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.13": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate is performing a security profile inspection using the CPU.",
+        "B": "FortiGate redirected the client to trio captive portal to authenticate so that a correct policy match",
+        "C": "FortiGate either initiated the session or the session terminates at FortiGate.",
+        "D": "FortiGate forwarded this session without any inspection."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.14": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "IKE_SA_INIT",
+        "B": "INFORMATIONAL",
+        "C": "CREATE_CHILD_SA",
+        "D": "IKE_Auth"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.15": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The total slab size of the sctp_session slab is 0 kB and is associated with the user space.",
+        "B": "The total slab size of the ip_session slab is 3600 kB and is associated with the user space.",
+        "C": "The total slab size of the ip6_session slab is 1300 kB and is associated with the kernel.",
+        "D": "The total slab size of the tcp_session slab is 7500 kB and is associated with the kernel."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.16": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The BGP route",
+        "B": "The policy route",
+        "C": "The static route",
+        "D": "The OS PF route"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.17": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Set snat-route-change to enable.",
+        "B": "Set the priority of the static default route using port2 to 1.",
+        "C": "Set preserve-session-route to enable.",
+        "D": "Set the priority of the static default route using port1 to 10."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.18": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The local FortiGate has at least one interface that participates in a broadcast network.",
+        "B": "The local FortiGate has at least one interface that participates in a point-to-point network.",
+        "C": "The local FortiGate is the DR.",
+        "D": "Neighbor 0.0.0.18 is the designated router (DR)."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.19": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate only offloads auxiliary sessions.",
+        "B": "FortiGate accelerates all ECMP traffic to the NP6 processor",
+        "C": "FortiGates creates a now auxiliary session for each packet it receives.",
+        "D": "FortiGate creates two sessions in case of a routing change."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.20": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Strict RPF is enabled by default.",
+        "B": "User B: Fail. There is no route to 95.56.234.24 using wan2 in the routing table.",
+        "C": "User A: Pass. The default static route through wan1 passes the RPF check regardless of the source",
+        "D": "User B: Pass. FortiGate will use asymmetric routing using wan1 to reply to traffic for 95.56.234.24.",
+        "E": "User C: Fail. There is no route to 10.0.4.63 using port1 in the touting table."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.21": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The TCP port 445 is blocked between FortiGate and collector agent.",
+        "B": "The collector agent preshared password is mismatched.",
+        "C": "The FortiGate cannot resolve the active directory server name.",
+        "D": "The FortiGate and the collector agent are using different TCP ports."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.22": {
+    "question": "",
+    "options": {
+      "C": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "C": "IT Certification Guaranteed, The Easy Way!"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.23": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The local router is waiting for the keepalive message from the router 10.125.0.60.",
+        "B": "None of the three neighbors has successfully established the TCP three-way handshake with the",
+        "C": "The router 100.64.3.1 is waiting for the OPEN message from the local router.",
+        "D": "The RIB-OUT configuration for router 10.127.0.75 prevents any route advertisement to the local"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.24": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The session would be deleted, and the client would need to start a new session.",
+        "B": "The session would remain in the session table, but its traffic would now egress from both port1",
+        "C": "The session would remain in the session table, and its traffic would egress from port2.",
+        "D": "The session would remain in the session table, and its traffic would egress from port1."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.25": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The Hello packet is being sent from an OSPF router with ID 0.0.0.112.",
+        "B": "The two FortiGate devices attempting adjacency are in area 0.0.0.0.",
+        "C": "One FortiGate device is configured to require authentication, while the other is not.",
+        "D": "The passwords on the FortiGate devices do not match."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.26": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The egress interface associated with static route 8.8.8.8/32 is administratively up.",
+        "B": "The default static route through 10.200.1.254 is not in the forwarding information base.",
+        "C": "The default static route through port2 is in the forwarding information base.",
+        "D": "The BGP route to 10.0.4.0/24 is not in the forwarding information base."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.27": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate enters conserve mode when the system memory reaches the configured extreme",
+        "B": "FortiGate starts taking the configured action for new sessions requiring content inspection when",
+        "C": "FortiGate exits conserve mode when the system memory goes below the configured green",
+        "D": "FortiGate starts dropping all new sessions when the system memory reaches the configured red"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.28": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The secondary device has this session synchronized; however, because application control is",
+        "B": "Traffic for this session continues to be permitted on the new primary device after failover, without",
+        "C": "The session will be removed from the session table of the secondary device because of the",
+        "D": "The session state is preserved but the kernel will need to re-evaluate the session because NAT was"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.29": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The BGP route to 10.0.4.0/24 is not in the forwarding information base.",
+        "B": "The default static route through 10.200.1 254 is in the forwarding information* base.",
+        "C": "FortiGate is performing ECMP using both default static routes.",
+        "D": "The local FortiGate is receiving only one LSA from one OSPF neighbor."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.30": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "mschap",
+        "B": "pap",
+        "C": "mschap2",
+        "D": "eap"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.31": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The local ForliGate has received one prefix from BGP neighbor 100.64.1.254.",
+        "B": "The TCP connection with BGP neighbor 100.64.2.254 was successful.",
+        "C": "The local FortiGate has received 18 packets from a BGP neighbor.",
+        "D": "The local FortiGate is still calculating the prefixes received from BGP neighbor 100.64.2.264"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.32": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate uses the SNI from the user's web browser.",
+        "B": "FortiGate closes the connection because this represents an invalid SSL/TLS configuration.",
+        "C": "FortiGate uses the first entry listed in the SAN field in the server certificate.",
+        "D": "FortiGate uses the CN information from the Subject field in the server certificate."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.33": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Disable webfilter-force-off.",
+        "B": "Increase webfilter-timeout.",
+        "C": "Enable fortiguard-anycast.",
+        "D": "Change protocol to TCP."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.34": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "An ISDB route",
+        "B": "A regular policy route",
+        "C": "A regular policy route, which is associated with an active static route in the FIB",
+        "D": "An SD-WAN rule"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.35": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "SP Login dump",
+        "B": "Authentication Response",
+        "C": "Authentication Request",
+        "D": "Assertion dump"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.36": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate will drop the expected traffic if it does not arrive within 23 seconds.",
+        "B": "Clearing the master session has no impact on the expectation session.",
+        "C": "This is a pinhole session to allow traffic for a TCP protocol that dynamically assigns TCP ports.",
+        "D": "The session is checked against firewall policy ID 25."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.37": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Return traffic to the initiator is sent to 10.1.0.1.",
+        "B": "Return traffic to the initiator is sent lo 10.200.1.254.",
+        "C": "It is an ICMP session from 10.1.10.10 to 10.200.1.1.",
+        "D": "It is an ICMP session from 10.1.10.1 to 10.200.5.1."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.38": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate blocks the connection as an invalid URL.",
+        "B": "Based on the URL Filter configuration, FortiGate allows the connection.",
+        "C": "FortiGate blocks the connection, based on the FortiGuard category-based filter configuration.",
+        "D": "Based on the Web Content filter configuration, access to www.dropbox.com would be exempted."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.39": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "In the phase 1 proposal configuration, add AES256-SHA256 to the list of encryption algorithms.",
+        "B": "In the phase 1 proposal configuration, add AESCBC-SHA2 to the list of encryption algorithms.",
+        "C": "In the phase 1 network configuration, set the IKE version to 2.",
+        "D": "In the phase 1 proposal configuration, add AES128-SHA128 to the list of encryption algorithms."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.40": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The session is offloaded using NP7.",
+        "B": "Return traffic to the initiator is sent to",
+        "C": "It is a TCP session from 10.9.31.117 to 10.1.0.3",
+        "D": "The session will expire in one second."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.41": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "PPP chooses from a group of parallel options lo identity the optimal path tor processing a packet.",
+        "B": "Only FortiGate hardware configurations affect the path that a packet takes.",
+        "C": "PPP does not apply to packets that are part of an already established session.",
+        "D": "Software configuration has no impact on PPP."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.42": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "A third-party device is blocking protocol 50.",
+        "B": "The administrator has not yet configured the VPN tunnel on FGT-02.",
+        "C": "The administrator configured the wrong remote peer IP address on FGT-01.",
+        "D": "The administrator set the wrong sniffer filter on FGT-02."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.43": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Packet was dropped because of policy route misconfiguration.",
+        "B": "Packet was dropped because of traffic shaping.",
+        "C": "Trusted host list misconfiguration.",
+        "D": "VIP or IP pool misconfiguration."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.44": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The interlace is part of the OSPF backbone area.",
+        "B": "There are a total of five OSPF routers attached to the vorz4 network segment",
+        "C": "One of the neighbors has a router ID of 0.0.0.4.",
+        "D": "In the network connected to port4, two OSPF routers are down."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.45": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "A batter route to the 8.8.8.8/32 network exists in the routing table.",
+        "B": "FGT-B is configured with a prefix list denying the 8.8.8.8/32 network to be injected into the routing",
+        "C": "The administrator has misconfigured redistribution of routes on FGT-A.",
+        "D": "FGT-B is configured with a distribution list denying the 8.8.8.8/32 network to be injected into the"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.46": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Reduce the number of IPS signatures enabled on the active IPS profiles",
+        "B": "Execute diagnose test application ipsMonitor 2inatead.",
+        "C": "Disable IPS on all firewall policies.",
+        "D": "Bypass all IPS engines"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.47": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Remote registry is not running on the workstation.",
+        "B": "The user's status shows as \"not verified\" in the collector agent.",
+        "C": "DNS resolution is unable to resolve the workstation name.",
+        "D": "The FortiGate firmware version is not compatible with that of the collector agent.",
+        "E": "A firewall is blocking traffic to port 139 and 445."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.48": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "If a configuration change is made to the primary FortiGate at this time, the secondary will initiate a",
+        "B": "If port 7 becomes disconnected on the secondary, both FortiGate devices will elect itself as",
+        "C": "If FGVM...649 is rebooted. FGVM...650 will become the primary and retain that role, even after",
+        "D": "If no action is taken, the primary FortiGate will leave the cluster because of the current sync"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.49": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FSSO cannot verify if the user is still logged in.",
+        "B": "Fortinet Single Sign-On (FSSO) is using DC Agent mode to detect logon events.",
+        "C": "FortiGate is frequently polling the workstation in case the user has logged out.",
+        "D": "FSSO is using agentless polling mode to detect logon events.",
+        "E": "FortiGate polled this event through TCP port 8000."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.50": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Change the priority of the port1 static route to 11.",
+        "B": "Change the priority of the port2 static route to 5.",
+        "C": "Configure unset snat-route-change to return it to the default setting.",
+        "D": "Configure set snat-route-change enable."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.51": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate uses the SNI from the user's web browser.",
+        "B": "FortiGate does not decrypt the traffic if the traffic is blocked by the web filter profile.",
+        "C": "FortiGate uses the CN information from the Subject field in the server certificate.",
+        "D": "FortiGate does not decrypt the traffic if the traffic is allowed by the web filter profile."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.52": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "IKE_Req_INIT",
+        "B": "Create_CHILD_SA",
+        "C": "IKE_Auth",
+        "D": "IKE_SA_INIT"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.53": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The TCP session has been successfully established.",
+        "B": "The session was initiated from an authenticated user.",
+        "C": "The session is being inspected using flow inspection.",
+        "D": "The session is being offloaded."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.54": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The VPN is configured to use IKE over TCP",
+        "B": "esp is not a valid sniffer argument.",
+        "C": "The ISP is blocking all VPN traffic.",
+        "D": "Mismatched IKE versions are detected on the VPN peers"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.55": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "There are 98908 kB of memory that will never be used.",
+        "B": "The user space has 708880 kB of physical memory that is not used by the system.",
+        "C": "The I/O cache, which has 641364 kB of memory allocated to it.",
+        "D": "The value indicated next to the inactive heading represents the currently unused cache page."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.56": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate is deleting sessions because the kernel cannot allocate more memory pages",
+        "B": "FortiGate is dropping all TCP sessions with incomplete three-way handshakes.",
+        "C": "FortiGate is not accepting sessions because the device has been down 10 out of 120 seconds.",
+        "D": "FortiGate is flushing sessions because of high memory usage."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.57": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "diagnose sniffer packet any 'ip proto 50'",
+        "B": "diagnose sniffer packet any 'host 10.0.10.10'",
+        "C": "diagnose sniffer packet any 'esp and host 10.200.3.2'",
+        "D": "diagnose sniffer packet any 'port 4500'"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.58": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Only the interface and gateway information for dev=7 will be removed.",
+        "B": "The session information will not change unless the current route has been removed from the",
+        "C": "The session will be flagged as dirty but no route lookups will be performed.",
+        "D": "Sessions involving port7 or port19 will not have their routing information flushed."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.59": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The session is synchronized with the secondary device, however, because application control is",
+        "B": "The session will be removed from the session table of the secondary device because the TCP",
+        "C": "The session continues to permit traffic on the new primary device after failover. without requiring",
+        "D": "The session state is preserved but the kernel will re-evaluate the session because the routing"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.60": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate automatically reboots to clear memory and restore full operation.",
+        "B": "FortiGate switches to a less memory-intensive inspection mode, such as flow-based inspection.",
+        "C": "FortiGate reduces or stops non-essential processes tike logging and antivirus scanning",
+        "D": "Fortigate begins dropping all new sessions to protect resources."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.61": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Phase 2 is down",
+        "B": "Phase 1 is down.",
+        "C": "There is currently no traffic traversing the tunnel",
+        "D": "Both Phase 1 and Phase 2 were negotiated successfully."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.62": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The packet was dropped because it is not allowed by any firewall policy.",
+        "B": "The packet was dropped because there is no route to the source.",
+        "C": "The packet was dropped because the trusted host list is misconfigured",
+        "D": "The packet was dropped because the requested service is not enabled on FortiGate"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.63": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The session is offloaded to the NPU.",
+        "B": "The firewall policy is configured with proxy-based inspection mode.",
+        "C": "The web filter profile is configured with proxy-based inspection mode.",
+        "D": "The HTTPS port is mapped to 443 in the SSL/SSH Inspection Profile"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.64": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "A Diffie-Hellman mismatch",
+        "B": "Blocked traffic on UDP port 500",
+        "C": "A mismatch m the Phase 1 negotiations",
+        "D": "A mismatch in the Phase 2 negotiations"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.65": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The administrator must also run the command diagnose debug enable.",
+        "B": "The debug shows only error messages. If there is no output, then the phase 1 and phase 2",
+        "C": "The log-filter setting is incorrect. The VPN traffic does not match this filter.",
+        "D": "Replace diagnose debug application ike -1 with diagnose debug application ipsec -1."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.66": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The first server provided to FortiGate when it performed a DNS query looking for a list of rating",
+        "B": "There is a natural correlation between the value in the FortiGuard-requests field and the value in",
+        "C": "FortiGate used 64.26.151.37 as the initial server to validate its contract.",
+        "D": "Servers with a negative TZ value are less preferred for rating requests."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.67": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Phase 2 drops but Phase 1 is up.",
+        "B": "Dead Peer Detection is not receiving its acknowledge packet.",
+        "C": "The tunnel drops during rekey negotiation.",
+        "D": "The tunnel drops after the timer expires."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.68": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Active Directory is used for authentication.",
+        "B": "The authentication request is for an SSL VPN connection.",
+        "C": "The IdP IP address is 10.1.10.254.",
+        "D": "The IdP IP address is 10.1.10.2."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.69": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Change to aggressive mode on both VPNs.",
+        "B": "Enable XAuth on both VPNs.",
+        "C": "Use different pre-shared keys on both VPNs.",
+        "D": "Set up specific peer IDs on both VPNs."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.70": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The name of the configured LDAP server is Lab.",
+        "B": "The user is authenticating using CN=John Smith.",
+        "C": "FortiOS is able to locate the user in step 3 (Bind Request) of the LDAP authentication process.",
+        "D": "FortiOS is performing the second step (Search Request) in the LDAP authentication process."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.71": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Modify the prefix using the network command from 172.16.0.0/16 to 172.16.54.0/24.",
+        "B": "Manually add the BGP route on FGT-A.",
+        "C": "Restart BGP using a soft reset to force both peers to exchange their complete BGP routing tables.",
+        "D": "Use the set network-import-check disable command."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.72": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Perfect Forward Secrecy (PFS) is enabled in the configuration.",
+        "B": "The local gateway IP address is 10.0.0.1.",
+        "C": "It shows a phase 2 negotiation.",
+        "D": "The initiator provided remote as its IPsec peer ID."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.73": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The heartbeat messages can be seen using the command diagnose debug authd fsso list.",
+        "B": "The heartbeat messages can be seen in the collector agent logs.",
+        "C": "The heartbeat messages can be seen on FortiGate using the real-lime FSSO debug.",
+        "D": "The heartbeat messages must be manually enabled on FortiGate."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.74": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The router 100.64.3.1 needs to update the local AS number in its BGP configuration in order to",
+        "B": "An inbound route-map on local router is blocking the prefixes from neighbor 100.64.3.1.",
+        "C": "All of the neighbors displayed are part of a single BGP configuration on the local router with the",
+        "D": "The BGP session with peer 10.127.0.75 is up."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.75": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The miglogd daemon is running on CPU core ID 0.",
+        "B": "The diagnose sys top command has been running for 18 minutes.",
+        "C": "The miglogd daemon would be on top of the list, if the administrator pressed m on the keyboard.",
+        "D": "The cmdbsvr process is occupying 2.4% of the total user memory space.",
+        "E": "If the neweli daemon continues to be in the R state, it will need to be manually restarted."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.76": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The network type connecting the local Fortigate and OSPF neighbor 0.0.0.10 is point-to-point.",
+        "B": "All neighbors are in area 0.0.0.0.",
+        "C": "The local FortiGate is the BDR.",
+        "D": "The local FortiGate is not a DROther."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.77": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Protocol options allow administrators to configure a maximum number of sessions for each",
+        "B": "Protocol options give administrators a streamlined method to instruct FortiGate to block all",
+        "C": "Protocol options allow administrators to configure the Any setting for all enabled protocols, which",
+        "D": "Protocol options allow administrators to configure which Layer 4 port numbers map to upper-"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.78": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Enable asymmetric routing under config system settings.",
+        "B": "Change the configuration from strict RPF check mode to feasible RPF check mode.",
+        "C": "A firewall policy that allows all ICMP traffic from port3 to port1.",
+        "D": "Modify the default gateway on the laptop from 10.1.0.2 to 10.2.0.2."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.79": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Area 0.0.0.5 is configured not to propagate type 5 LSAs.",
+        "B": "FGT-2 is configured with a distribution list to block all advertised routes from FGT-3.",
+        "C": "FGT-3 and FGT-2 have not formed an OSPF adjacency yet.",
+        "D": "IP protocol 89 is blocked between FGT-1 and FGT-3."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.80": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The advertised prefix of 10.20.30.0/24 was configured using the network command.",
+        "B": "The first four prefixes are being advertised using a legacy route advertisement.",
+        "C": "The advertised prefix of 10.20.30.0/24 is being advertised through the redistribution of another",
+        "D": "The output shows all prefixes advertised by all neighbors as well as the local router."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.81": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "There is no autonomous system border router (ASBR) in the network,",
+        "B": "The peer of the local router is using a prefix-list-out. configuration to prevent all type 5 LSAs to be",
+        "C": "The local router is located in a stub area",
+        "D": "IP protocol 89 is blocked between the local router and its peer."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.82": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "208.91.112.194",
+        "B": "209.22.147.36",
+        "C": "64.26.151.37",
+        "D": "96.45.33.65"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.83": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate is currently allowing new sessions that require flow-based content inspection and",
+        "B": "FortiGate is currently allowing new sessions and will continue to allow sessions if memory",
+        "C": "FortiGate is currently allowing now sessions that require flow-based or proxy-based content",
+        "D": "FortiGate is currently blocking all new sessions regardless of the content inspection requirements"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.84": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The remote peer is the initiating peer.",
+        "B": "This is a phase1 negotiation.",
+        "C": "There is a Diffie-Hellman group mismatch.",
+        "D": "This is a phase2 negotiation"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.85": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The user was found in the LDAP tree, whose root is TAC.ottawa.fortinet.com.",
+        "B": "FortiOS performs a bind to the LDAP server using the user's credentials.",
+        "C": "FortiOS collects the user group information.",
+        "D": "FortiOS is performing the second step (Search Request) in the LDAP authentication process."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.86": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "eap",
+        "B": "pap",
+        "C": "mschap",
+        "D": "mschap2"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.87": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Create_Child_SA, IKEAUTH, IKESAJNIT",
+        "B": "Create_Child_SA, IKE_SA_INIT. IKE_AUTH",
+        "C": "IKE SA INIT, IKE AUTH. Create Child SA OIKE AUTH.",
+        "D": "IKE_AUTH_IKE_SA_INIT, Create_Child_SA"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.88": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Check that the inspection mode configured for the web filter profile matches that of the firewall",
+        "B": "Check that FortiGate is not entering conserve mode.",
+        "C": "Check that the correct port is mapped to HTTP in the Protocol Options",
+        "D": "Check that the communication between FortiGate and FortiGuard is stable"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.89": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "You can configure automation stitches on any FortiGate device in a Security Fabric environment.",
+        "B": "You can configure automation stitches to execute actions sequentially by taking parameters from",
+        "C": "You can set an automation stitch configured to execute actions in parallel to insert a specific delay",
+        "D": "You can create automation stitches to run diagnostic commands and attach the results to an email"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.90": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "You must authorize the downstream FortiGate on the root FortiGate.",
+        "B": "FortiGate must not be in NAT mode.",
+        "C": "Ensure TCP port 8013 is not blocked along the way.",
+        "D": "You must enable Security Fabric/Fortitelemetry on the receiving interface of the upstream",
+        "E": "Ensure the port for Neighbor Discovery has been changed."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.91": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The traffic has been tagged for VLAN 0000.",
+        "B": "NP7 is handling offloading of this session.",
+        "C": "The traffic matches Policy ID 1.",
+        "D": "The session has been offloaded."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.92": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiTelemetry and Neighbor Discovery both operate using TCP.",
+        "B": "The default port for Neighbor Discovery can be modified.",
+        "C": "FortiTelemetry must be manually enabled on the FortiGate interface.",
+        "D": "By default, the downstream FortiGate establishes a connection with the upstream FortiGate using"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.93": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Ensure the user logs in using 'John Smith' not 'jsmith'.",
+        "B": "Ensure the user is providing the correct user credentials.",
+        "C": "Ensure the user is a member of at least one AD group to ensure step 4 of the LDAP authentication",
+        "D": "Ensure the account is active."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.94": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Log is full on the collector agent.",
+        "B": "Inability to reach IP address of the collector agent.",
+        "C": "Refused connection. Potential mismatch of TCP port.",
+        "D": "Mismatched pre-shared password.",
+        "E": "Incompatible collector agent software version."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.95": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "A UDP session with only one packet received",
+        "B": "A UOP session with packets sent and received",
+        "C": "A TCP session waiting for the SYN ACK",
+        "D": "A TCP session waiting for FIN ACK"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.96": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Create_CHILD_SA",
+        "B": "IKE_Auth",
+        "C": "IKE_Req_INIT",
+        "D": "IKE_SA_NIT"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.97": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Both IKEv1 and IKEv2 share the feature of asymmetric authentication.",
+        "B": "IKEv1 and IKEv2 have enough of the header format in common that both versions can run over the",
+        "C": "IKEv1 and IKEv2 use same TCP port but run on different UDP ports.",
+        "D": "IKEv1 and IKEv2 share the concept of phase1 and phase2."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.98": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "66.117.56.37",
+        "B": "208.91.112.194",
+        "C": "209.22.147.36",
+        "D": "64.26.151.37"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.99": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The regular bind requires the client to send the full distinguished name (ON).",
+        "B": "The regular bind type is the easiest bind type to configure on ForbOS.",
+        "C": "The regular bind type requires a FortiGate super admin account to access the LDAP server.",
+        "D": "It is not often used as a bind type"
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.100": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The automation stitch test is not being logged.",
+        "B": "The automation stitch test failed but the HA failover was successful.",
+        "C": "An HA failover occurred.",
+        "D": "The test was unsuccessful."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.101": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Add another entry to the prefix list to specifically allow the 172.16.52.0/24 network.",
+        "B": "Change the ge value to 17.",
+        "C": "Change the R- value lo 16.",
+        "D": "Modify the default prefix-list behavior from implicit deny to implicit allow."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.102": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which two observations can you make from the output? (Choose two.)",
+      "options": {
+        "A": "The configuration was backed up",
+        "B": "A high availability (HA) failover occurred.",
+        "C": "The lest was unsuccessful.",
+        "D": "The automation stitch test is not being logged."
+      }
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.35.pdf::NO.103": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "diagnose sniffer packet any 'udp port 4500'",
+        "B": "diagnose sniffer packet any 'lp proto 50'",
+        "C": "diagnose sniffer packet any 'ah'",
+        "D": "diagnose sniffer packet any 'udp port 500'"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.1": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "When an FGSP member in FortiGate fails, FortiGate flushes the corresponding tunnels and sends",
+        "B": "FortiGate will consider all IKEV2 packets as fragmentable.",
+        "C": "If fragmentation occurs, FortiGate will allow the packets at the IKE layer.",
+        "D": "FortiGate will add additional redundant information to reconstruct any lost or erratically received"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.2": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "set auto-discovery-sender enable and set network-id x",
+        "B": "set auto-discovery-forwarder enable and set remote-as x",
+        "C": "set auto-discovery-crossover enable and set enforce-multihop enable",
+        "D": "set auto-discovery-receiver enable and set npu-offload enable"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.3": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "neighbor-group",
+        "B": "route-reflector-client",
+        "C": "neighbor-range",
+        "D": "ibgp-enforce-multihop"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.4": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use routing protocols to specify allowed subnets over the tunnel.",
+        "B": "Configure an IPsec-aggregate to create redundancy between each firewall peer.",
+        "C": "Clearly indicate to the VPN which segments will be encrypted in the phase two selectors.",
+        "D": "Configure an IP address on the IPsec interface of each firewall to establish unique peer"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.5": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "ebgp-enforce-multihop",
+        "B": "update-source",
+        "C": "ibgp-enforce-multihop",
+        "D": "recursive-next-hop"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.6": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Create an application sensor and apply the application control profile to the firewall policy.",
+        "B": "Create a URL niter and apply the web filter profile to the firewall policy.",
+        "C": "Create an IP address external connector and apply it to the destination field of the firewall policy.",
+        "D": "Create an Internet Service Database (ISDB) group and apply it to the destination field of the"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.7": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Security rating is enabled in ISFW.",
+        "B": "ISFW is in a Security Fabric environment.",
+        "C": "ISFW is not connected to FortiAnalyzer and must go through NGFW-1.",
+        "D": "The firewall policy in NGFW-1 has UTM enabled."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.8": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "This configuration is the best for networks with regular traffic intervals, providing a balance",
+        "B": "Peer IDs are unencrypted and exposed, creating a security risk.",
+        "C": "FortiGate will not add a route to its routing or forwarding information base when the dynamic",
+        "D": "A separate interface is created for each dial-up tunnel, which can be slower and more resource"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.9": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Enable override in virtual duster 2 for HQ-NGFW-2.",
+        "B": "Change the priority from 120 to 200 for HQ-NGFW-2.",
+        "C": "Change the priority from 100 to 160 for HQ-NGFW-2.",
+        "D": "Reboot HQ-NGFW-2."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.10": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "set ebgp-enforce-multrhop enable",
+        "B": "set next-hop-self enable",
+        "C": "set ibgp-enforce-multihop advpn",
+        "D": "set attribute-unchanged next-hop"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.11": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "You must enable STP or RSTP on FortiGate and FortiSwitch to avoid layer 2 loopbacks.",
+        "B": "The LAN interface must use a 802.3ad type interface.",
+        "C": "This connection is using a FortiLInk to manage VLANs on FortiGate.",
+        "D": "FortiGate is using an SD-WAN-type interface to connect to a FortiSwitch device with MCLAG."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.12": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate with ports X5 to X8.",
+        "B": "FortiGate with only one NP6.",
+        "C": "FortiGate with ports connected to a CP10.",
+        "D": "FortiGate with ports connected to a SP5."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.13": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "IKEv2 fragmentation is performed at IP layer.",
+        "B": "The reassembly timeout default value is 30 seconds.",
+        "C": "Only some IKE version 2 packets are considered fragmentable.",
+        "D": "The maximum number of IKE version 2 fragments are 64."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.14": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Each member of the Security Fabric maintains the shared Security Fabric map.",
+        "B": "Only the root FortiGate collects network topology information and forwards it to FortiAnalyzer.",
+        "C": "FortiGate uses the FortiTelemetry protocol to communicate with FortiAnalyzer.",
+        "D": "Each FortiGate device in the Security Fabric must have bidirectional FortiTelemetry connectivity.",
+        "E": "Only FortiGate devices with configuration-sync sel to Local receive and synchronize the global"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.15": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Installation of the session key in the network processor (NP)",
+        "B": "Data encryption and decryption",
+        "C": "Security inspections such as ACL, HPE, and IP integrity header checking",
+        "D": "Offloading the packets directly to the content processor (CP)"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.16": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The administrator did not assign the template correctly when adding the model device because",
+        "B": "Pre-run CLI templates are automatically unassigned after their initial installation",
+        "C": "Pre-run CLI templates for ZTP and LTP must be unassigned manually after the first installation to",
+        "D": "The administrator must use post-run CLI templates that are designed for ZTP and LTP"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.17": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Decryption",
+        "B": "Installation of the session key in the network processor (NP)",
+        "C": "A reverse path forwarding (RPF) check",
+        "D": "IP integrity header checking"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.18": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "NP7",
+        "B": "SP5",
+        "C": "9",
+        "D": "NTurbo"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.19": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The maximum segment size permitted in the firewall policy determines whether TCP packets are",
+        "B": "Applying commands in a firewall policy determines the largest payload a device can handle in a",
+        "C": "The administrator must consider the payload size of the packet and the size of the IP header to",
+        "D": "The TCP packet modifies the packet size only if the size of the packet is less than the one the"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.20": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Deploy a full-mesh VPN topology to eliminate hub dependency.",
+        "B": "Implement static routing over IPsec interfaces for each spoke.",
+        "C": "Use a dynamic routing protocol using loopback interfaces to streamline peers and routes.",
+        "D": "Establish a traditional hub-and-spoke VPN topology with policy routes."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.21": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "It restricts the interface to managing traffic only from the specified VLAN, effectively segregating",
+        "B": "It configures the interface to prioritize traffic based on the domain ID, enhancing quality of service",
+        "C": "It isolates traffic within a specific VLAN by assigning a broadcast domain to an interface based on",
+        "D": "It assigns a unique domain ID to the interface, allowing it to operate across multiple VLANs within"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.22": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Enable metadata variables to use dynamic configurations in the standard interfaces of",
+        "B": "Use the Install On feature in the policy package to automatically assign different interfaces based",
+        "C": "Create interfaces using device database scripts to use them on the same policy package of",
+        "D": "Create normalized interface types per-platform to automatically recognize device layer interfaces"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.23": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The root VDOM does not have access to FortiManager in a closed network.",
+        "B": "The root VDOM does not have a VDOM link to connect with the Corel and Core2 VDOMs.",
+        "C": "The Core1 and Core2 VDOMs must also be enabled as Management VDOMs to receive FortiGuard",
+        "D": "The root VDOM does not have access to any valid public FDN."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.24": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "You can effectively apply an antivirus security profile to this traffic.",
+        "B": "You can effectively apply a web filtering profile to this traffic.",
+        "C": "The subject alternative name (SAN) is necessary to apply security profiles.",
+        "D": "The client supports only TLS versions 1.2 and 1.3."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.25": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate will receive a certificate that supports multiple domains because FortiManager operates",
+        "B": "FortiGate is connecting to the same IP server and will receive an independent certificate for its",
+        "C": "If the TLS handshake contains 17 cipher suites it means the TLS version must be 1.0 on this three-",
+        "D": "The wildcard for the domain *.fortinet-ca2.support.fortinet.com must be supported by"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.26": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate will advertise only the corresponding prefixes in the BGP network table to its BGP",
+        "B": "FortiGate will advertise all the prefixes in the BGP network table to its BGP neighbor, even if it is",
+        "C": "FortiGate will not advertise any imported routes received from one BGP neighbor to another.",
+        "D": "FortiGate will not advertise the prefixes, if it is not in the routing table."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.27": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Enable server certificate SNI check in the SSL/SSH inspection profile.",
+        "B": "Enable auto-detection of outdated SSL/TLS versions in the SSL/SSH inspection profile to block",
+        "C": "Block invalid SSL certificates in the SSL/SSH inspection profile.",
+        "D": "Configure the unsupported SSL version and set the minimum allowed SSL version in the HTTPS"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.28": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate has a predefined list of all IPs and ports for specific applications downloaded from",
+        "B": "The ISDB blocks the IP addresses and ports of an application predefined by FortiGuard.",
+        "C": "The ISDB works in proxy mode, allowing the analysis of packets in layers 3 and 4 of the OSI model.",
+        "D": "The ISDB limits access by URL and domain."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.29": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The administrator must implement BGP to inject the new remote office network into the",
+        "B": "The administrator must configure a static route to the subnet 192.168.1.0/24 on the corporate",
+        "C": "The administrator must configure virtual links on both FortiGate devices.",
+        "D": "The administrator must implement OSPF over IPsec on both FortiGate devices."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.30": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use a file filter profile to protect against DNS exfiltration.",
+        "B": "Use an intrusion prevention system (IPS) profile and DNS exfiltration-related signatures.",
+        "C": "Enable DNS filter to protect against DNS exfiltration.",
+        "D": "Enable data loss prevention (DLP) to prevent DNS exfiltration."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.31": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The administrator must reconfigure the monitor interface.",
+        "B": "The administrator must reconfigure the cluster in active-active mode.",
+        "C": "The administrator must reconfigure the cluster in FGSP mode.",
+        "D": "The administrator must reconfigure the heartbeat interface."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.32": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Configure the action as quarantine, if an application requires feedback to prevent instability.",
+        "B": "Configure central source network address translation (SNAT), if NAT is required.",
+        "C": "Create an application control profile and apply the profile to a firewall policy.",
+        "D": "Specify an SSLISSH inspection profile on a consolidated policy."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.33": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Configure the unsupported SSL version and set the minimum allowed SSL version in the HTTPS",
+        "B": "Enable auto-detection of outdated SSL/TLS versions in the SSL/SSH inspection profile to block",
+        "C": "Install the required certificate in the client's browser or use Active Directory policies to block",
+        "D": "Use the latest certificate, Fortinet_SSL_ECDSA256, and replace the CA certificate in the SSL/SSH"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.34": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Meta fields must be set to required.",
+        "B": "Meta field changes are applied only at the ADOM level.",
+        "C": "Meta fields are useful for creating multiple objects with the same logical name but different",
+        "D": "Meta fields can be used as variables in scripts or provisioning templates."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.35": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The session synchronization is encrypted.",
+        "B": "session-pickup-connectionless is set to disable on FortiGate_B.",
+        "C": "FortiGate_B is configured in passive mode.",
+        "D": "FortiGate_A and FortiGate_B have the same standalone-group-id value."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.36": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Enable RIP redistribution on FortiGate B.",
+        "B": "Configure a distribute-route-map-in on FortiGate B.",
+        "C": "Configure a virtual link between FortiGate A and B.",
+        "D": "Set the area 0.0.0.l type to stub on FortiGate A and B."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.37": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Prefix list",
+        "B": "Route reflector",
+        "C": "BFD",
+        "D": "Neighbor group"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.38": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "config neighbor",
+        "B": "config redistribute bgp",
+        "C": "config router route-map",
+        "D": "config redistribute ospf"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.39": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "It configures the interface to prioritize traffic based on the domain ID, enhancing quality of service",
+        "B": "It isolates traffic within a specific VLAN by assigning a broadcast domain to an interface based on",
+        "C": "It restricts the interface to managing traffic only from the specified VLAN, effectively segregating",
+        "D": "It assigns a unique domain ID to the interface, allowing it to operate across multiple VLANs within"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.40": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The administrator must set the policy to inspection mode to analyze the HTTPS packets as",
+        "B": "The administrator must enable HTTPS in the protocol port mapping of the deep- inspection",
+        "C": "The administrator must enable SSL inspection of the SSL server and upload the certificate of the",
+        "D": "The administrator must enable cipher suites in the SSL/SSH inspection profile to decrypt the"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.41": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The normalized interface LAN will be mapped to the private interface for FortiGate-VM64 model",
+        "B": "The normalized interface LAN will be mapped to the wireless interface for FortiGate-81E model",
+        "C": "The normalized interface LAN will be mapped to the port2 interface for NGFW-1 [Core2].",
+        "D": "The normalized interface LAN will be mapped to the Human Resources interface for any FortiGate-"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.42": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Option ip.flags.mf must be set to enable on FortiGate. The user has to adjust the ping MTU to",
+        "B": "Fragmented packets must be encrypted. To connect any application successfully, the user must",
+        "C": "FortiGate honors the do not fragment bit and the packets are dropped. The user has to adjust the",
+        "D": "The user must trigger different traffic because path MTU discovery techniques do not recognize"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.43": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Based on the policy configuration on NGFW-1, the configuration on both spokes is modified and",
+        "B": "On NGFW-1, the configuration was changed and spokes are wailing for an autoupdate.",
+        "C": "On both Spoke-1 and Spoke-2, the configuration was changed directly on the FortiGate device, and",
+        "D": "Spoke-1 and Spoke-2 are sharing the same security policy configuration and the same policy"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.44": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The web filter database is stored locally, but the administrator must run over CLI diagnose",
+        "B": "The web filter database is stored locally on FortiGate, but it is hidden behind the GUI. It requires",
+        "C": "The web filter database is not hosted on FortiGate: FortiGate queries FortiGuard or FortiManager",
+        "D": "The web filter database is only accessible after manual syncing with a valid FDS server using"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.45": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The FortiGate device is a backup designated router",
+        "B": "The FortiGate device is connected to multiple areas",
+        "C": "The FortiGate device injects external routing information",
+        "D": "The FortiGate device has OSPF ECMP enabled"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.46": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "This retrieved process was automatically triggered by a Remote FortiGate Directly (via CLI) script.",
+        "B": "The user script_manager is an API user from the Fortinet Developer Network (FDN) retrieving a",
+        "C": "To identify the user who created the event, check it on the Configuration and Installation widget",
+        "D": "Find the user in the FortiManager system logs and use the type=script command to find the"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.47": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "IPsec SAs cannot be offloaded.",
+        "B": "The two IPsec SAs, inbound and outbound, are copied to the NPU.",
+        "C": "Only the outbound IPsec SA is copied to the NPU.",
+        "D": "Only the inbound IPsec SA is copied to the NPU."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.48": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Set a route map in the AS boundary FortiGate.",
+        "B": "Set the area 0.0.0.1 to the type STUB in the area border FortiGate.",
+        "C": "Set an access list in the AS boundary FortiGate.",
+        "D": "Set the area 0.0.0.1 to the type NSSA in the area border FortiGate."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.49": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The user script_manager, an API user from the Fortinet Developer Network (FDN). is retrieving a",
+        "B": "The retrieve process was automatically triggered by a Remote FortiGate Directly (via CLI) script.",
+        "C": "To identify the user who created the event, in the FortiManager system logs, they must use the",
+        "D": "To identify the user who created the event, they must view it on the Configuration and Installation"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.50": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The prefix 172.16.1.248/30 in the BGP Networks section on FortiGate_B",
+        "B": "A BGP route map out for 172.16.1.248/30 on FortiGate_B",
+        "C": "Enable Redistribute Connected in the BGP section on FortiGate_B.",
+        "D": "A BGP route map in for 172.16.1.248/30 on FortiGate_A"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.51": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use metadata variables to dynamically assign values according to each FortiGate device.",
+        "B": "Use provisioning templates and install configuration settings at the device layer.",
+        "C": "Use the Global ADOM to deploy global object configurations to each FortiGate device.",
+        "D": "Apply Jinja in the FortiManager scripts for large-scale and advanced deployments.",
+        "E": "Add FortiGate devices on FortiManager as model devices, and use ZTP or LTP to connect to"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.52": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Set up OSPF routing over static VPN tunnels between spokes.",
+        "B": "Utilize ADVPN 2.0 to facilitate dynamic direct tunnels and automatic link optimization.",
+        "C": "Establish static VPN tunnels between spokes with predefined backup routes.",
+        "D": "Implement SD-WAN policies at the hub to manage spoke link quality."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.53": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "They force the former primary to send gratuitous ARP packets when the failover happens to",
+        "B": "They force the former primary to shut down all its interfaces for one second when failover",
+        "C": "They force both HA devices for remote link monitoring to detect an issue in the forwarding path.",
+        "D": "They force the switches to update their MAC forwarding tables, when failover happens."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.54": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Create uniquely named objects on FortiGate and reimport them into the policy package.",
+        "B": "Retrieve the FortiGate configuration to automatically export correct objects and policies.",
+        "C": "Use non-default object values because FortiManager is unable to alter default values.",
+        "D": "Select the FortiManager configuration that accepts changes on FortiManager and preserves"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.55": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate creates separate virtual interfaces for each VPN client.",
+        "B": "add-route is enabled in the tunnel IPSec phase 1 configuration.",
+        "C": "FortiGate is not using the destination subnets of the quick mode selectors to populate the routing",
+        "D": "net-device is disabled in the tunnel IPSec phase 1 configuration."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.56": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Change the network type to point-to-multipoint",
+        "B": "Change the router ID to 0.0.0.65",
+        "C": "Change the router ID to 0.0.0.95",
+        "D": "Change the router priority to 200"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.57": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use full SSL inspection to thoroughly inspect encrypted payloads.",
+        "B": "Disable SSL inspection entirely to conserve resources.",
+        "C": "Configure SSL inspection to handle HTTPS traffic efficiently.",
+        "D": "Enable SSL certificate inspection mode to perform basic checks without decrypting traffic."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.58": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The user is prompted to create an SSO administrator account for AdminSSO.",
+        "B": "The user receives an authentication failure message.",
+        "C": "The user accesses the downstream FortiGate with super_admin_readonly privileges.",
+        "D": "The user accesses the downstream FortiGate with super_admin privileges."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.59": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Configure route-map-in on FortiGate_A.",
+        "B": "Configure connected routes redistribution on FortiGate_C.",
+        "C": "Configure BGP route redistribution on FortiGate_B.",
+        "D": "Configure the 100.64.2.0/24 network on FortiGate_C."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.60": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "graceful-restart",
+        "B": "ibgp-multipath",
+        "C": "bfd",
+        "D": "route-reflector-client"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.61": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "With FortiNAC",
+        "B": "With FortiAnalyzer",
+        "C": "With a Security Fabric automation",
+        "D": "With an external connector from Threat Feeds"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.62": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "set auto-discovery-sender enable",
+        "B": "set auto-discovery-forwarder enable",
+        "C": "set add-route enable",
+        "D": "set auto-discovery-receiver enable"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.63": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use the DNS filter to block application signatures and protocol decoders.",
+        "B": "Use application control to limit non-URL-based software handling.",
+        "C": "Enable application detection-based SD-WAN rules.",
+        "D": "Configure a web filter profile in flow mode."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.64": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "When NP acceleration is enabled, firewall sessions may not offload if proxy-based security profiles",
+        "B": "You can disable the NP for each firewall policy using the command np-acceleration set to loose.",
+        "C": "The FortiGate CPU offloads all firewall sessions that require FortiOS session helper to the network",
+        "D": "For UDP traffic, the FortiGate CPU offloads the first packet to identify it as fast-path traffic."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.65": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Configure a static route to 100.65.4.1.",
+        "B": "Configure the local AS to 65300.",
+        "C": "Contact the remote peer administrator to enable BGP",
+        "D": "Enable ebgp-enforce-multihop."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.66": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The administrator must disable override on FortiGate_A.",
+        "B": "The administrator must change the priority from 100 to 160 for FortiGate_B.",
+        "C": "The administrator must change the load balancing method on FortiGate_B.",
+        "D": "The administrator must change the priority from 128 to 200 for FortiGate_B."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.67": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use the IPS profile extension to select an operating system, protocol, and application for all the",
+        "B": "Enable Scan Outgoing Connections to avoid clicking suspicious links or attachments that can",
+        "C": "Use an IPS profile with action monitor, however, the administrator must be aware that this can",
+        "D": "Install missing or expired SSUTLS certificates on the client PC to prevent expected false positives."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.68": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use a dynamic routing protocol using loopback interfaces to streamline peers and routes.",
+        "B": "Deploy a full-mesh VPN topology to eliminate hub dependency.",
+        "C": "Implement static routing over IPsec interfaces for each spoke.",
+        "D": "Establish a traditional hub-and-spoke VPN topology with policy routes."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.69": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "route-map-out",
+        "B": "network-import-check",
+        "C": "prefix-list-out",
+        "D": "distribute-list-out"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.70": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "get hardware status",
+        "B": "diagnose hardware deviceinfo",
+        "C": "get hardware cp",
+        "D": "diagnose hardware lspci | grep 4e36"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.71": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FGSP with external load balancers",
+        "B": "FGCP in active-active mode and with switches",
+        "C": "FGCP in active-passive mode and with VDOM disabled",
+        "D": "VRRP with switches"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.72": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Add a URL wildcard domain to the website CA certificate and use it in the SSL/SSH Inspection",
+        "B": "In the Protocol Port Mapping section of the SSL/SSH Inspection Profile, enter 443, 8443 to analyze",
+        "C": "To analyze nonstandard ports in web filter profiles, use TLSv1.3 in the SSL/SSH Inspection Profile.",
+        "D": "Administrators can block traffic on nonstandard ports by enabling the SNI check in the SSL/SSH"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.73": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The administrator must enable reputable websites to allow only SSL/TLS websites rated by",
+        "B": "The administrator must enable URL extraction from SNI on the SSL certificate inspection to ensure",
+        "C": "The administrator must enable DNS over TLS to protect against fake Server Name Indication (SNI)",
+        "D": "The administrator must enable full SSL inspection in the SSL/SSH Inspection Profile to decrypt"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.74": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "It includes stronger Diffie-Hellman (DH) groups, such as Elliptic Curve (ECP) groups.",
+        "B": "It supports interoperability with devices using IKEv1.",
+        "C": "It exchanges a minimum of two messages to establish a secure tunnel.",
+        "D": "It supports the extensible authentication protocol (EAP)."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.75": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use IKEv2, which encrypts peer IDs and prevents exposure.",
+        "B": "Opt for SSL VPN web mode because it does not use peer IDs at all.",
+        "C": "Choose IKEv1 aggressive mode because it simplifies peer identification.",
+        "D": "Stick with IKEv1 main mode because it offers better performance."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.76": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "network-import-check",
+        "B": "ibgp-enforce-multihop",
+        "C": "neighbor-group",
+        "D": "route-reflector-client"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.77": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Shortcut query",
+        "B": "Shortcut offer",
+        "C": "Shortcut reply",
+        "D": "Shortcut forward"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.78": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Use an IPS profile with all signatures in monitor mode and verify patterns before blocking.",
+        "B": "Limit the IPS profile to server targets only to avoid blocking connections from the server to clients.",
+        "C": "Select flow mode in the IPS profile to accurately analyze application patterns.",
+        "D": "Set the IPS profile signature action to default to discard all possible false positives."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.79": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Create an inline-CASB to protect against DNS exfiltration.",
+        "B": "Configure a File Filter profile to prevent DNS exfiltration.",
+        "C": "Enable DNS Filter to protect against DNS exfiltration.",
+        "D": "Use an IPS profile and DNS exfiltration-related signatures."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.80": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "set max-neighbor-num 2",
+        "B": "set neighbor-group advpn",
+        "C": "set route-reflector-client enable",
+        "D": "set prefix 172.16.1.0 255.255.255.0"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.81": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The FortiGate device can inject external routing information.",
+        "B": "The FortiGate device is in the area 0.0.0.5.",
+        "C": "The FortiGate device does not support OSPF ECMP.",
+        "D": "The FortiGate device is a backup designated router."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.82": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "fec-ingress and fsc-egrsss",
+        "B": "dpd and dpd-retryinterval",
+        "C": "fragmentation and fragmentation-mtu",
+        "D": "keepalive and keylive"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.83": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The suspicious packet is related to a cluster that has VDOMs enabled.",
+        "B": "The network includes FortiGate devices configured with the FGSP protocol.",
+        "C": "The suspicious packet is related to a cluster with a group-id value lower than 255.",
+        "D": "The suspicious packet corresponds to port 7 on a FortiGate device."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.84": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The traffic corresponding to the firewall policy is encrypted.",
+        "B": "auto-asic-off load is set to enable in the firewall policy,",
+        "C": "inspection-mode is set to proxy in the firewall policy.",
+        "D": "The option npudbg is not added in the diagnose sniff packet command."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.85": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Adjust the MTU on interfaces only if FortiGate has the FortiGuard enterprise bundle, which allows",
+        "B": "Adjust the MTU on interfaces in all FortiGate devices that support the latest family of Fortinet",
+        "C": "Adjust the MTU on interfaces in controlled environments where all devices along the path allow",
+        "D": "Adjust the MTU on interfaces only in wired connections like PPPoE, optic fiber, and ethernet cable"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.86": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "FortiGate uses the first entry listed in the SAN field in the server certificate.",
+        "B": "FortiGate closes the connection because this represents an invalid SSL/TLS header.",
+        "C": "FortiGate uses the CN information from the Subject field in the server certificate.",
+        "D": "FortiGate uses the SNI from the user's web browser."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.87": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Set route-overlap to either use-new or use-old",
+        "B": "Set net-device to ecmp",
+        "C": "Set single-source to enable",
+        "D": "Set route-overlap to allow"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.88": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "The remote-ip must be on a different IP address from the overlay subnet.",
+        "B": "set net-device must be disabled to avoid dynamic interface creation.",
+        "C": "set add-route must be enabled to add routes.",
+        "D": "An overlay IP address with a mask of /32 must be assigned to the IPsec virtual interface."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.89": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "set prefix 10.0.12.0 255.255.255.0",
+        "B": "set route-reflector-client enable",
+        "C": "set neighbor-group advpn",
+        "D": "set prefix 172.16.1.0 255.255.255.0"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.90": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "In an HA cluster, FortiGate devices will keep the OSPF routes in their routing table to avoid traffic",
+        "B": "The OSPF neighbor that receives the grace link-state advertisement (LSA) will enter into helper",
+        "C": "After the default 40 seconds wait time, the OSPF neighbors will resume communication with the",
+        "D": "FortiGate is configured with graceful restart, and will exit graceful mode, if the network topology"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.91": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "Set bfd enable in the router configuration",
+        "B": "Set network-type point-to-multipoint in the hub interface",
+        "C": "Set rfc1583-compatible enable in the router configuration",
+        "D": "Set virtual-link enable in the hub interface"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.92": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "",
+      "options": {
+        "A": "NGFW-1 will send type 1 and type 2 LSAs.",
+        "B": "NGFW-1 will send type 1 and type 3 LSAs.",
+        "C": "NGFW-1 will send type 1 and type 4 LSAs.",
+        "D": "NGFW-1 will send type 1 and type 5 LSAs."
+      }
+    }
+  }
+}

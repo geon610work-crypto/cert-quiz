@@ -100,6 +100,17 @@ if os.path.isfile(_CACHE_FILE):
 
 # Cloud 버전: API 기능 없음 — korean_cache.json 만 사용
 
+# Translation cache: {"PDF명::NO.XX": {"question": "...", "options": {"A": "...", ...}}}
+_TRANS_FILE = os.path.join(WORKSPACE, 'translation_cache.json')
+translation_cache = {}
+if os.path.isfile(_TRANS_FILE):
+    try:
+        with open(_TRANS_FILE, encoding='utf-8') as _f:
+            translation_cache.update(json.load(_f))
+        print(f"  🌐 Translation cache loaded: {len(translation_cache)} entries from translation_cache.json")
+    except Exception as _e:
+        print(f"  ⚠️  Failed to load translation_cache.json: {_e}")
+
 
 def _cache_key(pdf_name, q_num):
     """Compound cache key to avoid collisions between PDFs with same question numbers."""
@@ -986,6 +997,10 @@ class QuizHandler(BaseHTTPRequestHandler):
             for q in selected:
                 q['explanation_ko'] = _lookup_cache(pdf_name, q['num'])
                 q['pdf_name'] = pdf_name
+                trans_key = f"{pdf_name}::{q['num']}"
+                trans = translation_cache.get(trans_key, {})
+                q['question_ko'] = trans.get('question') or None
+                q['options_ko']  = trans.get('options') or {}
             self.send_json({'questions': selected, 'total': len(all_q),
                             'has_fitz': HAS_FITZ})
 
@@ -1499,12 +1514,15 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
   const q     = questions[studyIdx];
   const total = questions.length;
   const opts  = Object.keys(q.options).sort();
+  const [showTrans, setShowTrans] = useState(true);
 
   const koreanHtml = q.explanation_ko
     ? (typeof marked !== 'undefined'
         ? marked.parse(q.explanation_ko)
         : q.explanation_ko.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br/>'))
     : null;
+
+  const transStyle = {fontSize:'12px',color:'var(--c5)',fontStyle:'italic',marginTop:'4px',lineHeight:'1.5'};
 
   return (
     <div className="container">
@@ -1515,6 +1533,12 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
         <span style={{flex:1,textAlign:'center',fontWeight:'600',fontSize:'14px',color:'var(--c5)'}}>
           {q.num} / 전체 {total}
         </span>
+        <button onClick={()=>setShowTrans(v=>!v)}
+          style={{padding:'5px 10px',fontSize:'12px',fontWeight:'600',borderRadius:'8px',border:'1px solid var(--c2)',
+            background:showTrans?'#0d9488':'var(--c1)',color:showTrans?'#fff':'var(--c5)',cursor:'pointer',flexShrink:0,
+            transition:'all .15s'}}>
+          직독직해 {showTrans?'ON':'OFF'}
+        </button>
         <button className="btn btn-secondary"
           onClick={()=>setStudyIdx(i=>Math.max(0,i-1))}
           disabled={studyIdx===0}
@@ -1545,6 +1569,9 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
             </span>
           )}
           <p style={{fontSize:'15px',lineHeight:'1.7',whiteSpace:'pre-wrap'}}>{q.question}</p>
+          {showTrans && q.question_ko && (
+            <p style={transStyle}>{q.question_ko}</p>
+          )}
         </div>
 
         {/* 선택지 */}
@@ -1553,10 +1580,11 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
             const text     = q.options[letter];
             const isAnswer = q.answer.includes(letter);
             const isImgOpt = text==='[옵션 텍스트가 Exhibit 이미지에 포함됨]';
+            const textKo   = showTrans && q.options_ko && q.options_ko[letter];
             return (
               <div key={letter} style={{
                 padding:'10px 14px',borderRadius:'8px',
-                border: isAnswer?'1px solid #22c55e':'1px solid #334155',
+                border: isAnswer?'1px solid #22c55e':'1px solid var(--c2)',
                 background: isAnswer?'rgba(34,197,94,0.08)':'var(--c0)',
                 display:'flex',gap:'10px',alignItems:'flex-start',
               }}>
@@ -1564,9 +1592,9 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
                   minWidth:'18px',color:isAnswer?'#22c55e':'var(--c4)'}}>
                   {letter}.
                 </span>
-                <span style={{fontSize:'14px',lineHeight:'1.6',flex:1,
-                  color:'var(--c7)'}}>
+                <span style={{fontSize:'14px',lineHeight:'1.6',flex:1,color:'var(--c7)'}}>
                   {isImgOpt?'(위 이미지 참조)':text}
+                  {textKo && <div style={transStyle}>{textKo}</div>}
                 </span>
                 {isAnswer&&<span style={{flexShrink:0,color:'#22c55e',fontSize:'14px'}}>✓</span>}
               </div>

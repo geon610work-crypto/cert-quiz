@@ -140,7 +140,7 @@ def _cache_key(pdf_name, q_num):
 def _extract_product_id(pdf_name):
     """PDF 파일명에서 고유 식별자 추출 (버전/공통단어 제외).
     예: 'FCSS_NST_SE-7.6 V13.35.pdf' → 'NST'
-        'FCSS_EFW_AD-7.6 V12.95.pdf' → 'EFW'
+        'FCSS_EFW_AD-7.6 V13.35.pdf' → 'EFW'
     """
     # FCSS 다음에 오는 첫 번째 세그먼트가 제품 식별자
     m = re.search(r'FCSS[_\-]([A-Z]+)', pdf_name.upper())
@@ -251,6 +251,9 @@ def _extract_text_fitz(pdf_path):
                 lines = [l for l in text.split('\n')
                          if 'IT Certification Guaranteed' not in l]
                 page_text = '\n'.join(lines)
+                # "QUESTION NO: X" 형식도 page_map에 등록
+                for m in re.finditer(r'QUESTION NO:\s*(\d+)', page_text):
+                    page_map[f'NO.{m.group(1)}'] = page_num
                 for m in re.finditer(r'NO\.(\d+)', page_text):
                     page_map[f'NO.{m.group(1)}'] = page_num
                 full_text += page_text + '\n'
@@ -281,9 +284,15 @@ def extract_questions_from_pdf(pdf_path):
                 lines = [l for l in text.split('\n')
                          if 'IT Certification Guaranteed' not in l]
                 page_text = '\n'.join(lines)
+                # "QUESTION NO: X" 형식도 page_map에 등록
+                for m in re.finditer(r'QUESTION NO:\s*(\d+)', page_text):
+                    page_map[f'NO.{m.group(1)}'] = page_num
                 for m in re.finditer(r'NO\.(\d+)', page_text):
                     page_map[f'NO.{m.group(1)}'] = page_num
                 full_text += page_text + '\n'
+
+    # "QUESTION NO: X" → "NO.X" 로 정규화 (신버전 EFW PDF 대응)
+    full_text = re.sub(r'QUESTION NO:\s*(\d+)', r'NO.\1', full_text)
 
     # OCR 오타 자동 수정 적용
     full_text = fix_ocr_text(full_text)

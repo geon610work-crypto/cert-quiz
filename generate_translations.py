@@ -19,7 +19,7 @@ TRANS_FILE = os.path.join(WORKSPACE, 'translation_cache.json')
 
 PDFS = [
     'FCSS_NST_SE-7.6 V13.35.pdf',
-    'FCSS_EFW_AD-7.6 V12.95.pdf',
+    'FCSS_EFW_AD-7.6 V13.35.pdf',
 ]
 
 # ── PDF 파싱 (quiz_server_cloud.py 의 extract_questions_from_pdf 와 동일 로직) ──

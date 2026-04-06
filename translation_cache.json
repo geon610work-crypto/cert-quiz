@@ -1868,25 +1868,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.1": {
-    "question": "fec-ingress와 fec-egress IPsec 설정이 / IPsec 터널에 / 어떤 영향을 미치는가?",
-    "options": {
-      "A": "FortiGate의 FGSP 멤버가 장애를 일으키면 / FortiGate는 해당 터널을 초기화하고 / dead peer detection 프로브를 전송하여 / 사용 불가능한 원격 피어를 찾는다.",
-      "B": "FortiGate는 / 모든 IKEv2 패킷을 / 분할 가능한 것으로 간주한다.",
-      "C": "분열이 발생하면 / FortiGate는 / IKE 레이어에서 / 해당 패킷을 허용한다.",
-      "D": "FortiGate는 / 손실되거나 불규칙하게 수신된 패킷을 재구성하기 위해 / 추가적인 중복 정보를 삽입한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "When an FGSP member in FortiGate fails, FortiGate flushes the corresponding tunnels and sends",
-        "B": "FortiGate will consider all IKEV2 packets as fragmentable.",
-        "C": "If fragmentation occurs, FortiGate will allow the packets at the IKE layer.",
-        "D": "FortiGate will add additional redundant information to reconstruct any lost or erratically received"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.2": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.62": {
     "question": "전시물을 참조하라. 전시물은 / Hub A에서 Spoke 1, Spoke 2로의, 그리고 Hub에서 Spoke 3, Spoke 4로의 / VPN IPsec phase 1을 나타내는 ADVPN IPsec 인터페이스를 보여준다. / 관리자는 / overlay network 1과 2를 연결하기 위해 / IBGP와 EBGP를 사용한 ADVPN을 구성해야 한다. / ADVPN 터널의 phase 1 VPN IPsec 구성에서 / 관리자는 무엇을 설정해야 하는가?",
     "options": {
       "A": "set auto-discovery-sender enable 및 set network-id x",
@@ -1904,7 +1886,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.3": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.61": {
     "question": "전시물을 참조하라. 전시물은 / hub and spokes 배포를 보여준다. / 관리자는 / hub에 연결하기 위한 BGP 설정을 포함하여 / 여러 spoke를 배포하고 있다. / 관리자가 / 구성을 최소화할 수 있는 / 두 가지 명령은 무엇인가? (두 개 선택)",
     "options": {
       "A": "neighbor-group",
@@ -1922,7 +1904,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.4": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.49": {
     "question": "IT 부서는 / 지난 네트워크 마이그레이션에서 / phase 2 IPsec 구성의 all-zero phase selector가 / 네트워크 운영에 영향을 미쳤음을 발견했다. / 향후 마이그레이션에서 / 이를 방지하기 위한 / 두 가지 유효한 접근 방식은 무엇인가? (두 개 선택)",
     "options": {
       "A": "라우팅 프로토콜을 사용하여 / 터널 상에서 허용되는 서브넷을 지정한다.",
@@ -1940,7 +1922,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.5": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.58": {
     "question": "전시물을 참조하라. 전시물은 / ISP에 연결된 기업 네트워크를 보여준다. / 관리자는 / ISP에 연결하기 위한 BGP 소스로 / loopback을 구성해야 한다. / 연결을 확립하기 위해 / 필요한 두 가지 명령은 무엇인가? (두 개 선택)",
     "options": {
       "A": "ebgp-enforce-multihop",
@@ -1958,25 +1940,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.6": {
-    "question": "서브넷 172.165.58.0/24 내의 / 여러 웹사이트를 차단하기 위해 / 방화벽 정책을 업데이트해야 한다. / 이 주소들을 효율적으로 차단하기 위해 / 무엇을 해야 하는가?",
-    "options": {
-      "A": "애플리케이션 센서를 생성하고 / 방화벽 정책에 / application control 프로파일을 적용한다.",
-      "B": "URL 필터를 생성하고 / 방화벽 정책에 / web filter 프로파일을 적용한다.",
-      "C": "IP 주소 external connector를 생성하고 / 방화벽 정책의 / 목적지 필드에 적용한다.",
-      "D": "ISDB(Internet Service Database) 그룹을 생성하고 / 방화벽 정책의 / 목적지 필드에 적용한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Create an application sensor and apply the application control profile to the firewall policy.",
-        "B": "Create a URL niter and apply the web filter profile to the firewall policy.",
-        "C": "Create an IP address external connector and apply it to the destination field of the firewall policy.",
-        "D": "Create an Internet Service Database (ISDB) group and apply it to the destination field of the"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.7": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.26": {
     "question": "전시물을 참조하라. 전시물은 / 물리적 토폴로지와 트래픽 로그를 보여준다. / 관리자는 / FortiGate ISFW 장치 뒤에 위치한 / IP 주소 10.1.10.1 장치의 / FortiAnalyzer 트래픽을 확인하고 있다. / ISFW 장치의 방화벽 정책에는 UTM이 활성화되어 있지 않으며, / 전시물에서처럼 / Malware 조치가 포함된 로그가 / 표시되어 놀라고 있다. / FortiAnalyzer가 이 로그를 표시하는 / 두 가지 이유는 무엇인가? (두 개 선택)",
     "options": {
       "A": "ISFW에서 / Security rating이 활성화되어 있다.",
@@ -1994,7 +1958,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.8": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.27": {
     "question": "전시물을 참조하라. 전시물은 / VPN 구성의 일부를 보여준다. / 이 VPN IPsec phase 1 구성에서 / 무엇을 결론지을 수 있는가?",
     "options": {
       "A": "이 구성은 / 정기적인 트래픽 간격을 가진 네트워크에 최적이며 / 연결 보증과 리소스 활용 사이의 / 균형을 제공한다.",
@@ -2012,7 +1976,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.9": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.71": {
     "question": "전시물을 참조하라. / 동일한 HA 업타임을 가진 / active-active (A-A) 클러스터의 HA 구성이 표시되어 있다. / HQ-NGFW-2가 / Core2 VDOM 트래픽을 처리하게 하려면 / 어떤 수정을 해야 하는가?",
     "options": {
       "A": "HQ-NGFW-2의 / virtual cluster 2에서 / override를 활성화한다.",
@@ -2030,7 +1994,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.10": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.35": {
     "question": "전시물을 참조하라. 전시물은 / ADVPN 네트워크를 보여준다. / 관리자는 / overlay network 1과 2를 연결하기 위해 / IBGP와 EBGP를 사용한 ADVPN을 구성해야 한다. / BGP에서 / 관리자가 구성해야 할 / 두 가지 옵션은 무엇인가? (두 개 선택)",
     "options": {
       "A": "set ebgp-enforce-multihop enable",
@@ -2048,7 +2012,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.11": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.42": {
     "question": "전시물을 참조하라. 전시물은 / FortiGate에서 두 FortiSwitch 장치로 연결된 / LAN 인터페이스를 보여준다. / 해당 LAN 인터페이스에서 / 도출할 수 있는 두 가지 결론은 무엇인가? (두 개 선택)",
     "options": {
       "A": "Layer 2 루프백을 방지하기 위해 / FortiGate와 FortiSwitch에서 / STP 또는 RSTP를 활성화해야 한다.",
@@ -2066,25 +2030,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.12": {
-    "question": "초저지연 인터페이스를 갖춘 / 캠퍼스용 / 내부 분할 방화벽(ISFW) FortiGate가 필요하다. / 어떤 FortiGate를 선택해야 하는가?",
-    "options": {
-      "A": "X5~X8 포트를 갖춘 FortiGate",
-      "B": "NP6가 하나만 있는 FortiGate",
-      "C": "CP10에 연결된 포트를 갖춘 FortiGate",
-      "D": "SP5에 연결된 포트를 갖춘 FortiGate"
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "FortiGate with ports X5 to X8.",
-        "B": "FortiGate with only one NP6.",
-        "C": "FortiGate with ports connected to a CP10.",
-        "D": "FortiGate with ports connected to a SP5."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.13": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.23": {
     "question": "IKE 버전 2 분할(fragmentation)에 관한 / 두 가지 사실은 무엇인가? (두 개 선택)",
     "options": {
       "A": "IKEv2 분할은 / IP 레이어에서 수행된다.",
@@ -2102,7 +2048,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.14": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.110": {
     "question": "Security Fabric에 관한 / 두 가지 사실은 무엇인가? (두 개 선택)",
     "options": {
       "A": "Security Fabric의 / 각 멤버는 / 공유 Security Fabric 맵을 유지한다.",
@@ -2122,7 +2068,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.15": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.2": {
     "question": "FortiGate가 / 세션의 첫 번째 패킷을 처리할 때 / 수행하는 초기 단계는 무엇인가?",
     "options": {
       "A": "네트워크 프로세서(NP)에 / 세션 키 설치",
@@ -2140,7 +2086,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.16": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.36": {
     "question": "전시물을 참조하라. / FortiManager와 함께 / ZTP(zero-touch provisioning) 및 LTP(low-touch provisioning)에 사용되는 / pre-run CLI 템플릿이 표시되어 있다. / 구성이 이미 FortiGate에 설치되었음에도 / 템플릿이 할당되어 있지 않다. / 이 시나리오에서 / 사실인 것은 무엇인가?",
     "options": {
       "A": "관리자가 / 모델 장치 추가 시 / 템플릿을 올바르게 할당하지 않았다. / pre-CLI 템플릿은 방화벽에 / 영구적으로 할당된 상태로 남기 때문이다.",
@@ -2158,7 +2104,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.17": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.74": {
     "question": "기업 네트워크 트래픽을 보호하기 위해 / FortiGate가 / 세션의 첫 번째 패킷을 처리할 때 / 먼저 수행하는 단계는 무엇인가?",
     "options": {
       "A": "복호화",
@@ -2176,7 +2122,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.18": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.18": {
     "question": "관리자는 / FortiGate에서 / VXLAN을 광범위하게 사용하고 있다. / 성능 향상을 위해 / FortiGate에 / 어떤 특화된 가속 하드웨어가 필요한가?",
     "options": {
       "A": "NP7",
@@ -2194,7 +2140,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.19": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.51": {
     "question": "방화벽 정책에서 / set tcp-mss-sender와 set tcp-mss-receiver를 구성하면 / 네트워크의 TCP 패킷 크기와 처리에 / 어떤 영향을 미치는가?",
     "options": {
       "A": "방화벽 정책에서 허용되는 / 최대 세그먼트 크기에 따라 / TCP 패킷이 허용 또는 거부된다.",
@@ -2212,7 +2158,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.20": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.60": {
     "question": "관리자는 / 다양한 수의 인터넷 링크를 가진 / 대규모 기업의 / ADVPN 네트워크를 설계하고 있다. / hub에서 / 많은 수의 경로와 피어 연결을 피하고자 한다. / 라우팅 및 피어 관리를 단순화하기 위해 / 어떤 방법을 사용해야 하는가?",
     "options": {
       "A": "hub 의존성을 없애기 위해 / full-mesh VPN 토폴로지를 배포한다.",
@@ -2230,7 +2176,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.21": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.25": {
     "question": "transparent VDOM 인터페이스에서 / set forward-domain <domain_ID> 명령은 / 무엇을 하는가?",
     "options": {
       "A": "지정된 VLAN의 트래픽만 관리하도록 / 인터페이스를 제한하여 / 네트워크 트래픽을 효과적으로 분리한다.",
@@ -2248,7 +2194,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.22": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.57": {
     "question": "관리자는 / FortiManager를 사용하여 / 일관된 인터페이스 역할 및 정책 패키지로 / 브랜치 전반의 FortiGate 장치 배포를 / 표준화해야 한다. / 이 시나리오에서 / 인터페이스 할당에 권장되는 / 모범 사례는 무엇인가?",
     "options": {
       "A": "메타데이터 변수를 활성화하여 / FortiManager의 표준 인터페이스에 / 동적 구성을 사용한다.",
@@ -2266,7 +2212,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.23": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.68": {
     "question": "전시물을 참조하라. 전시물은 / FortiGate 장치의 VDOM 섹션을 보여준다. / 관리자는 / 유지보수 후 / Core1과 Core2에서 / webfilter가 작동을 중단했음을 발견한다. / webfilter가 작동을 중단한 / 두 가지 이유는 무엇인가? (두 개 선택)",
     "options": {
       "A": "루트 VDOM이 / 폐쇄 네트워크의 / FortiManager에 접근할 수 없다.",
@@ -2284,7 +2230,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.24": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.8": {
     "question": "전시물을 참조하라. / client hello 메시지의 패킷 캡처 출력이 표시되어 있다. / SSL 인증서 검사가 포함된 / 방화벽 정책을 업데이트하고 있다. / 이 방화벽 정책을 통과하는 트래픽에서 / 패킷을 캡처하고 있다. / 패킷 캡처에 관한 / 두 가지 올바른 설명은 무엇인가? (두 개 선택)",
     "options": {
       "A": "이 트래픽에 / antivirus 보안 프로파일을 효과적으로 적용할 수 있다.",
@@ -2302,7 +2248,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.25": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.41": {
     "question": "전시물을 참조하라. 전시물은 / FortiGate와 FortiManager Cloud 간의 / 3-way 핸드셰이크의 패킷 캡처 출력을 보여준다. / 전시물에서 / 도출할 수 있는 두 가지 결론은 무엇인가? (두 개 선택)",
     "options": {
       "A": "FortiManager가 클라우드 컴퓨팅 환경에서 운영되므로 / FortiGate는 / 여러 도메인을 지원하는 인증서를 받게 된다.",
@@ -2320,25 +2266,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.26": {
-    "question": "BGP 프로토콜을 구성하는 동안 / 관리자는 / config network 아래에 / set network-import-check disable 명령을 적용한다. / 이 명령의 결과로 / FortiGate는 무엇을 하는가?",
-    "options": {
-      "A": "FortiGate는 / 라우팅 테이블에 없더라도 / BGP 네트워크 테이블의 / 해당 프리픽스만 / BGP 이웃에게 광고한다.",
-      "B": "FortiGate는 / 라우팅 테이블에 없더라도 / BGP 네트워크 테이블의 / 모든 프리픽스를 / BGP 이웃에게 광고한다.",
-      "C": "FortiGate는 / 하나의 BGP 이웃으로부터 받은 / 가져온 경로를 / 다른 BGP 이웃에게 광고하지 않는다.",
-      "D": "FortiGate는 / 라우팅 테이블에 없으면 / 프리픽스를 광고하지 않는다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "FortiGate will advertise only the corresponding prefixes in the BGP network table to its BGP",
-        "B": "FortiGate will advertise all the prefixes in the BGP network table to its BGP neighbor, even if it is",
-        "C": "FortiGate will not advertise any imported routes received from one BGP neighbor to another.",
-        "D": "FortiGate will not advertise the prefixes, if it is not in the routing table."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.27": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.52": {
     "question": "취약점 스캔 보고서에 따르면 / 사용자가 / HTTPS 웹 서버가 지원하는 / 약한 SSL/TLS 버전을 사용하여 / example.com 웹사이트에 / 트래픽을 생성했음이 밝혀졌다. / 모든 HTTPS 웹 서버에서 / 오래된 SSL/TLS 버전을 차단하여 / 사용자 트래픽에 대한 / 가능한 공격을 방지하기 위해 / 무엇을 할 수 있는가?",
     "options": {
       "A": "SSL/SSH 검사 프로파일에서 / 서버 인증서 SNI 확인을 활성화한다.",
@@ -2356,7 +2284,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.28": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.72": {
     "question": "ISDB가 콘텐츠 필터링 적용 시 / OSI 모델의 레이어 3과 4를 차단하는 / 두 가지 이유는 무엇인가? (두 개 선택)",
     "options": {
       "A": "FortiGate는 / FortiGuard에서 다운로드한 / 특정 애플리케이션의 / 모든 IP와 포트의 사전 정의 목록을 가지고 있다.",
@@ -2374,7 +2302,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.29": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.32": {
     "question": "전시물을 참조하라. 전시물은 / 기업 네트워크와 새로운 원격 사무소 네트워크를 보여준다. / 관리자는 / 새 원격 사무소 네트워크를 / 기업 네트워크에 통합해야 한다. / 두 네트워크 간의 라우팅을 허용하기 위해 / 관리자는 무엇을 해야 하는가?",
     "options": {
       "A": "관리자는 / BGP를 구현하여 / 새 원격 사무소 네트워크를 / 기업 FortiGate 장치에 주입해야 한다.",
@@ -2392,97 +2320,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.30": {
-    "question": "FortiAnalyzer에서 / 1TB 디스크가 하루 만에 가득 찼다는 / 경보를 받았다. / 조사 결과 / JHCMQK.website.com과 같은 / 비정상적인 DNS 로그 요청이 / 수천 건이나 발견되었으며 / 응답이 없었다. / 나중에 DNS 유출이 / UDP와 TLS 모두를 통해 / 발생하고 있음을 발견했다. / 이 데이터 도용 기술을 어떻게 방지할 수 있는가?",
-    "options": {
-      "A": "파일 필터 프로파일을 사용하여 / DNS 유출에 대비한다.",
-      "B": "IPS(침입 방지 시스템) 프로파일과 / DNS 유출 관련 시그니처를 사용한다.",
-      "C": "DNS 필터를 활성화하여 / DNS 유출에 대비한다.",
-      "D": "DLP(데이터 손실 방지)를 활성화하여 / DNS 유출을 방지한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Use a file filter profile to protect against DNS exfiltration.",
-        "B": "Use an intrusion prevention system (IPS) profile and DNS exfiltration-related signatures.",
-        "C": "Enable DNS filter to protect against DNS exfiltration.",
-        "D": "Enable data loss prevention (DLP) to prevent DNS exfiltration."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.31": {
-    "question": "전시물을 참조하라. / 네트워크 다이어그램과 / config system ha 명령의 출력이 표시되어 있다. / 관리자는 / 전시물에 표시된 명령으로 / 클러스터를 구성했다. / HA 클러스터가 형성되지 않는 이유는 무엇인가?",
-    "options": {
-      "A": "관리자는 / monitor 인터페이스를 / 재구성해야 한다.",
-      "B": "관리자는 / active-active 모드로 / 클러스터를 재구성해야 한다.",
-      "C": "관리자는 / FGSP 모드로 / 클러스터를 재구성해야 한다.",
-      "D": "관리자는 / heartbeat 인터페이스를 / 재구성해야 한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "The administrator must reconfigure the monitor interface.",
-        "B": "The administrator must reconfigure the cluster in active-active mode.",
-        "C": "The administrator must reconfigure the cluster in FGSP mode.",
-        "D": "The administrator must reconfigure the heartbeat interface."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.32": {
-    "question": "관리자는 / NGFW 정책 기반 모드로 실행 중인 / FortiGate에서 / 애플리케이션 제어를 구성하고 있다. / 관리자가 취해야 할 / 두 가지 조치는 무엇인가? (두 개 선택)",
-    "options": {
-      "A": "애플리케이션이 / 불안정성을 방지하기 위해 / 피드백을 필요로 하는 경우 / 조치를 격리로 구성한다.",
-      "B": "NAT가 필요한 경우 / 중앙 소스 NAT(SNAT)를 구성한다.",
-      "C": "애플리케이션 제어 프로파일을 생성하고 / 방화벽 정책에 / 프로파일을 적용한다.",
-      "D": "통합 정책에 / SSL/SSH 검사 프로파일을 지정한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Configure the action as quarantine, if an application requires feedback to prevent instability.",
-        "B": "Configure central source network address translation (SNAT), if NAT is required.",
-        "C": "Create an application control profile and apply the profile to a firewall policy.",
-        "D": "Specify an SSLISSH inspection profile on a consolidated policy."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.33": {
-    "question": "취약점 스캔 보고서에 따르면 / 사용자가 / HTTPS 웹 서버가 지원하는 / 약한 SSL/TLS 버전을 사용하여 / example.com(10.10.10.10) 웹사이트에 / 트래픽을 생성했음이 밝혀졌다. / 방화벽 관리자는 / 모든 HTTPS 웹 서버에서 / 오래된 SSL/TLS 버전을 차단하여 / 사용자 트래픽에 대한 / 가능한 공격을 방지하기 위해 / 무엇을 할 수 있는가?",
-    "options": {
-      "A": "SSL/SSH 검사 프로파일의 / HTTPS 설정에서 / 지원되지 않는 SSL 버전을 구성하고 / 최소 허용 SSL 버전을 설정한다.",
-      "B": "SSL/SSH 검사 프로파일에서 / 오래된 SSL/TLS 버전의 자동 감지를 활성화하여 / 취약한 웹사이트를 차단한다.",
-      "C": "클라이언트 브라우저에 / 필요한 인증서를 설치하거나 / Active Directory 정책을 사용하여 / SSL/SSH 검사 프로파일에 정의된 / 특정 웹사이트를 차단한다.",
-      "D": "최신 인증서인 / Fortinet_SSL_ECDSA256을 사용하여 / SSL/SSH 검사 프로파일의 / CA 인증서를 교체한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Configure the unsupported SSL version and set the minimum allowed SSL version in the HTTPS",
-        "B": "Enable auto-detection of outdated SSL/TLS versions in the SSL/SSH inspection profile to block",
-        "C": "Install the required certificate in the client's browser or use Active Directory policies to block",
-        "D": "Use the latest certificate, Fortinet_SSL_ECDSA256, and replace the CA certificate in the SSL/SSH"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.34": {
-    "question": "meta field에 관한 / 사실인 설명은 무엇인가?",
-    "options": {
-      "A": "Meta field는 / 필수 항목으로 설정해야 한다.",
-      "B": "Meta field 변경 사항은 / ADOM 수준에서만 / 적용된다.",
-      "C": "Meta field는 / 같은 논리적 이름을 가지지만 / 다른 값을 가진 / 여러 객체를 만드는 데 / 유용하다.",
-      "D": "Meta field는 / 스크립트나 프로비저닝 템플릿에서 / 변수로 사용할 수 있다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Meta fields must be set to required.",
-        "B": "Meta field changes are applied only at the ADOM level.",
-        "C": "Meta fields are useful for creating multiple objects with the same logical name but different",
-        "D": "Meta fields can be used as variables in scripts or provisioning templates."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.35": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.30": {
     "question": "전시물을 참조하라. / FortiGate_A와 FortiGate_B는 / 기업 네트워크의 / FGSP 클러스터 멤버이다. / ping 명령으로 클러스터를 테스트하는 동안 / 관리자는 패킷 손실을 모니터링했으며 / 전시물과 같이 / FortiGate_B의 세션 출력을 발견했다. / FortiGate_B에서 이 출력의 / 원인은 무엇인가?",
     "options": {
       "A": "세션 동기화가 / 암호화되어 있다.",
@@ -2500,7 +2338,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.36": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.21": {
     "question": "전시물을 참조하라. 전시물은 / 부분적인 기업 네트워크를 보여준다. / 관리자는 / area 0.0.0.0이 / 외부 네트워크를 감지하길 원한다. / 관리자는 무엇을 구성해야 하는가?",
     "options": {
       "A": "FortiGate B에서 / RIP 재분배를 활성화한다.",
@@ -2518,25 +2356,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.37": {
-    "question": "전시물을 참조하라. / 관리자는 / AS 6500에 / 두 개의 FortiGate 장치를 추가하여 / 네트워크를 확장하려 한다. / 이 시나리오에서 / BGP 컨버전스를 향상시키기 위한 / 가장 효과적인 구성은 무엇인가?",
-    "options": {
-      "A": "Prefix list",
-      "B": "Route reflector",
-      "C": "BFD",
-      "D": "Neighbor group"
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Prefix list",
-        "B": "Route reflector",
-        "C": "BFD",
-        "D": "Neighbor group"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.38": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.33": {
     "question": "전시물을 참조하라. 전시물은 / ISP에 연결된 기업 네트워크를 보여준다. / 관리자는 / 기업 네트워크에 인터넷 접속을 제공하기 위해 / FortiGate A의 BGP 섹션을 구성해야 한다. / ISP와 연결을 확립하기 위해 / 관리자가 사용해야 할 명령은 무엇인가?",
     "options": {
       "A": "config neighbor",
@@ -2554,25 +2374,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.39": {
-    "question": "transparent VDOM 인터페이스에서 / set forward-domain <domain_ID> 명령은 / 무엇을 하는가?",
-    "options": {
-      "A": "domain ID를 기반으로 / 트래픽 우선순위를 지정하도록 / 인터페이스를 구성하여 / 지정된 VLAN의 서비스 품질을 향상시킨다.",
-      "B": "VLAN ID를 기반으로 / 인터페이스에 브로드캐스트 도메인을 할당하여 / 특정 VLAN 내에서 / 트래픽을 격리한다.",
-      "C": "지정된 VLAN의 트래픽만 관리하도록 / 인터페이스를 제한하여 / 네트워크 트래픽을 효과적으로 분리한다.",
-      "D": "인터페이스에 / 고유한 domain ID를 할당하여 / 동일한 VDOM 내의 / 여러 VLAN에서 작동할 수 있도록 한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "It configures the interface to prioritize traffic based on the domain ID, enhancing quality of service",
-        "B": "It isolates traffic within a specific VLAN by assigning a broadcast domain to an interface based on",
-        "C": "It restricts the interface to managing traffic only from the specified VLAN, effectively segregating",
-        "D": "It assigns a unique domain ID to the interface, allowing it to operate across multiple VLANs within"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.40": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.55": {
     "question": "전시물을 참조하라. / 네트워크 토폴로지, 방화벽 정책 및 SSL/SSH 검사 프로파일 구성이 표시되어 있다. / FortiGate가 / Linux 서버를 대상으로 하는 / 방화벽 정책 ID 3에서 / HTTPS 공격을 감지하지 못하는 이유는 무엇인가?",
     "options": {
       "A": "관리자는 / 정책을 / HTTPS 패킷이 예상대로 분석되도록 / inspection 모드로 설정해야 한다.",
@@ -2590,61 +2392,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.41": {
-    "question": "전시물을 참조하라. / FortiManager의 / 정규화된 인터페이스 LAN이 표시되어 있다. / 이 인터페이스 구성에 관한 / 두 가지 올바른 설명은 무엇인가? (두 개 선택)",
-    "options": {
-      "A": "정규화된 인터페이스 LAN은 / FortiGate-VM64 모델 장치의 / private 인터페이스에 매핑된다.",
-      "B": "정규화된 인터페이스 LAN은 / FortiGate-81E 모델 장치의 / wireless 인터페이스에 매핑된다.",
-      "C": "정규화된 인터페이스 LAN은 / NGFW-1 [Core2]의 / port2 인터페이스에 매핑된다.",
-      "D": "정규화된 인터페이스 LAN은 / FortiGate-40F 모델 장치의 / Human Resources 인터페이스에 매핑된다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "The normalized interface LAN will be mapped to the private interface for FortiGate-VM64 model",
-        "B": "The normalized interface LAN will be mapped to the wireless interface for FortiGate-81E model",
-        "C": "The normalized interface LAN will be mapped to the port2 interface for NGFW-1 [Core2].",
-        "D": "The normalized interface LAN will be mapped to the Human Resources interface for any FortiGate-"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.42": {
-    "question": "전시물을 참조하라. / 기본 MTU가 1500바이트인 / 사용자의 Windows PC 구성과 / MTU가 1000바이트로 설정된 / FortiGate 인터페이스, 그리고 / PC1이 서버 172.16.0.254를 ping하는 결과가 표시되어 있다. / Windows PC1의 사용자가 / 서버 172.16.0.254를 ping할 수 없고 / \"패킷 분열이 필요하지만 DF가 설정됨\" 메시지를 보는 이유는 무엇인가?",
-    "options": {
-      "A": "FortiGate에서 / ip.flags.mf 옵션을 / enable로 설정해야 한다. / 성공하려면 / 사용자가 ping MTU를 1000으로 조정해야 한다.",
-      "B": "분열된 패킷은 암호화되어야 한다. / 애플리케이션을 성공적으로 연결하려면 / 사용자가 / Microsoft 관리 콘솔에 / Fortinet_CA 인증서를 설치해야 한다.",
-      "C": "FortiGate는 / do not fragment 비트를 준수하여 / 패킷이 삭제된다. / 성공하려면 / 사용자가 ping MTU를 972로 조정해야 한다.",
-      "D": "경로 MTU 검색 기술이 / ICMP 페이로드를 인식하지 못하므로 / 사용자는 / 다른 트래픽을 발생시켜야 한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Option ip.flags.mf must be set to enable on FortiGate. The user has to adjust the ping MTU to",
-        "B": "Fragmented packets must be encrypted. To connect any application successfully, the user must",
-        "C": "FortiGate honors the do not fragment bit and the packets are dropped. The user has to adjust the",
-        "D": "The user must trigger different traffic because path MTU discovery techniques do not recognize"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.43": {
-    "question": "전시물을 참조하라. 전시물은 / FortiManager의 / 장치 등록을 보여준다. / \"cond: Modified (recent auto-updated)\" 정보와 관련하여 / Spoke-1과 Spoke-2 구성에 대해 / 무엇을 결론지을 수 있는가?",
-    "options": {
-      "A": "NGFW-1의 정책 구성을 기반으로 / 두 spoke의 구성이 수정되어 / 자동으로 업데이트되었다.",
-      "B": "NGFW-1에서 / 구성이 변경되었으며 / spoke는 자동 업데이트를 기다리고 있다.",
-      "C": "Spoke-1과 Spoke-2 모두에서 / 구성이 FortiGate 장치에서 직접 변경되었으며 / 변경 사항이 / 장치 데이터베이스에 의해 자동으로 가져와졌다.",
-      "D": "Spoke-1과 Spoke-2는 / 동일한 보안 정책 구성과 / 동일한 정책 패키지를 공유하고 있다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Based on the policy configuration on NGFW-1, the configuration on both spokes is modified and",
-        "B": "On NGFW-1, the configuration was changed and spokes are wailing for an autoupdate.",
-        "C": "On both Spoke-1 and Spoke-2, the configuration was changed directly on the FortiGate device, and",
-        "D": "Spoke-1 and Spoke-2 are sharing the same security policy configuration and the same policy"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.44": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.34": {
     "question": "전시물을 참조하라. 전시물은 / FortiGate 장치의 / FortiGuard 배포 네트워크를 보여준다. / 관리자는 / flow 모드 web filter 프로파일에서 / 웹사이트 필터링이 올바르게 작동하지 않는 문제를 해결하기 위해 / FortiGate에서 / web filter 데이터베이스 시그니처를 찾으려 한다. / IPS 정의처럼 / GUI에서 / web filter 데이터베이스 버전이 보이지 않는 이유는 무엇인가?",
     "options": {
       "A": "web filter 데이터베이스는 / 로컬에 저장되어 있지만 / 관리자는 CLI에서 / diagnose autoupdate versions를 실행해야 한다.",
@@ -2662,25 +2410,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.45": {
-    "question": "전시물을 참조하라. 전시물은 / OSPF 명령의 / 부분적인 출력을 포함한다. / 관리자는 / FortiGate 장치의 OSPF 상태를 확인하고 / 전시물과 같은 출력을 받는다. / 관리자가 도출할 수 있는 / 두 가지 결론은 무엇인가? (두 개 선택)",
-    "options": {
-      "A": "FortiGate 장치는 / 백업 지정 라우터(BDR)이다.",
-      "B": "FortiGate 장치는 / 여러 영역에 연결되어 있다.",
-      "C": "FortiGate 장치는 / 외부 라우팅 정보를 주입한다.",
-      "D": "FortiGate 장치는 / OSPF ECMP가 활성화되어 있다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "The FortiGate device is a backup designated router",
-        "B": "The FortiGate device is connected to multiple areas",
-        "C": "The FortiGate device injects external routing information",
-        "D": "The FortiGate device has OSPF ECMP enabled"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.46": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.37": {
     "question": "전시물을 참조하라. 전시물은 / FortiManager 장치 레이어의 / 개정 기록 창을 보여준다. / IT 팀은 / FortiGate 장치 데이터베이스에서 / 가장 최근 업데이트에 책임 있는 / 관리자를 파악하려 한다. / 이 시나리오에서 / 어떤 결론을 내릴 수 있는가?",
     "options": {
       "A": "이 가져오기 프로세스는 / Remote FortiGate Directly (via CLI) 스크립트에 의해 / 자동으로 트리거되었다.",
@@ -2698,7 +2428,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.47": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.31": {
     "question": "전시물을 참조하라. 전시물은 / 부분적인 문제 해결 명령 출력을 보여준다. / 관리자는 / FortiGate에서 / IPsec을 광범위하게 사용하고 있다. / 많은 터널이 / 전시물과 유사한 정보를 보여준다. / 관리자가 결론지을 수 있는 것은 무엇인가?",
     "options": {
       "A": "IPsec SA는 / 오프로드할 수 없다.",
@@ -2716,61 +2446,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.48": {
-    "question": "전시물을 참조하라. 전시물은 / OSPF 네트워크를 보여준다. / OSPF 데이터베이스를 최적화하기 위해 / 관리자가 적용해야 할 / 구성은 무엇인가?",
-    "options": {
-      "A": "AS 경계 FortiGate에 / route map을 설정한다.",
-      "B": "영역 경계 FortiGate에서 / area 0.0.0.1 유형을 / STUB로 설정한다.",
-      "C": "AS 경계 FortiGate에 / access list를 설정한다.",
-      "D": "영역 경계 FortiGate에서 / area 0.0.0.1 유형을 / NSSA로 설정한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Set a route map in the AS boundary FortiGate.",
-        "B": "Set the area 0.0.0.1 to the type STUB in the area border FortiGate.",
-        "C": "Set an access list in the AS boundary FortiGate.",
-        "D": "Set the area 0.0.0.1 to the type NSSA in the area border FortiGate."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.49": {
-    "question": "전시물을 참조하라. / FortiManager 장치 레이어의 / 개정 기록 창이 표시되어 있다. / IT 팀은 / FortiGate 장치 데이터베이스에서 / 가장 최근 업데이트에 책임 있는 / 관리자를 파악하려 한다. / IT 팀이 결론지을 수 있는 것은 무엇인가?",
-    "options": {
-      "A": "사용자 script_manager는 / 구성을 가져오는 / Fortinet 개발자 네트워크(FDN)의 / API 사용자이다.",
-      "B": "가져오기 프로세스는 / Remote FortiGate Directly (via CLI) 스크립트에 의해 / 자동으로 트리거되었다.",
-      "C": "이벤트를 생성한 사용자를 파악하려면 / FortiManager 시스템 로그에서 / 사용자 필드에 / type=script 필터를 사용해야 한다.",
-      "D": "이벤트를 생성한 사용자를 파악하려면 / FortiManager 장치 레이어의 / FortiGate 구성 및 설치 위젯에서 / 확인해야 한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "The user script_manager, an API user from the Fortinet Developer Network (FDN). is retrieving a",
-        "B": "The retrieve process was automatically triggered by a Remote FortiGate Directly (via CLI) script.",
-        "C": "To identify the user who created the event, in the FortiManager system logs, they must use the",
-        "D": "To identify the user who created the event, they must view it on the Configuration and Installation"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.50": {
-    "question": "전시물을 참조하라. / FortiGate_A와 FortiGate_B의 / 라우팅 테이블이 표시되어 있다. / FortiGate_A와 FortiGate_B는 / 동일한 자율 시스템에 있다. / 관리자는 / FortiGate_A에 / 경로 172.16.1.248/30만 / 동적으로 추가하려 한다. / 관리자는 무엇을 구성해야 하는가?",
-    "options": {
-      "A": "FortiGate_B의 / BGP Networks 섹션에 / 프리픽스 172.16.1.248/30을 추가한다.",
-      "B": "FortiGate_B에 / 172.16.1.248/30에 대한 / BGP route map out을 구성한다.",
-      "C": "FortiGate_B의 / BGP 섹션에서 / Redistribute Connected를 활성화한다.",
-      "D": "FortiGate_A에 / 172.16.1.248/30에 대한 / BGP route map in을 구성한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "The prefix 172.16.1.248/30 in the BGP Networks section on FortiGate_B",
-        "B": "A BGP route map out for 172.16.1.248/30 on FortiGate_B",
-        "C": "Enable Redistribute Connected in the BGP section on FortiGate_B.",
-        "D": "A BGP route map in for 172.16.1.248/30 on FortiGate_A"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.51": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.1": {
     "question": "여러 나라에 걸쳐 / 여러 브랜치를 인수한 회사가 / 각 브랜치에 / 새 FortiGate 장치를 설치해야 한다. / 하지만 IT 직원들이 / FortiGate 장치에 / 초기 구성을 구현하기에 / 충분한 지식이 부족하다. / 원격 브랜치에 / 고급 초기 구성을 성공적으로 배포하기 위해 / 회사가 취할 수 있는 / 세 가지 접근 방식은 무엇인가? (세 개 선택)",
     "options": {
       "A": "메타데이터 변수를 사용하여 / 각 FortiGate 장치에 따라 / 값을 동적으로 할당한다.",
@@ -2790,7 +2466,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.52": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.24": {
     "question": "관리자는 / 회사 네트워크의 / 여러 spoke 간의 / 직접 통신을 활성화해야 한다. / 각 spoke는 / 하나 이상의 인터넷 연결을 가지고 있다. / 요구 사항은 / spoke가 hub를 통하지 않고 / 직접 연결하고 / 링크가 자동으로 / 최적의 연결로 전환되는 것이다. / spoke 간의 / 이 자동 감지 및 최적 링크 활용은 / 어떻게 달성할 수 있는가?",
     "options": {
       "A": "spoke 간의 / 정적 VPN 터널에 / OSPF 라우팅을 설정한다.",
@@ -2808,79 +2484,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.53": {
-    "question": "관리자는 / HA 클러스터에서 / 두 개의 FortiGate 장치를 구성하고 있다. / 장치를 구성하는 동안 / 관리자는 / 두 HA 클러스터 멤버 모두에 / 다음 명령을 실행한다. / 이 명령들이 / HA 클러스터에 영향을 미치는 / 두 가지 방식은 무엇인가? (두 개 선택)",
-    "options": {
-      "A": "장애 조치 발생 시 / 이전 primary가 / gratuitous ARP 패킷을 보내도록 하여 / 가상 MAC 주소가 / 이제 다른 장치를 사용하고 있음을 알린다.",
-      "B": "장애 조치 발생 시 / 이전 primary가 / heartbeat 및 예약 관리 인터페이스를 제외하고 / 모든 인터페이스를 1초 동안 종료하도록 한다.",
-      "C": "두 HA 장치가 / 포워딩 경로에서 문제를 감지하기 위해 / 원격 링크 모니터링을 수행하도록 한다.",
-      "D": "장애 조치 발생 시 / 스위치가 / MAC 포워딩 테이블을 업데이트하도록 한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "They force the former primary to send gratuitous ARP packets when the failover happens to",
-        "B": "They force the former primary to shut down all its interfaces for one second when failover",
-        "C": "They force both HA devices for remote link monitoring to detect an issue in the forwarding path.",
-        "D": "They force the switches to update their MAC forwarding tables, when failover happens."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.54": {
-    "question": "전시물을 참조하라. / Core1 VDOM의 가져오기 장치 마법사에서 / 정책 패키지 충돌 상태와 정보가 표시되어 있다. / 정책 패키지를 가져올 때 / Web_restrictions web filter 프로파일과 / deep-inspection SSL-SSH 프로파일에 대해 / 다음 메시지가 나타난다: / \"충돌이 발견된 객체들이 있습니다. / 설정을 확인한 후 계속하십시오.\" / Web_restrictions와 deep-inspection 프로파일은 / FortiManager 내의 / 다른 FortiGate 장치에서도 사용되고 있다. / 이 문제를 해결하기 위해 / 어떤 단계를 취해야 하는가?",
-    "options": {
-      "A": "FortiGate에서 / 고유한 이름의 객체를 생성하고 / 정책 패키지에 다시 가져온다.",
-      "B": "FortiGate 구성을 가져와서 / 올바른 객체와 정책을 / 자동으로 내보낸다.",
-      "C": "FortiManager가 / 기본값을 변경할 수 없으므로 / 기본값이 아닌 객체 값을 사용한다.",
-      "D": "FortiManager 구성을 선택하여 / FortiManager의 변경 사항을 수락하고 / FortiGate 장치의 / 기존 구성을 보존한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Create uniquely named objects on FortiGate and reimport them into the policy package.",
-        "B": "Retrieve the FortiGate configuration to automatically export correct objects and policies.",
-        "C": "Use non-default object values because FortiManager is unable to alter default values.",
-        "D": "Select the FortiManager configuration that accepts changes on FortiManager and preserves"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.55": {
-    "question": "전시물을 참조하라. 전시물은 / 부분적인 라우팅 테이블을 보여준다. / 전시물에 표시된 / FortiGate 출력에서 / 도출할 수 있는 두 가지 결론은 무엇인가? (두 개 선택)",
-    "options": {
-      "A": "FortiGate는 / 각 VPN 클라이언트에 대해 / 별도의 가상 인터페이스를 생성한다.",
-      "B": "터널 IPsec phase 1 구성에서 / add-route가 활성화되어 있다.",
-      "C": "FortiGate는 / 라우팅 테이블을 채우기 위해 / 빠른 모드 selector의 / 목적지 서브넷을 사용하지 않는다.",
-      "D": "터널 IPsec phase 1 구성에서 / net-device가 비활성화되어 있다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "FortiGate creates separate virtual interfaces for each VPN client.",
-        "B": "add-route is enabled in the tunnel IPSec phase 1 configuration.",
-        "C": "FortiGate is not using the destination subnets of the quick mode selectors to populate the routing",
-        "D": "net-device is disabled in the tunnel IPSec phase 1 configuration."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.56": {
-    "question": "전시물을 참조하라. 전시물은 / hub 라우터 NGFW-1의 / OSPF 인터페이스에 관한 정보를 보여준다. / spoke 라우터가 / 기본 OSPF 매개변수를 가지고 있을 때 / NGFW-1의 인터페이스 상태를 / Designated router로 변경하려면 / 어떻게 해야 하는가?",
-    "options": {
-      "A": "네트워크 유형을 / point-to-multipoint로 변경한다.",
-      "B": "라우터 ID를 / 0.0.0.65로 변경한다.",
-      "C": "라우터 ID를 / 0.0.0.95로 변경한다.",
-      "D": "라우터 우선순위를 / 200으로 변경한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Change the network type to point-to-multipoint",
-        "B": "Change the router ID to 0.0.0.65",
-        "C": "Change the router ID to 0.0.0.95",
-        "D": "Change the router priority to 200"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.57": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.56": {
     "question": "관리자는 / FortiGate 방화벽에서 / CPU 및 RAM 사용을 최소화하면서도 / HTTPS 트래픽에 대한 / web filtering 및 application control과 같은 / 필수 보안 기능을 활성화해야 한다. / 암호화된 HTTPS 트래픽에 대한 / web filtering 및 application control과 같은 / 보안 기능을 활성화하면서 / 시스템 부하를 줄이는 데 도움이 되는 / SSL 검사 설정은 무엇인가?",
     "options": {
       "A": "암호화된 페이로드를 철저히 검사하기 위해 / full SSL 검사를 사용한다.",
@@ -2898,61 +2502,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.58": {
-    "question": "전시물을 참조하라. / 루트 FortiGate 장치의 관리자 섹션과 / 다운스트림 FortiGate 장치의 / Security Fabric 설정 섹션이 표시되어 있다. / 다운스트림 FortiGate 장치에서 / Security Fabric으로 로그인하라는 메시지가 표시될 때 / 사용자가 AdminSSO 자격 증명을 입력한다. / 사용자의 다음 상태는 무엇인가?",
-    "options": {
-      "A": "사용자는 / AdminSSO에 대한 / SSO 관리자 계정을 생성하라는 메시지를 받는다.",
-      "B": "사용자는 / 인증 실패 메시지를 받는다.",
-      "C": "사용자는 / super_admin_readonly 권한으로 / 다운스트림 FortiGate에 접근한다.",
-      "D": "사용자는 / super_admin 권한으로 / 다운스트림 FortiGate에 접근한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "The user is prompted to create an SSO administrator account for AdminSSO.",
-        "B": "The user receives an authentication failure message.",
-        "C": "The user accesses the downstream FortiGate with super_admin_readonly privileges.",
-        "D": "The user accesses the downstream FortiGate with super_admin privileges."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.59": {
-    "question": "전시물을 참조하라. / 네트워크 토폴로지와 / FortiGate 라우팅 테이블이 표시되어 있다. / FortiGate_A의 / 라우팅 테이블에 / 서브넷 100.64.2.0/24만 추가하기 위해 / BGP 섹션에서 / 무엇을 구성해야 하는가?",
-    "options": {
-      "A": "FortiGate_A에서 / route-map-in을 구성한다.",
-      "B": "FortiGate_C에서 / 연결된 경로 재분배를 구성한다.",
-      "C": "FortiGate_B에서 / BGP 경로 재분배를 구성한다.",
-      "D": "FortiGate_C에서 / 100.64.2.0/24 네트워크를 구성한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Configure route-map-in on FortiGate_A.",
-        "B": "Configure connected routes redistribution on FortiGate_C.",
-        "C": "Configure BGP route redistribution on FortiGate_B.",
-        "D": "Configure the 100.64.2.0/24 network on FortiGate_C."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.60": {
-    "question": "관리자는 / 두 개의 별도 자율 시스템 간에 / BGP를 동적 라우팅 프로토콜로 사용하는 / FortiGate 장치에서 / 완전한 경로 이중화를 갖춘 / 기업 네트워크에서 / 데이터 손실을 최소화하여 / 링크의 복원력을 향상시켜야 한다. / 관리자가 활성화해야 할 것은 무엇인가? (두 개 선택)",
-    "options": {
-      "A": "graceful-restart",
-      "B": "ibgp-multipath",
-      "C": "bfd",
-      "D": "route-reflector-client"
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "graceful-restart",
-        "B": "ibgp-multipath",
-        "C": "bfd",
-        "D": "route-reflector-client"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.61": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.47": {
     "question": "관리자는 / 기업 네트워크의 FortiGate 장치를 / Fortinet Security Fabric에 참여하도록 구성했다. / 관리자는 / 데이터 센터 방화벽에서 / 차단해야 할 IP 주소 목록을 가지고 있다. / 이 목록은 매일 업데이트된다. / 관리자는 / 매일 업데이트되는 목록으로 / 방화벽 정책을 어떻게 자동화할 수 있는가?",
     "options": {
       "A": "FortiNAC를 사용한다.",
@@ -2970,7 +2520,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.62": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.105": {
     "question": "전시물을 참조하라. 전시물은 / ADVPN 네트워크를 보여준다. / 관리자는 / overlay network 1과 2를 연결하기 위해 / IBGP와 EBGP를 사용한 ADVPN을 구성해야 한다. / Hub2Hub 터널의 / phase 1 VPN IPsec 구성에서 / 관리자는 무엇을 구성해야 하는가?",
     "options": {
       "A": "set auto-discovery-sender enable",
@@ -2988,7 +2538,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.63": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.59": {
     "question": "FortiGate에서 / 네트워크 전송 패턴과 애플리케이션 시그니처에 초점을 맞추어 / IPS 프로토콜 디코더를 사용하여 / 트래픽을 차단하기 위해 / 어떤 조치를 취할 수 있는가?",
     "options": {
       "A": "DNS 필터를 사용하여 / 애플리케이션 시그니처와 / 프로토콜 디코더를 차단한다.",
@@ -3006,25 +2556,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.64": {
-    "question": "네트워크 프로세서(NP) 오프로드에 관한 / 사실인 설명은 무엇인가?",
-    "options": {
-      "A": "NP 가속이 활성화된 경우 / 방화벽 정책에 / proxy 기반 보안 프로파일이 포함되어 있으면 / 방화벽 세션이 오프로드되지 않을 수 있다.",
-      "B": "np-acceleration을 loose로 설정하는 명령을 사용하여 / 각 방화벽 정책에 대해 / NP를 비활성화할 수 있다.",
-      "C": "FortiGate CPU는 / FortiOS 세션 헬퍼가 필요한 / 모든 방화벽 세션을 / NPU로 오프로드한다.",
-      "D": "UDP 트래픽의 경우 / FortiGate CPU는 / 첫 번째 패킷을 오프로드하여 / fast-path 트래픽으로 식별한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "When NP acceleration is enabled, firewall sessions may not offload if proxy-based security profiles",
-        "B": "You can disable the NP for each firewall policy using the command np-acceleration set to loose.",
-        "C": "The FortiGate CPU offloads all firewall sessions that require FortiOS session helper to the network",
-        "D": "For UDP traffic, the FortiGate CPU offloads the first packet to identify it as fast-path traffic."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.65": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.40": {
     "question": "전시물을 참조하라. 전시물은 / 부분적인 명령 출력을 포함한다. / 관리자는 / FortiGate에서 / BGP를 구성했다. / 이 새 BGP 구성의 상태가 / 전시물에 표시되어 있다. / 관리자가 다음으로 / 고려해야 할 구성은 무엇인가?",
     "options": {
       "A": "100.65.4.1에 대한 / 정적 경로를 구성한다.",
@@ -3042,7 +2574,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.66": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.43": {
     "question": "전시물을 참조하라. 전시물은 / active-passive 클러스터의 / HA 상태를 보여준다. / 관리자는 / FortiGate_B가 / Core2 VDOM 트래픽을 처리하게 하려 한다. / 이를 달성하기 위해 / 관리자가 적용해야 할 수정은 무엇인가?",
     "options": {
       "A": "관리자는 / FortiGate_A에서 / override를 비활성화해야 한다.",
@@ -3060,7 +2592,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.67": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.50": {
     "question": "관리자는 / 애플리케이션에 영향을 미치거나 / 사용자의 정상 트래픽 흐름에 문제를 일으킬 수 있는 / 오탐(false positive)을 유발하지 않고 / IPS 프로파일을 설치해야 한다. / IPS 분석에서 / 오탐을 방지하기 위해 / 관리자가 취할 수 있는 조치는 무엇인가?",
     "options": {
       "A": "IPS 프로파일 확장을 사용하여 / 네트워크 내부 서비스 및 사용자에 대해 / 운영 체제, 프로토콜, 애플리케이션을 선택하여 / 오탐을 방지한다.",
@@ -3078,61 +2610,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.68": {
-    "question": "관리자는 / 다양한 수의 인터넷 링크를 가진 / 대규모 기업의 / ADVPN 네트워크를 설계하고 있다. / hub에서 / 많은 수의 경로와 피어 연결을 피하려 한다. / 라우팅 및 피어 관리를 단순화하기 위해 / 어떤 방법을 사용해야 하는가?",
-    "options": {
-      "A": "loopback 인터페이스를 사용하는 / 동적 라우팅 프로토콜을 사용하여 / 피어와 경로를 간소화한다.",
-      "B": "hub 의존성을 없애기 위해 / full-mesh VPN 토폴로지를 배포한다.",
-      "C": "각 spoke에 대해 / IPsec 인터페이스에 / 정적 라우팅을 구현한다.",
-      "D": "정책 경로를 사용하는 / 전통적인 hub-and-spoke VPN 토폴로지를 구성한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Use a dynamic routing protocol using loopback interfaces to streamline peers and routes.",
-        "B": "Deploy a full-mesh VPN topology to eliminate hub dependency.",
-        "C": "Implement static routing over IPsec interfaces for each spoke.",
-        "D": "Establish a traditional hub-and-spoke VPN topology with policy routes."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.69": {
-    "question": "전시물을 참조하라. 전시물은 / 네트워크 다이어그램을 보여준다. / 관리자는 / 자율 시스템 30의 / BGP 이웃에게 / FortiGate_1에서 광고하는 / MED 값을 수정하려 한다. / 이를 구현하기 위해 / FortiGate_1에서 / 관리자가 구성해야 할 것은 무엇인가?",
-    "options": {
-      "A": "route-map-out",
-      "B": "network-import-check",
-      "C": "prefix-list-out",
-      "D": "distribute-list-out"
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "route-map-out",
-        "B": "network-import-check",
-        "C": "prefix-list-out",
-        "D": "distribute-list-out"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.70": {
-    "question": "FortiGate가 / 어떤 콘텐츠 프로세서(CP) 모델을 / 포함하고 있는지 알고 싶다. / 어떤 명령을 입력해야 하는가?",
-    "options": {
-      "A": "get hardware status",
-      "B": "diagnose hardware deviceinfo",
-      "C": "get hardware cp",
-      "D": "diagnose hardware lspci | grep 4e36"
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "get hardware status",
-        "B": "diagnose hardware deviceinfo",
-        "C": "get hardware cp",
-        "D": "diagnose hardware lspci | grep 4e36"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.71": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.63": {
     "question": "UTM 프로파일을 갖춘 / FortiGate 장치가 / 리소스 한계에 도달하고 있으며 / 관리자는 / 기업 네트워크의 트래픽이 / 증가할 것으로 예상한다. / 관리자는 / 동일 모델의 / 추가 FortiGate를 받았다. / 이 기업 네트워크에 / 추가 FortiGate 장치를 통합하기 위해 / 관리자가 사용해야 할 / 두 가지 프로토콜은 무엇인가? (두 개 선택)",
     "options": {
       "A": "외부 로드 밸런서를 사용한 / FGSP",
@@ -3150,7 +2628,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.72": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.39": {
     "question": "프록시 모드로 운영되는 / 회사의 게스트 인터넷 정책이 / FortiGuard를 사용하여 / AI 기술 사이트 접근을 차단한다. / 하지만 게스트 사용자가 / 포트 8443을 사용하여 / 이 카테고리의 페이지에 접근했다. / 게스트 정책에서 / full SSL 검사가 활성화된 경우 / FortiGate가 / 8443과 같은 비표준 포트의 / HTTPS 트래픽을 분석하기 위해 / 어떤 구성 변경이 필요한가?",
     "options": {
       "A": "웹사이트 CA 인증서에 / URL 와일드카드 도메인을 추가하고 / SSL/SSH 검사 프로파일에서 사용한다.",
@@ -3168,7 +2646,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.73": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.94": {
     "question": "사용자가 / 보안 HTTPS 웹사이트에 접근한 후 / 컴퓨터가 악성 프로그램에 감염되었다고 보고한다. / 하지만 관리자가 / FortiGate 로그를 확인했을 때 / SSL 인증서와 올바른 프로파일이 / 정책에 적용되어 있음에도 불구하고 / 웹사이트가 비안전으로 감지되지 않았음을 발견한다. / 관리자는 / FortiGate가 / 웹사이트의 / 암호화된 HTTPS 트래픽을 분석할 수 있도록 / 어떻게 해야 하는가?",
     "options": {
       "A": "관리자는 / 평판 웹사이트를 활성화하여 / FortiGuard web filter가 / 평가한 SSL/TLS 웹사이트만 / 허용해야 한다.",
@@ -3186,25 +2664,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.74": {
-    "question": "관리자가 / VPN 토폴로지에 / IKEv2를 구현하기로 결정한 경우 / IKEv2에 관한 / 두 가지 사실은 무엇인가? (두 개 선택)",
-    "options": {
-      "A": "타원 곡선(ECP) 그룹과 같은 / 더 강력한 Diffie-Hellman(DH) 그룹을 포함한다.",
-      "B": "IKEv1을 사용하는 장치와의 / 상호 운용성을 지원한다.",
-      "C": "안전한 터널을 구성하기 위해 / 최소 두 개의 메시지를 교환한다.",
-      "D": "EAP(확장 가능 인증 프로토콜)를 지원한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "It includes stronger Diffie-Hellman (DH) groups, such as Elliptic Curve (ECP) groups.",
-        "B": "It supports interoperability with devices using IKEv1.",
-        "C": "It exchanges a minimum of two messages to establish a secure tunnel.",
-        "D": "It supports the extensible authentication protocol (EAP)."
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.75": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.54": {
     "question": "관리자는 / ADVPN 구성을 설정하고 있으며 / VPN 구성 중에 / peer ID가 노출되지 않도록 / 보장하려 한다. / 보안을 강화하기 위해 / 관리자가 사용할 수 있는 / 프로토콜은 무엇인가?",
     "options": {
       "A": "peer ID를 암호화하고 / 노출을 방지하는 / IKEv2를 사용한다.",
@@ -3222,7 +2682,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.76": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.66": {
     "question": "관리자는 / IBGP 네트워크에서 / IBGP 세션을 확장하고 / 라우팅 테이블을 최적화하려 한다. / 관리자가 구성해야 할 / 매개변수는 무엇인가?",
     "options": {
       "A": "network-import-check",
@@ -3240,25 +2700,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.77": {
-    "question": "전시물을 참조하라. 전시물은 / ADVPN 네트워크를 보여준다. / Spoke-1 뒤의 클라이언트가 / Spoke-2 뒤에 있는 장치로 / 트래픽을 생성한다. / hub가 / 동적 터널을 구성하기 위해 / Spoke-1에 보내는 / 첫 번째 메시지는 무엇인가?",
-    "options": {
-      "A": "Shortcut query",
-      "B": "Shortcut offer",
-      "C": "Shortcut reply",
-      "D": "Shortcut forward"
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "Shortcut query",
-        "B": "Shortcut offer",
-        "C": "Shortcut reply",
-        "D": "Shortcut forward"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.78": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.13": {
     "question": "관리자는 / 서버를 보호하기 위해 / 클라이언트 및 서버 대상에 대해 / block-all IPS 프로파일을 적용했지만 / 데이터베이스 팀은 / 그 직후 / 애플리케이션이 작동을 중단했다고 보고했다. / 관리자는 / 네트워크의 기존 애플리케이션을 방해하지 않는 방식으로 / IPS를 적용하려면 / 어떻게 해야 하는가?",
     "options": {
       "A": "모든 시그니처를 / 모니터 모드로 설정한 / IPS 프로파일을 사용하고 / 차단하기 전에 / 패턴을 확인한다.",
@@ -3276,7 +2718,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.79": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.46": {
     "question": "관리자는 / 디스크 1개가 하루 만에 가득 찼다는 / FortiAnalyzer 경보를 받았다. / 조사 결과 / JHCMQK.website.com과 같은 / 비정상적인 DNS 로그 요청이 / 수천 건이나 발견되었으며 / 응답이 없었다. / 나중에 DNS 유출이 / UDP와 TLS 모두를 통해 / 발생하고 있었음을 발견했다. / 관리자는 / 이 데이터 도용 기술을 / 어떻게 방지할 수 있는가?",
     "options": {
       "A": "inline-CASB를 생성하여 / DNS 유출에 대비한다.",
@@ -3294,7 +2736,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.80": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.22": {
     "question": "전시물을 참조하라. 전시물은 / ADVPN 네트워크 토폴로지와 / 부분적인 BGP 구성을 보여준다. / 전시물에 표시된 / spoke에 대한 / config neighbor range에서 / 관리자가 구성해야 할 / 두 가지 매개변수는 무엇인가? (두 개 선택)",
     "options": {
       "A": "set max-neighbor-num 2",
@@ -3312,7 +2754,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.81": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.53": {
     "question": "전시물을 참조하라. 전시물은 / OSPF 명령의 / 부분적인 출력을 포함한다. / 관리자는 / FortiGate 장치의 OSPF 상태를 확인하고 / 전시물과 같은 출력을 받는다. / 이 FortiGate 장치에 관한 / 올바른 설명은 무엇인가?",
     "options": {
       "A": "FortiGate 장치는 / 외부 라우팅 정보를 주입할 수 있다.",
@@ -3330,25 +2772,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.82": {
-    "question": "관리자는 / 패킷 손실이 높은 / WAN 링크에서 / 실시간 음성 및 비디오 애플리케이션의 / 성능을 최적화해야 한다. / 오류를 줄이고 / 애플리케이션 안정성을 높이기 위해 / 관리자가 구성해야 할 / IPsec phase 1 매개변수의 조합은 무엇인가?",
-    "options": {
-      "A": "fec-ingress와 fec-egress",
-      "B": "dpd와 dpd-retryinterval",
-      "C": "fragmentation과 fragmentation-mtu",
-      "D": "keepalive와 keylive"
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "fec-ingress and fsc-egrsss",
-        "B": "dpd and dpd-retryinterval",
-        "C": "fragmentation and fragmentation-mtu",
-        "D": "keepalive and keylive"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.83": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.28": {
     "question": "관리자는 / 기업 네트워크를 확인하던 중 / MAC 주소 e0:23:ff:fc:00:86을 가진 / 의심스러운 패킷을 발견했다. / 관리자가 도출할 수 있는 / 두 가지 결론은 무엇인가? (두 개 선택)",
     "options": {
       "A": "의심스러운 패킷은 / VDOM이 활성화된 / 클러스터와 관련이 있다.",
@@ -3366,7 +2790,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.84": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.44": {
     "question": "유지보수 창 동안 / 관리자는 / NP6 인터페이스에서 처리되는 / 특정 방화벽 정책을 통과하는 / 모든 트래픽을 스니핑해야 한다. / 스니퍼 추적의 출력은 / 몇 개의 패킷만 제공한다. / 스니퍼 추적 출력이 / 제한되는 이유는 무엇인가?",
     "options": {
       "A": "방화벽 정책에 해당하는 / 트래픽이 암호화되어 있다.",
@@ -3384,7 +2808,7 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.85": {
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.29": {
     "question": "FortiGate A와 B 간의 / IPsec VPN에서 / VXLAN을 구현한 이후 / 회사 사용자들이 / 간헐적인 문제를 겪고 있다. / 관리자는 / 기본 1500바이트 MTU를 초과하는 패킷이 / 문제를 일으키고 있다고 의심한다. / IP 패킷에 / 추가 헤더를 더하는 프로토콜로 인한 문제를 해결하기 위해 / 인터페이스의 최대 MTU 값을 조정하는 것이 / 도움이 되는 상황은 무엇인가?",
     "options": {
       "A": "FortiGate에 / MTU 수정을 허용하는 / FortiGuard 엔터프라이즈 번들이 있는 경우에만 / 인터페이스에서 MTU를 조정한다.",
@@ -3402,34 +2826,358 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.86": {
-    "question": "전시물을 참조하라. 전시물은 / SSL 인증서 검사 구성을 보여준다. / 테스트 중에 / 관리자는 / ssl-ssh-profile 구성을 / set sni-server-cert-check strict 명령으로 업데이트했다. / 관리자는 / SNI가 / 서버 인증서의 / CN 또는 SAN 중 어느 것과도 / 일치하지 않음을 발견했다. / set sni-server-cert-check strict 명령과 관련하여 / FortiGate는 어떤 조치를 취하는가?",
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.3": {
+    "question": "",
     "options": {
-      "A": "FortiGate는 / 서버 인증서의 / SAN 필드에 첫 번째로 나열된 항목을 사용한다.",
-      "B": "FortiGate는 / 이것이 유효하지 않은 SSL/TLS 헤더를 나타내므로 / 연결을 종료한다.",
-      "C": "FortiGate는 / 서버 인증서의 Subject 필드에서 / CN 정보를 사용한다.",
-      "D": "FortiGate는 / 사용자 웹 브라우저의 / SNI를 사용한다."
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
     },
     "_src": {
-      "question": "",
+      "question": "Which specialized acceleration hardware must you use for VXLAN?",
       "options": {
-        "A": "FortiGate uses the first entry listed in the SAN field in the server certificate.",
-        "B": "FortiGate closes the connection because this represents an invalid SSL/TLS header.",
-        "C": "FortiGate uses the CN information from the Subject field in the server certificate.",
-        "D": "FortiGate uses the SNI from the user's web browser."
+        "A": "CPU",
+        "B": "NTurbo",
+        "C": "CP10",
+        "D": "NPU7"
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.87": {
-    "question": "전시물을 참조하라. 전시물은 / hub와 site 1 간의 / 기존 VPN IPsec 연결에 / 중복 네트워크 세그먼트가 있는 / site 2를 추가하는 / 네트워크 다이어그램을 보여준다. / 중복 서브넷으로 여러 원격 사이트가 연결될 때 / ECMP 라우팅을 활성화하기 위해 / FortiGate hub에서 / 관리자가 수행해야 할 / IPsec phase 2 구성은 무엇인가?",
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.4": {
+    "question": "",
     "options": {
-      "A": "route-overlap를 / use-new 또는 use-old로 설정한다.",
-      "B": "net-device를 / ecmp로 설정한다.",
-      "C": "single-source를 / enable로 설정한다.",
-      "D": "route-overlap를 / allow로 설정한다."
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
     },
     "_src": {
-      "question": "",
+      "question": "How does configuring tcp-mss-sender and tcp-mss-receiver affect TCP packets?",
+      "options": {
+        "A": "Header",
+        "B": "Payload",
+        "C": "Allow",
+        "D": "Fragment"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.5": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "You are trying to efficiently deploy ADVPN within the enterprise network. Which two\napproaches can facilitate this deployment? (Choose two.)",
+      "options": {
+        "A": "On FortiManager, enable ADVPN on VPN Manager.",
+        "B": "On FortiGate, connect only the links with the best status.",
+        "C": "On FortiGate, utilize loopback interfaces to reduce the number of routes and peers.",
+        "D": "On FortiManager, activate the recommended IPsec tunnel provisioning templates and"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.6": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\n3\n4\nA LAN interface connected from FortiGate to two FortiSwitch devices is shown.\nWhich two statements about the LAN interface connection shown in the exhibit are correct?\n(Choose two.)",
+      "options": {
+        "A": "The LAN interface must use an 802.3ad type interface.",
+        "B": "FortiGate is using an SD-WAN-type interface to connect to one FortiSwitch device with",
+        "C": "The connection is using a FortiLink interface.",
+        "D": "You must enable Spanning Tree Protocol (STP) or Rapid STP (RSTP) on FortiGate and"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.7": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\nThe system administrator settings configured on a root FortiGate and the Security Fabric\nsettings configured on a downstream FortiGate are shown.\nWhen prompted to sign in with Security Fabric to the downstream FortiGate, a user enters\nthe single sign-on (SSO) provider credentials.\n5\nWhat is the result?",
+      "options": {
+        "A": "The downstream FortiGate creates an SSO administrator account for AdminSSO with the",
+        "B": "The downstream FortiGate creates an SSO administrator account for AdminSSO with the",
+        "C": "The user is prompted to create an administrator account for AdminSSO.",
+        "D": "The downstream FortiGate relies on the root FortiGate and does not create an"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.9": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\nThe firewall policy ID 1 of the DCFW policy package and the reinstall preview window for the\nDCFW policy package installation are shown.\nWhy is FortiManager installing set srcaddr \"SSLVPN_tunnel_addr1\" on firewall policy ID 1\nwhen the policy package DCFW has the source address 10.0.5 on the firewall policy ID 1?\n7",
+      "options": {
+        "A": "The reinstall policy package ignores recent changes to the policy layer. The administrator",
+        "B": "FortiManager is installing the global policy package, which has higher priority than the",
+        "C": "FortiManager has assigned firewall HQ-DCFW a CLI template that can overwrite",
+        "D": "The firewall policy and reinstall preview use the same addresses, but they have different"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.10": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "You applied a block-all intrusion prevention system (IPS) profile for client and server targets\nto secure the server but the database team reported that applications stopped working\nimmediately after.\nHow can you apply IPS in a way that ensures it does not disrupt existing applications in the\nnetwork?",
+      "options": {
+        "A": "Set the IPS profile signature action to default and verify patterns",
+        "B": "Use an IPS profile with all signatures in monitor mode and verify patterns before blocking.",
+        "C": "Select flow mode in the IPS profile and monitor the application patterns.",
+        "D": "Limit the IPS profile to server targets only and set the action to default."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.11": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\n8\n9\nThe routing tables of FortiGate_A and FortiGate_B, and a network topology are shown.\nWhy does FortiGate_B have only one external route available to 100.75.5.1/32?",
+      "options": {
+        "A": "rf c-1583-compatible is not set to enable on FortiGate_B.",
+        "B": "The subnet 10.0.11.0/24 is not located in the FortiGate_B area.",
+        "C": "FortiGate_A advertises only one external route to FortiGate_B",
+        "D": "The route to 100.75.5.1/32 shown on FortiGate B has the lowest cost."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.12": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "A user reports that their computer was infected with matware after accessing a secured\nHTTPS website. However, when you check the FortiGate logs, you see that FortiGate did not\ndetect the website as insecure, despite having an SSL certificate and the correct profiles\napplied on the policy.\nHow can you ensure that FortiGate can analyze encrypted HTTPS traffic on a website?",
+      "options": {
+        "A": "Enable full SSL inspection in the SSUSSH inspection profile to decrypt packets",
+        "B": "Set min-allowed-ssl-version to tls-1.2.",
+        "C": "Enable server certificate SNI check to protect against unsecured HTTPS websites.",
+        "D": "Set inspection-mode to proxy."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.14": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "A FortiGate device using unified threat management (UTM) profiles is reaching resource\nlimits, and you expect traffic in your enterprise network to increase.\nYou received an additional FortiGate of the same model.\nWhich two options should you consider using to integrate the additional FortiGate into your\nenterprise network? (Choose two.)",
+      "options": {
+        "A": "FortiGate Session Life Support Protocol (FGSP) with external load balancers",
+        "B": "FortiGate Clustering Protocol (FGCP) in active-active (A-A) mode with switches",
+        "C": "Virtual Router Redundancy Protocol (VRRP) with switches",
+        "D": "FortiGate Clustering Protocol (FGCP) in active-passive (A-P) mode with VDOM disabled"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.15": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "An organization's guest Internet policy, operating in proxy mode, blocks access to artificial\nintelligence technology sites using FortiGuard.\nHowever, a guest user accessed a page in this category using port 8443\nWhich configuration change must you make for FortiGate to analyze HTTPS traffic on\nnonstandard ports like 8443. when full SSL inspection is active in the guest policy?",
+      "options": {
+        "A": "Block traffic on nonstandard ports by enabling server certificate SNI check in the SSL/SSH",
+        "B": "Enable network protocol enforcement for port 8443 with the protocol HTTPS in FortiGuard",
+        "C": "Enter 443, 8443 to analyze both standard (443) and non-standard (8443) HTTPS ports in",
+        "D": "Block untrusted SSL certificates in the SSL/SSH inspection profile."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.16": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "You configured the FortiGate devices in an enterprise network to join the Fortinet Security\nFabric. You have a list of IP addresses that must be blocked by the data center firewall. This\nlist is updated daily.\nHow can you automate updates to the firewall policy to add the IP addresses from the daily\nupdated list?",
+      "options": {
+        "A": "With a Security Fabric automation",
+        "B": "With an external connector from External Feeds",
+        "C": "With metadata variables in FortiManager",
+        "D": "With a CLI script in FortiManager"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.17": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\nYou must configure a loopback as a BGP source to connect to the ISP.\nWhich two commands must you use to establish the connection? (Choose two.)",
+      "options": {
+        "A": "ebgp-enforce-multihop",
+        "B": "update-source",
+        "C": "ibgp-enforce-multihop",
+        "D": "recursive-next-hop"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.19": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "A FortiGate device using unified threat management (UTM) profiles is reaching resource\nlimits, and you expect traffic in your enterprise network to increase.\nYou received an additional FortiGate of the same model.\nWhich two options should you consider using to integrate the additional FortiGate into your\nenterprise network? (Choose two.)",
+      "options": {
+        "A": "FortiGate Session Life Support Protocol (FGSP) with external load balancers",
+        "B": "FortiGate Clustering Protocol (FGCP) in active-passive (A-P) mode with VDOM disabled",
+        "C": "FortiGate Clustering Protocol (FGCP) in active-active (A-A) mode with switches",
+        "D": "Virtual Router Redundancy Protocol (VRRP) with switches"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.20": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How do you resolve object conflicts when importing a policy package?",
+      "options": {
+        "A": "Rename",
+        "B": "Retrieve config",
+        "C": "FortiManager accept",
+        "D": "Non-default"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.38": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit, which contains the partial output of an OSPF command.\n28\nAn administrator is checking the OSPF status of a FortiGate device and receives the output\nshown in the exhibit.\nWhat two conclusions can the administrator draw? (Choose two.)",
+      "options": {
+        "A": "The FortiGate device is a backup designated router",
+        "B": "The FortiGate device is connected to multiple areas",
+        "C": "The FortiGate device injects external routing information",
+        "D": "The FortiGate device has OSPF ECMP enabled"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.45": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit, which shows a network diagram.\nAn administrator would like to modify the MED value advertised from FortiGate_1 to a BGP\n34\nneighbor in the autonomous system 30.\nWhat must the administrator configure on FortiGate_1 to implement this?",
+      "options": {
+        "A": "route-map-out",
+        "B": "network-import-check",
+        "C": "prefix-list-out",
+        "D": "distribute-list-out"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.48": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit, which shows an OSPF network.\nWhich configuration must the administrator apply to optimize the OSPF database?",
+      "options": {
+        "A": "Set a route map in the AS boundary FortiGate.",
+        "B": "Set the area 0.0.0.1 to the type STUB in the area border FortiGate.",
+        "C": "Set an access list in the AS boundary FortiGate.",
+        "D": "Set the area 0.0.0.1 to the type NSSA in the area border FortiGate."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.64": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\n55\nThe routing tables of FortiGate_A and FortiGate_B are shown. FortiGate_A and FortiGate_B\nare in the same autonomous system.\nThe administrator wants to dynamically add only route 172.16.1.248/30 on FortiGate_A.\nWhat must the administrator configure?",
+      "options": {
+        "A": "The prefix 172.16.1.248/30 in the BGP Networks section on FortiGate_B",
+        "B": "A BGP route map out for 172.16.1.248/30 on FortiGate_B",
+        "C": "Enable Redistribute Connected in the BGP section on FortiGate_B.",
+        "D": "A BGP route map in for 172.16.1.248/30 on FortiGate_A"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.65": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit, which shows a network diagram showing the addition of site 2 with an\noverlapping network segment to the existing VPN IPsec connection between the hub and site\n1.\nWhich IPsec phase 2 configuration must an administrator make on the FortiGate hub to\nenable equal-cost multi-path (ECMP) routing when multiple remote sites connect with\noverlapping subnets?",
       "options": {
         "A": "Set route-overlap to either use-new or use-old",
         "B": "Set net-device to ecmp",
@@ -3438,70 +3186,34 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.88": {
-    "question": "hub에서 / ADVPN(auto-discovery VPN) 구현에 / 필수적인 두 가지 구성은 무엇인가? (두 개 선택)",
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.67": {
+    "question": "",
     "options": {
-      "A": "remote-ip는 / overlay 서브넷과 다른 / IP 주소에 있어야 한다.",
-      "B": "동적 인터페이스 생성을 피하기 위해 / set net-device를 비활성화해야 한다.",
-      "C": "경로를 추가하기 위해 / set add-route를 활성화해야 한다.",
-      "D": "/32 마스크의 overlay IP 주소를 / IPsec 가상 인터페이스에 / 할당해야 한다."
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
     },
     "_src": {
-      "question": "",
+      "question": "Refer to the exhibits.\n58\nThe configuration of a user's Windows PC, which has a default MTU of 1500 bytes, along\nwith FortiGate interfaces set to an MTU of 1000 bytes, and the results of PC1 pinging server\n172.16.0.254 are shown.\nWhy is the user in Windows PC1 unable to ping server 172.16.0.254 and is seeing the\nmessage: Packet needs to be fragmented but DF set?",
       "options": {
-        "A": "The remote-ip must be on a different IP address from the overlay subnet.",
-        "B": "set net-device must be disabled to avoid dynamic interface creation.",
-        "C": "set add-route must be enabled to add routes.",
-        "D": "An overlay IP address with a mask of /32 must be assigned to the IPsec virtual interface."
+        "A": "Option ip.flags.mf must be set to enable on FortiGate. The user has to adjust the ping",
+        "B": "Fragmented packets must be encrypted. To connect any application successfully, the user",
+        "C": "FortiGate honors the do not fragment bit and the packets are dropped. The user has to",
+        "D": "The user must trigger different traffic because path MTU discovery techniques do not"
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.89": {
-    "question": "전시물을 참조하라. / ADVPN 네트워크 토폴로지와 / 부분적인 BGP 구성이 표시되어 있다. / 전시물에 표시된 / spoke에 대한 / config neighbor range에서 / 구성해야 할 / 두 가지 매개변수는 무엇인가? (두 개 선택)",
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.69": {
+    "question": "",
     "options": {
-      "A": "set prefix 10.0.12.0 255.255.255.0",
-      "B": "set route-reflector-client enable",
-      "C": "set neighbor-group advpn",
-      "D": "set prefix 172.16.1.0 255.255.255.0"
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
     },
     "_src": {
-      "question": "",
-      "options": {
-        "A": "set prefix 10.0.12.0 255.255.255.0",
-        "B": "set route-reflector-client enable",
-        "C": "set neighbor-group advpn",
-        "D": "set prefix 172.16.1.0 255.255.255.0"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.90": {
-    "question": "관리자는 / FortiGate에서 / 다음 명령을 구성했다: / config router ospf / set restart-mode graceful-restart / 위 명령의 결과를 / 올바르게 설명하는 / 두 가지 설명은 무엇인가? (두 개 선택)",
-    "options": {
-      "A": "HA 클러스터에서 / FortiGate 장치는 / HA 장애 조치 중 / 트래픽 중단을 피하기 위해 / 라우팅 테이블에서 / OSPF 경로를 유지한다.",
-      "B": "grace LSA(link-state advertisement)를 받는 / OSPF 이웃은 / 헬퍼 모드로 진입한다.",
-      "C": "기본 40초 대기 시간 후 / OSPF 이웃은 / 재시작 라우터와의 / 통신을 재개한다.",
-      "D": "FortiGate는 / graceful restart로 구성되었으며 / 네트워크 토폴로지가 변경되면 / graceful 모드를 종료한다."
-    },
-    "_src": {
-      "question": "",
-      "options": {
-        "A": "In an HA cluster, FortiGate devices will keep the OSPF routes in their routing table to avoid traffic",
-        "B": "The OSPF neighbor that receives the grace link-state advertisement (LSA) will enter into helper",
-        "C": "After the default 40 seconds wait time, the OSPF neighbors will resume communication with the",
-        "D": "FortiGate is configured with graceful restart, and will exit graceful mode, if the network topology"
-      }
-    }
-  },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.91": {
-    "question": "전시물을 참조하라. / 관리자는 / 동적 프로토콜로 OSPF를 사용하는 / hub and spokes 네트워크를 배포하고 있다. / 이웃 인접성을 위해 / 필수적인 구성은 무엇인가?",
-    "options": {
-      "A": "라우터 구성에서 / set bfd enable을 설정한다.",
-      "B": "hub 인터페이스에서 / set network-type point-to-multipoint를 설정한다.",
-      "C": "라우터 구성에서 / set rfc1583-compatible enable을 설정한다.",
-      "D": "hub 인터페이스에서 / set virtual-link enable을 설정한다."
-    },
-    "_src": {
-      "question": "",
+      "question": "Refer to the exhibit.\nAn administrator is deploying a hub and spokes network and using OSPF as dynamic\nprotocol.\nWhich configuration is mandatory for neighbor adjacency?",
       "options": {
         "A": "Set bfd enable in the router configuration",
         "B": "Set network-type point-to-multipoint in the hub interface",
@@ -3510,21 +3222,723 @@
       }
     }
   },
-  "FCSS_EFW_AD-7.6 V12.95.pdf::NO.92": {
-    "question": "전시물을 참조하라. 전시물은 / OSPF 네트워크를 보여준다. / NGFW-1이 / 백업 지정 라우터(BDR)인 경우 / NGFW-1이 전송하는 / LSA(link-state advertisement) 유형은 무엇인가?",
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.70": {
+    "question": "",
     "options": {
-      "A": "NGFW-1은 / 타입 1과 타입 2 LSA를 전송한다.",
-      "B": "NGFW-1은 / 타입 1과 타입 3 LSA를 전송한다.",
-      "C": "NGFW-1은 / 타입 1과 타입 4 LSA를 전송한다.",
-      "D": "NGFW-1은 / 타입 1과 타입 5 LSA를 전송한다."
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
     },
     "_src": {
-      "question": "",
+      "question": "Refer to the exhibit.\nA FortiGate segmented into VDOMs is shown. You must ensure effective and accelerated\ninternet access for all of the VDOMs in this enterprise network. How can you achieve this?\n(Choose one answer)",
       "options": {
-        "A": "NGFW-1 will send type 1 and type 2 LSAs.",
-        "B": "NGFW-1 will send type 1 and type 3 LSAs.",
-        "C": "NGFW-1 will send type 1 and type 4 LSAs.",
-        "D": "NGFW-1 will send type 1 and type 5 LSAs."
+        "A": "Connect a physical interface from each VDOM to the root VDOM.",
+        "B": "Create VDOM links.",
+        "C": "Configure network processing unit (NPU) vlinks.",
+        "D": "Create VLANs over network processing unit (NPU) vlinks."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.73": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\n64\nThe partial output of an OSPF command is shown. While checking the OSPF status of\nFortiGate, you receive the output shown in the exhibit. Based on the output, which two\nstatements about FortiGate are correct? (Choose two answers)",
+      "options": {
+        "A": "FortiGate has OSPF ECMP enabled.",
+        "B": "FortiGate is a backup designated router.",
+        "C": "FortiGate injects external routing information.",
+        "D": "FortiGate is connected to multiple areas."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.75": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\nA physical topology along with a traffic log is shown. You are using FortiAnalyzer to monitor\ntraffic from the device with IP address 10.0.2.51, which is located behind the FortiGate\ninternal segmentation firewall (ISFW) device. Unified threat management (UTM) is not\nenabled in the firewall policy on the HQ-ISFW device, and you are surprised to see a log with\nthe action Malware, as shown in the exhibit. What are two reasons why FortiAnalyzer would\ndisplay this log? (Choose two answers)",
+      "options": {
+        "A": "HQ-ISFW is not connected to FortiAnalyzer and traffic must go through HQ-NGFW-1.",
+        "B": "UTM is enabled in the firewall policy in HQ-NGFW-1.",
+        "C": "HQ-ISFW is in a Security Fabric environment.",
+        "D": "Security rating is enabled in HQ-ISFW."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.76": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\n67\nA policy package conflict status and information from the import device wizard in the Core1\nVDOM are shown. When you import a policy package, the following message appears for the\nWeb_restrictions web filter profile and the deep-inspection SSL-SSH profile: \"The following\nobjects were found having conflicts. Please confirm your settings, then continue.\" The\nWeb_restrictions and deep-inspection profiles are used by other FortiGate devices within\nFortiManager. Which step must you take to resolve the issue? (Choose one answer)",
+      "options": {
+        "A": "Retrieve the FortiGate configuration to automatically export correct objects and policies.",
+        "B": "Create uniquely named objects on FortiGate and reimport them into the policy package.",
+        "C": "Select the FortiManager configuration that accepts changes on FortiManager and",
+        "D": "Use non-default object values because FortiManager is unable to alter default values."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.77": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "You are using Virtual eXtensible LAN (VXLAN) extensively on FortiGate. Which specialized\nacceleration hardware must you use to improve FortiGate performance? (Choose one\nanswer)",
+      "options": {
+        "A": "NP7",
+        "B": "SP5",
+        "C": "CP9",
+        "D": "NTurbo"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.78": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\n69\nThe partial output of an OSPF command is shown. You are checking the OSPF status of a\nFortiGate device when you receive the output shown in the exhibit. Based on the output,\nwhich two statements about FortiGate are correct? (Choose two answers)",
+      "options": {
+        "A": "FortiGate is a backup designated router.",
+        "B": "FortiGate supports OSPF ECMP.",
+        "C": "FortiGate is in the area 0.0.0.5.",
+        "D": "FortiGate can inject external routing information."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.79": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which technology should you use to facilitate dynamic direct tunnels and automatic link\noptimization in a hub-and-spoke VPN topology?\n70",
+      "options": {
+        "A": "Use static IPsec tunnels",
+        "B": "Use ADVPN 2.0",
+        "C": "Use GRE over IPsec",
+        "D": "Use IP-in-IP tunneling"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.80": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Why is the web filter database version not shown in the FortiGuard Security Services\ndashboard?",
+      "options": {
+        "A": "The database failed to update",
+        "B": "The web filter database is cloud hosted",
+        "C": "Flow mode disables the database",
+        "D": "FortiGate does not support web filtering"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.81": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Why does FortiGate_B not show ICMP sessions when running:\nget system session list | grep icmp\nin an FGSP cluster?",
+      "options": {
+        "A": "session-pickup is disabled",
+        "B": "session-pickup-connectionless is disabled",
+        "C": "FGSP is misconfigured",
+        "D": "ICMP is unsupported"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.82": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Based on the TLS handshake shown, what can be inferred about the client?",
+      "options": {
+        "A": "Supports TLS 1.0 only",
+        "B": "Supports TLS 1.2 and TLS 1.3",
+        "C": "Supports SSLv3",
+        "D": "Supports DTLS"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.83": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\n71\nThe Administrators section of a root FortiGate device and the Security Fabric Settings section\nof a downstream FortiGate device are shown.\nWhen prompted to sign in with Security Fabric in the downstream FortiGate device, a user\nenters the AdminSSO credentials.\nWhat is the next status for the user?",
+      "options": {
+        "A": "The user is prompted to create an SSO administrator account for AdminSSO.",
+        "B": "The user receives an authentication failure message.",
+        "C": "The user accesses the downstream FortiGate with super_admin_readonly privileges.",
+        "D": "The user accesses the downstream FortiGate with super_admin privileges."
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.84": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Why do the firewall policy and reinstall preview show different address names during\ninstallation?",
+      "options": {
+        "A": "Address mismatch",
+        "B": "Per-device mapping",
+        "C": "Object corruption",
+        "D": "Policy conflict"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.85": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which action should you take after applying a block-all IPS profile that caused applications to\nstop working?",
+      "options": {
+        "A": "Disable IPS",
+        "B": "Use monitor mode",
+        "C": "Enable flow mode",
+        "D": "Remove server targets"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.86": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How can you automate updates to firewall policies using a daily updated IP block list?",
+      "options": {
+        "A": "Automation stitch",
+        "B": "External Feeds",
+        "C": "CLI scripts",
+        "D": "ZTNA"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.87": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "In which two ways does FortiGate utilize the Internet Service Database (ISDB)?",
+      "options": {
+        "A": "Blocks IPs and ports",
+        "B": "Limits by URL",
+        "C": "Works in proxy mode",
+        "D": "Provides predefined IPs and ports"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.88": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which three approaches can successfully deploy advanced initial configurations?",
+      "options": {
+        "A": "Metadata variables",
+        "B": "Model device ZTP/LTP",
+        "C": "Jinja scripting",
+        "D": "Global ADOM"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.89": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "What can be inferred from the OSPF status output shown?",
+      "options": {
+        "A": "Is ASBR",
+        "B": "Is BDR",
+        "C": "Supports ECMP",
+        "D": "Is in area 0.0.0.5"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.90": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Why does FortiGate_B install only one OSPF external route?",
+      "options": {
+        "A": "ECMP disabled",
+        "B": "Single advertisement",
+        "C": "Area mismatch",
+        "D": "Route filtering"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.91": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How can you ensure FortiGate can analyze encrypted HTTPS traffic?",
+      "options": {
+        "A": "Enable SNI",
+        "B": "Enable full SSL inspection",
+        "C": "Set TLS 1.2",
+        "D": "Enable proxy"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.92": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which two options should you consider to scale performance using an additional FortiGate?",
+      "options": {
+        "A": "FGSP",
+        "B": "FGCP Active-Active",
+        "C": "VRRP",
+        "D": "FGCP Active-Passive"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.93": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which two parameters must you configure in neighbor-range for ADVPN iBGP deployment?\n74",
+      "options": {
+        "A": "route-reflector-client",
+        "B": "neighbor-group",
+        "C": "remote-as",
+        "D": "update-source"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.95": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How can you ensure the corporate FortiGate learns the 192.168.1.0/24 network?",
+      "options": {
+        "A": "Add static route",
+        "B": "Enable RIP",
+        "C": "Implement OSPF over IPsec",
+        "D": "Add network locally"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.96": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which two features can you use to segment an enterprise network?",
+      "options": {
+        "A": "IPsec",
+        "B": "ZTNA",
+        "C": "VDOM",
+        "D": "VLAN"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.97": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which two recommendations prevent invalid paths when using zero phase 2 selectors?",
+      "options": {
+        "A": "Routing protocols",
+        "B": "Exact selectors",
+        "C": "Aggregate IPsec",
+        "D": "Assign tunnel IP"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.98": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "What must be done for RIP routes to propagate into OSPF?",
+      "options": {
+        "A": "Enable on FortiGate_A",
+        "B": "Enable on FortiGate_B",
+        "C": "Disable RIP",
+        "D": "Static route"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.99": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How do you allow IPS inspection of inbound HTTPS traffic?",
+      "options": {
+        "A": "Enable HTTP",
+        "B": "Enable HTTPS mapping",
+        "C": "Enable SMTPS",
+        "D": "Disable inspection"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.100": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How should you adjust MTU values to resolve encapsulation issues?",
+      "options": {
+        "A": "All interfaces",
+        "B": "Wired only",
+        "C": "FortiGate only",
+        "D": "Controlled environment"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.101": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How can FortiGate_B advertise only 172.16.1.248/30 using BGP?",
+      "options": {
+        "A": "Redistribute connected",
+        "B": "Route map out",
+        "C": "Prefix list in",
+        "D": "Network"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.102": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which parameter should be configured to scale iBGP sessions?",
+      "options": {
+        "A": "neighbor-group",
+        "B": "recursive-next-hop",
+        "C": "route-reflector-client",
+        "D": "neighbor-range"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.103": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How can FortiGate analyze HTTPS traffic on non-standard port 8443?",
+      "options": {
+        "A": "Proxy mode",
+        "B": "TLS 1.2",
+        "C": "Add 443 and 8443 mapping",
+        "D": "Enable IPS"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.104": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "What should be configured to provide hardware-accelerated inter-VDOM traffic?",
+      "options": {
+        "A": "VDOM link",
+        "B": "NPU vlinks",
+        "C": "VLAN",
+        "D": "Physical link"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.106": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which hardware improves VXLAN performance?",
+      "options": {
+        "A": "CPU",
+        "B": "NTurbo",
+        "C": "CP10",
+        "D": "NPU7"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.107": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "What is the effect of configuring tcp-mss-sender and tcp-mss-receiver?",
+      "options": {
+        "A": "Header change",
+        "B": "Largest payload",
+        "C": "Allow/Deny",
+        "D": "Fragment only"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.108": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Why is the prerun CLI template not assigned after installation?",
+      "options": {
+        "A": "Manual removal",
+        "B": "Auto-unassigned",
+        "C": "Permanent",
+        "D": "Postrun needed"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.109": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "What happens when an SSO user logs into a downstream FortiGate?",
+      "options": {
+        "A": "Denied",
+        "B": "Readonly admin",
+        "C": "Super admin",
+        "D": "No account"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.111": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which two approaches facilitate efficient ADVPN deployment?",
+      "options": {
+        "A": "VPN Manager enable",
+        "B": "Best link only",
+        "C": "Loopback",
+        "D": "IPsec templates"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.112": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which parameter must be configured to modify the MED value?",
+      "options": {
+        "A": "route-overlap",
+        "B": "distribute-list-out",
+        "C": "prefix-list-out",
+        "D": "route-map-out"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.113": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "How do you resolve object conflicts when importing a policy package?",
+      "options": {
+        "A": "Rename",
+        "B": "FortiManager accept",
+        "C": "Non-default",
+        "D": "Retrieve config"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.114": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "What does npu_flag=20 indicate for IPsec tunnels?",
+      "options": {
+        "A": "Inbound only",
+        "B": "Outbound only",
+        "C": "Both SAs",
+        "D": "No offload"
+      }
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35.pdf::NO.115": {
+    "question": "",
+    "options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": ""
+    },
+    "_src": {
+      "question": "Which two options integrate an additional FortiGate for scaling?",
+      "options": {
+        "A": "FGSP",
+        "B": "FGCP Active-Active",
+        "C": "VRRP",
+        "D": "FGCP Active-Passive"
       }
     }
   }

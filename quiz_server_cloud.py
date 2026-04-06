@@ -323,7 +323,7 @@ def parse_question(num, content, page_num):
     answer_idx = None
     answer     = []
     for i, line in enumerate(lines):
-        m = re.match(r'^Answer:\s*([A-E][A-E\s]*)', line, re.IGNORECASE)
+        m = re.match(r'^Answer:\s*([A-E][A-E,\s]*)', line, re.IGNORECASE)
         if m:
             answer_idx = i
             answer = sorted(list(set(re.findall(r'[A-E]', m.group(1).upper()))))

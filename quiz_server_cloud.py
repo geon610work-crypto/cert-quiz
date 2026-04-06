@@ -396,6 +396,30 @@ def parse_question(num, content, page_num):
 # ─────────────────────────────────────────
 # Page Image Rendering
 # ─────────────────────────────────────────
+
+def _search_q_header(page, question_num=None):
+    """두 형식(NO.X / QUESTION NO: X)을 모두 지원하는 question header 검색.
+
+    question_num이 있으면 해당 문제 위치 반환,
+    없으면 페이지 내 모든 question header 위치 반환 (y0 기준 정렬).
+    """
+    hits = []
+    if question_num:
+        # "NO.3" → 두 형식 모두 시도
+        hits = page.search_for(question_num)
+        if not hits:
+            m = re.match(r'NO\.(\d+)', question_num)
+            if m:
+                hits = page.search_for(f"QUESTION NO: {m.group(1)}")
+                if not hits:
+                    hits = page.search_for(f"QUESTION NO:{m.group(1)}")
+    else:
+        # 경계 탐지용: 두 형식 모두 수집 후 y0 정렬
+        hits = page.search_for("NO.")
+        hits += page.search_for("QUESTION NO:")
+        hits.sort(key=lambda r: r.y0)
+    return hits
+
 def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
     """Extract the exhibit image for a specific question from a PDF page.
 
@@ -435,19 +459,18 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
         next_q_y_for_img = None
         is_second_on_page = False   # True if another NO.XX appears BEFORE this Q on same page
         if question_num:
-            q_hits_img = page.search_for(question_num)
+            q_hits_img = _search_q_header(page, question_num)
             if q_hits_img:
                 q_y_for_img = q_hits_img[0].y0
                 pr_tmp = page.rect
                 next_q_y_for_img = pr_tmp.y1  # default: end of page
-                # Find the next "NO.\d+" on this page that comes AFTER q_y
-                for m in page.search_for("NO."):
+                # Find the next question header on this page that comes AFTER q_y
+                for m in _search_q_header(page):
                     if m.y0 > q_y_for_img + 20:   # skip the question itself
                         if m.y0 < next_q_y_for_img:
                             next_q_y_for_img = m.y0
                 # Detect if this is the second (or later) question on this page
-                # by checking if any NO.XX appears BEFORE our question position
-                for m in page.search_for("NO."):
+                for m in _search_q_header(page):
                     if m.y0 < q_y_for_img - 20:
                         is_second_on_page = True
                         break
@@ -613,7 +636,7 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
         crop_bottom = pr.y1 - pr.height * 0.08
 
         if question_num:
-            q_hits = page.search_for(question_num)
+            q_hits = _search_q_header(page, question_num)
             if q_hits:
                 q_y = q_hits[0].y0
                 crop_bottom = q_y - 6
@@ -698,20 +721,18 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                 return None
 
         def _first_question_y_on_page(pg):
-            """Return the Y position of the first 'NO.\\d+' text on pg, or None."""
+            """Return the Y position of the first question header on pg, or None."""
             first_y = None
-            for hit in pg.search_for("NO."):
-                # Verify it is actually 'NO.<digits>' not just 'NO.' in body text
-                # by checking a small area to the right contains digits
+            for hit in _search_q_header(pg):
                 y = hit.y0
                 if first_y is None or y < first_y:
                     first_y = y
             return first_y
 
         def _page_has_questions(pg):
-            """Return True if the page contains any NO.\\d+ question headers."""
+            """Return True if the page contains any question headers."""
             text = pg.get_text("text")
-            return bool(re.search(r'NO\.\d+', text))
+            return bool(re.search(r'NO\.\d+', text) or re.search(r'QUESTION NO:', text))
 
         if exhibit_height < 50:
             total_pages = doc.page_count
@@ -890,8 +911,8 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
                 crop_bottom = hit.y0 - 4
                 break
 
-        # Also stop before the next "NO." question header
-        for hit in opts_page.search_for("NO."):
+        # Also stop before the next question header (NO.X or QUESTION NO: X)
+        for hit in _search_q_header(opts_page):
             if hit.y0 > crop_top + 10 and hit.y0 < crop_bottom:
                 crop_bottom = hit.y0 - 4
                 break

@@ -11,6 +11,7 @@ Stop:      Ctrl+C
 """
 
 import os, re, json, random, sys, socket, threading, webbrowser, uuid, tempfile
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import OrderedDict
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from socketserver import ThreadingMixIn
@@ -94,7 +95,7 @@ image_cache = _LRUCache(maxsize=200)
 
 # 동시 fitz 렌더링 수 제한 — Render.com 무료 플랜은 CPU가 약하므로
 # 동시 렌더 2개 초과 시 CPU 포화 → 모든 요청이 느려지는 문제 방지
-_render_semaphore = threading.Semaphore(2)
+_render_semaphore = threading.Semaphore(4)
 
 # fitz Document cache: 스레드당 별도 Document (fitz는 멀티스레드 비안전)
 # ThreadingHTTPServer에서 각 요청 스레드가 자체 doc을 유지
@@ -1235,15 +1236,6 @@ class QuizHandler(BaseHTTPRequestHandler):
                     print(f"  ⏳ Extracting: {os.path.basename(pdf_path)}")
                     question_cache[pdf_path] = extract_questions_from_pdf(pdf_path)
                     print(f"  ✅ {len(question_cache[pdf_path])} questions extracted")
-                    # exhibit 페이지 맵만 미리 빌드 (렌더링은 선택된 문제만)
-                    if HAS_FITZ:
-                        def _warmup_map(_path=pdf_path):
-                            try:
-                                _build_exhibit_pages_map(_path)
-                                print(f"  ✅ Exhibit pages map built: {os.path.basename(_path)}")
-                            except Exception as _e:
-                                print(f"  ⚠️  Exhibit map warmup failed: {_e}")
-                        threading.Thread(target=_warmup_map, daemon=True).start()
 
             all_q = question_cache[pdf_path]
             if not all_q:
@@ -1257,21 +1249,21 @@ class QuizHandler(BaseHTTPRequestHandler):
             else:
                 selected = random.sample(all_q, min(count, len(all_q)))
 
-            # 선택된 문제의 exhibit만 백그라운드 pre-render
-            # 공부모드(order=1)는 어느 문제부터 볼지 모르므로 pre-render 생략 (on-demand)
-            if HAS_FITZ and order != '1':
-                _sel_exhibit_qs = [q for q in selected
-                                   if q.get('has_exhibit') and q.get('page_num', 0) > 0]
-                if _sel_exhibit_qs:
-                    def _prerender_selected(_path=pdf_path, _qs=_sel_exhibit_qs):
-                        try:
-                            print(f"  🖼  Pre-rendering {len(_qs)} exhibit(s) (n=1 only)")
-                            for _q in _qs:
-                                render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
-                            print(f"  ✅ Exhibit pre-render done")
-                        except Exception as _e:
-                            print(f"  ⚠️  Exhibit pre-render failed: {_e}")
-                    threading.Thread(target=_prerender_selected, daemon=True).start()
+            # 모든 모드: exhibit 이미지를 동기적으로 pre-render 후 응답
+            # ThreadPoolExecutor(4)로 병렬 렌더 → 응답 전 캐시 완료 보장
+            if HAS_FITZ:
+                _exhibit_qs = [q for q in selected
+                               if q.get('has_exhibit') and q.get('page_num', 0) > 0]
+                if _exhibit_qs:
+                    # exhibit_pages_map 먼저 빌드 (렌더 전 필요)
+                    _build_exhibit_pages_map(pdf_path)
+                    print(f"  🖼  Pre-rendering {len(_exhibit_qs)} exhibit(s) in parallel...")
+                    def _render_one(_q, _path=pdf_path):
+                        render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
+                        render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
+                    with ThreadPoolExecutor(max_workers=4) as _ex:
+                        list(_ex.map(_render_one, _exhibit_qs))
+                    print(f"  ✅ Exhibit pre-render done")
 
             # Cloud 버전: 캐시에서 즉시 조회 (API 생성 없음)
             for q in selected:
@@ -1619,14 +1611,13 @@ function SelectScreen({ onStart }){
   };
 
   /* start quiz */
-  const [preparing, setPreparing] = useState(false);
   const start = async(mode='exam')=>{
     const pdfPath = tab==='server' ? sel : (uploaded && uploaded.path);
     const pdfName = tab==='server'
       ? (pdfs.find(p=>p.path===sel)||{}).name||''
       : (uploaded && uploaded.name)||'';
     if(!pdfPath) return;
-    setLoading(true); setPreparing(false); setErr('');
+    setLoading(true); setErr('');
     try{
       // 연습/공부 모드는 전체 문제, 시험 모드는 count개
       const url = (mode==='practice' || mode==='study')
@@ -1635,14 +1626,9 @@ function SelectScreen({ onStart }){
       const res  = await fetch(url);
       const data = await res.json();
       if(data.error) throw new Error(data.error);
-      // 시험/연습 모드는 exhibit pre-render 대기 (공부모드는 pre-render 없으므로 스킵)
-      if(mode !== 'study' && data.has_fitz){
-        setPreparing(true);
-        await new Promise(r => setTimeout(r, 3000));
-      }
       onStart(data.questions, data.total, pdfPath, mode, pdfName);
     }catch(e){ setErr('오류: '+e.message); }
-    finally{ setLoading(false); setPreparing(false); }
+    finally{ setLoading(false); }
   };
 
   const canStart = tab==='server' ? !!sel : !!uploaded;
@@ -1758,12 +1744,12 @@ function SelectScreen({ onStart }){
           <button className="btn btn-primary" onClick={()=>start('exam')}
             disabled={loading || !canStart || (tab==='upload' && uploading)}
             style={{flex:1,padding:'13px',fontSize:'15px'}}>
-            {loading ? (preparing ? '🖼 이미지 준비 중...' : '⏳ 불러오는 중...') : '🚀 시험 모드'}
+            {loading ? '⏳ 불러오는 중...' : '🚀 시험 모드'}
           </button>
           <button className="btn" onClick={()=>start('practice')}
             disabled={loading || !canStart || (tab==='upload' && uploading)}
             style={{flex:1,padding:'13px',fontSize:'15px',background:'#7c3aed',borderColor:'#7c3aed'}}>
-            {loading ? (preparing ? '🖼 이미지 준비 중...' : '⏳ 불러오는 중...') : '🎯 연습 모드'}
+            {loading ? '⏳ 불러오는 중...' : '🎯 연습 모드'}
           </button>
         </div>
         <button className="btn" onClick={()=>start('study')}

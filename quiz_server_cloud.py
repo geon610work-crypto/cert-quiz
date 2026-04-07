@@ -86,6 +86,26 @@ class _LRUCache:
 # page image cache: {(pdf_path, page_num): base64_str}
 image_cache = _LRUCache(maxsize=200)
 
+# fitz Document cache: keep PDF documents open to avoid repeated fitz.open() overhead
+# Single-threaded server → no locking needed for main-thread access
+_fitz_doc_cache: dict = {}   # pdf_path → fitz.Document
+
+def _get_cached_fitz_doc(pdf_path: str):
+    """Return a cached (open) fitz.Document for pdf_path.
+
+    Keeps the last 3 PDFs open.  Evicts the oldest when the cache is full.
+    Never closes the returned document — the caller must NOT close it.
+    """
+    if pdf_path not in _fitz_doc_cache:
+        if len(_fitz_doc_cache) >= 3:
+            oldest = next(iter(_fitz_doc_cache))
+            try:
+                _fitz_doc_cache.pop(oldest).close()
+            except Exception:
+                _fitz_doc_cache.pop(oldest, None)
+        _fitz_doc_cache[pdf_path] = fitz.open(pdf_path)
+    return _fitz_doc_cache[pdf_path]
+
 # Korean explanation cache: {q_num: korean_str}
 # Pre-load from korean_cache.json if it exists (bundled explanations)
 korean_cache = {}
@@ -583,9 +603,8 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
         exmap = _build_exhibit_pages_map(pdf_path)
         q_exhibit_pages = exmap.get(question_num, []) if question_num else []
 
-        doc2 = None
         try:
-            doc2 = fitz.open(pdf_path)
+            doc2 = _get_cached_fitz_doc(pdf_path)  # 캐시된 doc 재사용 (close 불필요)
             img_data = None
 
             if len(q_exhibit_pages) >= 2:
@@ -621,13 +640,8 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
         except Exception as e:
             print(f"  ⚠️  Exhibit2 render failed: {e}")
             return None
-        finally:
-            if doc2:
-                try: doc2.close()
-                except: pass
-    doc = None
     try:
-        doc  = fitz.open(pdf_path)
+        doc  = _get_cached_fitz_doc(pdf_path)  # 캐시된 doc 재사용 (close 불필요)
         page = doc[page_num - 1]
 
         # ── 1. Try to extract the best embedded image ──────────────────
@@ -1022,11 +1036,6 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
     except Exception as e:
         print(f"  ⚠️  Exhibit render failed (p{page_num}): {e}")
         return None
-    finally:
-        try:
-            doc.close()
-        except Exception:
-            pass
 
 
 options_area_cache = _LRUCache(maxsize=100)
@@ -1049,9 +1058,8 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
         return options_area_cache[key]
     if not HAS_FITZ or page_num <= 0:
         return None
-    doc = None
     try:
-        doc  = fitz.open(pdf_path)
+        doc  = _get_cached_fitz_doc(pdf_path)  # 캐시된 doc 재사용
         mat  = fitz.Matrix(dpi / 72, dpi / 72)
 
         # Determine which page holds the options
@@ -1122,11 +1130,6 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
     except Exception as e:
         print(f"  ⚠️  render_options_area_base64 failed: {e}")
         return None
-    finally:
-        try:
-            doc.close()
-        except Exception:
-            pass
 
 
 # ─────────────────────────────────────────
@@ -1217,6 +1220,18 @@ class QuizHandler(BaseHTTPRequestHandler):
                 print(f"  ⏳ Extracting: {os.path.basename(pdf_path)}")
                 question_cache[pdf_path] = extract_questions_from_pdf(pdf_path)
                 print(f"  ✅ {len(question_cache[pdf_path])} questions extracted")
+                # exhibit pages 맵을 백그라운드에서 미리 빌드 (첫 exhibit 로딩 딜레이 방지)
+                if HAS_FITZ and pdf_path not in _exhibit_pages_cache:
+                    import threading as _threading
+                    _warmup_path = pdf_path
+                    def _warmup_exhibit():
+                        try:
+                            _build_exhibit_pages_map(_warmup_path)
+                            print(f"  📐 Exhibit pages map ready: "
+                                  f"{os.path.basename(_warmup_path)}")
+                        except Exception as _we:
+                            print(f"  ⚠️  Exhibit map warmup failed: {_we}")
+                    _threading.Thread(target=_warmup_exhibit, daemon=True).start()
 
             all_q = question_cache[pdf_path]
             if not all_q:
@@ -1405,14 +1420,26 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode, exhibitN=1 }) {
               + (qNum ? '&q=' + encodeURIComponent(qNum) : '')
               + (optsMode ? '&opts=1' : '')
               + (exhibitN > 1 ? '&n=' + exhibitN : '');
-    fetch(url)
-      .then(r => r.json())
-      .then(data => {
-        if (data.image) setSrc('data:image/jpeg;base64,' + data.image);
-        else setErr(true);
-      })
-      .catch(() => setErr(true))
-      .finally(() => setLoading(false));
+    let retries = 0;
+    const MAX_RETRIES = 3;
+    const fetchExhibit = () => {
+      fetch(url)
+        .then(r => r.json())
+        .then(data => {
+          if (data.image) { setSrc('data:image/jpeg;base64,' + data.image); setLoading(false); }
+          else { setErr(true); setLoading(false); }
+        })
+        .catch(() => {
+          if (retries < MAX_RETRIES) {
+            retries++;
+            setTimeout(fetchExhibit, 1500 * retries);  // 1.5s, 3s, 4.5s 재시도
+          } else {
+            setErr(true);
+            setLoading(false);
+          }
+        });
+    };
+    fetchExhibit();
   }, [pdfPath, pageNum, qNum, optsMode, exhibitN]);
 
   const [zoomed, setZoomed] = useState(false);

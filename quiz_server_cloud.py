@@ -1620,13 +1620,14 @@ function SelectScreen({ onStart }){
   };
 
   /* start quiz */
+  const [preparing, setPreparing] = useState(false);
   const start = async(mode='exam')=>{
     const pdfPath = tab==='server' ? sel : (uploaded && uploaded.path);
     const pdfName = tab==='server'
       ? (pdfs.find(p=>p.path===sel)||{}).name||''
       : (uploaded && uploaded.name)||'';
     if(!pdfPath) return;
-    setLoading(true); setErr('');
+    setLoading(true); setPreparing(false); setErr('');
     try{
       // 연습/공부 모드는 전체 문제, 시험 모드는 count개
       const url = (mode==='practice' || mode==='study')
@@ -1635,9 +1636,14 @@ function SelectScreen({ onStart }){
       const res  = await fetch(url);
       const data = await res.json();
       if(data.error) throw new Error(data.error);
+      // 시험/연습 모드는 exhibit pre-render 대기 (공부모드는 pre-render 없으므로 스킵)
+      if(mode !== 'study' && data.has_fitz){
+        setPreparing(true);
+        await new Promise(r => setTimeout(r, 3000));
+      }
       onStart(data.questions, data.total, pdfPath, mode, pdfName);
     }catch(e){ setErr('오류: '+e.message); }
-    finally{ setLoading(false); }
+    finally{ setLoading(false); setPreparing(false); }
   };
 
   const canStart = tab==='server' ? !!sel : !!uploaded;
@@ -1753,12 +1759,12 @@ function SelectScreen({ onStart }){
           <button className="btn btn-primary" onClick={()=>start('exam')}
             disabled={loading || !canStart || (tab==='upload' && uploading)}
             style={{flex:1,padding:'13px',fontSize:'15px'}}>
-            {loading ? '⏳ 불러오는 중...' : '🚀 시험 모드'}
+            {loading ? (preparing ? '🖼 이미지 준비 중...' : '⏳ 불러오는 중...') : '🚀 시험 모드'}
           </button>
           <button className="btn" onClick={()=>start('practice')}
             disabled={loading || !canStart || (tab==='upload' && uploading)}
             style={{flex:1,padding:'13px',fontSize:'15px',background:'#7c3aed',borderColor:'#7c3aed'}}>
-            {loading ? '⏳ 불러오는 중...' : '🎯 연습 모드'}
+            {loading ? (preparing ? '🖼 이미지 준비 중...' : '⏳ 불러오는 중...') : '🎯 연습 모드'}
           </button>
         </div>
         <button className="btn" onClick={()=>start('study')}

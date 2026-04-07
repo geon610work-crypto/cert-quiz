@@ -1225,17 +1225,26 @@ class QuizHandler(BaseHTTPRequestHandler):
                     print(f"  ⏳ Extracting: {os.path.basename(pdf_path)}")
                     question_cache[pdf_path] = extract_questions_from_pdf(pdf_path)
                     print(f"  ✅ {len(question_cache[pdf_path])} questions extracted")
-                    # exhibit pages 맵을 백그라운드에서 미리 빌드 (첫 exhibit 로딩 딜레이 방지)
-                    if HAS_FITZ and pdf_path not in _exhibit_pages_cache:
+                    # 백그라운드에서 모든 exhibit 이미지를 미리 렌더링
+                    if HAS_FITZ:
                         _warmup_path = pdf_path
-                        def _warmup_exhibit():
+                        _warmup_qs = [
+                            q for q in question_cache[pdf_path]
+                            if q.get('has_exhibit') and q.get('page_num', 0) > 0
+                        ]
+                        def _prerender_all_exhibits(_path=_warmup_path, _qs=_warmup_qs):
                             try:
-                                _build_exhibit_pages_map(_warmup_path)
-                                print(f"  📐 Exhibit pages map ready: "
-                                      f"{os.path.basename(_warmup_path)}")
-                            except Exception as _we:
-                                print(f"  ⚠️  Exhibit map warmup failed: {_we}")
-                        threading.Thread(target=_warmup_exhibit, daemon=True).start()
+                                _build_exhibit_pages_map(_path)
+                                print(f"  🖼  Pre-rendering {len(_qs)} exhibit(s): "
+                                      f"{os.path.basename(_path)}")
+                                for _q in _qs:
+                                    render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
+                                    if _q.get('exhibit_count', 0) >= 2:
+                                        render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
+                                print(f"  ✅ Exhibit pre-render done: {os.path.basename(_path)}")
+                            except Exception as _e:
+                                print(f"  ⚠️  Exhibit pre-render failed: {_e}")
+                        threading.Thread(target=_prerender_all_exhibits, daemon=True).start()
 
             all_q = question_cache[pdf_path]
             if not all_q:

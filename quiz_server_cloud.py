@@ -526,18 +526,23 @@ def _build_exhibit_pages_map(pdf_path: str) -> dict:
                 if _is_exhibit_only(_pg)
             ]
 
-            # Step 3: assign each exhibit page to the last question whose
-            #         first page is ≤ the exhibit page number
+            # Step 3: assign each exhibit page to the NEAREST question
+            # (measured by |question_first_page - exhibit_page|).
+            # This handles both layouts:
+            #   A) exhibit comes AFTER question text  (inline, next page)
+            #   B) exhibit comes BEFORE question text (dedicated exhibit → question)
+            # In case of equal distance, prefer the earlier question (before exhibit).
             _sorted_qs = sorted(q_first_page.items())   # [(q_num, page), ...]
             for _ep in _exhibit_only:
-                _owner = None
+                _best_qn   = None
+                _best_dist = float('inf')
                 for _qn, _qp in _sorted_qs:
-                    if _qp <= _ep:
-                        _owner = _qn
-                    else:
-                        break
-                if _owner is not None:
-                    _key = f"NO.{_owner}"
+                    _dist = abs(_qp - _ep)
+                    if _dist < _best_dist:   # strictly <: earlier question wins ties
+                        _best_dist = _dist
+                        _best_qn   = _qn
+                if _best_qn is not None:
+                    _key = f"NO.{_best_qn}"
                     result.setdefault(_key, []).append(_ep)
 
     except Exception as _e:

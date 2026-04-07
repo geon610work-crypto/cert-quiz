@@ -422,6 +422,85 @@ def _search_q_header(page, question_num=None):
         hits.sort(key=lambda r: r.y0)
     return hits
 
+# ── Exhibit pages index cache ──────────────────────────────────────────
+# Maps pdf_path → {"NO.6": [4], "NO.11": [9], "NO.55": [41, 42], ...}
+# Only contains questions whose exhibits live on DEDICATED exhibit-only pages
+# (pages with no question headers, only images).  Inline exhibits (image
+# on the same page as the question text) are NOT listed here.
+_exhibit_pages_cache: dict = {}
+
+def _build_exhibit_pages_map(pdf_path: str) -> dict:
+    """Return {question_num_str: [page1, page2, ...]} for dedicated exhibit pages.
+
+    A "dedicated exhibit page" is a page that:
+      - has NO question header (QUESTION NO: X  or  NO.X)
+      - has minimal non-watermark text (just the page number)
+      - contains more than one image (watermark logo counts as one)
+
+    Results are cached per pdf_path.
+    """
+    if pdf_path in _exhibit_pages_cache:
+        return _exhibit_pages_cache[pdf_path]
+
+    result: dict = {}
+    try:
+        import pdfplumber as _pdfp
+        with _pdfp.open(pdf_path) as _pdf:
+            # Step 1: question number → first page it appears on
+            q_first_page: dict = {}
+            for _i, _pg in enumerate(_pdf.pages):
+                _txt = _pg.extract_text() or ''
+                for _q in re.findall(r'QUESTION NO:\s*(\d+)', _txt):
+                    _qn = int(_q)
+                    if _qn not in q_first_page:
+                        q_first_page[_qn] = _i + 1   # 1-indexed
+                for _q in re.findall(r'(?:^|\n)NO\.(\d+)', _txt):
+                    _qn = int(_q)
+                    if _qn not in q_first_page:
+                        q_first_page[_qn] = _i + 1
+
+            # Step 2: identify pure exhibit-only pages
+            def _is_exhibit_only(_pg) -> bool:
+                _t = _pg.extract_text() or ''
+                _real = [
+                    _l.strip() for _l in _t.split('\n')
+                    if _l.strip()
+                    and 'IT Certification' not in _l
+                    and not re.match(r'^\d+$', _l.strip())
+                ]
+                _has_q = bool(
+                    re.search(r'QUESTION NO:\s*\d+', _t)
+                    or re.search(r'(?:^|\n)NO\.\d+', _t, re.MULTILINE)
+                )
+                return not _has_q and len(_real) < 3 and len(_pg.images) > 1
+
+            _exhibit_only = [
+                _i + 1 for _i, _pg in enumerate(_pdf.pages)
+                if _is_exhibit_only(_pg)
+            ]
+
+            # Step 3: assign each exhibit page to the last question whose
+            #         first page is ≤ the exhibit page number
+            _sorted_qs = sorted(q_first_page.items())   # [(q_num, page), ...]
+            for _ep in _exhibit_only:
+                _owner = None
+                for _qn, _qp in _sorted_qs:
+                    if _qp <= _ep:
+                        _owner = _qn
+                    else:
+                        break
+                if _owner is not None:
+                    _key = f"NO.{_owner}"
+                    result.setdefault(_key, []).append(_ep)
+
+    except Exception as _e:
+        print(f"  ⚠️  _build_exhibit_pages_map failed for "
+              f"{os.path.basename(pdf_path)}: {_e}")
+
+    _exhibit_pages_cache[pdf_path] = result
+    return result
+
+
 def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n=1):
     """Extract the exhibit image for a specific question from a PDF page.
 
@@ -441,46 +520,104 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
     if not HAS_FITZ or page_num <= 0:
         return None
 
-    # exhibit_n=2: 두 번째 exhibit는 page N-2에서 단순 렌더링
+    # ── exhibit_n=2: 두 번째 exhibit 렌더링 ────────────────────────────
+    # 전략:
+    #   A) 이 문제에 dedicated exhibit 페이지가 2개 이상 → 두 번째 페이지 렌더
+    #   B) dedicated 페이지가 1개이고 그 페이지에 실제 이미지가 2개 이상 → 두 번째 이미지 반환
+    #   C) dedicated 페이지 없음 (inline exhibit) → 같은 페이지에서 두 번째로 큰 이미지 반환
     if exhibit_n == 2:
-        target_idx = page_num - 3  # 0-indexed, page_num-2 (1-indexed)
-        if not HAS_FITZ or target_idx < 0:
+        if not HAS_FITZ:
             return None
+
+        # Watermark 로고 제외 기준:
+        #   - area ≥ 8000 (아이콘/작은 이미지 제외)
+        #   - height/width ≥ 0.05 (초광폭 배너 제외)
+        #   - width ≥ 350 (EFW/NST PDF의 watermark 로고는 249~322px)
+        def _is_real_exhibit_img(r):
+            area = r.width * r.height
+            if area < 8000:
+                return False
+            if r.width > 0 and (r.height / r.width) < 0.05:
+                return False
+            if r.width < 350:
+                return False
+            return True
+
+        def _get_nth_real_image(pg, n=0, y_min=None, y_max=None):
+            """Page에서 n번째로 큰 실제 exhibit 이미지를 bytes로 반환.
+            y_min/y_max 지정 시 해당 Y 범위 내 이미지만 고려.
+            """
+            candidates = []
+            for _img in pg.get_images(full=True):
+                _xref = _img[0]
+                try:
+                    _rects = pg.get_image_rects(_xref)
+                except Exception:
+                    _rects = []
+                if not _rects:
+                    continue
+                _r = _rects[0]
+                if not _is_real_exhibit_img(_r):
+                    continue
+                if y_min is not None and y_max is not None:
+                    if not (y_min - 10 <= _r.y0 <= y_max):
+                        continue
+                candidates.append((_r.width * _r.height, _xref))
+            candidates.sort(reverse=True)
+            if len(candidates) <= n:
+                return None
+            _xref2 = candidates[n][1]
+            try:
+                _raw = pg.parent.extract_image(_xref2)
+                _data = _raw['image']
+                _ext = _raw.get('ext', 'jpeg').lower()
+                if _ext not in ('jpeg', 'jpg'):
+                    _pix = fitz.Pixmap(pg.parent, _xref2)
+                    if _pix.alpha:
+                        _pix = fitz.Pixmap(fitz.csRGB, _pix)
+                    _data = _pix.tobytes('jpeg')
+                return _data
+            except Exception:
+                return None
+
+        exmap = _build_exhibit_pages_map(pdf_path)
+        q_exhibit_pages = exmap.get(question_num, []) if question_num else []
+
         doc2 = None
         try:
             doc2 = fitz.open(pdf_path)
-            if target_idx >= doc2.page_count:
-                return None
-            tpage = doc2[target_idx]
-            pr = tpage.rect
-            mat = fitz.Matrix(dpi / 72, dpi / 72)
-            # 가장 큰 이미지 찾기
-            best_img = None
-            best_area = 0
-            for img in tpage.get_images(full=True):
-                xref = img[0]
-                try:
-                    rects = tpage.get_image_rects(xref)
-                except Exception:
-                    rects = []
-                if rects:
-                    r = rects[0]
-                    area = r.width * r.height
-                    if area > best_area and area > 5000:
-                        best_area = area
-                        best_img = xref
-            if best_img:
-                base_img = doc2.extract_image(best_img)
-                img_bytes = base_img['image']
+            img_data = None
+
+            if len(q_exhibit_pages) >= 2:
+                # Case A: 2개 이상의 dedicated exhibit 페이지 → 두 번째 페이지 사용
+                _tpg = doc2[q_exhibit_pages[1] - 1]
+                img_data = _get_nth_real_image(_tpg, n=0)
+
+            elif len(q_exhibit_pages) == 1:
+                # Case B: 1개의 dedicated exhibit 페이지 → 그 페이지의 두 번째 이미지
+                _tpg = doc2[q_exhibit_pages[0] - 1]
+                img_data = _get_nth_real_image(_tpg, n=1)
+                # 두 번째 이미지가 없으면 (이미 exhibit_n=1에서 표시됨) None 반환
+
             else:
-                # 이미지 없으면 페이지 전체 렌더
-                clip = fitz.Rect(pr.x0, pr.y0 + pr.height * 0.05,
-                                 pr.x1, pr.y1 - pr.height * 0.05)
-                pix = tpage.get_pixmap(matrix=mat, alpha=False, clip=clip)
-                img_bytes = pix.tobytes('jpeg')
-            b64_result = base64.b64encode(img_bytes).decode()
+                # Case C: inline exhibit → 같은 페이지에서 두 번째로 큰 이미지
+                _tpg = doc2[page_num - 1]
+                _y_min = None
+                _y_max = None
+                if question_num:
+                    _qhits = _search_q_header(_tpg, question_num)
+                    if _qhits:
+                        _y_min = _qhits[0].y0
+                        _y_max = _tpg.rect.y1
+                img_data = _get_nth_real_image(_tpg, n=1,
+                                               y_min=_y_min, y_max=_y_max)
+
+            if img_data is None:
+                return None
+            b64_result = base64.b64encode(img_data).decode()
             image_cache[key] = b64_result
             return b64_result
+
         except Exception as e:
             print(f"  ⚠️  Exhibit2 render failed: {e}")
             return None

@@ -1,0 +1,21 @@
+# API keys
+.quiz_env
+*.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+quiz_env/
+
+# Temp images (no100~, no101~ etc)
+no1*.png
+no1*.jpeg
+no*.png
+no*.jpeg
+*_preview.png
+*_hq.png
+*_full.png
+
+# 업로드 임시 파일
+*.tmp

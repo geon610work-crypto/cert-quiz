@@ -1235,25 +1235,15 @@ class QuizHandler(BaseHTTPRequestHandler):
                     print(f"  ⏳ Extracting: {os.path.basename(pdf_path)}")
                     question_cache[pdf_path] = extract_questions_from_pdf(pdf_path)
                     print(f"  ✅ {len(question_cache[pdf_path])} questions extracted")
-                    # 백그라운드에서 모든 exhibit 이미지를 미리 렌더링
+                    # exhibit 페이지 맵만 미리 빌드 (렌더링은 선택된 문제만)
                     if HAS_FITZ:
-                        _warmup_path = pdf_path
-                        _warmup_qs = [
-                            q for q in question_cache[pdf_path]
-                            if q.get('has_exhibit') and q.get('page_num', 0) > 0
-                        ]
-                        def _prerender_all_exhibits(_path=_warmup_path, _qs=_warmup_qs):
+                        def _warmup_map(_path=pdf_path):
                             try:
                                 _build_exhibit_pages_map(_path)
-                                print(f"  🖼  Pre-rendering {len(_qs)} exhibit(s): "
-                                      f"{os.path.basename(_path)}")
-                                for _q in _qs:
-                                    render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
-                                    render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
-                                print(f"  ✅ Exhibit pre-render done: {os.path.basename(_path)}")
+                                print(f"  ✅ Exhibit pages map built: {os.path.basename(_path)}")
                             except Exception as _e:
-                                print(f"  ⚠️  Exhibit pre-render failed: {_e}")
-                        threading.Thread(target=_prerender_all_exhibits, daemon=True).start()
+                                print(f"  ⚠️  Exhibit map warmup failed: {_e}")
+                        threading.Thread(target=_warmup_map, daemon=True).start()
 
             all_q = question_cache[pdf_path]
             if not all_q:
@@ -1266,6 +1256,22 @@ class QuizHandler(BaseHTTPRequestHandler):
                 selected = all_q
             else:
                 selected = random.sample(all_q, min(count, len(all_q)))
+
+            # 선택된 문제의 exhibit만 백그라운드 pre-render (전체 아닌 실제 볼 문제만)
+            if HAS_FITZ:
+                _sel_exhibit_qs = [q for q in selected
+                                   if q.get('has_exhibit') and q.get('page_num', 0) > 0]
+                if _sel_exhibit_qs:
+                    def _prerender_selected(_path=pdf_path, _qs=_sel_exhibit_qs):
+                        try:
+                            print(f"  🖼  Pre-rendering {len(_qs)} selected exhibit(s)")
+                            for _q in _qs:
+                                render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
+                                render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
+                            print(f"  ✅ Selected exhibit pre-render done")
+                        except Exception as _e:
+                            print(f"  ⚠️  Selected exhibit pre-render failed: {_e}")
+                    threading.Thread(target=_prerender_selected, daemon=True).start()
 
             # Cloud 버전: 캐시에서 즉시 조회 (API 생성 없음)
             for q in selected:

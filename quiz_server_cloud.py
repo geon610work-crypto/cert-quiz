@@ -1257,13 +1257,11 @@ class QuizHandler(BaseHTTPRequestHandler):
             else:
                 selected = random.sample(all_q, min(count, len(all_q)))
 
-            # 선택된 문제의 exhibit만 백그라운드 pre-render (전체 아닌 실제 볼 문제만)
-            # 공부모드(order=1)는 전체 문제가 selected이므로 앞 15개만 pre-render
-            if HAS_FITZ:
-                _all_exhibit_qs = [q for q in selected
+            # 선택된 문제의 exhibit만 백그라운드 pre-render
+            # 공부모드(order=1)는 어느 문제부터 볼지 모르므로 pre-render 생략 (on-demand)
+            if HAS_FITZ and order != '1':
+                _sel_exhibit_qs = [q for q in selected
                                    if q.get('has_exhibit') and q.get('page_num', 0) > 0]
-                _prerender_limit = 15 if order == '1' else len(_all_exhibit_qs)
-                _sel_exhibit_qs = _all_exhibit_qs[:_prerender_limit]
                 if _sel_exhibit_qs:
                     def _prerender_selected(_path=pdf_path, _qs=_sel_exhibit_qs):
                         try:

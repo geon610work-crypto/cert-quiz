@@ -375,6 +375,7 @@ def parse_question(num, content, page_num):
         re.search(r'\bexhibits?\b', explanation, re.IGNORECASE) or
         re.search(r'(?:from|refer to|shown in|based on)\s+the\s+(?:output|following|diagram|topology|table)', q_text, re.IGNORECASE)
     )
+    exhibit_count = 2 if re.search(r'\bexhibits\b', q_text, re.IGNORECASE) else 1
 
     # How many to choose
     cm = re.search(r'choose\s+(\w+)', q_text, re.IGNORECASE)
@@ -387,6 +388,7 @@ def parse_question(num, content, page_num):
         'answer':       answer,
         'explanation':  explanation,
         'has_exhibit':  has_exhibit,
+        'exhibit_count': exhibit_count if has_exhibit else 0,
         'page_num':     page_num,
         'num_to_choose': num_to_choose,
         'is_multiple':  num_to_choose > 1,
@@ -420,7 +422,7 @@ def _search_q_header(page, question_num=None):
         hits.sort(key=lambda r: r.y0)
     return hits
 
-def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
+def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n=1):
     """Extract the exhibit image for a specific question from a PDF page.
 
     Strategy:
@@ -433,11 +435,59 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150):
                             question (or page header if not found)
       3. Last resort: full-page render.
     """
-    key = (pdf_path, page_num, question_num)
+    key = (pdf_path, page_num, question_num, dpi, exhibit_n)
     if key in image_cache:
         return image_cache[key]
     if not HAS_FITZ or page_num <= 0:
         return None
+
+    # exhibit_n=2: 두 번째 exhibit는 page N-2에서 단순 렌더링
+    if exhibit_n == 2:
+        target_idx = page_num - 3  # 0-indexed, page_num-2 (1-indexed)
+        if not HAS_FITZ or target_idx < 0:
+            return None
+        doc2 = None
+        try:
+            doc2 = fitz.open(pdf_path)
+            if target_idx >= doc2.page_count:
+                return None
+            tpage = doc2[target_idx]
+            pr = tpage.rect
+            mat = fitz.Matrix(dpi / 72, dpi / 72)
+            # 가장 큰 이미지 찾기
+            best_img = None
+            best_area = 0
+            for img in tpage.get_images(full=True):
+                xref = img[0]
+                try:
+                    rects = tpage.get_image_rects(xref)
+                except Exception:
+                    rects = []
+                if rects:
+                    r = rects[0]
+                    area = r.width * r.height
+                    if area > best_area and area > 5000:
+                        best_area = area
+                        best_img = xref
+            if best_img:
+                base_img = doc2.extract_image(best_img)
+                img_bytes = base_img['image']
+            else:
+                # 이미지 없으면 페이지 전체 렌더
+                clip = fitz.Rect(pr.x0, pr.y0 + pr.height * 0.05,
+                                 pr.x1, pr.y1 - pr.height * 0.05)
+                pix = tpage.get_pixmap(matrix=mat, alpha=False, clip=clip)
+                img_bytes = pix.tobytes('jpeg')
+            b64_result = base64.b64encode(img_bytes).decode()
+            image_cache[key] = b64_result
+            return b64_result
+        except Exception as e:
+            print(f"  ⚠️  Exhibit2 render failed: {e}")
+            return None
+        finally:
+            if doc2:
+                try: doc2.close()
+                except: pass
     doc = None
     try:
         doc  = fitz.open(pdf_path)
@@ -1058,6 +1108,7 @@ class QuizHandler(BaseHTTPRequestHandler):
             page_num    = int(params.get('page', ['0'])[0])
             question_num = params.get('q', [''])[0] or None  # e.g. "NO.84"
             opts_mode   = params.get('opts', ['0'])[0] == '1'
+            exhibit_n   = int(params.get('n', ['1'])[0])
 
             if not pdf_path or not os.path.exists(pdf_path) or page_num <= 0:
                 self.send_json({'error': 'invalid params'}, 400)
@@ -1066,7 +1117,7 @@ class QuizHandler(BaseHTTPRequestHandler):
             if opts_mode:
                 b64 = render_options_area_base64(pdf_path, page_num, question_num)
             else:
-                b64 = render_page_base64(pdf_path, page_num, question_num)
+                b64 = render_page_base64(pdf_path, page_num, question_num, exhibit_n=exhibit_n)
             if b64:
                 self.send_json({'image': b64})
             else:
@@ -1204,7 +1255,7 @@ select:focus{border-color:#3b82f6}
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
 /* ── ExhibitImage: lazy-loads PDF page image from server ── */
-function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
+function ExhibitImage({ pdfPath, pageNum, qNum, optsMode, exhibitN=1 }) {
   const [src,     setSrc]     = useState(null);
   const [loading, setLoading] = useState(true);
   const [err,     setErr]     = useState(false);
@@ -1215,7 +1266,8 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
     const url = '/api/exhibit?path=' + encodeURIComponent(pdfPath)
               + '&page=' + pageNum
               + (qNum ? '&q=' + encodeURIComponent(qNum) : '')
-              + (optsMode ? '&opts=1' : '');
+              + (optsMode ? '&opts=1' : '')
+              + (exhibitN > 1 ? '&n=' + exhibitN : '');
     fetch(url)
       .then(r => r.json())
       .then(data => {
@@ -1224,7 +1276,7 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode }) {
       })
       .catch(() => setErr(true))
       .finally(() => setLoading(false));
-  }, [pdfPath, pageNum, qNum, optsMode]);
+  }, [pdfPath, pageNum, qNum, optsMode, exhibitN]);
 
   const [zoomed, setZoomed] = useState(false);
 
@@ -1605,7 +1657,12 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
       <div className="card">
         {/* Exhibit */}
         {q.has_exhibit && (
-          <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
+          <>
+            {q.exhibit_count >= 2 && q.page_num >= 3 && (
+              <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
+            )}
+            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
+          </>
         )}
 
         {/* 문제 텍스트 */}
@@ -1813,8 +1870,14 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           {q.has_exhibit  && <span className="badge b-yellow">📊 Exhibit</span>}
         </div>
 
-        {q.has_exhibit && q.page_num>0 &&
-          <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />}
+        {q.has_exhibit && q.page_num>0 && (
+          <>
+            {q.exhibit_count >= 2 && q.page_num >= 3 && (
+              <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
+            )}
+            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
+          </>
+        )}
         {q.has_exhibit && q.page_num<=0 &&
           <div className="exhibit-warn">
             ⚠️ 이 문제는 <strong>Exhibit(그림/출력)</strong>을 참조하지만 페이지 정보를 찾을 수 없습니다.
@@ -1974,9 +2037,14 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
 
       {/* question */}
       <div className="card">
-        {q.has_exhibit && q.page_num > 0 &&
-          <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
-        }
+        {q.has_exhibit && q.page_num > 0 && (
+          <>
+            {q.exhibit_count >= 2 && q.page_num >= 3 && (
+              <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
+            )}
+            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
+          </>
+        )}
         {q.has_exhibit && q.page_num <= 0 &&
           <div className="exhibit-warn">
             ⚠️ 이 문제는 <strong>Exhibit(그림/출력)</strong>을 참조하지만 페이지 정보를 찾을 수 없습니다.
@@ -2154,9 +2222,14 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
             {expanded===r.num && <>
               <div className="divider" />
               {/* exhibit image */}
-              {r.has_exhibit && r.page_num > 0 &&
-                <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
-              }
+              {r.has_exhibit && r.page_num > 0 && (
+                <>
+                  {r.exhibit_count >= 2 && r.page_num >= 3 && (
+                    <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
+                  )}
+                  <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
+                </>
+              )}
               {/* options-area exhibit when ALL options are images */}
               {r.page_num > 0 && Object.keys(r.options).length > 0 &&
                 Object.values(r.options).every(v=>v==='[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
@@ -2221,9 +2294,14 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
 
             {expandedCorrect===r.num && <>
               <div className="divider" />
-              {r.has_exhibit && r.page_num > 0 &&
-                <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
-              }
+              {r.has_exhibit && r.page_num > 0 && (
+                <>
+                  {r.exhibit_count >= 2 && r.page_num >= 3 && (
+                    <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
+                  )}
+                  <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
+                </>
+              )}
               {r.page_num > 0 && Object.keys(r.options).length > 0 &&
                 Object.values(r.options).every(v=>v==='[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
                 <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />

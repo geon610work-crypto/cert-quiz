@@ -13,6 +13,11 @@ Stop:      Ctrl+C
 import os, re, json, random, sys, socket, threading, webbrowser, uuid, tempfile
 from collections import OrderedDict
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from socketserver import ThreadingMixIn
+
+class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
+    """동시 exhibit 요청을 병렬 처리하기 위한 멀티스레드 HTTP 서버."""
+    daemon_threads = True   # 서버 종료 시 워커 스레드도 함께 종료
 from urllib.parse import urlparse, parse_qs
 
 # ─────────────────────────────────────────
@@ -86,25 +91,22 @@ class _LRUCache:
 # page image cache: {(pdf_path, page_num): base64_str}
 image_cache = _LRUCache(maxsize=200)
 
-# fitz Document cache: keep PDF documents open to avoid repeated fitz.open() overhead
-# Single-threaded server → no locking needed for main-thread access
-_fitz_doc_cache: dict = {}   # pdf_path → fitz.Document
+# fitz Document cache: 스레드당 별도 Document (fitz는 멀티스레드 비안전)
+# ThreadingHTTPServer에서 각 요청 스레드가 자체 doc을 유지
+_thread_local = threading.local()
 
-def _get_cached_fitz_doc(pdf_path: str):
-    """Return a cached (open) fitz.Document for pdf_path.
+def _get_thread_fitz_doc(pdf_path: str):
+    """Return a per-thread cached fitz.Document for pdf_path.
 
-    Keeps the last 3 PDFs open.  Evicts the oldest when the cache is full.
-    Never closes the returned document — the caller must NOT close it.
+    fitz.Document는 스레드 비안전이므로 threading.local()로 스레드마다 별도 인스턴스 유지.
+    각 스레드 내에서는 같은 PDF를 재사용 (open 오버헤드 최소화).
+    호출자는 doc을 close()하면 안 됨.
     """
-    if pdf_path not in _fitz_doc_cache:
-        if len(_fitz_doc_cache) >= 3:
-            oldest = next(iter(_fitz_doc_cache))
-            try:
-                _fitz_doc_cache.pop(oldest).close()
-            except Exception:
-                _fitz_doc_cache.pop(oldest, None)
-        _fitz_doc_cache[pdf_path] = fitz.open(pdf_path)
-    return _fitz_doc_cache[pdf_path]
+    if not hasattr(_thread_local, 'docs'):
+        _thread_local.docs = {}
+    if pdf_path not in _thread_local.docs:
+        _thread_local.docs[pdf_path] = fitz.open(pdf_path)
+    return _thread_local.docs[pdf_path]
 
 # Korean explanation cache: {q_num: korean_str}
 # Pre-load from korean_cache.json if it exists (bundled explanations)
@@ -604,7 +606,7 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
         q_exhibit_pages = exmap.get(question_num, []) if question_num else []
 
         try:
-            doc2 = _get_cached_fitz_doc(pdf_path)  # 캐시된 doc 재사용 (close 불필요)
+            doc2 = _get_thread_fitz_doc(pdf_path)  # 캐시된 doc 재사용 (close 불필요)
             img_data = None
 
             if len(q_exhibit_pages) >= 2:
@@ -641,7 +643,7 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
             print(f"  ⚠️  Exhibit2 render failed: {e}")
             return None
     try:
-        doc  = _get_cached_fitz_doc(pdf_path)  # 캐시된 doc 재사용 (close 불필요)
+        doc  = _get_thread_fitz_doc(pdf_path)  # 캐시된 doc 재사용 (close 불필요)
         page = doc[page_num - 1]
 
         # ── 1. Try to extract the best embedded image ──────────────────
@@ -1059,7 +1061,7 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
     if not HAS_FITZ or page_num <= 0:
         return None
     try:
-        doc  = _get_cached_fitz_doc(pdf_path)  # 캐시된 doc 재사용
+        doc  = _get_thread_fitz_doc(pdf_path)  # 캐시된 doc 재사용
         mat  = fitz.Matrix(dpi / 72, dpi / 72)
 
         # Determine which page holds the options
@@ -1174,6 +1176,7 @@ def parse_multipart(content_type, body):
 # HTTP Server
 # ─────────────────────────────────────────
 question_cache = {}
+_question_cache_lock = threading.Lock()   # 멀티스레드 동시 추출 방지
 
 class QuizHandler(BaseHTTPRequestHandler):
 
@@ -1216,22 +1219,23 @@ class QuizHandler(BaseHTTPRequestHandler):
                 self.send_json({'error': 'PDF not found'}, 404)
                 return
 
-            if pdf_path not in question_cache:
-                print(f"  ⏳ Extracting: {os.path.basename(pdf_path)}")
-                question_cache[pdf_path] = extract_questions_from_pdf(pdf_path)
-                print(f"  ✅ {len(question_cache[pdf_path])} questions extracted")
-                # exhibit pages 맵을 백그라운드에서 미리 빌드 (첫 exhibit 로딩 딜레이 방지)
-                if HAS_FITZ and pdf_path not in _exhibit_pages_cache:
-                    import threading as _threading
-                    _warmup_path = pdf_path
-                    def _warmup_exhibit():
-                        try:
-                            _build_exhibit_pages_map(_warmup_path)
-                            print(f"  📐 Exhibit pages map ready: "
-                                  f"{os.path.basename(_warmup_path)}")
-                        except Exception as _we:
-                            print(f"  ⚠️  Exhibit map warmup failed: {_we}")
-                    _threading.Thread(target=_warmup_exhibit, daemon=True).start()
+            # 동시에 두 스레드가 같은 PDF를 추출하지 않도록 lock 사용
+            with _question_cache_lock:
+                if pdf_path not in question_cache:
+                    print(f"  ⏳ Extracting: {os.path.basename(pdf_path)}")
+                    question_cache[pdf_path] = extract_questions_from_pdf(pdf_path)
+                    print(f"  ✅ {len(question_cache[pdf_path])} questions extracted")
+                    # exhibit pages 맵을 백그라운드에서 미리 빌드 (첫 exhibit 로딩 딜레이 방지)
+                    if HAS_FITZ and pdf_path not in _exhibit_pages_cache:
+                        _warmup_path = pdf_path
+                        def _warmup_exhibit():
+                            try:
+                                _build_exhibit_pages_map(_warmup_path)
+                                print(f"  📐 Exhibit pages map ready: "
+                                      f"{os.path.basename(_warmup_path)}")
+                            except Exception as _we:
+                                print(f"  ⚠️  Exhibit map warmup failed: {_we}")
+                        threading.Thread(target=_warmup_exhibit, daemon=True).start()
 
             all_q = question_cache[pdf_path]
             if not all_q:
@@ -2577,7 +2581,7 @@ def get_free_port(preferred=5555):
 
 if __name__ == '__main__':
     port   = PORT if IS_CLOUD else get_free_port(PORT)
-    server = HTTPServer(('0.0.0.0', port), QuizHandler)
+    server = ThreadingHTTPServer(('0.0.0.0', port), QuizHandler)
     url    = f'http://localhost:{port}'
 
     print('\n' + '='*45)

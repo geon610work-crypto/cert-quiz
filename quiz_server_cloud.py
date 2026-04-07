@@ -1280,13 +1280,15 @@ class QuizHandler(BaseHTTPRequestHandler):
             else:
                 selected = random.sample(all_q, min(count, len(all_q)))
 
-            # 모든 모드: exhibit 이미지를 동기적으로 pre-render 후 응답
-            # ThreadPoolExecutor(4)로 병렬 렌더 → 응답 전 캐시 완료 보장
-            if HAS_FITZ:
+            # pre-extracted 파일이 있는 서버 PDF는 즉시 응답 (렌더링 불필요)
+            # 업로드 PDF처럼 exhibits/ 가 없는 경우만 동기 pre-render
+            _pdf_stem = os.path.splitext(os.path.basename(pdf_path))[0]
+            _has_preextracted = os.path.isdir(os.path.join(EXHIBIT_DIR, _pdf_stem))
+
+            if HAS_FITZ and not _has_preextracted:
                 _exhibit_qs = [q for q in selected
                                if q.get('has_exhibit') and q.get('page_num', 0) > 0]
                 if _exhibit_qs:
-                    # exhibit_pages_map 먼저 빌드 (렌더 전 필요)
                     _build_exhibit_pages_map(pdf_path)
                     print(f"  🖼  Pre-rendering {len(_exhibit_qs)} exhibit(s) in parallel...")
                     def _render_one(_q, _path=pdf_path):

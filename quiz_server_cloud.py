@@ -89,7 +89,12 @@ class _LRUCache:
 
 
 # page image cache: {(pdf_path, page_num): base64_str}
+# 빈 문자열('')은 "두 번째 exhibit 없음" 센티넬 (캐시 히트 시 즉시 None 반환)
 image_cache = _LRUCache(maxsize=200)
+
+# 동시 fitz 렌더링 수 제한 — Render.com 무료 플랜은 CPU가 약하므로
+# 동시 렌더 2개 초과 시 CPU 포화 → 모든 요청이 느려지는 문제 방지
+_render_semaphore = threading.Semaphore(2)
 
 # fitz Document cache: 스레드당 별도 Document (fitz는 멀티스레드 비안전)
 # ThreadingHTTPServer에서 각 요청 스레드가 자체 doc을 유지
@@ -538,7 +543,8 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
     """
     key = (pdf_path, page_num, question_num, dpi, exhibit_n)
     if key in image_cache:
-        return image_cache[key]
+        cached = image_cache[key]
+        return cached if cached else None  # '' 센티넬 → None ("no exhibit" 캐시 히트)
     if not HAS_FITZ or page_num <= 0:
         return None
 
@@ -606,34 +612,35 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
         q_exhibit_pages = exmap.get(question_num, []) if question_num else []
 
         try:
-            doc2 = _get_thread_fitz_doc(pdf_path)  # 캐시된 doc 재사용 (close 불필요)
-            img_data = None
+            with _render_semaphore:  # CPU 과부하 방지: 동시 렌더 최대 2개
+                doc2 = _get_thread_fitz_doc(pdf_path)
+                img_data = None
 
-            if len(q_exhibit_pages) >= 2:
-                # Case A: 2개 이상의 dedicated exhibit 페이지 → 두 번째 페이지 사용
-                _tpg = doc2[q_exhibit_pages[1] - 1]
-                img_data = _get_nth_real_image(_tpg, n=0)
+                if len(q_exhibit_pages) >= 2:
+                    # Case A: 2개 이상의 dedicated exhibit 페이지 → 두 번째 페이지 사용
+                    _tpg = doc2[q_exhibit_pages[1] - 1]
+                    img_data = _get_nth_real_image(_tpg, n=0)
 
-            elif len(q_exhibit_pages) == 1:
-                # Case B: 1개의 dedicated exhibit 페이지 → 그 페이지의 두 번째 이미지
-                _tpg = doc2[q_exhibit_pages[0] - 1]
-                img_data = _get_nth_real_image(_tpg, n=1)
-                # 두 번째 이미지가 없으면 (이미 exhibit_n=1에서 표시됨) None 반환
+                elif len(q_exhibit_pages) == 1:
+                    # Case B: 1개의 dedicated exhibit 페이지 → 그 페이지의 두 번째 이미지
+                    _tpg = doc2[q_exhibit_pages[0] - 1]
+                    img_data = _get_nth_real_image(_tpg, n=1)
 
-            else:
-                # Case C: inline exhibit → 같은 페이지에서 두 번째로 큰 이미지
-                _tpg = doc2[page_num - 1]
-                _y_min = None
-                _y_max = None
-                if question_num:
-                    _qhits = _search_q_header(_tpg, question_num)
-                    if _qhits:
-                        _y_min = _qhits[0].y0
-                        _y_max = _tpg.rect.y1
-                img_data = _get_nth_real_image(_tpg, n=1,
-                                               y_min=_y_min, y_max=_y_max)
+                else:
+                    # Case C: inline exhibit → 같은 페이지에서 두 번째로 큰 이미지
+                    _tpg = doc2[page_num - 1]
+                    _y_min = None
+                    _y_max = None
+                    if question_num:
+                        _qhits = _search_q_header(_tpg, question_num)
+                        if _qhits:
+                            _y_min = _qhits[0].y0
+                            _y_max = _tpg.rect.y1
+                    img_data = _get_nth_real_image(_tpg, n=1,
+                                                   y_min=_y_min, y_max=_y_max)
 
             if img_data is None:
+                image_cache[key] = ''  # 센티넬: 두 번째 exhibit 없음 캐시 (중복 렌더 방지)
                 return None
             b64_result = base64.b64encode(img_data).decode()
             image_cache[key] = b64_result
@@ -642,8 +649,9 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
         except Exception as e:
             print(f"  ⚠️  Exhibit2 render failed: {e}")
             return None
+    _render_semaphore.acquire()
     try:
-        doc  = _get_thread_fitz_doc(pdf_path)  # 캐시된 doc 재사용 (close 불필요)
+        doc  = _get_thread_fitz_doc(pdf_path)
         page = doc[page_num - 1]
 
         # ── 1. Try to extract the best embedded image ──────────────────
@@ -1038,6 +1046,8 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
     except Exception as e:
         print(f"  ⚠️  Exhibit render failed (p{page_num}): {e}")
         return None
+    finally:
+        _render_semaphore.release()
 
 
 options_area_cache = _LRUCache(maxsize=100)
@@ -1438,20 +1448,25 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode, exhibitN=1 }) {
               + (exhibitN > 1 ? '&n=' + exhibitN : '');
     let retries = 0;
     const MAX_RETRIES = 3;
+    const TIMEOUT_MS = 20000;  // 20초 타임아웃
     const fetchExhibit = () => {
-      fetch(url)
-        .then(r => r.json())
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+      fetch(url, { signal: ctrl.signal })
+        .then(r => { clearTimeout(tid); return r.json(); })
         .then(data => {
-          if (data.image)      { setSrc('data:image/jpeg;base64,' + data.image); setLoading(false); }
-          else if (data.no_exhibit) { setAbsent(true); setLoading(false); }  // 두 번째 exhibit 없음
-          else                 { setErr(true); setLoading(false); }
+          if (data.image)           { setSrc('data:image/jpeg;base64,' + data.image); setLoading(false); }
+          else if (data.no_exhibit) { setAbsent(true); setLoading(false); }
+          else                      { setErr(true); setLoading(false); }
         })
-        .catch(() => {
+        .catch(err => {
+          clearTimeout(tid);
           if (retries < MAX_RETRIES) {
             retries++;
             setTimeout(fetchExhibit, 1500 * retries);
           } else {
-            setErr(true);
+            // exhibitN > 1이면 에러 대신 조용히 숨김 (두 번째 exhibit이 없을 수도 있음)
+            if (exhibitN > 1) setAbsent(true); else setErr(true);
             setLoading(false);
           }
         });

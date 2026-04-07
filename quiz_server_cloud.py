@@ -27,7 +27,8 @@ from urllib.parse import urlparse, parse_qs
 WORKSPACE  = os.path.dirname(os.path.abspath(__file__))
 PORT       = int(os.environ.get('PORT', 5555))
 IS_CLOUD   = os.environ.get('RENDER') or os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('FLY_APP_NAME')
-UPLOAD_DIR = os.path.join(tempfile.gettempdir(), 'quiz_uploads')
+UPLOAD_DIR  = os.path.join(tempfile.gettempdir(), 'quiz_uploads')
+EXHIBIT_DIR = os.path.join(WORKSPACE, 'exhibits')   # pre-extracted exhibit images
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 MAX_UPLOAD_MB = 80
 
@@ -205,6 +206,24 @@ def _lookup_cache(pdf_name, q_num):
 def generate_korean_explanation(q_num, question, explanation, options, answer=None, pdf_name=''):
     """Cloud 버전: 캐시 조회만 수행, API 호출 없음."""
     return _lookup_cache(pdf_name, q_num)
+
+
+def _load_preextracted_exhibit(pdf_path: str, question_num: str, exhibit_n: int):
+    """pre-extracted exhibit 이미지 파일이 있으면 base64로 반환, 없으면 None."""
+    if not question_num:
+        return None
+    pdf_name = os.path.splitext(os.path.basename(pdf_path))[0]
+    img_path = os.path.join(EXHIBIT_DIR, pdf_name, f"{question_num}_n{exhibit_n}.jpg")
+    absent_marker = os.path.join(EXHIBIT_DIR, pdf_name, f"{question_num}_n{exhibit_n}.absent")
+    if os.path.exists(absent_marker):
+        return ''   # 센티넬: 없음이 확인된 경우
+    if not os.path.exists(img_path):
+        return None
+    try:
+        with open(img_path, 'rb') as f:
+            return base64.b64encode(f.read()).decode()
+    except Exception:
+        return None
 
 
 def find_pdfs():
@@ -1301,11 +1320,13 @@ class QuizHandler(BaseHTTPRequestHandler):
             if opts_mode:
                 b64 = render_options_area_base64(pdf_path, page_num, question_num)
             else:
-                b64 = render_page_base64(pdf_path, page_num, question_num, exhibit_n=exhibit_n)
+                # pre-extracted 파일 먼저 확인 (빠른 파일 서빙)
+                b64 = _load_preextracted_exhibit(pdf_path, question_num, exhibit_n)
+                if b64 is None:
+                    b64 = render_page_base64(pdf_path, page_num, question_num, exhibit_n=exhibit_n)
             if b64:
                 self.send_json({'image': b64})
             elif exhibit_n >= 2:
-                # 두 번째 exhibit가 없는 경우 — 에러가 아니라 조용히 없음을 알림
                 self.send_json({'no_exhibit': True})
             else:
                 self.send_json({'error': 'render failed or PyMuPDF not available'}, 500)
@@ -1581,7 +1602,7 @@ function useTimer(){
 
 /* ── SelectScreen ── */
 function SelectScreen({ onStart }){
-  const [tab,      setTab]     = useState('upload'); // 'server' | 'upload'
+  const [tab,      setTab]     = useState('server'); // 'server' | 'upload'
   // server tab
   const [pdfs,    setPdfs]    = useState([]);
   const [sel,     setSel]     = useState('');

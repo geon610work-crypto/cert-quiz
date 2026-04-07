@@ -1265,10 +1265,9 @@ class QuizHandler(BaseHTTPRequestHandler):
                 if _sel_exhibit_qs:
                     def _prerender_selected(_path=pdf_path, _qs=_sel_exhibit_qs):
                         try:
-                            print(f"  🖼  Pre-rendering {len(_qs)} exhibit(s)")
+                            print(f"  🖼  Pre-rendering {len(_qs)} exhibit(s) (n=1 only)")
                             for _q in _qs:
                                 render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
-                                render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
                             print(f"  ✅ Exhibit pre-render done")
                         except Exception as _e:
                             print(f"  ⚠️  Exhibit pre-render failed: {_e}")

@@ -529,6 +529,56 @@ def _build_exhibit_pages_map(pdf_path: str) -> dict:
     return result
 
 
+def _is_real_exhibit_img(r):
+    """워터마크·아이콘 제외 필터."""
+    if r.width * r.height < 8000:
+        return False
+    if r.width > 0 and (r.height / r.width) < 0.05:
+        return False
+    if r.width < 350:
+        return False
+    return True
+
+
+def _get_nth_exhibit_image(pg, n=0, y_min=None, y_max=None):
+    """페이지에서 n번째 exhibit 이미지를 bytes로 반환.
+    PDF 표시 순서(Y 위치, 위→아래)로 정렬해 n번째를 선택.
+    y_min/y_max 지정 시 해당 Y 범위 내 이미지만 고려.
+    """
+    candidates = []
+    for _img in pg.get_images(full=True):
+        _xref = _img[0]
+        try:
+            _rects = pg.get_image_rects(_xref)
+        except Exception:
+            _rects = []
+        if not _rects:
+            continue
+        _r = _rects[0]
+        if not _is_real_exhibit_img(_r):
+            continue
+        if y_min is not None and y_max is not None:
+            if not (y_min - 10 <= _r.y0 <= y_max):
+                continue
+        candidates.append((_r.y0, _xref))   # Y 위치 기준 정렬
+    candidates.sort()                         # 위→아래 순서
+    if len(candidates) <= n:
+        return None
+    _xref2 = candidates[n][1]
+    try:
+        _raw = pg.parent.extract_image(_xref2)
+        _data = _raw['image']
+        _ext = _raw.get('ext', 'jpeg').lower()
+        if _ext not in ('jpeg', 'jpg'):
+            _pix = fitz.Pixmap(pg.parent, _xref2)
+            if _pix.alpha:
+                _pix = fitz.Pixmap(fitz.csRGB, _pix)
+            _data = _pix.tobytes('jpeg')
+        return _data
+    except Exception:
+        return None
+
+
 def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n=1):
     """Extract the exhibit image for a specific question from a PDF page.
 
@@ -558,57 +608,6 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
         if not HAS_FITZ:
             return None
 
-        # Watermark 로고 제외 기준:
-        #   - area ≥ 8000 (아이콘/작은 이미지 제외)
-        #   - height/width ≥ 0.05 (초광폭 배너 제외)
-        #   - width ≥ 350 (EFW/NST PDF의 watermark 로고는 249~322px)
-        def _is_real_exhibit_img(r):
-            area = r.width * r.height
-            if area < 8000:
-                return False
-            if r.width > 0 and (r.height / r.width) < 0.05:
-                return False
-            if r.width < 350:
-                return False
-            return True
-
-        def _get_nth_real_image(pg, n=0, y_min=None, y_max=None):
-            """Page에서 n번째로 큰 실제 exhibit 이미지를 bytes로 반환.
-            y_min/y_max 지정 시 해당 Y 범위 내 이미지만 고려.
-            """
-            candidates = []
-            for _img in pg.get_images(full=True):
-                _xref = _img[0]
-                try:
-                    _rects = pg.get_image_rects(_xref)
-                except Exception:
-                    _rects = []
-                if not _rects:
-                    continue
-                _r = _rects[0]
-                if not _is_real_exhibit_img(_r):
-                    continue
-                if y_min is not None and y_max is not None:
-                    if not (y_min - 10 <= _r.y0 <= y_max):
-                        continue
-                candidates.append((_r.width * _r.height, _xref))
-            candidates.sort(reverse=True)
-            if len(candidates) <= n:
-                return None
-            _xref2 = candidates[n][1]
-            try:
-                _raw = pg.parent.extract_image(_xref2)
-                _data = _raw['image']
-                _ext = _raw.get('ext', 'jpeg').lower()
-                if _ext not in ('jpeg', 'jpg'):
-                    _pix = fitz.Pixmap(pg.parent, _xref2)
-                    if _pix.alpha:
-                        _pix = fitz.Pixmap(fitz.csRGB, _pix)
-                    _data = _pix.tobytes('jpeg')
-                return _data
-            except Exception:
-                return None
-
         exmap = _build_exhibit_pages_map(pdf_path)
         q_exhibit_pages = exmap.get(question_num, []) if question_num else []
 
@@ -618,17 +617,17 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
                 img_data = None
 
                 if len(q_exhibit_pages) >= 2:
-                    # Case A: 2개 이상의 dedicated exhibit 페이지 → 두 번째 페이지 사용
+                    # Case A: 2개 이상의 dedicated exhibit 페이지 → 두 번째 페이지 첫 이미지
                     _tpg = doc2[q_exhibit_pages[1] - 1]
-                    img_data = _get_nth_real_image(_tpg, n=0)
+                    img_data = _get_nth_exhibit_image(_tpg, n=0)
 
                 elif len(q_exhibit_pages) == 1:
-                    # Case B: 1개의 dedicated exhibit 페이지 → 그 페이지의 두 번째 이미지
+                    # Case B: 1개의 dedicated exhibit 페이지 → Y순서로 두 번째 이미지
                     _tpg = doc2[q_exhibit_pages[0] - 1]
-                    img_data = _get_nth_real_image(_tpg, n=1)
+                    img_data = _get_nth_exhibit_image(_tpg, n=1)
 
                 else:
-                    # Case C: inline exhibit → 같은 페이지에서 두 번째로 큰 이미지
+                    # Case C: inline exhibit → 같은 페이지에서 Y순서로 두 번째 이미지
                     _tpg = doc2[page_num - 1]
                     _y_min = None
                     _y_max = None
@@ -637,8 +636,8 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
                         if _qhits:
                             _y_min = _qhits[0].y0
                             _y_max = _tpg.rect.y1
-                    img_data = _get_nth_real_image(_tpg, n=1,
-                                                   y_min=_y_min, y_max=_y_max)
+                    img_data = _get_nth_exhibit_image(_tpg, n=1,
+                                                      y_min=_y_min, y_max=_y_max)
 
             if img_data is None:
                 image_cache[key] = ''  # 센티넬: 두 번째 exhibit 없음 캐시 (중복 렌더 방지)
@@ -653,6 +652,19 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
     _render_semaphore.acquire()
     try:
         doc  = _get_thread_fitz_doc(pdf_path)
+
+        # dedicated exhibit 페이지가 있으면 거기서 첫 번째 이미지(Y순서)를 exhibit_n=1로 사용
+        if question_num:
+            _exmap1 = _build_exhibit_pages_map(pdf_path)
+            _exp1   = _exmap1.get(question_num, [])
+            if _exp1:
+                _dpg = doc[_exp1[0] - 1]
+                _d1  = _get_nth_exhibit_image(_dpg, n=0)
+                if _d1 is not None:
+                    _b64d = base64.b64encode(_d1).decode()
+                    image_cache[key] = _b64d
+                    return _b64d
+
         page = doc[page_num - 1]
 
         # ── 1. Try to extract the best embedded image ──────────────────
@@ -1850,13 +1862,13 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
       </div>
 
       <div className="card">
-        {/* Exhibit */}
+        {/* Exhibit: n=1 먼저(PDF 순서 첫 번째), n=2 나중(두 번째) */}
         {q.has_exhibit && (
           <>
+            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
             {q.page_num > 0 && (
               <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
-            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
           </>
         )}
 
@@ -2067,10 +2079,10 @@ function PracticeScreen({ questions, onExit, pdfPath }){
 
         {q.has_exhibit && q.page_num>0 && (
           <>
+            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
             {q.page_num > 0 && (
               <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
-            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
           </>
         )}
         {q.has_exhibit && q.page_num<=0 &&
@@ -2234,10 +2246,10 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
       <div className="card">
         {q.has_exhibit && q.page_num > 0 && (
           <>
+            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
             {q.page_num > 0 && (
               <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
-            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
           </>
         )}
         {q.has_exhibit && q.page_num <= 0 &&
@@ -2419,10 +2431,10 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               {/* exhibit image */}
               {r.has_exhibit && r.page_num > 0 && (
                 <>
+                  <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
                   {r.page_num > 0 && (
                     <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
                   )}
-                  <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
                 </>
               )}
               {/* options-area exhibit when ALL options are images */}
@@ -2491,10 +2503,10 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               <div className="divider" />
               {r.has_exhibit && r.page_num > 0 && (
                 <>
+                  <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
                   {r.page_num > 0 && (
                     <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
                   )}
-                  <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
                 </>
               )}
               {r.page_num > 0 && Object.keys(r.options).length > 0 &&

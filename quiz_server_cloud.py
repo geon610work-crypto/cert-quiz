@@ -1239,8 +1239,7 @@ class QuizHandler(BaseHTTPRequestHandler):
                                       f"{os.path.basename(_path)}")
                                 for _q in _qs:
                                     render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
-                                    if _q.get('exhibit_count', 0) >= 2:
-                                        render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
+                                    render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
                                 print(f"  ✅ Exhibit pre-render done: {os.path.basename(_path)}")
                             except Exception as _e:
                                 print(f"  ⚠️  Exhibit pre-render failed: {_e}")
@@ -1285,6 +1284,9 @@ class QuizHandler(BaseHTTPRequestHandler):
                 b64 = render_page_base64(pdf_path, page_num, question_num, exhibit_n=exhibit_n)
             if b64:
                 self.send_json({'image': b64})
+            elif exhibit_n >= 2:
+                # 두 번째 exhibit가 없는 경우 — 에러가 아니라 조용히 없음을 알림
+                self.send_json({'no_exhibit': True})
             else:
                 self.send_json({'error': 'render failed or PyMuPDF not available'}, 500)
 
@@ -1424,10 +1426,11 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode, exhibitN=1 }) {
   const [src,     setSrc]     = useState(null);
   const [loading, setLoading] = useState(true);
   const [err,     setErr]     = useState(false);
+  const [absent,  setAbsent]  = useState(false);  // 서버가 no_exhibit 반환 시
 
   useEffect(() => {
     if (!pdfPath || !pageNum) return;
-    setLoading(true); setSrc(null); setErr(false);
+    setLoading(true); setSrc(null); setErr(false); setAbsent(false);
     const url = '/api/exhibit?path=' + encodeURIComponent(pdfPath)
               + '&page=' + pageNum
               + (qNum ? '&q=' + encodeURIComponent(qNum) : '')
@@ -1439,13 +1442,14 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode, exhibitN=1 }) {
       fetch(url)
         .then(r => r.json())
         .then(data => {
-          if (data.image) { setSrc('data:image/jpeg;base64,' + data.image); setLoading(false); }
-          else { setErr(true); setLoading(false); }
+          if (data.image)      { setSrc('data:image/jpeg;base64,' + data.image); setLoading(false); }
+          else if (data.no_exhibit) { setAbsent(true); setLoading(false); }  // 두 번째 exhibit 없음
+          else                 { setErr(true); setLoading(false); }
         })
         .catch(() => {
           if (retries < MAX_RETRIES) {
             retries++;
-            setTimeout(fetchExhibit, 1500 * retries);  // 1.5s, 3s, 4.5s 재시도
+            setTimeout(fetchExhibit, 1500 * retries);
           } else {
             setErr(true);
             setLoading(false);
@@ -1457,13 +1461,14 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode, exhibitN=1 }) {
 
   const [zoomed, setZoomed] = useState(false);
 
+  if (absent) return null;  // 두 번째 exhibit 없음 — 조용히 숨김
   if (loading) return (
     <div style={{textAlign:'center',padding:'16px',color:'var(--c5)',fontSize:'13px',
       background:'var(--c0)',borderRadius:'8px',marginBottom:'16px',border:'1px solid #334155'}}>
       ⏳ Exhibit 로딩 중...
     </div>
   );
-  if (err && optsMode) return null;  // opts exhibit is optional — hide silently
+  if (err && (optsMode || exhibitN > 1)) return null;  // 선택적 exhibit — 조용히 숨김
   if (err) return (
     <div style={{textAlign:'center',padding:'10px',color:'#f59e0b',fontSize:'13px',
       background:'#451a03',borderRadius:'8px',marginBottom:'16px'}}>
@@ -1835,7 +1840,7 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
         {/* Exhibit */}
         {q.has_exhibit && (
           <>
-            {q.exhibit_count >= 2 && q.page_num >= 3 && (
+            {q.page_num > 0 && (
               <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
             <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
@@ -2049,7 +2054,7 @@ function PracticeScreen({ questions, onExit, pdfPath }){
 
         {q.has_exhibit && q.page_num>0 && (
           <>
-            {q.exhibit_count >= 2 && q.page_num >= 3 && (
+            {q.page_num > 0 && (
               <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
             <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
@@ -2216,7 +2221,7 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
       <div className="card">
         {q.has_exhibit && q.page_num > 0 && (
           <>
-            {q.exhibit_count >= 2 && q.page_num >= 3 && (
+            {q.page_num > 0 && (
               <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
             <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
@@ -2401,7 +2406,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               {/* exhibit image */}
               {r.has_exhibit && r.page_num > 0 && (
                 <>
-                  {r.exhibit_count >= 2 && r.page_num >= 3 && (
+                  {r.page_num > 0 && (
                     <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
                   )}
                   <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
@@ -2473,7 +2478,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               <div className="divider" />
               {r.has_exhibit && r.page_num > 0 && (
                 <>
-                  {r.exhibit_count >= 2 && r.page_num >= 3 && (
+                  {r.page_num > 0 && (
                     <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
                   )}
                   <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />

@@ -1258,19 +1258,22 @@ class QuizHandler(BaseHTTPRequestHandler):
                 selected = random.sample(all_q, min(count, len(all_q)))
 
             # 선택된 문제의 exhibit만 백그라운드 pre-render (전체 아닌 실제 볼 문제만)
+            # 공부모드(order=1)는 전체 문제가 selected이므로 앞 15개만 pre-render
             if HAS_FITZ:
-                _sel_exhibit_qs = [q for q in selected
+                _all_exhibit_qs = [q for q in selected
                                    if q.get('has_exhibit') and q.get('page_num', 0) > 0]
+                _prerender_limit = 15 if order == '1' else len(_all_exhibit_qs)
+                _sel_exhibit_qs = _all_exhibit_qs[:_prerender_limit]
                 if _sel_exhibit_qs:
                     def _prerender_selected(_path=pdf_path, _qs=_sel_exhibit_qs):
                         try:
-                            print(f"  🖼  Pre-rendering {len(_qs)} selected exhibit(s)")
+                            print(f"  🖼  Pre-rendering {len(_qs)} exhibit(s)")
                             for _q in _qs:
                                 render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
                                 render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
-                            print(f"  ✅ Selected exhibit pre-render done")
+                            print(f"  ✅ Exhibit pre-render done")
                         except Exception as _e:
-                            print(f"  ⚠️  Selected exhibit pre-render failed: {_e}")
+                            print(f"  ⚠️  Exhibit pre-render failed: {_e}")
                     threading.Thread(target=_prerender_selected, daemon=True).start()
 
             # Cloud 버전: 캐시에서 즉시 조회 (API 생성 없음)

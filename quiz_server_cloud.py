@@ -129,6 +129,21 @@ if os.path.isfile(_CACHE_FILE):
 
 # Cloud 버전: API 기능 없음 — korean_cache.json 만 사용
 
+# Question overrides: 번역 오류 등 특정 문제에 경고 노트
+_OVERRIDES_FILE = os.path.join(WORKSPACE, 'question_overrides.json')
+_question_overrides = {}
+if os.path.isfile(_OVERRIDES_FILE):
+    try:
+        with open(_OVERRIDES_FILE, encoding='utf-8') as _f:
+            _question_overrides = json.load(_f)
+        print(f"  📝 Question overrides loaded: {sum(len(v) for v in _question_overrides.values())} entries")
+    except Exception as _e:
+        print(f"  ⚠️  Failed to load question_overrides.json: {_e}")
+
+def _lookup_override_note(pdf_name, q_num):
+    """문제별 override 노트 조회."""
+    return _question_overrides.get(pdf_name, {}).get(q_num, {}).get('note')
+
 # Translation cache: {"PDF명::NO.XX": {"question": "...", "options": {"A": "...", ...}}}
 _TRANS_FILE = os.path.join(WORKSPACE, 'translation_cache.json')
 translation_cache = {}
@@ -1358,6 +1373,9 @@ class QuizHandler(BaseHTTPRequestHandler):
                 trans = _lookup_translation(pdf_name, q['num'])
                 q['question_ko'] = trans.get('question') or None
                 q['options_ko']  = trans.get('options') or {}
+                _note = _lookup_override_note(pdf_name, q['num'])
+                if _note:
+                    q['translation_note'] = _note
             self.send_json({'questions': selected, 'total': len(all_q),
                             'has_fitz': HAS_FITZ})
 
@@ -1961,6 +1979,12 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
           {showTrans && q.question_ko && (
             <p style={transStyle}>{q.question_ko}</p>
           )}
+          {showTrans && q.translation_note && (
+            <div style={{marginTop:'6px',padding:'8px 12px',borderRadius:'6px',
+              background:'#fff3cd',border:'1px solid #ffc107',fontSize:'13px',color:'#856404'}}>
+              ⚠️ {q.translation_note}
+            </div>
+          )}
         </div>
 
         {/* 선택지 */}
@@ -2539,6 +2563,12 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   );
                 })}
               </div>
+              {r.translation_note && (
+                <div style={{marginTop:'8px',padding:'8px 12px',borderRadius:'6px',
+                  background:'#fff3cd',border:'1px solid #ffc107',fontSize:'13px',color:'#856404'}}>
+                  ⚠️ {r.translation_note}
+                </div>
+              )}
               <KoreanExplain question={r} />
             </>}
           </div>
@@ -2607,6 +2637,12 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   );
                 })}
               </div>
+              {r.translation_note && (
+                <div style={{marginTop:'8px',padding:'8px 12px',borderRadius:'6px',
+                  background:'#fff3cd',border:'1px solid #ffc107',fontSize:'13px',color:'#856404'}}>
+                  ⚠️ {r.translation_note}
+                </div>
+              )}
               <KoreanExplain question={r} />
             </>}
           </div>

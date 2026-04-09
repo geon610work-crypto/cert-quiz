@@ -660,6 +660,10 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
                         if _qhits:
                             _y_min = _qhits[0].y0
                             _y_max = _tpg.rect.y1
+                            # 같은 페이지에 다음 문제가 있으면 그 header Y로 제한
+                            for _m in _search_q_header(_tpg):
+                                if _m.y0 > _y_min + 20 and _m.y0 < _y_max:
+                                    _y_max = _m.y0
                     img_data = _get_nth_exhibit_image(_tpg, n=1,
                                                       y_min=_y_min, y_max=_y_max)
 

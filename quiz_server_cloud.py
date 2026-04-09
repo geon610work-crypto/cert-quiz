@@ -1991,12 +1991,6 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
               ⚠️ {q.translation_note}
             </div>
           )}
-          {q.answer_conflict && (
-            <div style={{marginTop:'6px',padding:'8px 12px',borderRadius:'6px',
-              background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
-              🔴 {q.answer_conflict}
-            </div>
-          )}
         </div>
 
         {/* 선택지 */}
@@ -2262,6 +2256,12 @@ function PracticeScreen({ questions, onExit, pdfPath }){
               </div>}
 
             {/* 한국어 해석 */}
+            {q.answer_conflict && (
+              <div style={{margin:'8px 0',padding:'8px 12px',borderRadius:'6px',
+                background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
+                🔴 {q.answer_conflict}
+              </div>
+            )}
             <KoreanExplain question={{...q, explanation_ko: q.explanation_ko}} />
 
             <button className="btn btn-primary" onClick={next}

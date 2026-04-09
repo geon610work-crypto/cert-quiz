@@ -142,7 +142,8 @@ if os.path.isfile(_OVERRIDES_FILE):
 
 def _lookup_override(pdf_name, q_num):
     """문제별 override 전체 조회."""
-    return _question_overrides.get(pdf_name, {}).get(q_num, {})
+    stem = os.path.splitext(pdf_name)[0] if pdf_name else pdf_name
+    return _question_overrides.get(stem, {}).get(q_num, {})
 
 def _lookup_override_note(pdf_name, q_num):
     """문제별 번역 노트 조회."""

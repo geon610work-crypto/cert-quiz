@@ -2026,6 +2026,13 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
           <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} optsMode={true} />
         )}
 
+        {q.answer_conflict && (
+          <div style={{margin:'8px 0',padding:'8px 12px',borderRadius:'6px',
+            background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
+            🔴 {q.answer_conflict}
+          </div>
+        )}
+
         {/* 한국어 해석 */}
         {koreanHtml ? (
           <div style={{marginTop:'4px',background:'var(--ko-bg)',border:'1px solid var(--ko-border)',
@@ -2247,6 +2254,13 @@ function PracticeScreen({ questions, onExit, pdfPath }){
                 </p>}
             </div>
 
+            {q.answer_conflict && (
+              <div style={{marginTop:'8px',padding:'8px 12px',borderRadius:'6px',
+                background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
+                🔴 {q.answer_conflict}
+              </div>
+            )}
+
             {/* 해설 */}
             {q.explanation &&
               <div style={{marginTop:'12px',background:'var(--c1)',border:'1px solid #334155',
@@ -2256,12 +2270,6 @@ function PracticeScreen({ questions, onExit, pdfPath }){
               </div>}
 
             {/* 한국어 해석 */}
-            {q.answer_conflict && (
-              <div style={{margin:'8px 0',padding:'8px 12px',borderRadius:'6px',
-                background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
-                🔴 {q.answer_conflict}
-              </div>
-            )}
             <KoreanExplain question={{...q, explanation_ko: q.explanation_ko}} />
 
             <button className="btn btn-primary" onClick={next}

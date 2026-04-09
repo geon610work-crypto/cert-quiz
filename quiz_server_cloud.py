@@ -475,6 +475,29 @@ def _search_q_header(page, question_num=None):
 # (pages with no question headers, only images).  Inline exhibits (image
 # on the same page as the question text) are NOT listed here.
 _exhibit_pages_cache: dict = {}
+_min_q_page_cache:    dict = {}
+
+
+def _get_min_question_page(pdf_path: str) -> int:
+    """Return the 1-indexed page number of the first question in the PDF.
+
+    Used to exclude cover/intro pages (before any question) from being
+    mistakenly treated as exhibit sources.
+    """
+    if pdf_path in _min_q_page_cache:
+        return _min_q_page_cache[pdf_path]
+    result = 1
+    try:
+        _doc = _get_thread_fitz_doc(pdf_path)
+        for _pn in range(_doc.page_count):
+            if _search_q_header(_doc[_pn]):
+                result = _pn + 1
+                break
+    except Exception:
+        pass
+    _min_q_page_cache[pdf_path] = result
+    return result
+
 
 def _build_exhibit_pages_map(pdf_path: str) -> dict:
     """Return {question_num_str: [page1, page2, ...]} for dedicated exhibit pages.
@@ -1023,6 +1046,12 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
                 if page_num < total_pages:
                     candidates.append(('next', next_pg_idx))
 
+            # 커버/인트로 페이지 제외: 첫 번째 문제가 시작되기 이전 페이지는
+            # exhibit 소스로 사용하지 않음 (표지가 NO.1 exhibit으로 잘못 추출되는 버그 방지)
+            _min_q_pg = _get_min_question_page(pdf_path)
+            candidates = [(d, i) for d, i in candidates
+                          if not (d == 'prev' and i + 1 < _min_q_pg)]
+
             # ── Pass 1: try embedded images from adjacent pages ──
             # When checking NEXT page: pass the Y of its first question header
             # so we only pick images that appear BEFORE that question starts.
@@ -1041,9 +1070,18 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
                     return b64
 
             # ── Pass 2: fallback vector render of adjacent page portion ──
+            # (벡터 그래픽 exhibit을 위한 폴백)
             for direction, pg_idx in candidates:
                 adj_page = doc[pg_idx]
                 adj_pr   = adj_page.rect
+
+                # next 페이지: 첫 문제 이전에 실제 이미지가 없으면 건너뜀
+                # (다음 문제의 exhibit을 이 문제 것으로 잘못 렌더하는 것 방지)
+                if direction == 'next' and _page_has_questions(adj_page):
+                    _nq_y2 = _first_question_y_on_page(adj_page)
+                    if _nq_y2 is not None and not _extract_best_image_from_page(adj_page, max_y=_nq_y2):
+                        continue
+
                 try:
                     if direction == 'prev':
                         clip = fitz.Rect(adj_pr.x0,
@@ -1063,6 +1101,12 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
                     return b64
                 except Exception:
                     continue
+
+        # no_image_in_range 상황에서 adjacent 체크가 모두 실패하면
+        # 관계없는 페이지 전체를 렌더하지 않고 absent로 처리
+        if no_image_in_range and pix is None:
+            image_cache[key] = ''  # absent sentinel
+            return None
 
         if pix is None:
             try:

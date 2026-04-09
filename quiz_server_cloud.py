@@ -140,9 +140,13 @@ if os.path.isfile(_OVERRIDES_FILE):
     except Exception as _e:
         print(f"  ⚠️  Failed to load question_overrides.json: {_e}")
 
+def _lookup_override(pdf_name, q_num):
+    """문제별 override 전체 조회."""
+    return _question_overrides.get(pdf_name, {}).get(q_num, {})
+
 def _lookup_override_note(pdf_name, q_num):
-    """문제별 override 노트 조회."""
-    return _question_overrides.get(pdf_name, {}).get(q_num, {}).get('note')
+    """문제별 번역 노트 조회."""
+    return _lookup_override(pdf_name, q_num).get('note')
 
 # Translation cache: {"PDF명::NO.XX": {"question": "...", "options": {"A": "...", ...}}}
 _TRANS_FILE = os.path.join(WORKSPACE, 'translation_cache.json')
@@ -1373,9 +1377,11 @@ class QuizHandler(BaseHTTPRequestHandler):
                 trans = _lookup_translation(pdf_name, q['num'])
                 q['question_ko'] = trans.get('question') or None
                 q['options_ko']  = trans.get('options') or {}
-                _note = _lookup_override_note(pdf_name, q['num'])
-                if _note:
-                    q['translation_note'] = _note
+                _ov = _lookup_override(pdf_name, q['num'])
+                if _ov.get('note'):
+                    q['translation_note'] = _ov['note']
+                if _ov.get('answer_conflict'):
+                    q['answer_conflict'] = _ov['answer_conflict']
             self.send_json({'questions': selected, 'total': len(all_q),
                             'has_fitz': HAS_FITZ})
 
@@ -1985,6 +1991,12 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
               ⚠️ {q.translation_note}
             </div>
           )}
+          {q.answer_conflict && (
+            <div style={{marginTop:'6px',padding:'8px 12px',borderRadius:'6px',
+              background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
+              🔴 {q.answer_conflict}
+            </div>
+          )}
         </div>
 
         {/* 선택지 */}
@@ -2569,6 +2581,12 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   ⚠️ {r.translation_note}
                 </div>
               )}
+              {r.answer_conflict && (
+                <div style={{margin:'8px 0',padding:'8px 12px',borderRadius:'6px',
+                  background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
+                  🔴 {r.answer_conflict}
+                </div>
+              )}
               <KoreanExplain question={r} />
             </>}
           </div>
@@ -2641,6 +2659,12 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                 <div style={{marginTop:'8px',padding:'8px 12px',borderRadius:'6px',
                   background:'#fff3cd',border:'1px solid #ffc107',fontSize:'13px',color:'#856404'}}>
                   ⚠️ {r.translation_note}
+                </div>
+              )}
+              {r.answer_conflict && (
+                <div style={{margin:'8px 0',padding:'8px 12px',borderRadius:'6px',
+                  background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
+                  🔴 {r.answer_conflict}
                 </div>
               )}
               <KoreanExplain question={r} />

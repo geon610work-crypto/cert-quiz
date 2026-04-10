@@ -1217,10 +1217,12 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
         crop_top    = main_img_bottom + 4
         crop_bottom = pr.y1 - pr.height * 0.08  # default: before footer
 
-        # Narrow to above "Answer:" if present
+        # Narrow to above "Answer:" if present — track whether found on this page
+        answer_found = False
         for hit in opts_page.search_for("Answer:"):
             if hit.y0 > crop_top and hit.y0 < crop_bottom:
                 crop_bottom = hit.y0 - 4
+                answer_found = True
                 break
 
         # Also stop before the next question header (NO.X or QUESTION NO: X)
@@ -1233,12 +1235,57 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
             return None
 
         try:
-            clip    = fitz.Rect(pr.x0, crop_top, pr.x1, crop_bottom)
-            pix     = opts_page.get_pixmap(matrix=mat, alpha=False, clip=clip)
-            img_bytes = pix.tobytes('jpeg')
+            clip = fitz.Rect(pr.x0, crop_top, pr.x1, crop_bottom)
+            pix1 = opts_page.get_pixmap(matrix=mat, alpha=False, clip=clip)
         except Exception as e:
             print(f"  ⚠️  Options area render failed (p{opts_pg_idx+1}): {e}")
             return None
+
+        # If "Answer:" was NOT on opts_page, options may continue on the next page.
+        # Render top of the next page up to "Answer:" and stitch vertically.
+        pix2 = None
+        if not answer_found:
+            next_idx = opts_pg_idx + 1
+            if next_idx < doc.page_count:
+                npage  = doc[next_idx]
+                npr    = npage.rect
+                n_top  = npr.y0
+                n_bot  = npr.y1
+                for hit in npage.search_for("Answer:"):
+                    if hit.y0 > n_top and hit.y0 < n_bot:
+                        n_bot = hit.y0 - 4
+                        break
+                for hit in _search_q_header(npage):
+                    if hit.y0 > n_top + 10 and hit.y0 < n_bot:
+                        n_bot = hit.y0 - 4
+                        break
+                if n_bot - n_top > 20:
+                    try:
+                        clip2 = fitz.Rect(npr.x0, n_top, npr.x1, n_bot)
+                        pix2  = npage.get_pixmap(matrix=mat, alpha=False, clip=clip2)
+                    except Exception:
+                        pix2 = None
+
+        # Stitch pix1 (and optional pix2) into one JPEG using PIL
+        try:
+            from PIL import Image
+            import io as _io
+            imgs_pil = [Image.open(_io.BytesIO(pix1.tobytes('jpeg')))]
+            if pix2 is not None:
+                imgs_pil.append(Image.open(_io.BytesIO(pix2.tobytes('jpeg'))))
+            total_w = max(i.width for i in imgs_pil)
+            total_h = sum(i.height for i in imgs_pil)
+            combined = Image.new('RGB', (total_w, total_h), (255, 255, 255))
+            y_off = 0
+            for img_pil in imgs_pil:
+                combined.paste(img_pil, (0, y_off))
+                y_off += img_pil.height
+            buf = _io.BytesIO()
+            combined.save(buf, format='JPEG', quality=85)
+            img_bytes = buf.getvalue()
+        except Exception:
+            # PIL unavailable or failed — fall back to first page only
+            img_bytes = pix1.tobytes('jpeg')
 
         b64 = base64.b64encode(img_bytes).decode('utf-8')
         options_area_cache[key] = b64

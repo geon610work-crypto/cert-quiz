@@ -1429,6 +1429,8 @@ class QuizHandler(BaseHTTPRequestHandler):
                     print(f"  ✅ Exhibit pre-render done")
 
             # Cloud 버전: 캐시에서 즉시 조회 (API 생성 없음)
+            _pdf_stem_ex = os.path.splitext(pdf_name)[0]
+            _ex_dir = os.path.join(EXHIBIT_DIR, _pdf_stem_ex)
             for q in selected:
                 q['explanation_ko'] = _lookup_cache(pdf_name, q['num'])
                 q['pdf_name'] = pdf_name
@@ -1440,6 +1442,14 @@ class QuizHandler(BaseHTTPRequestHandler):
                     q['translation_note'] = _ov['note']
                 if _ov.get('answer_conflict'):
                     q['answer_conflict'] = _ov['answer_conflict']
+                # Exhibit missing: has_exhibit=True but all pre-extracted files are absent
+                if q.get('has_exhibit') and os.path.isdir(_ex_dir):
+                    _n = q['num']
+                    _n1_jpg = os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.jpg"))
+                    _n2_jpg = os.path.exists(os.path.join(_ex_dir, f"{_n}_n2.jpg"))
+                    _n1_abs = os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))
+                    if not _n1_jpg and not _n2_jpg and _n1_abs:
+                        q['missing_exhibit'] = True
             self.send_json({'questions': selected, 'total': len(all_q),
                             'has_fitz': HAS_FITZ})
 
@@ -2021,13 +2031,20 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
 
       <div className="card">
         {/* Exhibit: n=1 먼저(PDF 순서 첫 번째), n=2 나중(두 번째) */}
-        {q.has_exhibit && (
+        {q.has_exhibit && !q.missing_exhibit && (
           <>
             <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
             {q.page_num > 0 && (
               <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
           </>
+        )}
+        {q.missing_exhibit && (
+          <div style={{marginBottom:'12px',padding:'10px 14px',borderRadius:'8px',
+            background:'#fff7ed',border:'1px solid #fb923c',fontSize:'13px',color:'#9a3412'}}>
+            🖼️ <strong>이 문제의 Exhibit 이미지가 PDF에 포함되어 있지 않습니다.</strong><br/>
+            문제와 정답을 함께 암기하세요.
+          </div>
         )}
 
         {/* 문제 텍스트 */}
@@ -2248,7 +2265,7 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           {q.has_exhibit  && <span className="badge b-yellow">📊 Exhibit</span>}
         </div>
 
-        {q.has_exhibit && q.page_num>0 && (
+        {q.has_exhibit && !q.missing_exhibit && q.page_num>0 && (
           <>
             <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
             {q.page_num > 0 && (
@@ -2256,10 +2273,17 @@ function PracticeScreen({ questions, onExit, pdfPath }){
             )}
           </>
         )}
-        {q.has_exhibit && q.page_num<=0 &&
+        {q.has_exhibit && !q.missing_exhibit && q.page_num<=0 &&
           <div className="exhibit-warn">
             ⚠️ 이 문제는 <strong>Exhibit(그림/출력)</strong>을 참조하지만 페이지 정보를 찾을 수 없습니다.
           </div>}
+        {q.missing_exhibit && (
+          <div style={{marginBottom:'12px',padding:'10px 14px',borderRadius:'8px',
+            background:'#fff7ed',border:'1px solid #fb923c',fontSize:'13px',color:'#9a3412'}}>
+            🖼️ <strong>이 문제의 Exhibit 이미지가 PDF에 포함되어 있지 않습니다.</strong><br/>
+            문제와 정답을 함께 암기하세요.
+          </div>
+        )}
 
         <p style={{fontSize:'15px',lineHeight:'1.85',marginBottom:'22px',whiteSpace:'pre-wrap'}}>
           {q.question}
@@ -2607,7 +2631,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
             {expanded===r.num && <>
               <div className="divider" />
               {/* exhibit image */}
-              {r.has_exhibit && r.page_num > 0 && (
+              {r.has_exhibit && !r.missing_exhibit && r.page_num > 0 && (
                 <>
                   <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
                   {r.page_num > 0 && (
@@ -2615,8 +2639,15 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   )}
                 </>
               )}
+              {r.missing_exhibit && (
+                <div style={{marginBottom:'12px',padding:'10px 14px',borderRadius:'8px',
+                  background:'#fff7ed',border:'1px solid #fb923c',fontSize:'13px',color:'#9a3412'}}>
+                  🖼️ <strong>이 문제의 Exhibit 이미지가 PDF에 포함되어 있지 않습니다.</strong><br/>
+                  문제와 정답을 함께 암기하세요.
+                </div>
+              )}
               {/* options-area exhibit when ALL options are images */}
-              {r.page_num > 0 && Object.keys(r.options).length > 0 &&
+              {!r.missing_exhibit && r.page_num > 0 && Object.keys(r.options).length > 0 &&
                 Object.values(r.options).every(v=>v==='[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
                 <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />
               )}
@@ -2691,7 +2722,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
 
             {expandedCorrect===r.num && <>
               <div className="divider" />
-              {r.has_exhibit && r.page_num > 0 && (
+              {r.has_exhibit && !r.missing_exhibit && r.page_num > 0 && (
                 <>
                   <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
                   {r.page_num > 0 && (
@@ -2699,7 +2730,14 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   )}
                 </>
               )}
-              {r.page_num > 0 && Object.keys(r.options).length > 0 &&
+              {r.missing_exhibit && (
+                <div style={{marginBottom:'12px',padding:'10px 14px',borderRadius:'8px',
+                  background:'#fff7ed',border:'1px solid #fb923c',fontSize:'13px',color:'#9a3412'}}>
+                  🖼️ <strong>이 문제의 Exhibit 이미지가 PDF에 포함되어 있지 않습니다.</strong><br/>
+                  문제와 정답을 함께 암기하세요.
+                </div>
+              )}
+              {!r.missing_exhibit && r.page_num > 0 && Object.keys(r.options).length > 0 &&
                 Object.values(r.options).every(v=>v==='[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
                 <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />
               )}

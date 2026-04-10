@@ -1266,25 +1266,35 @@ def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
                     except Exception:
                         pix2 = None
 
-        # Stitch pix1 (and optional pix2) into one JPEG using PIL
-        try:
-            from PIL import Image
-            import io as _io
-            imgs_pil = [Image.open(_io.BytesIO(pix1.tobytes('jpeg')))]
-            if pix2 is not None:
-                imgs_pil.append(Image.open(_io.BytesIO(pix2.tobytes('jpeg'))))
-            total_w = max(i.width for i in imgs_pil)
-            total_h = sum(i.height for i in imgs_pil)
-            combined = Image.new('RGB', (total_w, total_h), (255, 255, 255))
-            y_off = 0
-            for img_pil in imgs_pil:
-                combined.paste(img_pil, (0, y_off))
-                y_off += img_pil.height
-            buf = _io.BytesIO()
-            combined.save(buf, format='JPEG', quality=85)
-            img_bytes = buf.getvalue()
-        except Exception:
-            # PIL unavailable or failed — fall back to first page only
+        # Stitch pix1 (and optional pix2) vertically
+        if pix2 is not None:
+            try:
+                # Ensure both are RGB (3-channel, no alpha)
+                if pix1.n != 3:
+                    pix1 = fitz.Pixmap(fitz.csRGB, pix1)
+                if pix2.n != 3:
+                    pix2 = fitz.Pixmap(fitz.csRGB, pix2)
+                # Concatenate raw RGB rows: pad narrower image with white on the right
+                w1, h1 = pix1.width, pix1.height
+                w2, h2 = pix2.width, pix2.height
+                s1 = bytes(pix1.samples)
+                s2 = bytes(pix2.samples)
+                stride1 = w1 * 3
+                stride2 = w2 * 3
+                stride  = max(stride1, stride2)
+                rows = []
+                for row in range(h1):
+                    chunk = s1[row * stride1:(row + 1) * stride1]
+                    rows.append(chunk + b'\xff' * (stride - stride1))
+                for row in range(h2):
+                    chunk = s2[row * stride2:(row + 1) * stride2]
+                    rows.append(chunk + b'\xff' * (stride - stride2))
+                raw_samples = b''.join(rows)
+                combined = fitz.Pixmap(fitz.csRGB, stride // 3, h1 + h2, raw_samples, False)
+                img_bytes = combined.tobytes('jpeg')
+            except Exception:
+                img_bytes = pix1.tobytes('jpeg')
+        else:
             img_bytes = pix1.tobytes('jpeg')
 
         b64 = base64.b64encode(img_bytes).decode('utf-8')

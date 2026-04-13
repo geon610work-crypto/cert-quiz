@@ -7700,5 +7700,297 @@
         "D": "FortiGate does not decrypt the traffic if the traffic is allowed by the web filter profile."
       }
     }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.4": {
+    "question": "어떤 두 프로토콜 상태가 / 트래픽이 양방향임을 / 나타내는가? / (두 개 선택)",
+    "options": {
+      "A": "TCP 세션에서 / proto_state=01",
+      "B": "UDP 세션에서 / proto_state=01",
+      "C": "TCP 세션에서 / proto_state=05",
+      "D": "ICMP 세션에서 / proto_state=00"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.5": {
+    "question": "Exhibit 참조. / diagnose sys session stat 명령의 / 부분 출력이 표시되어 있다. / Exhibit에 표시된 출력에 대한 / 옳은 설명은?",
+    "options": {
+      "A": "113개 세션이 / 메모리 페이지 소진으로 / 드롭되었다",
+      "B": "131072개의 / 임시 세션이 기록되었지만 / 현재는 없다",
+      "C": "562개의 TCP 세션이 / 검사 없이 / proto_state=01로 설정되어 있다",
+      "D": "27개 세션이 / 만료되었지만 / 순서 어긋난 패킷을 위해 / 세션 테이블에 남아 있다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.6": {
+    "question": "Exhibit 참조. / FortiOS 커널 슬랩의 / 부분 출력이 표시되어 있다. / 총 슬랩 크기에 대해 / 옳은 설명은?",
+    "options": {
+      "A": "ip_session 슬랩의 / 총 슬랩 크기는 14080kB이고 / 사용자 공간과 연관된다",
+      "B": "tcp_session 슬랩의 / 총 슬랩 크기는 7500kB이고 / 커널과 연관된다",
+      "C": "ip6_session 슬랩의 / 총 슬랩 크기는 1472kB이고 / 커널과 연관된다",
+      "D": "UDPv6 슬랩의 / 총 슬랩 크기는 14080kB이고 / 사용자 공간과 연관된다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.7": {
+    "question": "Exhibit 참조. / 수집기 에이전트 로그 출력이 표시되어 있다. / 수집기 에이전트가 / 워크스테이션 상태를 / Not Verified로 표시하고 있다. / 가능한 이유는?",
+    "options": {
+      "A": "워크스테이션이 / 절전 모드에서 / 깨어났다",
+      "B": "워크스테이션의 / 원격 레지스트리 서비스가 / 실행 중이지 않다",
+      "C": "포트 139와 445로의 / 트래픽이 / 차단되어 있다",
+      "D": "DNS가 / 워크스테이션 이름을 / 확인할 수 없다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.8": {
+    "question": "Exhibit 참조. / 네트워크 토폴로지와 / 부분 라우팅 테이블이 표시되어 있다. / FortiGate는 / 모든 트래픽을 허용하는 / 방화벽 정책으로 구성되어 있다. / 어떤 두 조치가 / 문제를 해결하는가?",
+    "options": {
+      "A": "config system settings에서 / 비대칭 라우팅을 / 활성화한다",
+      "B": "FortiGate 설정을 / strict RPF 검사 모드에서 / feasible RPF 검사 모드로 변경한다",
+      "C": "노트북의 / 기본 게이트웨이를 / 10.1.0.2에서 10.1.0.254로 수정한다",
+      "D": "FortiGate에 / 모든 트래픽을 port3으로 전달하는 / 기본 정적 경로를 추가한다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.9": {
+    "question": "Exhibit 참조. / diagnose vpn tunnel list 명령의 / 출력이 표시되어 있다. / 디버그 명령을 검토할 때 / 트래픽의 현재 상태는?",
+    "options": {
+      "A": "아웃바운드 IPsec SA가 / NPU로 복사되었다",
+      "B": "NP6이 / 오프로딩을 처리하고 있다",
+      "C": "인바운드 및 아웃바운드 / IPsec SA 모두 / NPU로 복사되었다",
+      "D": "인바운드 IPsec SA가 / NPU로 복사되었다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.10": {
+    "question": "Exhibit 참조. / 세션 출력이 표시되어 있다. / 옳은 두 설명은? / (두 개 선택)",
+    "options": {
+      "A": "세션이 / 방화벽 정책과 / 매칭되지 않았다",
+      "B": "목적지로의 / 게이트웨이는 / 10.1.10.1이다",
+      "C": "세션이 / 인증된 사용자에 의해 / 시작되었다",
+      "D": "TCP 세션이 / 성공적으로 / 수립되었다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.11": {
+    "question": "Exhibit 참조. / get vpn ipsec tunnel details 명령의 / 부분 출력이 표시되어 있다. / 출력 기반으로 / 옳은 두 설명은? / (두 개 선택)",
+    "options": {
+      "A": "이 터널의 / npu_flag는 / 02이다",
+      "B": "서로 다른 SPI 값은 / phase2 셀렉터에 대한 / 자동 협상이 비활성화된 결과이다",
+      "C": "이 터널의 / npu_flag는 / 03이다",
+      "D": "Anti-replay가 / 활성화되어 있다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.12": {
+    "question": "처음에 성공적으로 / 수립된 후 / IKEv2 터널이 / 다운될 수 있는 원인은?",
+    "options": {
+      "A": "CREATE_CHILD_SA 중에 / 불일치하는 트래픽 셀렉터가 / 감지되었다",
+      "B": "IKE_AUTH 교환 중에 / 불일치하는 프로포절이 / 감지되었다",
+      "C": "IKE_AUTH 교환 중에 / 불일치하는 사전 공유 키가 / 감지되었다",
+      "D": "IKE_SA_INIT 교환 중에 / 불일치하는 / Diffie-Hellman 그룹이 감지되었다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.14": {
+    "question": "Exhibit 참조. / BGP 디버그 명령의 / 출력이 표시되어 있다. / 172.16.23.58의 / 로컬 라우터가 / 유일한 이웃과 / 인접 관계를 수립하지 못한 이유는?",
+    "options": {
+      "A": "이웃 라우터가 / 도달 불가능해졌으며 / 낮은 수신 메시지 비율로 / 알 수 있다",
+      "B": "로컬 라우터가 / 이웃으로부터 / OPEN 메시지를 / 받지 못했다",
+      "C": "로컬 라우터가 / 이웃으로부터 / SYN/ACK 패킷을 / 받지 못했다",
+      "D": "BGP 이웃까지의 / 활성 경로가 / 없다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.15": {
+    "question": "SAML 협상 과정에서 / Identity Provider(IdP)가 / 인증 과정에서 사용되는 / SAML 속성을 / Service Provider(SP)에 / 제공하는 섹션은?",
+    "options": {
+      "A": "Bindings HTTP post",
+      "B": "Assertion dump",
+      "C": "Authentication request",
+      "D": "Authentication response"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.17": {
+    "question": "Exhibit 참조. / FortiGate의 port1 인터페이스 설정과 / ICMP 트래픽에 대한 / 부분 세션 정보가 표시되어 있다. / 라우팅 변경이 발생하면 / 세션 정보에 / 어떤 두 가지가 일어나는가?",
+    "options": {
+      "A": "이 세션은 / 라우팅 변경의 영향을 받지 않는다 / 라우팅 변경은 / 새 세션에만 적용된다",
+      "B": "세션은 / dirty로 표시되지만 / 경로 조회는 / 수행되지 않는다",
+      "C": "세션 정보는 / 현재 경로가 라우팅 테이블에서 / 제거되지 않는 한 / 변경되지 않는다",
+      "D": "활성 경로가 / 라우팅 테이블에서 제거되어도 / 세션 정보는 / 변경되지 않는다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.18": {
+    "question": "Exhibit 참조. / diagnose debug rating 명령의 / 부분 출력이 표시되어 있다. / FortiGate 알고리즘이 / 선택하는 / FDS 서버는?",
+    "options": {
+      "A": "96.45.33.65",
+      "B": "208.91.112.194",
+      "C": "64.26.151.37",
+      "D": "209.22.147.36"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.19": {
+    "question": "Exhibit 참조. / 관리자가 / proxy 기반 검사 모드를 사용하는 / 방화벽 정책을 설정했다. / 디버그 플로우 출력에서 / 관찰된 메시지를 / 설명할 수 있는 것은?",
+    "options": {
+      "A": "Protocol Options에서 / 적어도 하나의 프로토콜 포트가 / Any로 매핑되어 있다",
+      "B": "SSL 딥 검사가 / 설정되지 않았다",
+      "C": "FTP 프로토콜이 / Protocol Options에서 / 포트 211로 / 아직 매핑되지 않았다",
+      "D": "FortiGate에 / proxy 기반 검사를 수행할 / 충분한 여유 메모리가 없다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.20": {
+    "question": "처음에 성공적으로 / 수립된 후 / IKEv2 터널이 / 다운될 수 있는 원인은?",
+    "options": {
+      "A": "IKE_AUTH 교환 중에 / 불일치하는 프로포절이 / 감지되었다",
+      "B": "IKE_SA_INIT 교환 중에 / 불일치하는 / Diffie-Hellman 그룹이 감지되었다",
+      "C": "IKE_AUTH 교환 중에 / 불일치하는 / 사전 공유 키가 감지되었다",
+      "D": "CREATE_CHILD_SA 교환 중에 / 불일치하는 / quick-mode 셀렉터가 감지되었다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.21": {
+    "question": "VPN 터널이 활성화되어 있다. / 트래픽 흐름 모니터링을 위해 / 관리자가 / FortiGate의 SSH 세션에서 / 다음 CLI 명령을 입력한다: / diagnose debug enable / diagnose sniffer packet any 'udp and port 500'",
+    "options": {
+      "A": "필터를 수정하여 / TCP 포트 443 또는 / UDP 포트 4500도 / 캡처해야 한다",
+      "B": "NAT Traversal이 / 활성화되어 있다",
+      "C": "스니퍼는 / 원격 피어 IP 주소로 / 제한되어야 한다",
+      "D": "diagnose debug enable 실행 시 / 애플리케이션 실시간 로그만 표시되므로 / 스니퍼 출력이 무시된다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.22": {
+    "question": "Exhibit 참조. / get router info bgp summary 명령의 / 출력이 표시되어 있다. / 로컬 라우터와 / 이웃들 간의 / 인접 관계에 대한 / 옳은 설명은?",
+    "options": {
+      "A": "로컬 라우터와 / 100.64.2.254 이웃은 / 100.64.1.254와의 인접이 / 수립될 때까지 / 인접 수립 불가",
+      "B": "로컬 라우터와 / 100.64.2.254 이웃은 / TCP 세션 문제로 / 인접 수립 불가",
+      "C": "로컬 라우터와 / 100.64.1.254 이웃이 / 인접 수립된 이유는 / 100.64.1.254의 우선순위 때문",
+      "D": "로컬 라우터와 / 100.64.2.254 이웃은 / AS 100이 이미 사용 중이어서 / 인접 수립 불가"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.23": {
+    "question": "Exhibit 참조. / SAML 연결 진단을 위해 / diagnose debug application samld -1 명령을 사용한 / 출력이 표시되어 있다. / 이 출력 기반으로 / 옳은 두 설명은?",
+    "options": {
+      "A": "IdP IP 주소는 / 10.1.10.254이다",
+      "B": "SP IP 주소는 / 10.1.10.254이다",
+      "C": "SP IP 주소는 / 10.1.10.2이다",
+      "D": "IdP IP 주소는 / 10.1.10.2이다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.25": {
+    "question": "Exhibit 참조. / NGFW-1과 NGFW-2가 / 1주일 동안 가동 중임을 / 고려할 때 / 출력에 대한 / 옳은 두 설명은? / (두 개 선택)",
+    "options": {
+      "A": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 다시 합류해도 / 그 역할을 유지한다",
+      "B": "secondary FortiGate에서 / port7이 끊기면 / 두 FortiGate 장치 모두 / 스스로 primary로 선출한다",
+      "C": "secondary FortiGate에 / 설정 변경을 하면 / Configuration Status가 / 변경되지 않는다",
+      "D": "이 시점에 / primary FortiGate에 / 설정 변경을 하면 / secondary가 동기화를 시작한다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.26": {
+    "question": "Exhibit 참조. / diagnose 명령의 출력이 표시되어 있다. / RTT 값으로부터 / 무엇을 알 수 있는가?",
+    "options": {
+      "A": "특정 서버에 / 등급 요청을 보낸 후 / 응답을 받는 데 걸리는 / 시간을 나타낸다",
+      "B": "패킷이 손실될 때마다 / 값이 증가한다",
+      "C": "라이선스 검증에 / 사용되는 / FortiGuard 서버를 / 결정한다",
+      "D": "초기 값은 / 정적으로 / 10으로 설정된다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.27": {
+    "question": "프로토콜 상태에 관한 / 다음 중 / 옳은 것은?",
+    "options": {
+      "A": "proto_state=00은 / UDP 트래픽이 / 양방향으로 흐름을 나타낸다",
+      "B": "proto_state=01은 / 수립된 TCP 세션을 / 나타낸다",
+      "C": "proto_state=10은 / 수립된 TCP 세션을 / 나타낸다",
+      "D": "proto_state=01은 / 단방향 ICMP 트래픽을 / 나타낸다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.29": {
+    "question": "Exhibit 참조. / 두 라우팅 디버그 명령의 / 부분 출력이 표시되어 있다. / port2 기본 경로가 / 두 번째 명령 출력에 / 없는 이유는?",
+    "options": {
+      "A": "port2 인터페이스가 / FortiGate 설정에서 / 비활성화되어 있다",
+      "B": "port1 기본 경로의 / 우선순위 값이 / port2 기본 경로보다 / 높다",
+      "C": "port1 기본 경로의 / 우선순위 값이 / port2 기본 경로보다 / 낮다",
+      "D": "port1 기본 경로의 / 거리(distance)가 / port2 기본 경로보다 / 낮다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.30": {
+    "question": "Exhibit 참조. / diagnose sys session stat의 / 출력이 표시되어 있다. / 출력에 대한 / 옳은 설명은?",
+    "options": {
+      "A": "세션 테이블의 / 모든 세션은 / TCP 세션이다",
+      "B": "162개 세션이 / 메모리 페이지 소진으로 / 삭제되었다",
+      "C": "3-way handshake를 / 완료하기를 기다리는 / TCP 세션이 166개 있다",
+      "D": "순서 어긋난 패킷을 위해 / 제거되지 않은 / 세션이 2개 있다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.31": {
+    "question": "diagnose test application ipsmonitor 5 명령은 / 무엇에 사용되는가?",
+    "options": {
+      "A": "모든 IPS 엔진과 / 모니터를 재시작한다",
+      "B": "IPS 세션에 관한 / 정보를 제공한다",
+      "C": "IPS 엔진을 / 비활성화한다",
+      "D": "IPS bypass 모드를 / 활성화한다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.33": {
+    "question": "두 FortiGate 장치가 / OSPF 인접 관계를 형성하기 위해 / 필요한 / 세 가지 조건은? / (세 개 선택)",
+    "options": {
+      "A": "OSPF 링크 비용이 / 일치해야 한다",
+      "B": "OSPF 인터페이스 우선순위 설정이 / 고유해야 한다",
+      "C": "OSPF 인터페이스 / 네트워크 타입이 / 일치해야 한다",
+      "D": "인증 설정이 / 일치해야 한다",
+      "E": "OSPF 라우터 ID가 / 고유해야 한다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.34": {
+    "question": "Exhibit 참조. / diagnose 명령의 출력이 표시되어 있다. / 표시된 출력에서 / 도출할 수 있는 / 두 가지 결론은? / (두 개 선택)",
+    "options": {
+      "A": "이것은 / IPS 엔진이 생성한 / 예상 세션이다",
+      "B": "원래 방향의 트래픽(10.171.121.38에서 오는)은 / 다음 홉으로 / 라우팅된다",
+      "C": "원래 방향의 트래픽(10.171.121.38에서 오는)은 / 다른 경로로 / 라우팅된다",
+      "D": "이것은 / 추가 세션이 필요한 프로토콜의 / 트래픽을 허용하기 위해 생성된 / 핀홀 세션이다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.35": {
+    "question": "Exhibit 참조. / 실시간 디버그의 출력이 표시되어 있다. / 이 출력에 대한 / 옳은 설명은?",
+    "options": {
+      "A": "서버 호스트명이 / 클라이언트 요청의 SNI 또는 / 서버 인증서의 CN에서 / 추출되었다",
+      "B": "FortiGate가 / 요청된 URL을 / 로컬 캐시에서 찾았다",
+      "C": "이 웹 요청은 / ftgd-allow 웹 필터 프로파일을 사용하여 / 검사되었다",
+      "D": "요청된 URL이 / 카테고리 ID 255에 / 속한다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.36": {
+    "question": "애플리케이션 레이어 / 테스트 명령에 대한 / 옳은 두 설명은? / (두 개 선택)",
+    "options": {
+      "A": "일부는 / 기능이나 프로세스에 대한 / 통계 및 설정 정보를 / 표시한다",
+      "B": "일부는 / 실시간 애플리케이션 디버그를 / 표시한다",
+      "C": "일부는 / diagnose debug console enable 명령 실행 후에만 / 출력을 표시한다",
+      "D": "일부는 / 애플리케이션을 / 재시작하는 데 사용할 수 있다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.38": {
+    "question": "diagnose test application ipsmonitor 5 명령은 / 무엇에 사용되는가?",
+    "options": {
+      "A": "IPS 엔진을 / 비활성화한다",
+      "B": "IPS 세션에 관한 / 정보를 제공한다",
+      "C": "모든 IPS 엔진과 / 모니터를 재시작한다",
+      "D": "IPS bypass 모드를 / 활성화한다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.39": {
+    "question": "Exhibit 참조. / 실시간 RADIUS 디버그의 / 잘린 출력이 표시되어 있다. / 옳은 두 설명은? / (두 개 선택)",
+    "options": {
+      "A": "인증을 위해 쿼리된 / RADIUS 서버는 / 172.25.188.164 IP 주소에 있다",
+      "B": "인증이 / 실패했다",
+      "C": "사용된 인증 방식은 / pop3이다",
+      "D": "인증이 / 성공했다",
+      "E": "2단계 인증이 / 필요했다"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.70": {
+    "question": "FSSO 실시간 디버그를 사용하여 / 식별할 수 있는 / FortiGate-수집기 에이전트 간 / 세 가지 일반적인 / 연결 문제는? / (세 개 선택)",
+    "options": {
+      "A": "수집기 에이전트에서 / 로그가 가득 찼다",
+      "B": "수집기 에이전트의 / IP 주소에 / 도달할 수 없다",
+      "C": "연결이 거부됨 / TCP 포트 불일치 가능성",
+      "D": "사전 공유 비밀번호가 / 일치하지 않는다",
+      "E": "호환되지 않는 / 수집기 에이전트 / 소프트웨어 버전"
+    }
+  },
+  "FCSS_NST_SE-7.6 V13.65.pdf::NO.103": {
+    "question": "FSSO 실시간 디버그를 사용하여 / 식별할 수 있는 / FortiGate-수집기 에이전트 간 / 세 가지 일반적인 / 연결 문제는? / (세 개 선택)",
+    "options": {
+      "A": "FSSO over SSL에 사용되는 / SSL 인증서가 / 만료되었다",
+      "B": "연결이 거부됨 / TCP 포트 불일치 가능성",
+      "C": "FortiGate가 / 수집기 에이전트의 / IP 주소에 도달할 수 없다",
+      "D": "사전 공유 키가 / 일치하지 않는다",
+      "E": "그룹 필터가 / 일치하지 않는다"
+    }
   }
 }

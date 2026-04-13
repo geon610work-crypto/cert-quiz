@@ -205,7 +205,11 @@ def _extract_product_id(pdf_name):
 
 
 def _lookup_cache(pdf_name, q_num):
-    """Look up cache: exact key → 제품 식별자(NST/EFW) 기반 매칭."""
+    """Look up cache: exact key → 제품 식별자(NST/EFW) 기반 매칭.
+
+    product-id 폴백은 해당 PDF에 대한 캐시 항목이 전혀 없을 때만 사용.
+    (예: 업로드 PDF 또는 레거시 키가 없는 경우)
+    """
     # 1) 정확한 키
     key = _cache_key(pdf_name, q_num) if pdf_name else q_num
     if key in korean_cache:
@@ -213,13 +217,16 @@ def _lookup_cache(pdf_name, q_num):
     # 2) 파일명 없이 q_num만으로 검색
     if q_num in korean_cache:
         return korean_cache[q_num]
-    # 3) 제품 식별자(NST/EFW 등)가 같은 캐시 항목만 검색
+    # 3) 제품 식별자(NST/EFW 등) 폴백 — 이 PDF에 캐시 항목이 하나도 없을 때만
     if pdf_name:
-        product_id = _extract_product_id(pdf_name)
-        if product_id:
-            for k, v in korean_cache.items():
-                if k.endswith(f'::{q_num}') and product_id in k.upper():
-                    return v
+        prefix = f"{pdf_name}::"
+        pdf_has_any_cache = any(k.startswith(prefix) for k in korean_cache)
+        if not pdf_has_any_cache:
+            product_id = _extract_product_id(pdf_name)
+            if product_id:
+                for k, v in korean_cache.items():
+                    if k.endswith(f'::{q_num}') and product_id in k.upper():
+                        return v
     return None
 
 

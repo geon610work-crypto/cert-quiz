@@ -316,8 +316,8 @@
     "options": {
       "A": "로컬 FortiGate는 / broadcast 네트워크에 참여하는 / 인터페이스가 최소 하나 있다.",
       "B": "로컬 FortiGate는 / point-to-point 네트워크에 참여하는 / 인터페이스가 최소 하나 있다.",
-      "C": "로컬 FortiGate가 / DR이다.",
-      "D": "이웃 0.0.0.18이 / 지정 라우터(DR)이다."
+      "C": "이웃 0.0.0.18이 / 지정 라우터(DR)이다.",
+      "D": "로컬 FortiGate가 / DR이다."
     },
     "_src": {
       "question": "",
@@ -673,8 +673,8 @@
   "FCSS_NST_SE-7.6 V13.35.pdf::NO.38": {
     "question": "Exhibit 참조. / 부분적인 웹 필터 프로파일 구성. / www.dropbox.com은 / File Sharing and Storage로 분류된다. / 사용자가 www.dropbox.com에 접근 시도 시 / FortiGate의 동작은?",
     "options": {
-      "A": "FortiGate는 / 유효하지 않은 URL로 / 연결을 차단한다.",
-      "B": "URL 필터 구성에 따라 / FortiGate는 / 연결을 허용한다.",
+      "A": "URL 필터 구성에 따라 / FortiGate는 / 연결을 허용한다.",
+      "B": "FortiGate는 / 유효하지 않은 URL로 / 연결을 차단한다.",
       "C": "FortiGate는 / FortiGuard 카테고리 기반 필터 구성에 따라 / 연결을 차단한다.",
       "D": "웹 콘텐츠 필터 구성에 따라 / www.dropbox.com 접근이 / 면제된다."
     },
@@ -857,8 +857,8 @@
     "options": {
       "A": "현재 primary FortiGate에서 / 구성 변경이 이루어지면 / secondary가 동기화 재설정을 시작한다.",
       "B": "secondary에서 / port 7이 끊기면 / 두 FortiGate 장치 모두 / 스스로 primary로 선출될 것이다.",
-      "C": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 재합류해도 / 그 역할을 유지한다.",
-      "D": "조치를 취하지 않으면 / 현재 동기화 상태로 인해 / primary FortiGate가 / 클러스터를 떠날 것이다."
+      "C": "조치를 취하지 않으면 / 현재 동기화 상태로 인해 / primary FortiGate가 / 클러스터를 떠날 것이다.",
+      "D": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 재합류해도 / 그 역할을 유지한다."
     },
     "_src": {
       "question": "",
@@ -1781,9 +1781,9 @@
   "FCSS_NST_SE-7.6 V13.35.pdf::NO.99": {
     "question": "regular bind 타입을 사용한 / LDAP 인증에 대한 / 정확한 설명은?",
     "options": {
-      "A": "regular bind는 / 클라이언트가 / 전체 식별 이름(DN)을 / 전송해야 한다.",
-      "B": "regular bind 타입은 / FortiOS에서 구성하기 / 가장 쉬운 bind 타입이다.",
-      "C": "regular bind 타입은 / LDAP 서버에 접근하기 위해 / FortiGate super admin 계정이 / 필요하다.",
+      "A": "regular bind 타입은 / FortiOS에서 구성하기 / 가장 쉬운 bind 타입이다.",
+      "B": "regular bind 타입은 / LDAP 서버에 접근하기 위해 / FortiGate super admin 계정이 / 필요하다.",
+      "C": "regular bind는 / 클라이언트가 / 전체 식별 이름(DN)을 / 전송해야 한다.",
       "D": "bind 타입으로 / 자주 사용되지 않는다."
     },
     "_src": {
@@ -2107,8 +2107,8 @@
   "FCSS_EFW_AD-7.6 V13.35.pdf::NO.74": {
     "question": "기업 네트워크 트래픽을 보호하기 위해 / FortiGate가 / 세션의 첫 번째 패킷을 처리할 때 / 먼저 수행하는 단계는 무엇인가?",
     "options": {
-      "A": "복호화",
-      "B": "네트워크 프로세서(NP)에 / 세션 키 설치",
+      "A": "네트워크 프로세서(NP)에 / 세션 키 설치",
+      "B": "복호화",
       "C": "RPF(역방향 경로 포워딩) 검사",
       "D": "IP 무결성 헤더 검사"
     },
@@ -2179,9 +2179,9 @@
   "FCSS_EFW_AD-7.6 V13.35.pdf::NO.25": {
     "question": "transparent VDOM 인터페이스에서 / set forward-domain <domain_ID> 명령은 / 무엇을 하는가?",
     "options": {
-      "A": "지정된 VLAN의 트래픽만 관리하도록 / 인터페이스를 제한하여 / 네트워크 트래픽을 효과적으로 분리한다.",
-      "B": "domain ID를 기반으로 / 트래픽 우선순위를 지정하도록 / 인터페이스를 구성하여 / 지정된 VLAN의 서비스 품질을 향상시킨다.",
-      "C": "VLAN ID를 기반으로 / 인터페이스에 브로드캐스트 도메인을 할당하여 / 특정 VLAN 내에서 / 트래픽을 격리한다.",
+      "A": "domain ID를 기반으로 / 트래픽 우선순위를 지정하도록 / 인터페이스를 구성하여 / 지정된 VLAN의 서비스 품질을 향상시킨다.",
+      "B": "VLAN ID를 기반으로 / 인터페이스에 브로드캐스트 도메인을 할당하여 / 특정 VLAN 내에서 / 트래픽을 격리한다.",
+      "C": "지정된 VLAN의 트래픽만 관리하도록 / 인터페이스를 제한하여 / 네트워크 트래픽을 효과적으로 분리한다.",
       "D": "인터페이스에 / 고유한 domain ID를 할당하여 / 동일한 VDOM 내의 / 여러 VLAN에서 작동할 수 있도록 한다."
     },
     "_src": {
@@ -2269,10 +2269,10 @@
   "FCSS_EFW_AD-7.6 V13.35.pdf::NO.52": {
     "question": "취약점 스캔 보고서에 따르면 / 사용자가 / HTTPS 웹 서버가 지원하는 / 약한 SSL/TLS 버전을 사용하여 / example.com 웹사이트에 / 트래픽을 생성했음이 밝혀졌다. / 모든 HTTPS 웹 서버에서 / 오래된 SSL/TLS 버전을 차단하여 / 사용자 트래픽에 대한 / 가능한 공격을 방지하기 위해 / 무엇을 할 수 있는가?",
     "options": {
-      "A": "SSL/SSH 검사 프로파일에서 / 서버 인증서 SNI 확인을 활성화한다.",
+      "A": "SSL/SSH 검사 프로파일의 / HTTPS 설정에서 / 지원되지 않는 SSL 버전을 구성하고 / 최소 허용 SSL 버전을 설정한다.",
       "B": "SSL/SSH 검사 프로파일에서 / 오래된 SSL/TLS 버전의 자동 감지를 활성화하여 / 취약한 웹사이트를 차단한다.",
-      "C": "SSL/SSH 검사 프로파일에서 / 유효하지 않은 SSL 인증서를 차단한다.",
-      "D": "SSL/SSH 검사 프로파일의 / HTTPS 설정에서 / 지원되지 않는 SSL 버전을 구성하고 / 최소 허용 SSL 버전을 설정한다."
+      "C": "필요한 인증서를 / 클라이언트 브라우저에 설치하거나 / AutoConfig를 사용하여 / 내부 인증서를 배포한다.",
+      "D": "최신 인증서 Fortinet_SSL_ECDSA256을 사용하여 / 기존 인증서를 교체한다."
     },
     "_src": {
       "question": "",
@@ -3945,10 +3945,10 @@
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.1": {
     "question": "전시물을 참조하라. 전시물은 / OSPF 명령의 / 부분적인 출력을 포함한다. / 관리자는 / FortiGate 장치의 OSPF 상태를 확인하고 / 전시물과 같은 출력을 받는다. / 관리자가 도출할 수 있는 / 두 가지 결론은 무엇인가? (두 개 선택)",
     "options": {
-      "A": "FortiGate 장치는 / 백업 지정 라우터(BDR)이다.",
+      "A": "FortiGate 장치는 / 외부 라우팅 정보를 주입한다.",
       "B": "FortiGate 장치는 / 여러 영역에 연결되어 있다.",
-      "C": "FortiGate 장치는 / 외부 라우팅 정보를 주입한다.",
-      "D": "FortiGate 장치는 / OSPF ECMP가 활성화되어 있다."
+      "C": "FortiGate 장치는 / OSPF ECMP가 활성화되어 있다.",
+      "D": "FortiGate 장치는 / 백업 지정 라우터(BDR)이다."
     },
     "_src": {
       "question": "Refer to the exhibit, which contains the partial output of an OSPF command.\n28\nAn administrator is checking the OSPF status of a FortiGate device and receives the output\nshown in the exhibit.\nWhat two conclusions can the administrator draw? (Choose two.)",
@@ -4036,9 +4036,9 @@
     "question": "정책 패키지를 가져올 때 / 객체 충돌을 / 어떻게 해결하는가?",
     "options": {
       "A": "이름 변경(Rename)",
-      "B": "구성 가져오기(Retrieve config)",
-      "C": "FortiManager 수락(FortiManager accept)",
-      "D": "기본값이 아닌 값(Non-default)"
+      "B": "FortiManager 수락(FortiManager accept)",
+      "C": "기본값이 아닌 값(Non-default)",
+      "D": "구성 가져오기(Retrieve config)"
     },
     "_src": {
       "question": "How do you resolve object conflicts when importing a policy package?",
@@ -4089,10 +4089,10 @@
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.12": {
     "question": "tcp-mss-sender와 tcp-mss-receiver 구성의 / 효과는 무엇인가?",
     "options": {
-      "A": "헤더 변경(Header change)",
-      "B": "최대 페이로드(Largest payload)",
-      "C": "허용/거부(Allow/Deny)",
-      "D": "분열만(Fragment only)"
+      "A": "분열만(Fragment only)",
+      "B": "헤더 변경(Header change)",
+      "C": "최대 페이로드(Largest payload)",
+      "D": "허용/거부(Allow/Deny)"
     },
     "_src": {
       "question": "What is the effect of configuring tcp-mss-sender and tcp-mss-receiver?",
@@ -4161,10 +4161,10 @@
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.19": {
     "question": "취약점 스캔 보고서에 따르면 / 사용자가 / HTTPS 웹 서버가 지원하는 / 약한 SSL/TLS 버전을 사용하여 / example.com 웹사이트에 / 트래픽을 생성했음이 밝혀졌다. / 모든 HTTPS 웹 서버에서 / 오래된 SSL/TLS 버전을 차단하여 / 사용자 트래픽에 대한 / 가능한 공격을 방지하기 위해 / 무엇을 할 수 있는가?",
     "options": {
-      "A": "SSL/SSH 검사 프로파일에서 / 서버 인증서 SNI 확인을 활성화한다.",
+      "A": "SSL/SSH 검사 프로파일의 / HTTPS 설정에서 / 지원되지 않는 SSL 버전을 구성하고 / 최소 허용 SSL 버전을 설정한다.",
       "B": "SSL/SSH 검사 프로파일에서 / 오래된 SSL/TLS 버전의 자동 감지를 활성화하여 / 취약한 웹사이트를 차단한다.",
-      "C": "SSL/SSH 검사 프로파일에서 / 유효하지 않은 SSL 인증서를 차단한다.",
-      "D": "SSL/SSH 검사 프로파일의 / HTTPS 설정에서 / 지원되지 않는 SSL 버전을 구성하고 / 최소 허용 SSL 버전을 설정한다."
+      "C": "필요한 인증서를 / 클라이언트 브라우저에 설치하거나 / AutoConfig를 사용하여 / 내부 인증서를 배포한다.",
+      "D": "최신 인증서 Fortinet_SSL_ECDSA256을 사용하여 / 기존 인증서를 교체한다."
     },
     "_src": {
       "question": "",
@@ -4575,10 +4575,10 @@
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.44": {
     "question": "사용자가 / 보안 HTTPS 웹사이트에 접근한 후 / 컴퓨터가 악성 프로그램에 감염되었다고 보고한다. / 하지만 FortiGate 로그를 확인하면 / SSL 인증서와 올바른 프로파일이 / 정책에 적용되어 있음에도 / FortiGate가 웹사이트를 비안전으로 감지하지 않았다. / FortiGate가 / 웹사이트의 암호화된 HTTPS 트래픽을 / 분석할 수 있도록 / 어떻게 해야 하는가?",
     "options": {
-      "A": "SSL/SSH 검사 프로파일에서 / full SSL 검사를 활성화하여 / 패킷을 복호화한다.",
-      "B": "min-allowed-ssl-version을 / tls-1.2로 설정한다.",
-      "C": "안전하지 않은 HTTPS 웹사이트로부터 보호하기 위해 / 서버 인증서 SNI 검사를 활성화한다.",
-      "D": "inspection-mode를 / proxy로 설정한다."
+      "A": "신뢰할 수 있는 웹사이트에서 / 강력한 암호화를 사용하는 / SSL/TLS 연결만 허용하도록 활성화한다.",
+      "B": "안전하지 않은 HTTPS 웹사이트로부터 보호하기 위해 / 서버 인증서 SNI 검사를 활성화한다.",
+      "C": "가짜 도메인으로부터 보호하기 위해 / DNS over TLS를 활성화한다.",
+      "D": "SSL/SSH 검사 프로파일에서 / full SSL 검사를 활성화한다."
     },
     "_src": {
       "question": "A user reports that their computer was infected with matware after accessing a secured\nHTTPS website. However, when you check the FortiGate logs, you see that FortiGate did not\ndetect the website as insecure, despite having an SSL certificate and the correct profiles\napplied on the policy.\nHow can you ensure that FortiGate can analyze encrypted HTTPS traffic on a website?",
@@ -4683,13 +4683,12 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.51": {
-    "question": "Security Fabric에 관한 / 두 가지 사실은 무엇인가? (두 개 선택)",
+    "question": "LAN 인터페이스 연결에 대해 / 올바른 두 설명은 무엇인가? (두 개 선택)",
     "options": {
-      "A": "Security Fabric의 / 각 멤버는 / 공유 Security Fabric 맵을 유지한다.",
-      "B": "루트 FortiGate만이 / 네트워크 토폴로지 정보를 수집하여 / FortiAnalyzer로 전달한다.",
-      "C": "FortiGate는 / FortiAnalyzer와 통신하기 위해 / FortiTelemetry 프로토콜을 사용한다.",
-      "D": "Security Fabric의 / 각 FortiGate 장치는 / 양방향 FortiTelemetry 연결이 있어야 한다.",
-      "E": "configuration-sync가 Local로 설정된 / FortiGate 장치만이 / 루트 FortiGate가 전송하는 / 전역 CMDB 객체를 수신하고 동기화한다."
+      "A": "802.3ad",
+      "B": "SD-WAN",
+      "C": "FortiLink",
+      "D": "Enable STP"
     },
     "_src": {
       "question": "",
@@ -4831,8 +4830,8 @@
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.60": {
     "question": "기업 네트워크 트래픽을 보호하기 위해 / FortiGate가 / 세션의 첫 번째 패킷을 처리할 때 / 먼저 수행하는 단계는 무엇인가?",
     "options": {
-      "A": "복호화",
-      "B": "네트워크 프로세서(NP)에 / 세션 키 설치",
+      "A": "네트워크 프로세서(NP)에 / 세션 키 설치",
+      "B": "복호화",
       "C": "RPF(역방향 경로 포워딩) 검사",
       "D": "IP 무결성 헤더 검사"
     },
@@ -6039,10 +6038,10 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.40": {
     "question": "관리자가 / 내장 스니퍼를 사용해 / 두 FortiGate 장치 간 / 암호화된 phase 2 트래픽을 캡처하려 한다. / NAT 장치가 없는 경우 / 실행해야 할 명령은?",
     "options": {
-      "A": "diagnose sniffer packet any 'udp port 4500'",
+      "A": "diagnose sniffer packet any 'udp port 500'",
       "B": "diagnose sniffer packet any 'ip proto 50'",
-      "C": "diagnose sniffer packet any 'ah'",
-      "D": "diagnose sniffer packet any 'udp port 500'"
+      "C": "diagnose sniffer packet any 'udp port 4500'",
+      "D": "diagnose sniffer packet any 'ah'"
     },
     "_src": {
       "question": "",
@@ -6237,10 +6236,10 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.51": {
     "question": "FortiOS에서 / config user radius 에서 / 구성할 수 없는 / 인증 옵션은?",
     "options": {
-      "A": "eap",
+      "A": "mschap",
       "B": "pap",
-      "C": "mschap",
-      "D": "mschap2"
+      "C": "mschap2",
+      "D": "eap"
     },
     "_src": {
       "question": "",
@@ -6275,8 +6274,8 @@
     "options": {
       "A": "현재 primary FortiGate에서 / 구성 변경이 이루어지면 / secondary가 동기화 재설정을 시작한다.",
       "B": "secondary에서 / port 7이 끊기면 / 두 FortiGate 장치 모두 / 스스로 primary로 선출될 것이다.",
-      "C": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 재합류해도 / 그 역할을 유지한다.",
-      "D": "조치를 취하지 않으면 / 현재 동기화 상태로 인해 / primary FortiGate가 / 클러스터를 떠날 것이다."
+      "C": "조치를 취하지 않으면 / 현재 동기화 상태로 인해 / primary FortiGate가 / 클러스터를 떠날 것이다.",
+      "D": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 재합류해도 / 그 역할을 유지한다."
     },
     "_src": {
       "question": "",
@@ -6601,10 +6600,10 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.72": {
     "question": "local OSPF 라우터가 / 피어와의 인접 관계를 / 수립하지 못하고 있다. / 관리자가 문제 해결을 위해 / 해야 할 두 가지는?",
     "options": {
-      "A": "TCP 포트 179가 / 차단되어 있는지 / 확인한다.",
-      "B": "피어로의 / 활성 정적 경로가 / 있는지 확인한다.",
-      "C": "두 피어 모두 / 같은 서브넷 내의 IP 주소를 / 가지고 있는지 확인한다.",
-      "D": "IP 프로토콜 89가 / 차단되어 있는지 / 확인한다."
+      "A": "두 피어 모두 / 같은 서브넷 내의 IP 주소를 / 가지고 있는지 확인한다.",
+      "B": "IP 프로토콜 89가 / 차단되어 있는지 / 확인한다.",
+      "C": "TCP 포트 179가 / 차단되어 있는지 / 확인한다.",
+      "D": "피어로의 / 활성 정적 경로가 / 있는지 확인한다."
     },
     "_src": {
       "question": "",
@@ -6657,8 +6656,8 @@
     "options": {
       "A": "로컬 FortiGate는 / broadcast 네트워크에 참여하는 / 인터페이스가 최소 하나 있다.",
       "B": "로컬 FortiGate는 / point-to-point 네트워크에 참여하는 / 인터페이스가 최소 하나 있다.",
-      "C": "로컬 FortiGate가 / DR이다.",
-      "D": "이웃 0.0.0.18이 / 지정 라우터(DR)이다."
+      "C": "이웃 0.0.0.18이 / 지정 라우터(DR)이다.",
+      "D": "로컬 FortiGate가 / DR이다."
     },
     "_src": {
       "question": "",
@@ -6691,8 +6690,8 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.77": {
     "question": "Exhibit 참조. / 부분적인 웹 필터 프로파일 구성. / www.dropbox.com은 / File Sharing and Storage로 분류된다. / 사용자가 www.dropbox.com에 접근 시도 시 / FortiGate의 동작은?",
     "options": {
-      "A": "FortiGate는 / 유효하지 않은 URL로 / 연결을 차단한다.",
-      "B": "URL 필터 구성에 따라 / FortiGate는 / 연결을 허용한다.",
+      "A": "URL 필터 구성에 따라 / FortiGate는 / 연결을 허용한다.",
+      "B": "FortiGate는 / 유효하지 않은 URL로 / 연결을 차단한다.",
       "C": "FortiGate는 / FortiGuard 카테고리 기반 필터 구성에 따라 / 연결을 차단한다.",
       "D": "웹 콘텐츠 필터 구성에 따라 / www.dropbox.com 접근이 / 면제된다."
     },
@@ -7053,9 +7052,9 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.97": {
     "question": "regular bind 타입을 사용한 / LDAP 인증에 대한 / 정확한 설명은?",
     "options": {
-      "A": "regular bind는 / 클라이언트가 / 전체 식별 이름(DN)을 / 전송해야 한다.",
-      "B": "regular bind 타입은 / FortiOS에서 구성하기 / 가장 쉬운 bind 타입이다.",
-      "C": "regular bind 타입은 / LDAP 서버에 접근하기 위해 / FortiGate super admin 계정이 / 필요하다.",
+      "A": "regular bind 타입은 / FortiOS에서 구성하기 / 가장 쉬운 bind 타입이다.",
+      "B": "regular bind 타입은 / LDAP 서버에 접근하기 위해 / FortiGate super admin 계정이 / 필요하다.",
+      "C": "regular bind는 / 클라이언트가 / 전체 식별 이름(DN)을 / 전송해야 한다.",
       "D": "bind 타입으로 / 자주 사용되지 않는다."
     },
     "_src": {
@@ -7540,10 +7539,10 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.125": {
     "question": "Exhibit 참조. / 세션 항목. / 이 TCP 세션에 대한 / 옳은 설명은?",
     "options": {
-      "A": "세션이 / NP7을 사용해 / 오프로드되어 있다.",
-      "B": "개시자로의 반환 트래픽은 / [Exhibit 참조]로 전송된다.",
-      "C": "10.9.31.117에서 10.1.0.3으로의 / TCP 세션이다.",
-      "D": "세션은 / 1초 후 / 만료된다."
+      "A": "세션은 / 1초 후 / 만료된다.",
+      "B": "10.9.31.117에서 10.1.0.3으로의 / TCP 세션이다.",
+      "C": "세션이 / NP7을 사용해 / 오프로드되어 있다.",
+      "D": "개시자로의 / 반환 트래픽은 / 10.9.31.117로 전송된다."
     },
     "_src": {
       "question": "",

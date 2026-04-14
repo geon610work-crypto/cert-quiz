@@ -1390,6 +1390,32 @@ class QuizHandler(BaseHTTPRequestHandler):
         elif path == '/api/pdfs':
             self.send_json(find_pdfs())
 
+        elif path == '/api/products':
+            # EFW / NST 최신 버전 자동 탐지
+            import re as _re
+            all_pdfs = find_pdfs()
+            products = {}
+            _pat = _re.compile(
+                r'FCSS_(EFW|NST)_(?:AD|SE)-[\d.]+\s+(V[\d.]+)\.pdf$', _re.IGNORECASE)
+            for p in all_pdfs:
+                m = _pat.match(os.path.basename(p['path']))
+                if not m:
+                    continue
+                key = m.group(1).upper()   # 'EFW' or 'NST'
+                ver = m.group(2)           # e.g. 'V13.65'
+                # keep highest version
+                def _ver_tuple(v):
+                    return tuple(int(x) for x in v.lstrip('V').split('.'))
+                if key not in products or _ver_tuple(ver) > _ver_tuple(products[key]['version']):
+                    products[key] = {
+                        'key':     key,
+                        'label':   'FCSS EFW AD-7.6' if key=='EFW' else 'FCSS NST SE-7.6',
+                        'version': ver,
+                        'path':    p['path'],
+                        'name':    p['name'],
+                    }
+            self.send_json(list(products.values()))
+
         elif path == '/api/quiz':
             pdf_path = params.get('path', [''])[0]
             count    = int(params.get('count', ['30'])[0])
@@ -1756,28 +1782,31 @@ function useTimer(){
 
 /* ── SelectScreen ── */
 function SelectScreen({ onStart }){
-  const [tab,      setTab]     = useState('server'); // 'server' | 'upload'
-  // server tab
-  const [pdfs,    setPdfs]    = useState([]);
-  const [sel,     setSel]     = useState('');
-  // upload tab
-  const [file,    setFile]    = useState(null);
-  const [uploading,setUploading]=useState(false);
-  const [uploaded, setUploaded]=useState(null); // {path, name}
-  // common
-  const [count,   setCount]   = useState(30);
-  const [loading, setLoading] = useState(false);
-  const [err,     setErr]     = useState('');
+  const [products,  setProducts]  = useState([]);   // [{key,label,version,path,name}]
+  const [selKey,    setSelKey]    = useState('');    // 'EFW' | 'NST' | ''
+  const [count,     setCount]     = useState(30);
+  const [loading,   setLoading]   = useState(false);
+  const [err,       setErr]       = useState('');
+  // upload (숨김 토글)
+  const [showUpload,setShowUpload]= useState(false);
+  const [file,      setFile]      = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploaded,  setUploaded]  = useState(null);
   const fileRef = useRef(null);
 
   useEffect(()=>{
-    fetch('/api/pdfs').then(r=>r.json()).then(data=>{
-      setPdfs(data);
-      if(data.length>0) setSel(data[0].path);
+    fetch('/api/products').then(r=>r.json()).then(data=>{
+      // EFW → NST 순서 정렬
+      const order = {EFW:0, NST:1};
+      data.sort((a,b)=>(order[a.key]??9)-(order[b.key]??9));
+      setProducts(data);
     }).catch(()=>{});
   },[]);
 
-  /* upload file to server */
+  /* 현재 선택된 product 객체 */
+  const selProduct = products.find(p=>p.key===selKey) || null;
+
+  /* upload */
   const doUpload = async(f)=>{
     if(!f) return;
     setUploading(true); setErr(''); setUploaded(null);
@@ -1792,23 +1821,15 @@ function SelectScreen({ onStart }){
     finally{ setUploading(false); }
   };
 
-  const handleFileChange = e=>{
-    const f = e.target.files[0];
-    if(f){ setFile(f); doUpload(f); }
-  };
-
-  /* start quiz */
-  const start = async(mode='exam')=>{
-    const pdfPath = tab==='server' ? sel : (uploaded && uploaded.path);
-    const pdfName = tab==='server'
-      ? (pdfs.find(p=>p.path===sel)||{}).name||''
-      : (uploaded && uploaded.name)||'';
+  /* start */
+  const start = async(mode)=>{
+    const pdfPath = showUpload ? (uploaded && uploaded.path) : (selProduct && selProduct.path);
+    const pdfName = showUpload ? (uploaded && uploaded.name) : (selProduct && selProduct.name);
     if(!pdfPath) return;
     setLoading(true); setErr('');
     try{
-      // 연습/공부 모드는 전체 문제, 시험 모드는 count개
-      const url = (mode==='practice' || mode==='study')
-        ? '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count=9999' + (mode==='study' ? '&order=1' : '')
+      const url = (mode==='practice'||mode==='study')
+        ? '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count=9999'+(mode==='study'?'&order=1':'')
         : '/api/quiz?path='+encodeURIComponent(pdfPath)+'&count='+count;
       const res  = await fetch(url);
       const data = await res.json();
@@ -1818,139 +1839,135 @@ function SelectScreen({ onStart }){
     finally{ setLoading(false); }
   };
 
-  const canStart = tab==='server' ? !!sel : !!uploaded;
+  const canStart = showUpload ? !!uploaded : !!selProduct;
 
-  const tabStyle = active => ({
-    flex:1, padding:'10px', border:'none', cursor:'pointer', fontWeight:'600',
-    fontSize:'14px', borderRadius:'8px', transition:'all .2s',
-    background: active ? '#3b82f6' : 'transparent',
-    color:      active ? '#fff'    : 'var(--c5)',
-  });
+  /* product card 색상 */
+  const productColor = {EFW:'#2563eb', NST:'#059669'};
+  const productEmoji = {EFW:'🔷', NST:'🟢'};
 
   return(
     <div className="container">
-      <div style={{textAlign:'center',padding:'44px 0 28px'}}>
+      <div style={{textAlign:'center',padding:'44px 0 24px'}}>
         <div style={{fontSize:'52px',marginBottom:'12px'}}>📚</div>
         <h1>Certification Exam Quiz</h1>
-        <p className="muted" style={{marginTop:'8px'}}>덤프 PDF에서 랜덤 문제를 뽑아 모의고사를 풀어보세요</p>
+        <p className="muted" style={{marginTop:'8px'}}>시험을 선택하고 학습 모드를 고르세요</p>
       </div>
 
-      <div className="card">
-        <h3 style={{marginBottom:'16px'}}>⚙️ 시험 설정</h3>
-
-        {/* Tab switcher */}
-        <div style={{display:'flex',gap:'6px',background:'var(--c0)',borderRadius:'10px',
-          padding:'4px',marginBottom:'20px'}}>
-          <button style={tabStyle(tab==='server')} onClick={()=>{setTab('server');setErr('');}}>
-            📁 서버 PDF
-          </button>
-          <button style={tabStyle(tab==='upload')} onClick={()=>{setTab('upload');setErr('');}}>
-            💻 내 PC에서 업로드
-          </button>
-        </div>
-
-        {/* Server PDF tab */}
-        {tab==='server' && (
-          pdfs.length > 0 ? <>
-            <label style={{display:'block',marginBottom:'7px',fontWeight:'600',fontSize:'13px',color:'var(--c5)'}}>
-              📄 PDF 파일 선택
-            </label>
-            <select value={sel} onChange={e=>setSel(e.target.value)} style={{marginBottom:'18px'}}>
-              {pdfs.map(p=><option key={p.path} value={p.path}>{p.rel}</option>)}
-            </select>
-          </> : (
-            <div style={{textAlign:'center',padding:'20px 0',color:'var(--c5)',fontSize:'13px',marginBottom:'8px'}}>
-              서버에 PDF 파일이 없습니다. "내 PC에서 업로드" 탭을 이용해 주세요.
-            </div>
-          )
-        )}
-
-        {/* Upload tab */}
-        {tab==='upload' && (
-          <div style={{marginBottom:'18px'}}>
-            <input ref={fileRef} type="file" accept=".pdf"
-              onChange={handleFileChange}
-              style={{display:'none'}} />
-
-            {!uploaded ? (
-              <div
-                onClick={()=>fileRef.current.click()}
+      {/* ── Product 버튼 ── */}
+      {!showUpload && (
+        <div style={{display:'flex',gap:'14px',marginBottom:'20px'}}>
+          {products.map(p=>{
+            const active = selKey===p.key;
+            const color  = productColor[p.key] || '#3b82f6';
+            return(
+              <button key={p.key} onClick={()=>{setSelKey(p.key);setErr('');}}
                 style={{
-                  border:'2px dashed #475569',borderRadius:'12px',padding:'32px',
-                  textAlign:'center',cursor:'pointer',transition:'border-color .2s',
-                }}
-                onMouseOver={e=>e.currentTarget.style.borderColor='#3b82f6'}
-                onMouseOut={e=>e.currentTarget.style.borderColor='var(--c3)'}
-              >
-                {uploading ? (
-                  <div>
-                    <div style={{fontSize:'32px',marginBottom:'8px'}}>⏳</div>
-                    <p style={{color:'var(--c5)',fontSize:'14px'}}>업로드 중...</p>
-                  </div>
-                ) : (
-                  <div>
-                    <div style={{fontSize:'36px',marginBottom:'10px'}}>📤</div>
-                    <p style={{fontWeight:'600',marginBottom:'4px'}}>클릭하여 PDF 선택</p>
-                    <p style={{color:'var(--c5)',fontSize:'13px'}}>최대 80MB · .pdf 파일만 지원</p>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div style={{background:'var(--c0)',borderRadius:'10px',padding:'14px 16px',
-                display:'flex',alignItems:'center',gap:'12px'}}>
-                <span style={{fontSize:'28px'}}>📄</span>
-                <div style={{flex:1,overflow:'hidden'}}>
-                  <p style={{fontWeight:'600',fontSize:'14px',
-                    overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                    {uploaded.name}
-                  </p>
-                  <p style={{color:'#22c55e',fontSize:'12px',marginTop:'2px'}}>✅ 업로드 완료</p>
-                </div>
-                <button className="btn btn-secondary" onClick={()=>{
-                  setUploaded(null); setFile(null);
-                  if(fileRef.current) fileRef.current.value='';
-                }} style={{fontSize:'12px',padding:'6px 10px',flexShrink:0}}>
-                  다시 선택
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+                  flex:1, padding:'22px 12px', borderRadius:'16px', cursor:'pointer',
+                  border: active ? `2px solid ${color}` : '2px solid var(--c2)',
+                  background: active ? `${color}18` : 'var(--c1)',
+                  transition:'all .18s', textAlign:'center',
+                  boxShadow: active ? `0 0 0 3px ${color}33` : 'none',
+                }}>
+                <div style={{fontSize:'36px',marginBottom:'8px'}}>{productEmoji[p.key]||'📄'}</div>
+                <div style={{fontWeight:'800',fontSize:'20px',color: active?color:'var(--c7)',
+                  letterSpacing:'0.5px',marginBottom:'4px'}}>{p.key}</div>
+                <div style={{fontSize:'12px',color:'var(--c5)',marginBottom:'4px'}}>{p.label}</div>
+                <div style={{
+                  display:'inline-block',padding:'2px 8px',borderRadius:'20px',
+                  fontSize:'11px',fontWeight:'700',
+                  background: active?color:'var(--c2)',
+                  color: active?'#fff':'var(--c5)',
+                }}>{p.version}</div>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
-        {/* Count slider — always visible */}
+      {/* ── 설정 카드 ── */}
+      <div className="card">
+        {/* 시험 모드: 문제 수 슬라이더 */}
         <label style={{display:'block',marginBottom:'7px',fontWeight:'600',fontSize:'13px',color:'var(--c5)'}}>
-          📝 문제 수: <span style={{color:'#3b82f6',fontWeight:'700'}}>{count}문제</span>
+          📝 시험 모드 문제 수: <span style={{color:'#3b82f6',fontWeight:'700'}}>{count}문제</span>
         </label>
-        <input type="range" min="10" max="50" step="5" value={count}
+        <input type="range" min="10" max="116" step="1" value={count}
           onChange={e=>setCount(+e.target.value)}
-          style={{width:'100%',marginBottom:'22px',accentColor:'#3b82f6'}} />
+          style={{width:'100%',marginBottom:'20px',accentColor:'#3b82f6'}} />
 
         {err && <p style={{color:'#ef4444',marginBottom:'12px',fontSize:'14px'}}>{err}</p>}
 
+        {/* 모드 버튼 */}
         <div style={{display:'flex',gap:'10px',marginBottom:'8px'}}>
           <button className="btn btn-primary" onClick={()=>start('exam')}
-            disabled={loading || !canStart || (tab==='upload' && uploading)}
+            disabled={loading||!canStart}
             style={{flex:1,padding:'13px',fontSize:'15px'}}>
-            {loading ? '⏳ 불러오는 중...' : '🚀 시험 모드'}
+            {loading?'⏳ 불러오는 중...':'🚀 시험 모드'}
           </button>
           <button className="btn" onClick={()=>start('practice')}
-            disabled={loading || !canStart || (tab==='upload' && uploading)}
+            disabled={loading||!canStart}
             style={{flex:1,padding:'13px',fontSize:'15px',background:'#7c3aed',borderColor:'#7c3aed'}}>
-            {loading ? '⏳ 불러오는 중...' : '🎯 연습 모드'}
+            {loading?'⏳ 불러오는 중...':'🎯 연습 모드'}
           </button>
         </div>
         <button className="btn" onClick={()=>start('study')}
-          disabled={loading || !canStart || (tab==='upload' && uploading)}
+          disabled={loading||!canStart}
           style={{width:'100%',padding:'13px',fontSize:'15px',
-            background:'#0d9488',borderColor:'#0d9488',marginBottom:'2px'}}>
-          {loading ? '⏳ 불러오는 중...' : '📖 공부 모드'}
+            background:'#0d9488',borderColor:'#0d9488'}}>
+          {loading?'⏳ 불러오는 중...':'📖 공부 모드'}
         </button>
       </div>
 
-      <p className="muted sm" style={{textAlign:'center'}}>
-        {tab==='server'
-          ? `${pdfs.length}개 서버 PDF 발견 · 시험: ${count}문제 랜덤 출제 / 연습: 전체 문제`
-          : '업로드한 PDF에서 문제를 출제합니다'}
+      {/* ── 업로드 토글 ── */}
+      <div style={{textAlign:'center',marginTop:'12px'}}>
+        <button onClick={()=>{setShowUpload(v=>!v);setErr('');setSelKey('');}}
+          style={{background:'none',border:'none',color:'var(--c4)',fontSize:'13px',
+            cursor:'pointer',textDecoration:'underline',padding:'4px'}}>
+          {showUpload ? '← 시험 선택으로 돌아가기' : '💻 다른 PDF 업로드'}
+        </button>
+      </div>
+
+      {/* 업로드 영역 */}
+      {showUpload && (
+        <div className="card" style={{marginTop:'14px'}}>
+          <h3 style={{marginBottom:'14px'}}>💻 PDF 업로드</h3>
+          <input ref={fileRef} type="file" accept=".pdf"
+            onChange={e=>{const f=e.target.files[0];if(f){setFile(f);doUpload(f);}}}
+            style={{display:'none'}} />
+          {!uploaded ? (
+            <div onClick={()=>fileRef.current.click()}
+              style={{border:'2px dashed #475569',borderRadius:'12px',padding:'28px',
+                textAlign:'center',cursor:'pointer'}}
+              onMouseOver={e=>e.currentTarget.style.borderColor='#3b82f6'}
+              onMouseOut={e=>e.currentTarget.style.borderColor='#475569'}>
+              {uploading
+                ? <><div style={{fontSize:'28px'}}>⏳</div><p style={{color:'var(--c5)',marginTop:'8px'}}>업로드 중...</p></>
+                : <><div style={{fontSize:'32px'}}>📤</div>
+                    <p style={{fontWeight:'600',marginTop:'8px'}}>클릭하여 PDF 선택</p>
+                    <p style={{color:'var(--c5)',fontSize:'12px',marginTop:'4px'}}>최대 80MB · .pdf 파일만 지원</p></>
+              }
+            </div>
+          ) : (
+            <div style={{background:'var(--c0)',borderRadius:'10px',padding:'14px',
+              display:'flex',alignItems:'center',gap:'12px'}}>
+              <span style={{fontSize:'24px'}}>📄</span>
+              <div style={{flex:1,overflow:'hidden'}}>
+                <p style={{fontWeight:'600',fontSize:'13px',overflow:'hidden',
+                  textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{uploaded.name}</p>
+                <p style={{color:'#22c55e',fontSize:'12px',marginTop:'2px'}}>✅ 업로드 완료</p>
+              </div>
+              <button className="btn btn-secondary" onClick={()=>{
+                setUploaded(null);setFile(null);
+                if(fileRef.current) fileRef.current.value='';
+              }} style={{fontSize:'12px',padding:'5px 10px',flexShrink:0}}>다시 선택</button>
+            </div>
+          )}
+        </div>
+      )}
+
+      <p className="muted sm" style={{textAlign:'center',marginTop:'12px'}}>
+        {selProduct
+          ? `${selProduct.label} ${selProduct.version} · 시험: ${count}문제 랜덤 / 연습·공부: 전체`
+          : showUpload ? '업로드한 PDF에서 문제를 출제합니다' : '위에서 시험을 선택하세요'}
       </p>
     </div>
   );

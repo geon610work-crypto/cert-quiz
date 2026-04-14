@@ -1469,7 +1469,6 @@ class QuizHandler(BaseHTTPRequestHandler):
                 q['pdf_name'] = pdf_name
                 trans = _lookup_translation(pdf_name, q['num'])
                 q['question_ko'] = trans.get('question') or None
-                q['options_ko']  = trans.get('options') or {}
                 _ov = _lookup_override(pdf_name, q['num'])
                 if _ov.get('note'):
                     q['translation_note'] = _ov['note']
@@ -2098,7 +2097,6 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
             const text     = q.options[letter];
             const isAnswer = q.answer.includes(letter);
             const isImgOpt = text==='[옵션 텍스트가 Exhibit 이미지에 포함됨]';
-            const textKo   = showTrans && q.options_ko && q.options_ko[letter];
             return (
               <div key={letter} style={{
                 padding:'10px 14px',borderRadius:'8px',
@@ -2112,7 +2110,6 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
                 </span>
                 <span style={{fontSize:'14px',lineHeight:'1.6',flex:1,color:'var(--c7)'}}>
                   {isImgOpt?'(위 이미지 참조)':text}
-                  {textKo && <div style={transStyle}>{textKo}</div>}
                 </span>
                 {isAnswer&&<span style={{flexShrink:0,color:'#22c55e',fontSize:'14px'}}>✓</span>}
               </div>

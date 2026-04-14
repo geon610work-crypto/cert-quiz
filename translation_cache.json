@@ -3946,8 +3946,8 @@
     "question": "전시물을 참조하라. 전시물은 / OSPF 명령의 / 부분적인 출력을 포함한다. / 관리자는 / FortiGate 장치의 OSPF 상태를 확인하고 / 전시물과 같은 출력을 받는다. / 관리자가 도출할 수 있는 / 두 가지 결론은 무엇인가? (두 개 선택)",
     "options": {
       "A": "FortiGate 장치는 / 외부 라우팅 정보를 주입한다.",
-      "B": "FortiGate 장치는 / 여러 영역에 연결되어 있다.",
-      "C": "FortiGate 장치는 / OSPF ECMP가 활성화되어 있다.",
+      "B": "FortiGate 장치는 / area 0.0.0.5에 있다.",
+      "C": "FortiGate 장치는 / OSPF ECMP를 지원하지 않는다.",
       "D": "FortiGate 장치는 / 백업 지정 라우터(BDR)이다."
     },
     "_src": {
@@ -4846,12 +4846,12 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.61": {
-    "question": "전시물을 참조하라. 전시물은 / ADVPN 네트워크를 보여준다. / 관리자는 / overlay network 1과 2를 연결하기 위해 / IBGP와 EBGP를 사용한 ADVPN을 구성해야 한다. / BGP에서 / 관리자가 구성해야 할 / 두 가지 옵션은 무엇인가? (두 개 선택)",
+    "question": "전시물을 참조하라. 전시물은 / ADVPN 네트워크를 보여준다. / Spoke-1 뒤의 클라이언트가 / Spoke-2 뒤에 위치한 장치로 / 트래픽을 발생시킨다. / 허브는 어떤 두 가지 메시지를 보내는가? (두 개 선택)",
     "options": {
-      "A": "set ebgp-enforce-multihop enable",
-      "B": "set next-hop-self enable",
-      "C": "set ibgp-enforce-multihop advpn",
-      "D": "set attribute-unchanged next-hop"
+      "A": "숏컷 쿼리(Shortcut query)",
+      "B": "숏컷 오퍼(Shortcut offer)",
+      "C": "숏컷 응답(Shortcut reply)",
+      "D": "숏컷 포워드(Shortcut forward)"
     },
     "_src": {
       "question": "",
@@ -4954,12 +4954,12 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.68": {
-    "question": "전시물을 참조하라. 전시물은 / 네트워크 다이어그램을 보여준다. / 관리자는 / 자율 시스템 30의 / BGP 이웃에게 / FortiGate_1에서 광고하는 MED 값을 / 수정하려 한다. / 이를 구현하기 위해 / FortiGate_1에서 / 관리자가 구성해야 할 것은 무엇인가?",
+    "question": "전시물을 참조하라. 전시물은 / overlapping 네트워크 세그먼트를 가진 / site 2 추가를 보여주는 / 네트워크 다이어그램이다. / 관리자는 / 트래픽이 올바르게 라우팅되도록 / FortiGate에서 어떤 두 가지 작업을 수행해야 하는가? (두 개 선택)",
     "options": {
-      "A": "route-map-out",
-      "B": "network-import-check",
-      "C": "prefix-list-out",
-      "D": "distribute-list-out"
+      "A": "route-overlap을 / use-new 또는 use-old로 설정한다.",
+      "B": "net-device를 / ecmp로 설정한다.",
+      "C": "single-source를 / enable로 설정한다.",
+      "D": "route-overlap을 / allow로 설정한다."
     },
     "_src": {
       "question": "Refer to the exhibit, which shows a network diagram.\nAn administrator would like to modify the MED value advertised from FortiGate_1 to a BGP\n34\nneighbor in the autonomous system 30.\nWhat must the administrator configure on FortiGate_1 to implement this?",
@@ -5044,12 +5044,12 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.74": {
-    "question": "전시물을 참조하라. 전시물은 / ISP에 연결된 기업 네트워크를 보여준다. / 관리자는 / 기업 네트워크에 인터넷 접속을 제공하기 위해 / FortiGate A의 BGP 섹션을 구성해야 한다. / ISP와 연결을 확립하기 위해 / 관리자가 사용해야 할 명령은 무엇인가?",
+    "question": "전시물을 참조하라. 전시물은 / ISP에 연결된 기업 네트워크를 보여준다. / 관리자는 / 기업 네트워크에 인터넷 접속을 제공하기 위해 / FortiGate A의 BGP 섹션을 구성해야 한다. / ISP와 연결을 확립하기 위해 / 관리자가 구성해야 하는 / 두 가지 BGP 설정은? (두 개 선택)",
     "options": {
-      "A": "config neighbor",
-      "B": "config redistribute bgp",
-      "C": "config router route-map",
-      "D": "config redistribute ospf"
+      "A": "ebgp-enforce-multihop",
+      "B": "update-source",
+      "C": "ibgp-enforce-multihop",
+      "D": "recursive-next-hop"
     },
     "_src": {
       "question": "",
@@ -5332,12 +5332,12 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.91": {
-    "question": "IKE 버전 2 분할(fragmentation)에 관한 / 두 가지 사실은 무엇인가? (두 개 선택)",
+    "question": "관리자가 / VPN 토폴로지에서 IKEv2를 구현하기로 결정한 경우 / IKEv2에 대한 옳은 두 가지 설명은? (두 개 선택)",
     "options": {
-      "A": "IKEv2 분할은 / IP 레이어에서 수행된다.",
-      "B": "재조립 타임아웃 기본값은 / 30초이다.",
-      "C": "일부 IKE 버전 2 패킷만 / 분할 가능한 것으로 간주된다.",
-      "D": "IKE 버전 2 분할의 / 최대 수는 64개이다."
+      "A": "더 강력한 Diffie-Hellman(DH) 그룹 / (예: Elliptic Curve(ECP) 그룹)을 / 포함한다.",
+      "B": "IKEv1을 사용하는 / 장치와의 / 상호운용성을 지원한다.",
+      "C": "보안 터널 수립을 위해 / 최소 두 개의 메시지를 / 교환한다.",
+      "D": "확장 인증 프로토콜(EAP)을 / 지원한다."
     },
     "_src": {
       "question": "",
@@ -5532,10 +5532,10 @@
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.104": {
     "question": "전시물을 참조하라. / 동일한 HA 업타임을 가진 / active-active (A-A) 클러스터의 HA 구성이 표시되어 있다. / HQ-NGFW-2가 / Core2 VDOM 트래픽을 처리하게 하려면 / 어떤 수정을 해야 하는가?",
     "options": {
-      "A": "HQ-NGFW-2의 / virtual cluster 2에서 / override를 활성화한다.",
-      "B": "HQ-NGFW-2의 / 우선순위를 120에서 200으로 변경한다.",
-      "C": "HQ-NGFW-2의 / 우선순위를 100에서 160으로 변경한다.",
-      "D": "HQ-NGFW-2를 / 재부팅한다."
+      "A": "HQ-NGFW-2를 / 재부팅한다.",
+      "B": "HQ-NGFW-2의 / 우선순위를 100에서 160으로 변경한다.",
+      "C": "HQ-NGFW-2의 / 우선순위를 120에서 200으로 변경한다.",
+      "D": "HQ-NGFW-2의 / virtual cluster 2에서 / override를 활성화한다."
     },
     "_src": {
       "question": "",
@@ -6274,8 +6274,8 @@
     "options": {
       "A": "현재 primary FortiGate에서 / 구성 변경이 이루어지면 / secondary가 동기화 재설정을 시작한다.",
       "B": "secondary에서 / port 7이 끊기면 / 두 FortiGate 장치 모두 / 스스로 primary로 선출될 것이다.",
-      "C": "조치를 취하지 않으면 / 현재 동기화 상태로 인해 / primary FortiGate가 / 클러스터를 떠날 것이다.",
-      "D": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 재합류해도 / 그 역할을 유지한다."
+      "C": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 재합류해도 / 그 역할을 유지한다.",
+      "D": "조치를 취하지 않으면 / 현재 동기화 상태로 인해 / primary FortiGate가 / 클러스터를 떠날 것이다."
     },
     "_src": {
       "question": "",

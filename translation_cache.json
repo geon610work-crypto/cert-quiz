@@ -7052,9 +7052,9 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.97": {
     "question": "regular bind 타입을 사용한 / LDAP 인증에 대한 / 정확한 설명은?",
     "options": {
-      "A": "regular bind 타입은 / FortiOS에서 구성하기 / 가장 쉬운 bind 타입이다.",
-      "B": "regular bind 타입은 / LDAP 서버에 접근하기 위해 / FortiGate super admin 계정이 / 필요하다.",
-      "C": "regular bind는 / 클라이언트가 / 전체 식별 이름(DN)을 / 전송해야 한다.",
+      "A": "regular bind는 / 클라이언트가 / 전체 식별 이름(DN)을 / 전송해야 한다.",
+      "B": "regular bind 타입은 / FortiOS에서 구성하기 / 가장 쉬운 bind 타입이다.",
+      "C": "regular bind 타입은 / LDAP 서버에 접근하기 위해 / FortiGate super admin 계정이 / 필요하다.",
       "D": "bind 타입으로 / 자주 사용되지 않는다."
     },
     "_src": {

@@ -1469,9 +1469,8 @@ class QuizHandler(BaseHTTPRequestHandler):
                 q['pdf_name'] = pdf_name
                 trans = _lookup_translation(pdf_name, q['num'])
                 q['question_ko'] = trans.get('question') or None
+                q['options_ko']  = trans.get('options') or {}
                 _ov = _lookup_override(pdf_name, q['num'])
-                if _ov.get('note'):
-                    q['translation_note'] = _ov['note']
                 if _ov.get('answer_conflict'):
                     q['answer_conflict'] = _ov['answer_conflict']
                 # Exhibit missing: has_exhibit=True but all pre-extracted files are absent
@@ -2083,12 +2082,6 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
           {showTrans && q.question_ko && (
             <p style={transStyle}>{q.question_ko}</p>
           )}
-          {showTrans && q.translation_note && (
-            <div style={{marginTop:'6px',padding:'8px 12px',borderRadius:'6px',
-              background:'#fff3cd',border:'1px solid #ffc107',fontSize:'13px',color:'#856404'}}>
-              ⚠️ {q.translation_note}
-            </div>
-          )}
         </div>
 
         {/* 선택지 */}
@@ -2097,6 +2090,7 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
             const text     = q.options[letter];
             const isAnswer = q.answer.includes(letter);
             const isImgOpt = text==='[옵션 텍스트가 Exhibit 이미지에 포함됨]';
+            const textKo   = showTrans && q.options_ko && q.options_ko[letter];
             return (
               <div key={letter} style={{
                 padding:'10px 14px',borderRadius:'8px',
@@ -2110,6 +2104,7 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
                 </span>
                 <span style={{fontSize:'14px',lineHeight:'1.6',flex:1,color:'var(--c7)'}}>
                   {isImgOpt?'(위 이미지 참조)':text}
+                  {textKo && <div style={transStyle}>{textKo}</div>}
                 </span>
                 {isAnswer&&<span style={{flexShrink:0,color:'#22c55e',fontSize:'14px'}}>✓</span>}
               </div>
@@ -2693,12 +2688,6 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   );
                 })}
               </div>
-              {r.translation_note && (
-                <div style={{marginTop:'8px',padding:'8px 12px',borderRadius:'6px',
-                  background:'#fff3cd',border:'1px solid #ffc107',fontSize:'13px',color:'#856404'}}>
-                  ⚠️ {r.translation_note}
-                </div>
-              )}
               {r.answer_conflict && (
                 <div style={{margin:'8px 0',padding:'8px 12px',borderRadius:'6px',
                   background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>
@@ -2780,12 +2769,6 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
                   );
                 })}
               </div>
-              {r.translation_note && (
-                <div style={{marginTop:'8px',padding:'8px 12px',borderRadius:'6px',
-                  background:'#fff3cd',border:'1px solid #ffc107',fontSize:'13px',color:'#856404'}}>
-                  ⚠️ {r.translation_note}
-                </div>
-              )}
               {r.answer_conflict && (
                 <div style={{margin:'8px 0',padding:'8px 12px',borderRadius:'6px',
                   background:'#f8d7da',border:'1px solid #f5c6cb',fontSize:'13px',color:'#721c24'}}>

@@ -1391,30 +1391,35 @@ class QuizHandler(BaseHTTPRequestHandler):
             self.send_json(find_pdfs())
 
         elif path == '/api/products':
-            # EFW / NST 최신 버전 자동 탐지
+            # 알려진 제품 목록: (regex 그룹 키, display label, 정렬 우선순위)
+            _PRODUCT_MAP = {
+                'EFW': ('FCSS EFW AD-7.6',  0),
+                'NST': ('FCSS NST SE-7.6',  1),
+                'FMG': ('FCP FMG AD-7.6',   2),
+                'FGT': ('NSE4 FGT AD-7.6',  3),
+            }
+            # 파일명에서 제품 키 추출: FCSS_EFW_, FCSS_NST_, FCP_FMG_, NSE4_FGT_
             import re as _re
+            _pat = _re.compile(
+                r'(?:FCSS_(EFW|NST)|FCP_(FMG)|NSE4_(FGT))_\S+-[\d.]+\s+(V[\d.]+)\.pdf$',
+                _re.IGNORECASE)
+            def _ver_tuple(v):
+                return tuple(int(x) for x in v.lstrip('V').split('.'))
             all_pdfs = find_pdfs()
             products = {}
-            _pat = _re.compile(
-                r'FCSS_(EFW|NST)_(?:AD|SE)-[\d.]+\s+(V[\d.]+)\.pdf$', _re.IGNORECASE)
             for p in all_pdfs:
                 m = _pat.match(os.path.basename(p['path']))
-                if not m:
-                    continue
-                key = m.group(1).upper()   # 'EFW' or 'NST'
-                ver = m.group(2)           # e.g. 'V13.65'
-                # keep highest version
-                def _ver_tuple(v):
-                    return tuple(int(x) for x in v.lstrip('V').split('.'))
+                if not m: continue
+                key = next(g for g in m.groups()[:-1] if g).upper()
+                ver = m.group(4)
                 if key not in products or _ver_tuple(ver) > _ver_tuple(products[key]['version']):
+                    label, order = _PRODUCT_MAP.get(key, (key, 99))
                     products[key] = {
-                        'key':     key,
-                        'label':   'FCSS EFW AD-7.6' if key=='EFW' else 'FCSS NST SE-7.6',
-                        'version': ver,
-                        'path':    p['path'],
-                        'name':    p['name'],
+                        'key': key, 'label': label, 'version': ver,
+                        'path': p['path'], 'name': p['name'], 'order': order,
                     }
-            self.send_json(list(products.values()))
+            result = sorted(products.values(), key=lambda x: x['order'])
+            self.send_json(result)
 
         elif path == '/api/quiz':
             pdf_path = params.get('path', [''])[0]
@@ -1794,9 +1799,7 @@ function SelectScreen({ onStart }){
 
   useEffect(()=>{
     fetch('/api/products').then(r=>r.json()).then(data=>{
-      // EFW → NST 순서 정렬
-      const order = {EFW:0, NST:1};
-      data.sort((a,b)=>(order[a.key]??9)-(order[b.key]??9));
+      // 서버가 이미 order 기준 정렬해서 반환
       setProducts(data);
     }).catch(()=>{});
   },[]);
@@ -1840,8 +1843,8 @@ function SelectScreen({ onStart }){
   const canStart = showUpload ? !!uploaded : !!selProduct;
 
   /* product card 색상 */
-  const productColor = {EFW:'#2563eb', NST:'#059669'};
-  const productEmoji = {EFW:'🔷', NST:'🟢'};
+  const productColor = {EFW:'#2563eb', NST:'#059669', FMG:'#d97706', FGT:'#dc2626'};
+  const productEmoji = {EFW:'🔷', NST:'🟢', FMG:'🟠', FGT:'🔴'};
 
   return(
     <div className="container">
@@ -1853,7 +1856,7 @@ function SelectScreen({ onStart }){
 
       {/* ── Product 버튼 ── */}
       {!showUpload && (
-        <div style={{display:'flex',gap:'14px',marginBottom:'20px'}}>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'14px',marginBottom:'20px'}}>
           {products.map(p=>{
             const active = selKey===p.key;
             const color  = productColor[p.key] || '#3b82f6';

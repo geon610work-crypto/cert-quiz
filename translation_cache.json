@@ -7991,5 +7991,2649 @@
       "D": "사전 공유 키가 / 일치하지 않는다",
       "E": "그룹 필터가 / 일치하지 않는다"
     }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.1": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 환경에 대해 / 옳은 설명은? (하나 선택)",
+    "options": {
+      "A": "보조 장치를 / 주 장치로 승격하면 / 재시작해야 한다.",
+      "B": "클러스터 멤버 간에 / FortiGuard 패키지가 / 동기화되지 않았다.",
+      "C": "하트비트 패킷을 / 5분간 수신하지 못하면 / 장애 조치가 발생한다.",
+      "D": "FortiAnalyzer 기능이 / 이 FortiManager 장치에서 / 활성화되어 있지 않다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Which statement about the environment shown in the exhibit is true? Choose one answer",
+      "options": {
+        "A": "You must restart the secondary device if you promote it to primary.",
+        "B": "No FortiGuard packages have been synchronized between the cluster members.",
+        "C": "A failover will take place after five minutes without receiving heartbeat packets.",
+        "D": "FortiAnalyzer features are not enabled on this FortiManager device."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.2": {
+    "question": "FortiManager가 / SSH 인증 없이 / FortiGate 장치에서 / CLI 스크립트를 실행할 수 있는 / 원인은?",
+    "options": {
+      "A": "레거시 로그인 방식을 사용하는 / FortiGate 장치.",
+      "B": "FortiManager와 FortiGate 장치 간 / 보안 관리 터널.",
+      "C": "Remote FortiGate Directly via CLI 옵션을 사용하는 / 스크립트.",
+      "D": "FortiManager 장치 데이터베이스에 있는 / 스크립트."
+    },
+    "_src": {
+      "question": "What allows FortiManager to run CLI scripts on FortiGate devices without prompting for SSH authentication?",
+      "options": {
+        "A": "FortiGate devices using the legacy login method.",
+        "B": "The secure management tunnel between FortiManager and FortiGate devices.",
+        "C": "The script using the Remote FortiGate Directly via CLI option.",
+        "D": "The script on the FortiManager device database."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.3": {
+    "question": "FortiManager 관리자가 / FortiGate 장치를 / 새 ADOM으로 이동했지만 / 정책 패키지를 볼 수 없다. / 이 문제를 해결하는 방법은?",
+    "options": {
+      "A": "ADOM 공유 객체를 사용하여 / 누락된 모든 데이터를 복원한다.",
+      "B": "장치를 초기화하고 / 새 ADOM에 다시 추가한다.",
+      "C": "Import Configuration 마법사를 사용하여 / 정책 패키지를 수동으로 가져온다.",
+      "D": "ADOM 동기화를 사용하여 / 누락된 구성을 복원한다."
+    },
+    "_src": {
+      "question": "A FortiManager administrator has moved a FortiGate device to a new ADOM, but they cannot see the policy package. How do you resolve this issue?",
+      "options": {
+        "A": "Use ADOM shared objects to restore all missing data.",
+        "B": "Reset the device and add it to the new ADOM again.",
+        "C": "Import the policy package manually using the Import Configuration wizard.",
+        "D": "Use ADOM sync to restore the missing configurations."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.4": {
+    "question": "관리자가 / VDOM-root, HR, Facilities를 가진 / FortiGate-HQ 장치를 / FortiManager에서 관리하고 있다. / VDOM을 별도로 관리하려면 / 어떻게 해야 하는가?",
+    "options": {
+      "A": "FortiGate-HQ는 / VDOM을 이동하려면 / FortiManager ADOM-root에서 / 관리되어야 한다.",
+      "B": "관리자는 / FortiGate-HQ VDOM-root의 / 장치 레이어에서 / 완전한 접근 권한을 가져야 한다.",
+      "C": "FortiManager는 / VDOM을 별도로 관리할 수 없는 / ADOM 일반 모드여야 한다.",
+      "D": "관리자는 / FortiGate-HQ 장치를 / FortiManager에서 삭제하고 / 다시 추가해야 한다."
+    },
+    "_src": {
+      "question": "An administrator has a FortiGate-HQ device with VDOMs-root, HR and Facilities, currently managed under FortiManager.",
+      "options": {
+        "A": "The FortiGate-HQ must be managed under the FortiManager ADOM-root to allow moving its VDOMs.",
+        "B": "The administrator must have full access in the device layer of FortiGate-HQ VDOM-root before moving VDOMs.",
+        "C": "FortiManager must be in ADOM normal mode, which does not allow VDOMs to be managed separately.",
+        "D": "The administrator must delete the FortiGate-HQ device from FortiManager and add it again using VDOM management."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.5": {
+    "question": "전시물을 참조하라. / 관리자가 / 사용자와 관련된 / 모든 구성을 복구해야 했다. / 전시물에 표시된 결과에 대해 / 옳은 설명은?",
+    "options": {
+      "A": "관리자가 / 구성 재정의를 방지하기 위해 / 플래그를 0으로 설정했다.",
+      "B": "관리자가 / 정책 패키지를 재설치했다.",
+      "C": "관리자가 / FortiGate 펌웨어를 올바르게 감지하기 위해 / 장치를 검색해야 한다.",
+      "D": "관리자가 / 장치 레이어 구성만 설치했다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. An administrator needed to recover all the configurations related to the user.",
+      "options": {
+        "A": "The administrator set the flag to 0 to prevent configuration overrides.",
+        "B": "The administrator reinstalled the policy package.",
+        "C": "The administrator needs to retrieve the device to correctly detect the FortiGate firmware.",
+        "D": "The administrator installed only the device-level configuration."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.6": {
+    "question": "전시물을 참조하라. / 전시물에서 / 로그 관리를 담당하는 프로세스가 / 사용하는 / 가용 RAM 비율은?",
+    "options": {
+      "A": "1.5",
+      "B": "3.1",
+      "C": "4.1",
+      "D": "2.9"
+    },
+    "_src": {
+      "question": "Refer to the exhibit. What percentage of the available RAM is being used by the process in charge of log management?",
+      "options": {
+        "A": "1.5",
+        "B": "3.1",
+        "C": "4.1",
+        "D": "2.9"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.7": {
+    "question": "회사 정책상 / FortiManager의 정책 패키지가 변경될 때마다 / ADOM 리비전을 생성해야 한다. / FortiManager를 업그레이드하기 전에 / 어떤 작업을 수행해야 하는가?",
+    "options": {
+      "A": "업그레이드 전에 / 글로벌 구성 데이터베이스를 / 검사하고 복구한다.",
+      "B": "방화벽 정책을 Excel로 내보내고 / ADOM에서 삭제한 후 / 업그레이드 후 재임포트한다.",
+      "C": "사용하지 않는 펌웨어 템플릿을 찾아 / 업그레이드 전에 삭제한다.",
+      "D": "업그레이드 전에 / ADOM 리비전 수를 제한한다."
+    },
+    "_src": {
+      "question": "Company policy dictates that any time a change is made to a policy package on FortiManager an ADOM revision must be created. What must be done before upgrading FortiManager?",
+      "options": {
+        "A": "Check and repair the global configuration database before upgrading.",
+        "B": "Export firewall policies to Excel, delete them on the ADOM, then reimport them after upgrading.",
+        "C": "Find unused firmware templates, then delete them before upgrading.",
+        "D": "Limit ADOM revisions before upgrading."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.8": {
+    "question": "전시물을 참조하라. / 관리자가 / BR1-FGT-1을 추가한 후 / 정책 패키지 설치 시 / 서명 오류가 발생했다. / 원인은?",
+    "options": {
+      "A": "BR1-FGT-1은 / 포트 443에서 HTTPS를 사용하는 / SSL/SSH 프로파일을 지원하지 않는다.",
+      "B": "관리자는 / FortiOS 펌웨어 버전을 / FortiManager ADOM 펌웨어 버전과 일치시켜야 한다.",
+      "C": "기본 Firewall Profile-Protocol-Options 객체만 / 서명 없이 작동하는 / 유일한 프로파일이다.",
+      "D": "FortiManager의 FortiGuard 데이터베이스가 / FortiGate BR1-FGT-1과 / 다르다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. An administrator added BR1-FGT-1 and a signature error occurred when installing the policy package.",
+      "options": {
+        "A": "BR1-FGT-1 does not support the SSL/SSH profile with HTTPS on port 443.",
+        "B": "The administrator must match the FortiOS firmware version with the FortiManager ADOM firmware version.",
+        "C": "The default Firewall Profile-Protocol-Options object is the only profile that does not sign.",
+        "D": "FortiManager has a different FortiGuard database compared to FortiGate BR1-FGT-1."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.9": {
+    "question": "전시물을 참조하라. / 관리자 admin이 / 이전 버전으로 되돌렸지만 / Config Status가 변경되지 않았다. / 이유는?",
+    "options": {
+      "A": "관리자 student가 / 변경 사항을 올바르게 보려면 / 구성 변경을 설치해야 한다.",
+      "B": "관리자가 / 방화벽 정책을 업데이트하려면 / 정책 패키지를 가져와야 한다.",
+      "C": "Revert config file을 사용할 때마다 / Install Wizard를 사용해야 한다.",
+      "D": "관리자가 / 변경 내용을 보여주는 Revision Diff 뷰를 사용했기 때문에 / 현재 상태가 아니다."
+    },
+    "_src": {
+      "question": "Refer to Exhibit: An administrator admin used the Configuration Revision History window to revert the config, but the Config Status did not change.",
+      "options": {
+        "A": "Because the administrator student must install the configuration changes to correctly see the changes.",
+        "B": "Because the administrator must import the firewall policies to update the firewall policy package.",
+        "C": "Because every time the administrator uses the revert config file, they must use the Install Wizard.",
+        "D": "Because the administrator used the Revision Diff view, which shows what changed, not what the current state is."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.10": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 구성에서 / 나타나는 두 가지 결과는? (두 개 선택)",
+    "options": {
+      "A": "비정상 종료된 세션은 / 관리자가 세션을 종료할 때까지 / ADOM을 잠금 상태로 유지한다.",
+      "B": "관리자는 / 정책 블록과 FortiManager 글로벌 ADOM을 / 잠글 수 있다.",
+      "C": "동일한 관리자가 / 동시에 / 하나 이상의 ADOM을 잠글 수 있다.",
+      "D": "관리자는 / 변경 사항을 승인하려면 / ADOM에 접근 권한이 있어야 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. What are two results from the configuration shown in the exhibit? (Choose two.)",
+      "options": {
+        "A": "Ungraceful closed sessions will keep the ADOM in a locked state until the administrator sends a session end.",
+        "B": "The administrator can lock policy blocks and FortiManager global ADOM.",
+        "C": "The same administrator can lock more than one ADOM at the same time.",
+        "D": "The administrator must have access to the ADOM to approve changes."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.11": {
+    "question": "전시물을 참조하라. / 관리자가 / HQ-NGFW-1의 HR_user에게 / FortiToken Mobile을 푸시해야 한다. / 어떻게 해야 하는가?",
+    "options": {
+      "A": "관리자는 / FortiToken을 할당하려면 / 사용자 로컬 메타 필드를 사용해야 한다.",
+      "B": "관리자는 / HQ-NGFW-1에 존재하는 / 유효한 FortiToken을 사용해야 한다.",
+      "C": "관리자는 / 여러 사용자에게 동일한 FortiToken을 할당하려면 / 메타데이터 변수를 사용해야 한다.",
+      "D": "관리자는 / HQ-NGFW-1에 FortiToken을 할당하려면 / 장치별 매핑을 사용해야 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. An administrator needs to push a FortiToken Mobile to assign it to HR_user in HQ-NGFW-1.",
+      "options": {
+        "A": "The administrator must use a user local meta field to assign FortiToken.",
+        "B": "The administrator must use a valid FortiToken that exists on HQ-NGFW-1.",
+        "C": "The administrator must use a metadata variable to assign the same FortiToken to multiple users.",
+        "D": "The administrator must use per-device mapping to assign the FortiToken to HQ-NGFW-1."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.12": {
+    "question": "전시물을 참조하라. / 관리자가 / reload failure 명령을 실행했을 때 / 오류가 발생한 원인은?",
+    "options": {
+      "A": "관리자는 / ID 번호 대신 / FortiGate 이름을 사용해야 한다.",
+      "B": "관리자가 / FortiGate HQ-NGFW를 / 최근에 모델 장치로 추가했다.",
+      "C": "FortiManager는 / ID 번호 대신 / FortiGate 시리얼 번호가 필요하다.",
+      "D": "FortiManager는 / FortiOS 버전 7.0을 지원하지 않는다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. An administrator runs the reload failure command diagnose test deploymanager and encounters an error.",
+      "options": {
+        "A": "The administrator must use the FortiGate name instead of the ID number.",
+        "B": "The administrator just recently added FortiGate HQ-NGFW as a model device.",
+        "C": "FortiManager requires the FortiGate serial number instead of the ID number.",
+        "D": "FortiManager does not support FortiOS version 7.0."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.13": {
+    "question": "전시물을 참조하라. / 모니터링된 인터페이스에 장애가 발생한 경우 / FortiManager HA에서 / 어떤 조치를 취해야 하는가?",
+    "options": {
+      "A": "FortiManager HA 장애 조치는 / 관리자에게 투명하게 처리되며 / 추가 조치가 필요 없다.",
+      "B": "작동 중인 보조 장치 중 하나를 / 수동으로 주 역할로 승격하고 / 실패한 장치를 재부팅한다.",
+      "C": "주 장치를 재구성하여 / 실패한 장치의 피어 IP 주소를 제거한다.",
+      "D": "주 장치의 무결성 데이터베이스를 확인하여 / 보조 장치가 주 장치가 되도록 강제한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. If the monitored interface for the FortiManager HA fails, what action must be taken?",
+      "options": {
+        "A": "The FortiManager HA failover is transparent to administrators and does not require any additional action.",
+        "B": "Manually promote one of the working secondary devices to the primary role and reboot the failed device.",
+        "C": "Reconfigure the primary device to remove the peer IP address of the failed device from its configuration.",
+        "D": "Check the integrity database of the primary device to force a secondary device to become the primary."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.14": {
+    "question": "전시물에 표시된 / 설치 실패 로그에서 / 무엇을 결론 내릴 수 있는가?",
+    "options": {
+      "A": "정책 ID 2가 / 비활성화된 상태로 / 설치된다.",
+      "B": "정책 ID 2는 / 설치되지 않는다.",
+      "C": "정책 ID 2가 / 출발지 주소 없이 / 설치된다.",
+      "D": "정책 ID 2가 / 원격 사용자 student 없이 / 설치된다."
+    },
+    "_src": {
+      "question": "What can you conclude from the failed installation log shown in the exhibit?",
+      "options": {
+        "A": "Policy ID 2 is installed in the disabled state.",
+        "B": "Policy ID 2 will not be installed.",
+        "C": "Policy ID 2 is installed without a source address.",
+        "D": "Policy ID 2 is installed without the remote user student."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.15": {
+    "question": "전시물을 참조하라. / 관리자가 / 기본 시스템 템플릿을 모든 장치에 적용했지만 / 일부 장치는 다른 구성이 필요하다. / 어떻게 해야 하는가?",
+    "options": {
+      "A": "ADOM 레벨에서 / 장치별 동적 객체 구성을 사용하고 / 템플릿에 적용한다.",
+      "B": "ADOM 레벨에서 / 메타데이터 변수를 구성하고 / 템플릿에서 사용한다.",
+      "C": "구성이 다른 경우 / 각 FortiGate마다 / 다른 시스템 템플릿을 생성한다.",
+      "D": "FortiManager 시스템 설정에서 / Device 유형의 메타 필드를 생성하고 / 템플릿에서 사용한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. An administrator has assigned the default system template to install all device configurations, but some devices need different configurations.",
+      "options": {
+        "A": "Use per-device dynamic object configurations at the ADOM level and apply them in the template.",
+        "B": "Configure a metadata variable at the ADOM level and use it in the template.",
+        "C": "Create a different system template for each FortiGate, if the configuration is different.",
+        "D": "Create a meta field on FortiManager system settings of type Device and use it in the template."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.16": {
+    "question": "관리자가 / FortiManager 데이터베이스에서 / 여러 객체를 구성하고 관리하며 / 변경 제어를 제공하려 한다. / 어떻게 해야 하는가?",
+    "options": {
+      "A": "저장 전에 / 방화벽 정책 변경 수락을 묻는 / 프롬프트를 활성화한다.",
+      "B": "모든 ADOM에 대해 / Workspace를 활성화하여 / 모든 변경을 제어한다.",
+      "C": "ADOM에서 / Device lock과 Advanced mode 기능을 활성화한다.",
+      "D": "Workflow 모드와 ADOM lock 기능을 활성화한다."
+    },
+    "_src": {
+      "question": "An administrator wants to configure and manage multiple objects in the FortiManager database and give a change control to administrators.",
+      "options": {
+        "A": "Enable the prompt asking the administrator to accept firewall policies changes before saving.",
+        "B": "Enable the workspace (for all ADOMs) to control all changes made by any administrator.",
+        "C": "Enable device lock and the advanced mode feature in the ADOM.",
+        "D": "Enable workflow mode and the ADOM lock feature."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.17": {
+    "question": "FortiManager를 통해 / NetFlow 구성 스크립트를 푸시하는 중 / VDOM-AGEUSR에서 오류가 발생했다. / 해결 방법은?",
+    "options": {
+      "A": "스크립트를 실행하는 사용자가 / VDOM-AGEUSR에 / 완전한 접근 권한을 갖도록 한다.",
+      "B": "장치 데이터베이스에서 / 스크립트를 실행한다.",
+      "C": "스크립트에서 VDOM을 사용하는 경우 / 메타데이터 변수를 사용한다.",
+      "D": "스크립트를 실행하기 전에 / 정책 레이어에 / 정규화된 인터페이스를 생성한다."
+    },
+    "_src": {
+      "question": "While attempting to push a NetFlow configuration script through the FortiManager policy package, an error occurred in VDOM-AGEUSR.",
+      "options": {
+        "A": "Make sure the user running the script has full access to the VDOM-AGEUSR.",
+        "B": "Run the script on the device database.",
+        "C": "Use metadata variables if they use VDOMs in the script.",
+        "D": "Create a normalized interface on the policy layer before running the script."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.18": {
+    "question": "네트워크에서 / 대량의 로그를 관리할 때 / 권장 사항은?",
+    "options": {
+      "A": "FortiManager에 로그를 저장하고 / FortiView를 사용한다.",
+      "B": "FortiManager에서 / FortiAnalyzer를 추가하고 관리한다.",
+      "C": "FortiManager에서 / 고급 ADOM 모드를 활성화한다.",
+      "D": "FortiAnalyzer에서 / FortiManager로 / 매일 로그를 전달한다."
+    },
+    "_src": {
+      "question": "Which is recommended when you are managing a high volume of logs in your network?",
+      "options": {
+        "A": "Store logs on FortiManager and use FortiView.",
+        "B": "Add and manage FortiAnalyzer from FortiManager.",
+        "C": "Enable advanced ADOM mode on FortiManager.",
+        "D": "Forward logs from FortiAnalyzer to FortiManager daily."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.19": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 구성에 대해 / 옳은 두 가지 설명은? (두 개 선택)",
+    "options": {
+      "A": "관리자는 / Local-FortiGate_root 정책 패키지를 / 잠글 수 있다.",
+      "B": "관리자가 / Remote-FortiGate 정책 패키지의 / 스냅샷을 생성했다.",
+      "C": "FortiManager ADOM workspace 모드가 / normal로 설정되어 있다.",
+      "D": "FortiManager가 / workflow 모드에 있다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Which two statements about the configuration shown in the exhibit are true? (Choose two.)",
+      "options": {
+        "A": "An administrator can lock the Local-FortiGate_root policy package.",
+        "B": "The administrator created a snapshot of the Remote-FortiGate policy package.",
+        "C": "The FortiManager ADOM workspace mode is set to normal.",
+        "D": "The FortiManager is in workflow mode."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.20": {
+    "question": "FortiManager의 / ADOM 레벨 데이터베이스에 속하는 / FortiGate 구성 설정은?",
+    "options": {
+      "A": "NSX-T 서비스 템플릿(NSX-T service template)",
+      "B": "보안 템플릿(Security template)",
+      "C": "라우팅(Routing)",
+      "D": "SNMP"
+    },
+    "_src": {
+      "question": "Which FortiGate configuration settings is part of an ADOM-level database on FortiManager?",
+      "options": {
+        "A": "NSX-T service template",
+        "B": "Security template",
+        "C": "Routing",
+        "D": "SNMP"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.21": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 per-device mapping 구성에서 / BR1-FGT-1 장치에 / 어떤 IP/넷마스크가 표시되는가?",
+    "options": {
+      "A": "172.16.0.0/255.255.255.0",
+      "B": "10.0.0.0/255.255.255.0",
+      "C": "192.168.1.0/255.255.255.0",
+      "D": "172.16.10.0/255.255.255.0"
+    },
+    "_src": {
+      "question": "Refer to the exhibits. Which IP/netmask will be presented to the BR1-FGT-1 device in the per-device mapping configuration?",
+      "options": {
+        "A": "172.16.0.0/255.255.255.0",
+        "B": "10.0.0.0/255.255.255.0",
+        "C": "192.168.1.0/255.255.255.0",
+        "D": "172.16.10.0/255.255.255.0"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.22": {
+    "question": "전시물을 참조하라. / 다운로드된 가져오기 보고서에서 / 무엇을 결론 내릴 수 있는가?",
+    "options": {
+      "A": "FortiManager는 / 방화벽 주소에 대한 / 장치별 매핑을 지원하지 않는다.",
+      "B": "관리자는 / FortiManager에서 / Remote-FortiGate_root라는 / 새 정책 패키지를 보게 된다.",
+      "C": "FortiManager가 / REMOTE_SUBNET 구성을 / 인터페이스 매핑에 맞게 변경한다.",
+      "D": "이 정책 가져오기 결과로 / FortiManager가 / 새 방화벽 주소를 생성한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. What can you conclude from the downloaded import report?",
+      "options": {
+        "A": "FortiManager does not support per-device mapping for firewall addresses.",
+        "B": "The administrator will see a new policy package named Remote-FortiGate_root in the FortiManager.",
+        "C": "FortiManager will change the configuration of REMOTE_SUBNET to match the interface mapping.",
+        "D": "As a result of this policy import process, FortiManager will create a new firewall address."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.23": {
+    "question": "FortiManager에서 / 새 리비전 기록을 생성하는 / 두 가지 조건은? (두 개 선택)",
+    "options": {
+      "A": "FortiManager가 / 관리 장치에 / 장치 레벨 변경 사항을 설치할 때.",
+      "B": "FortiManager에서 / 장치 레벨 데이터베이스 변경이 이루어질 때.",
+      "C": "FortiManager가 / 관리 장치에서 직접 변경된 / 구성으로 자동 업데이트될 때.",
+      "D": "장치 레벨 데이터베이스에서 / 관리 장치에 / 프로비저닝 템플릿이 할당될 때."
+    },
+    "_src": {
+      "question": "Which two conditions trigger FortiManager to create a new revision history? (Choose two.)",
+      "options": {
+        "A": "When FortiManager installs device-level changes on a managed device",
+        "B": "When changes to the device-level database are made on FortiManager",
+        "C": "When FortiManager is auto-updated with configuration changes made directly on a managed device",
+        "D": "When a provisioning template is assigned to a managed device on the device-level database"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.24": {
+    "question": "전시물을 참조하라. / Remote FortiGate Directly via CLI 방식으로 / 스크립트를 실행하면 / 어떤 두 가지 결과가 발생하는가? (두 개 선택)",
+    "options": {
+      "A": "FortiManager는 / 관리 장치에서 스크립트를 실행하기 전에 / CLI 명령 미리보기를 제공한다.",
+      "B": "FortiManager는 / 새 리비전 기록을 생성한다.",
+      "C": "FortiGate는 / FortiManager 장치 레벨 데이터베이스를 / 자동으로 업데이트한다.",
+      "D": "Install Wizard를 사용하여 / 변경 사항을 설치해야 한다."
+    },
+    "_src": {
+      "question": "Refer to Exhibit: Which two actions will occur if you run the script using the Remote FortiGate Directly via CLI option? (Choose two.)",
+      "options": {
+        "A": "FortiManager will provide a preview of CLI commands before executing this script on a managed device.",
+        "B": "FortiManager will create a new revision history.",
+        "C": "FortiGate will auto-updated the FortiManager device-level database.",
+        "D": "You will have to install these changes using the Install Wizard."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.25": {
+    "question": "전시물을 참조하라. / 관리자가 / FortiGateRugged-70F 모델로 / 장치를 교체해야 한다. / LAN 인터페이스 오류를 해결하는 방법은?",
+    "options": {
+      "A": "API를 사용하여 / FortiGateRugged-70F 모델의 / 시스템 템플릿 인터페이스를 할당한다.",
+      "B": "메타데이터 변수를 사용하여 / 이 오류 발생 시 / 인터페이스를 동적으로 할당한다.",
+      "C": "LAN 인터페이스의 / 장치별 매핑을 생성한다.",
+      "D": "LAN을 / FortiGateRugged-70F 모델이 지원하는 / lan1으로 교체한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. An administrator must replace the device with FortiGateRugged-70F model. How to resolve the LAN interface error?",
+      "options": {
+        "A": "Use the API to assign a system template interface for FortiGateRugged-70F model.",
+        "B": "Use a metadata variable to dynamically assign an interface when this error occurs.",
+        "C": "Create a per-device mapping for the LAN interface.",
+        "D": "Replace LAN with lan1, which is supported by FortiGateRugged-70F models."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.26": {
+    "question": "정책 패키지 구성 문제를 수정한 후 / 관리자가 / 동일한 실수를 반복하지 않도록 / 예방하려 한다. / 어떻게 해야 하는가?",
+    "options": {
+      "A": "FortiManager에서 / 각 FortiGate에 대해 / 로컬로 실행하는 TCL 스크립트를 구성한다.",
+      "B": "관리 프로파일이 있는 관리자가 / 리비전 기록을 볼 수 없도록 제한한다.",
+      "C": "변경 메모를 활성화하여 / 관리자가 객체를 변경할 때마다 / 메모를 추가하도록 요구한다.",
+      "D": "어떤 FortiGate에도 / 정책 패키지를 설치하기 전에 / 승인을 요구하는 Workflow를 활성화한다."
+    },
+    "_src": {
+      "question": "After correcting a policy package configuration issue, you want to prevent administrators from repeating the same mistake.",
+      "options": {
+        "A": "Configure an TCL script to run locally on FortiManager for each FortiGate.",
+        "B": "Restrict administrators with an administration profile from viewing the revision history.",
+        "C": "Enable the change note to require administrators to add a note whenever they change objects.",
+        "D": "Enable a workflow requiring approval before installing policy packages on any FortiGate."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.27": {
+    "question": "전시물을 참조하라. / FortiManager가 / NAT 장치 뒤에서 동작하고 있다. / FortiManager가 / FortiGate에 설정하는 IP 주소는?",
+    "options": {
+      "A": "FortiManager는 / 100.65.0.120과 10.0.13.120 / 두 IP 주소를 모두 / FortiGate에 설정한다.",
+      "B": "FortiManager는 / 100.65.0.120과 100.65.0.101 / 두 IP 주소를 모두 / FortiGate에 설정한다.",
+      "C": "FortiManager는 / 100.65.0.101 IP 주소를 / FortiGate에 설정한다.",
+      "D": "FortiManager는 / 100.65.0.120 IP 주소를 / FortiGate에 설정한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. FortiManager is operating behind a network address translation (NAT) device. What IP address does FortiManager set on FortiGate?",
+      "options": {
+        "A": "FortiManager sets both the 100.65.0.120 IP address and 10.0.13.120 IP address on FortiGate.",
+        "B": "FortiManager sets both the 100.65.0.120 IP address and 100.65.0.101 IP address on FortiGate.",
+        "C": "FortiManager sets the 100.65.0.101 IP address on FortiGate.",
+        "D": "FortiManager sets the 100.65.0.120 IP address on FortiGate."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.28": {
+    "question": "ADOM 리비전의 두 가지 결과는? (두 개 선택)",
+    "options": {
+      "A": "ADOM 리비전은 / 전체 ADOM의 현재 상태를 / 저장할 수 있다.",
+      "B": "ADOM 리비전은 / 구성 백업 크기를 / 늘리지 않는다.",
+      "C": "ADOM 리비전은 / ADOM의 모든 정책 패키지와 객체의 / 현재 상태를 저장할 수 있다.",
+      "D": "ADOM 리비전은 / Install Wizard의 / 정책 패키지 설치 설정 섹션에 나타난다."
+    },
+    "_src": {
+      "question": "What are two outcomes of ADOM revisions? Choose two answers.",
+      "options": {
+        "A": "ADOM revisions can save the current state of the entire ADOM.",
+        "B": "ADOM revisions do not increase the size of configuration backups.",
+        "C": "ADOM revisions can save the current state of all policy packages and objects for an ADOM.",
+        "D": "ADOM revisions appear in the Install Policy and Package Settings section of the install wizard."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.29": {
+    "question": "FortiManager의 데이터베이스 무결성에 관한 / 옳은 두 가지 설명은? (두 개 선택)",
+    "options": {
+      "A": "예약된 백업은 / 데이터베이스 무결성 명령을 / 자동으로 실행한다.",
+      "B": "diagnose dvm check-integrity 명령은 / 손상된 파일 시스템을 / 수정하려 시도한다.",
+      "C": "diagnose cdb check adom-integrity 명령은 / 잠긴 장치 관련 문제를 / 수정할 수 있다.",
+      "D": "스크립트를 실행하기 전에 / 모든 데이터베이스 무결성 문제를 해결해야 한다."
+    },
+    "_src": {
+      "question": "Which two statements about the integrity of databases on FortiManager are correct? Choose two answers.",
+      "options": {
+        "A": "Scheduled backups run database integrity commands automatically.",
+        "B": "The diagnose dvm check-integrity command attempts to fix a corrupted file system.",
+        "C": "The diagnose cdb check adom-integrity command can correct issues related to locked devices.",
+        "D": "You should fix all database integrity issues before performing a script."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.30": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 출력에 대해 / 옳은 두 가지 설명은? (두 개 선택)",
+    "options": {
+      "A": "관리 FortiGate의 최신 리비전 기록이 / 장치 레벨 데이터베이스와 / 일치하지 않는다.",
+      "B": "구성 변경 사항이 / FortiGate에 설치되어 / 정책 및 장치 레벨 데이터베이스가 / 업데이트되었다.",
+      "C": "관리 FortiGate의 최신 리비전 기록이 / FortiManager 정책 데이터베이스와 / 일치한다.",
+      "D": "기본 시스템 템플릿이 / 장치 레벨 데이터베이스 구성을 / 재정의한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Which two statements about the output shown in the exhibit are correct? (Choose two.)",
+      "options": {
+        "A": "The latest revision history for the managed FortiGate does not match the device-level database.",
+        "B": "Configuration changes have been installed on FortiGate, updating policy and device-level databases.",
+        "C": "The latest revision history for the managed FortiGate does match the FortiManager policy database.",
+        "D": "The system template default will override device-level database configurations."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.31": {
+    "question": "전시물을 참조하라. / 관리자가 / FortiGate를 추가했을 때 / 인터페이스 가져오기 중 / 어떤 문제가 발생하는가?",
+    "options": {
+      "A": "관리자는 / 모든 인터페이스를 올바르게 감지하려면 / 모든 인터페이스에 대해 / Per Platform을 선택해야 한다.",
+      "B": "관리자는 / 가져오기 문제를 피하기 위해 / ADOM 레이어에 / port4 인터페이스를 수동으로 생성해야 한다.",
+      "C": "FortiManager는 / ADOM 레이어에 / LAN, port4, port6을 / 정규화된 인터페이스로 생성한다.",
+      "D": "관리자가 / 모든 객체를 가져오지 않으면 / FortiGate가 예상대로 작동하지 않을 수 있다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. An administrator added a FortiGate device. What issues arise during interface import?",
+      "options": {
+        "A": "The administrator must select Per Platform for all interfaces to correctly detect all interfaces.",
+        "B": "The administrator must manually create the port4 interface on the ADOM layer to avoid import issues.",
+        "C": "FortiManager will create LAN, port4, and port6 as normalized interfaces at the ADOM layer.",
+        "D": "FortiGate may not work as expected when the administrator does not import all objects."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.32": {
+    "question": "전시물을 참조하라. / 관리자가 / 정책 패키지에서 / 비정상적인 동작을 관찰했다. / 원인은?",
+    "options": {
+      "A": "memory-failover-threshold 파라미터를 가진 / HQ-NGFW-2",
+      "B": "priority 파라미터를 가진 / HQ-NGFW-2",
+      "C": "memory-failover-flip-timeout 파라미터를 가진 / HQ-NGFW-1",
+      "D": "override 파라미터를 가진 / HQ-NGFW-1"
+    },
+    "_src": {
+      "question": "Refer to Exhibits: An administrator has observed the problem in the policy package. What is the cause?",
+      "options": {
+        "A": "HQ-NGFW-2 with the parameter memory-failover-threshold setting",
+        "B": "HQ-NGFW-2 with the parameter priority setting",
+        "C": "HQ-NGFW-1 with the parameter memory-failover-flip-timeout setting",
+        "D": "HQ-NGFW-1 with the parameter override setting"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.33": {
+    "question": "보조 FortiManager 장치 중 하나가 실패하면 / FortiManager HA를 / 정상 상태로 되돌리기 위해 / 어떤 조치를 취해야 하는가?",
+    "options": {
+      "A": "FortiManager HA 상태 전환은 / 관리자에게 투명하며 / 추가 조치가 필요 없다.",
+      "B": "실패한 장치에서 / HA 하트비트 패킷이 TCP 포트를 사용하는지 / 확인한다.",
+      "C": "작동 중인 보조 장치 중 하나를 / 수동으로 주 역할로 승격한다.",
+      "D": "주 장치에서 / 실패한 장치의 피어 IP를 제거한다."
+    },
+    "_src": {
+      "question": "If one of the secondary FortiManager devices fails, which action must be performed to return the FortiManager HA to a healthy state?",
+      "options": {
+        "A": "The FortiManager high availability HA state transition is transparent to administrators and does not require any action.",
+        "B": "Run a sanity check on the failed device to make sure HA heartbeat packets are using TCP port.",
+        "C": "Manually promote one of the working secondary devices to the primary role.",
+        "D": "Remove the peer IP of the failed device on the primary device."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.34": {
+    "question": "관리자가 / 백업 ADOM 내 / FortiGate 장치에 / 정책을 생성하고 설치해야 한다. / 어떻게 해야 하는가?",
+    "options": {
+      "A": "장치 관리자에 있는 / Install Wizard를 사용한다.",
+      "B": "Workflow 모드를 활성화하여 / 정책 생성 및 승인을 허용한다.",
+      "C": "ADOM과 FortiGate 펌웨어 버전이 일치하는지 확인하고 / ADOM 정책 패키지를 사용한다.",
+      "D": "FortiManager 스크립트를 사용하여 / 구성 변경을 적용한다."
+    },
+    "_src": {
+      "question": "An administrator must create a policy and install it on a FortiGate device within an ADOM in backup mode.",
+      "options": {
+        "A": "Use the Install Wizard located on the device manager.",
+        "B": "Enable workflow mode to allow policy creation and approval.",
+        "C": "Make sure the ADOM and FortiGate firmware versions match and use the ADOM policy package.",
+        "D": "Use a FortiManager script to apply the configuration changes."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.35": {
+    "question": "FortiManager와 FortiGate가 모두 / NAT 장치 뒤에 있을 때 / 예상되는 두 가지 결과는? (두 개 선택)",
+    "options": {
+      "A": "FortiGate는 / FortiManager에 의해 / FortiGate의 NATed IP 주소로 / 검색된다.",
+      "B": "검색 중 / FortiManager의 NATed IP 주소가 / 기본적으로 FortiGate에 설정되지 않는다.",
+      "C": "FortiGate는 / FortiManager의 non-NATed IP 주소만 / FortiManager에 알림 가능하다.",
+      "D": "FGFM 터널이 끊기면 / FortiManager는 / FortiGate를 재검색한다."
+    },
+    "_src": {
+      "question": "What are two expected results when both FortiManager and FortiGate are behind network address translation (NAT) devices? (Choose two.)",
+      "options": {
+        "A": "FortiGate is discovered by FortiManager through the FortiGate NATed IP address.",
+        "B": "During discovery, the FortiManager NATed IP address is not set by default on FortiGate.",
+        "C": "FortiGate can announce itself to FortiManager only if the FortiManager non-NATed IP address is configured.",
+        "D": "If the FortiGate-FortiManager communication protocol FGFM tunnel is torn down, FortiManager will rediscover FortiGate."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.36": {
+    "question": "관리자가 / ADOM 간 시스템 템플릿 프로파일을 복사할 때 / 대상은?",
+    "options": {
+      "A": "FortiManager /tmp/Backup_File 폴더",
+      "B": "FortiManager ADOM 정책 데이터베이스",
+      "C": "ADOM 장치 데이터베이스",
+      "D": "FortiManager 구성 백업 파일"
+    },
+    "_src": {
+      "question": "An administrator is copying a system template profile between ADOMs. Where is the destination?",
+      "options": {
+        "A": "FortiManager /tmp/Backup_File folder",
+        "B": "FortiManager ADOM policy database",
+        "C": "ADOM device database",
+        "D": "FortiManager configuration backup file"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.37": {
+    "question": "FortiManager의 / ADOM 레벨 데이터베이스에 속하는 / FortiGate 구성 설정은?",
+    "options": {
+      "A": "NSX-T 서비스 템플릿(NSX-T service template)",
+      "B": "보안 템플릿(Security template)",
+      "C": "SNMP",
+      "D": "라우팅(Routing)"
+    },
+    "_src": {
+      "question": "Which FortiGate configuration settings is part of an ADOM-level database on FortiManager?",
+      "options": {
+        "A": "NSX-T service template",
+        "B": "Security template",
+        "C": "SNMP",
+        "D": "Routing"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.38": {
+    "question": "네트워크에서 / 대량의 로그를 관리할 때 / 권장 사항은?",
+    "options": {
+      "A": "FortiManager에 로그를 저장하고 / FortiView를 사용한다.",
+      "B": "FortiAnalyzer에서 / FortiManager로 / 매일 로그를 전달한다.",
+      "C": "FortiManager에서 / 고급 ADOM 모드를 활성화한다.",
+      "D": "FortiManager에서 / FortiAnalyzer를 추가하고 관리한다."
+    },
+    "_src": {
+      "question": "Which is recommended when you are managing a high volume of logs in your network?",
+      "options": {
+        "A": "Store logs on FortiManager and use FortiView.",
+        "B": "Forward logs from FortiAnalyzer to FortiManager daily.",
+        "C": "Enable advanced ADOM mode on FortiManager.",
+        "D": "Add and manage FortiAnalyzer from FortiManager."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.39": {
+    "question": "FortiManager 관리자가 / 리비전 기록을 열고 / 이전 버전으로 되돌리면 / 어떤 결과가 발생하는가?",
+    "options": {
+      "A": "알 수 없는 장치 레벨 데이터베이스 상태가 되며 / Install Wizard를 사용해야 한다.",
+      "B": "프로비저닝 템플릿을 사용하는 경우 / 충돌 상태가 되며 / 관리자가 수동으로 해결해야 한다.",
+      "C": "장치 레벨 데이터베이스와 / 정책 레이어 데이터베이스 / 모두 되돌린다.",
+      "D": "장치 레벨 데이터베이스를 수정한다."
+    },
+    "_src": {
+      "question": "A FortiManager administrator opens the revision history and chooses to revert to a previous version. What happens?",
+      "options": {
+        "A": "It will trigger an unknown device-level database status, and the administrator will have to use the Install Wizard.",
+        "B": "It will trigger a conflict status if it is using any provisioning template, and the administrator must resolve it manually.",
+        "C": "It will revert both configurations: device-level database and policy layer database.",
+        "D": "It will modify the device-level database."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.40": {
+    "question": "FortiManager가 / 대량 프로비저닝에 도움이 되는 / 가장 좋은 설명은?",
+    "options": {
+      "A": "각 FortiGate 장치의 / OS를 업그레이드한다.",
+      "B": "네트워크에 / 로컬 FortiGuard 배포 서버(FDS) 서비스를 제공한다.",
+      "C": "템플릿을 사용하여 / 여러 장치에 / 동시에 동일한 설정을 구성한다.",
+      "D": "새 장치가 연결될 때 / 이메일 알림을 보낸다."
+    },
+    "_src": {
+      "question": "What is the best explanation of how FortiManager helps with mass provisioning?",
+      "options": {
+        "A": "It upgrades the OS of each FortiGate device.",
+        "B": "It provides local FortiGuard Distribution Server (FDS) services to the network.",
+        "C": "It uses templates to configure the same settings on many devices simultaneously.",
+        "D": "It sends email alerts when new devices connect."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.41": {
+    "question": "관리자가 / FortiGate 장치 전용 / Training이라는 새 ADOM을 생성했다. / 그런 다음 FortiGate를 Security Fabric root로 추가했다. / 다운스트림 장치에 / 어떤 일이 발생하는가?",
+    "options": {
+      "A": "다운스트림 장치가 / 자동으로 인증된다.",
+      "B": "다운스트림 장치가 / 루트 ADOM의 / 관리 FortiGate 섹션에 나타난다.",
+      "C": "다운스트림 장치가 / 루트 ADOM에서 / 미인증 상태로 표시된다.",
+      "D": "다운스트림 장치는 / Add Device 마법사를 사용하여 / 추가해야 한다."
+    },
+    "_src": {
+      "question": "An administrator created a new ADOM named Training for FortiGate devices only. Then, the administrator added the FortiGate as Security Fabric root. What happens to downstream devices?",
+      "options": {
+        "A": "The downstream devices are automatically authorized.",
+        "B": "The downstream devices will appear in the Managed FortiGate section of the root ADOM.",
+        "C": "The downstream devices show as unauthorized in the root ADOM.",
+        "D": "The downstream devices must be added using the Add Device wizard."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.42": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 구성에서 / 나타나는 두 가지 결과는? (두 개 선택)",
+    "options": {
+      "A": "동일한 관리자가 / 동시에 / 하나 이상의 ADOM을 잠글 수 있다.",
+      "B": "여러 관리자가 / 동시에 / 별도의 ADOM을 잠그고 작업할 수 있다.",
+      "C": "모든 변경 사항은 / 장치에 설치하기 전에 / 승인을 받아야 한다.",
+      "D": "ADOM에 대한 / 동시 읽기-쓰기 접근이 / 비활성화된다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. What are two results from the configuration shown in the exhibit? Choose two answers.",
+      "options": {
+        "A": "The same administrator can lock more than one ADOM at the same time.",
+        "B": "Multiple administrators can lock and work on separate ADOMs at the same time.",
+        "C": "All changes must be approved before they can be installed on a device.",
+        "D": "Concurrent read-write access to an ADOM is disabled."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.43": {
+    "question": "전시물을 참조하라. / 관리자가 / FortiManager에서 / 두 개의 새 메타 필드를 생성했다. / 어떤 작업을 수행할 수 있는가?",
+    "options": {
+      "A": "객체에 / 사용자 정의 속성으로 / 추가할 수 있다.",
+      "B": "다른 ADOM에서 사용하기 위해 / 내보낼 수 있다.",
+      "C": "스크립트에서 / 변수로 사용할 수 있다.",
+      "D": "$ 문자를 사용하여 / 호출할 수 있다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. An administrator created two new meta fields in FortiManager. Which operation can be done?",
+      "options": {
+        "A": "You can add them to objects as custom attributes.",
+        "B": "You can export them to be used in other ADOMs.",
+        "C": "You can use them as variables in scripts.",
+        "D": "You can invoke them using the $ character."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.44": {
+    "question": "서비스 제공업체 관리자가 / ADOM2라는 / 관리 고객 ADOM에 / 글로벌 정책 패키지를 할당했다. / 고객 관리자는 / 헤더 정책을 편집할 수 있는가?",
+    "options": {
+      "A": "고객 관리자는 / 글로벌 ADOM의 workspace 모드를 사용하여 / 헤더 정책을 편집할 수 있다.",
+      "B": "고객 관리자는 / 글로벌 ADOM의 workflow 모드를 사용하여 / 헤더 정책을 편집할 수 있다.",
+      "C": "서비스 제공업체 관리자가 / 글로벌 ADOM에서 / 글로벌 정책을 잠금 해제하여 / 자동으로 업데이트할 수 있다.",
+      "D": "고객 관리자는 / 글로벌 헤더 정책을 편집할 수 없다. / 서비스 제공업체 관리자만 가능하다."
+    },
+    "_src": {
+      "question": "A service provider administrator has assigned a global policy package to a managed customer ADOM named ADOM2. Can the customer administrator edit the header policy?",
+      "options": {
+        "A": "The customer administrator can edit the header policy by using workspace mode on the global ADOM.",
+        "B": "The customer administrator can edit the header policy by using workflow mode on the global ADOM.",
+        "C": "The service provider administrator can unlock the global policy from the global ADOM to auto-update.",
+        "D": "The customer administrator cannot edit the global header policy; only the service provider administrator can."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.45": {
+    "question": "전시물을 참조하라. / 관리자가 / 중앙 정책 패키지의 동일한 정책을 / BR1-FGT-1 방화벽에 설치해야 한다. / 어떻게 해야 하는가?",
+    "options": {
+      "A": "FortiManager는 / 방화벽당 하나의 정책 패키지만 허용하므로 / 하나만 할당한다.",
+      "B": "알 수 없는 상태를 변경하고 / 정책 패키지를 동기화하려면 / 정책 패키지를 가져온다.",
+      "C": "Install Wizard를 사용하여 / BR1-FGT-1 방화벽에 / 중앙 정책 패키지를 설치한다.",
+      "D": "먼저 / 구성 및 프로비저닝 템플릿의 수정된 상태를 해결하여 / 설치를 허용한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. An administrator has been asked to install the same policies from a central policy package on the BR1-FGT-1 firewall.",
+      "options": {
+        "A": "Assign only one policy package to the firewall because FortiManager does not allow more than one.",
+        "B": "Import the policy package to change the unknown status and synchronize the policy package.",
+        "C": "Use the install wizard to install the central policy package on the BR1-FGT-1 firewall.",
+        "D": "First resolve the modified status in the configuration and provisioning templates to allow installation."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.46": {
+    "question": "여러 관리자가 / 동일한 ADOM에서 / 구성 충돌 없이 / 작업하게 하려면 / 어떻게 해야 하는가?",
+    "options": {
+      "A": "RADIUS 인증을 구성하여 / 각 사용자에게 ADOM 역할을 할당한다.",
+      "B": "Workflow 모드를 활성화한다. / 동시 구성 충돌을 방지하는 유일한 방법이다.",
+      "C": "관리자에게 / JSON API 접근 권한을 / FortiManager에 할당한다.",
+      "D": "ADOM 설정에서 / Workspace 모드를 활성화한다."
+    },
+    "_src": {
+      "question": "You want to let multiple administrators work in the same ADOM without creating configuration conflicts.",
+      "options": {
+        "A": "Configure RADIUS authentication to assign ADOM roles to each user.",
+        "B": "Enable workflow mode, which is the only way to prevent concurrent configuration conflicts.",
+        "C": "Assign administrators with JSON API access to the FortiManager.",
+        "D": "Activate workspace mode in the ADOM settings."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.47": {
+    "question": "관리자가 / ADOM별 workspace 모드로 / FortiManager를 최신 버전으로 업그레이드했지만 / ADOM이 업그레이드되지 않았다. / 원인은?",
+    "options": {
+      "A": "관리자가 / 업그레이드 전에 / 데이터베이스 무결성 검사를 실행하지 않았다.",
+      "B": "FortiManager는 / 펌웨어 업그레이드 후 / ADOM을 자동으로 업그레이드하지 않는다.",
+      "C": "FortiManager 프로세스 태스크가 / 중단되어 ADOM 업그레이드를 차단하고 있어 / 수동 조치가 필요하다.",
+      "D": "업그레이드 전에 / 사용자가 모든 ADOM을 잠가 / 업그레이드가 중단되었다."
+    },
+    "_src": {
+      "question": "An administrator upgrades FortiManager with workspace mode per ADOM enabled to the latest version but ADOMs are not upgraded.",
+      "options": {
+        "A": "The administrator did not run the database integrity check before performing the upgrade.",
+        "B": "FortiManager does not automatically upgrade ADOMs after a firmware upgrade.",
+        "C": "A FortiManager process task is stuck and blocking the ADOM upgrade, so the administrator must take manual action.",
+        "D": "A user had all ADOMs locked before the upgrade, which stopped them from being upgraded."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.48": {
+    "question": "관리자가 / ADOM1의 Branches 정책 패키지에 / Training 글로벌 정책 패키지를 할당했다. / Remotes 정책 패키지에도 / 같은 글로벌 정책 패키지를 적용하려면?",
+    "options": {
+      "A": "Remotes 정책 패키지를 / 수동으로 추가하고 / Training 글로벌 정책 패키지에 할당한다.",
+      "B": "자동 설치 방법을 사용하여 / Training 글로벌에서 / ADOM 장치로 동기화한다.",
+      "C": "Remotes 정책 패키지에 / Training 글로벌 정책 패키지를 할당한다.",
+      "D": "Training 정책 패키지의 할당을 취소하고 / ADOM1 내 모든 정책 패키지에 / 재할당한다."
+    },
+    "_src": {
+      "question": "An administrator assigned the Training global policy package to the Branches policy package in ADOM1. How to also apply it to the Remotes policy package?",
+      "options": {
+        "A": "Manually add and assign the Remotes policy package to the Training global policy package",
+        "B": "Use the automatically install policies to ADOM devices method to sync from the Training global",
+        "C": "Assign the Training global policy package to the Remotes policy package",
+        "D": "Unassign the Training policy package and reassign it to all policy packages within ADOM1"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.49": {
+    "question": "전시물을 참조하라. / 관리자가 / HQ-NGFW-1에 / 새 정책 패키지를 할당했다. / 전시물의 구성에서 / 어떤 결론을 내릴 수 있는가?",
+    "options": {
+      "A": "FortiGate HQ-NGFW-1은 / FortiManager 펌웨어 템플릿을 사용하여 / 펌웨어 업그레이드 및 평가를 수행할 수 있다.",
+      "B": "FortiGate HQ-NGFW-1은 / FortiGuard 배포 서버로 동작하는 / FortiManager에 접속할 수 있다.",
+      "C": "FortiGate HQ-NGFW-1은 / 방화벽 주소 객체나 정책에서 / root_CA3 인증서를 사용한다.",
+      "D": "FortiManager는 / FortiGate 간 인증을 위해 / root_CA3 인증서를 FortiGate에 설치한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. An administrator assigned a new policy package to FortiGate HQ-NGFW-1. What can be concluded from the configuration?",
+      "options": {
+        "A": "FortiGate HQ-NGFW-1 can use FortiManager firmware templates to upgrade firmware and rating.",
+        "B": "FortiGate HQ-NGFW-1 can contact the FortiManager acting as FortiGuard Distribution Server.",
+        "C": "FortiGate HQ-NGFW-1 will use the root_CA3 certificate in firewall address objects or policies.",
+        "D": "FortiManager will install the CA certificate named root_CA3 to authenticate FortiGate-to-FortiGate."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.50": {
+    "question": "전시물을 참조하라. / 관리자가 / 방화벽 주소 객체를 생성했다. / BR1-FGT-1 장치에 / 어떤 IP/넷마스크가 표시되는가?",
+    "options": {
+      "A": "21.21.2.5/255.255.255.255",
+      "B": "172.16.5.20/255.255.255.255",
+      "C": "172.16.5.0/255.255.255.0",
+      "D": "10.10.10.5/255.255.255.255"
+    },
+    "_src": {
+      "question": "Refer to the exhibit. An administrator has created a firewall address object. Which IP/netmask will be presented to the BR1-FGT-1 device?",
+      "options": {
+        "A": "21.21.2.5/255.255.255.255",
+        "B": "172.16.5.20/255.255.255.255",
+        "C": "172.16.5.0/255.255.255.0",
+        "D": "10.10.10.5/255.255.255.255"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.51": {
+    "question": "관리자가 / FortiManager의 FortiGate / 장치 레벨 데이터베이스에서 / 새 BGP 피어를 구성했다. / 변경 사항이 예상대로 설치되지 않는 이유는?",
+    "options": {
+      "A": "관리자가 / FortiManager에서 / 무결성 검사를 실행해야 한다.",
+      "B": "FortiGate에 / FortiManager 데이터베이스에서 / BGP 템플릿이 할당되어 있다.",
+      "C": "관리자는 / Install Wizard를 사용하여 / 장치 설정만 설치를 선택해야 한다.",
+      "D": "FortiGate 펌웨어 버전이 / FortiManager ADOM 버전과 / 다르다."
+    },
+    "_src": {
+      "question": "An administrator configures a new BGP peer in the FortiManager device-level database of FortiGate. The changes are not installing as expected. Why?",
+      "options": {
+        "A": "The administrator must run a sanity check on FortiManager to make sure the database is not corrupted.",
+        "B": "FortiGate has a BGP template assigned on the FortiManager database.",
+        "C": "The administrator must use the Install Wizard and select Install device settings only.",
+        "D": "The FortiGate firmware version is different from the FortiManager ADOM version."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.52": {
+    "question": "관리자가 / HQ-NGFW-1의 정책 패키지 상태가 / Never Installed임을 확인했다. / 무엇을 결론 내릴 수 있는가?",
+    "options": {
+      "A": "정책이 / HQ-NGFW-1의 FortiManager / 장치 레벨 데이터베이스에서 / 아직 검색되지 않았다.",
+      "B": "HQ-NGFW-1이 등록된 후 / 정책 패키지가 / 리비전 기록으로 가져와진 적이 없다.",
+      "C": "방화벽 정책이 / ADOM에서 생성되거나 변경되었으며 / FortiGate에 설치되어야 한다.",
+      "D": "방화벽 정책이 / HQ-NGFW-1 장치 레벨 데이터베이스에만 존재하며 / 정책 패키지가 없다."
+    },
+    "_src": {
+      "question": "An administrator sees that the policy package status of HQ-NGFW-1 is Never Installed. What can be concluded?",
+      "options": {
+        "A": "The policies have not yet been retrieved from the HQ-NGFW-1 device-level database of FortiManager.",
+        "B": "The policy package was never imported to the revision history after HQ-NGFW-1 was registered.",
+        "C": "The firewall policies were created or changed in the ADOM, and they need to be installed on FortiGate.",
+        "D": "The firewall policies exist only in the HQ-NGFW-1 device-level database, and no policy package exists."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.53": {
+    "question": "관리자가 / ADOM1이라는 새 ADOM에 / 글로벌 정책 패키지를 할당했다. / 새 정책 패키지를 ADOM1에 생성하면 / 어떻게 되는가?",
+    "options": {
+      "A": "관리자는 / 글로벌 정책 패키지를 / 새 정책 패키지에 할당하는 옵션을 / 선택할 수 있다.",
+      "B": "FortiManager가 / 글로벌 정책 패키지를 / 새 정책 패키지에 자동으로 할당한다.",
+      "C": "FortiManager가 / ADOM1의 정책 패키지에 / 정책을 자동으로 설치한다.",
+      "D": "관리자가 / 글로벌 ADOM에서 / 글로벌 정책 패키지를 할당해야 한다."
+    },
+    "_src": {
+      "question": "An administrator has assigned a global policy package to a new ADOM named ADOM1. What will happen if a new policy package is created in ADOM1?",
+      "options": {
+        "A": "The administrator will be able to select the option to assign the global policy package to the new policy package.",
+        "B": "FortiManager will automatically assign the global policy package to the new policy package.",
+        "C": "FortiManager will automatically install policies on the policy package in ADOM1.",
+        "D": "The administrator will have to assign the global policy package from the global ADOM."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.54": {
+    "question": "NAT 장치 뒤에 있는 FortiGate 장치에서 / 푸시 업데이트가 실패하고 있다. / 어떻게 해결하는가?",
+    "options": {
+      "A": "NAT 장치 IP 주소와 / 올바른 포트가 / FortiManager에 구성되어 있는지 확인한다.",
+      "B": "FortiGuard 서비스 인터페이스에서 / FortiGuard 업데이트와 웹 서비스가 / 활성화되어 있는지 확인한다.",
+      "C": "NAT 장치에 / 가상 IP 주소와 / 올바른 포트가 구성되어 있는지 확인한다.",
+      "D": "FortiGuard 서비스 인터페이스의 / Bind to IP address 옵션이 / FortiManager IP로 설정되어 있는지 확인한다."
+    },
+    "_src": {
+      "question": "Push updates are failing on a FortiGate device located behind a network address translation (NAT) device. How to resolve?",
+      "options": {
+        "A": "Make sure the NAT device IP address and the correct ports are configured on FortiManager.",
+        "B": "Make sure FortiGuard updates and web service are enabled on the FortiGuard service interface.",
+        "C": "Make sure the virtual IP address and the correct ports are configured on the NAT device.",
+        "D": "Make sure the Bind to IP address option on the FortiGuard service interface is set to the FortiManager IP."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.55": {
+    "question": "관리자가 / Remote FortiGate Directly (via CLI) 방식으로 / CLI 스크립트를 푸시했지만 / IPsec 설정이 실패했다. / 해결 방법은?",
+    "options": {
+      "A": "IPsec phase 1 인터페이스 구성 블록 다음에 / end 명령을 추가한다.",
+      "B": "IPsec 템플릿을 사용하여 / 프로비저닝 템플릿을 배포한다.",
+      "C": "phase 1에 연결하지 않고 / 두 번째 config vpn ipsec phase2-interface 블록을 추가한다.",
+      "D": "정책 패키지 또는 ADOM 데이터베이스 방법을 사용하여 / 스크립트를 실행한다."
+    },
+    "_src": {
+      "question": "The administrator uses FortiManager to push a CLI script using the Remote FortiGate Directly (via CLI) method, but IPsec configuration fails.",
+      "options": {
+        "A": "Add the end command after finishing the IPsec phase 1-interface configuration block.",
+        "B": "Use IPsec templates to deploy provisioning templates.",
+        "C": "Add a second config vpn ipsec phase2-interface block without linking it to phase1.",
+        "D": "Run the script using the policy package or ADOM database method."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.56": {
+    "question": "관리자가 / 다른 FortiOS 버전을 사용하는 / 일부 FortiGate에서 / CLI 스크립트가 실패하고 있음을 발견했다. / 어떻게 해결하는가?",
+    "options": {
+      "A": "각 FortiOS 버전별로 / 별도의 ADOM을 생성한다.",
+      "B": "오래된 펌웨어를 사용하는 장치에서 / CLI 스크립트를 비활성화한다.",
+      "C": "FortiOS 버전에 따른 / 조건부 명령을 포함하도록 / CLI 스크립트를 수정한다.",
+      "D": "버전별 CLI 스크립트 그룹을 생성하고 / 적절한 장치에 할당한다."
+    },
+    "_src": {
+      "question": "An administrator notices that CLI scripts are failing on some FortiGate devices because they use different FortiOS versions.",
+      "options": {
+        "A": "Create separate ADOMs for each FortiOS version.",
+        "B": "Disable CLI scripts for devices using older firmware.",
+        "C": "Modify the CLI scripts to include conditional commands based on FortiOS version.",
+        "D": "Create version-specific CLI script groups and assign them to the appropriate devices."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.57": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 구성에서 / 무엇을 결론 내릴 수 있는가? (두 개 선택)",
+    "options": {
+      "A": "관리자는 / Local-FortiGate 구성을 검색하여 / Security 구성과 동기화해야 한다.",
+      "B": "정책 순서 #1이 / ISFW 장치 루트에 / 설치된다.",
+      "C": "정책 순서 #3은 / Install On 열에 / 장치 또는 VDOM이 나열되어야 한다.",
+      "D": "글로벌 정책 패키지가 / ISFW 정책 패키지의 상단에 / 추가된다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. What can you conclude, based on the configuration shown in the exhibit? Choose two.",
+      "options": {
+        "A": "The administrator needs to retrieve the Local-FortiGate configuration to sync with the Security configuration.",
+        "B": "Policy sequence #1 will be installed on the internal segmentation firewall ISFW device root.",
+        "C": "Policy sequence #3 must have devices or VDOMs listed in the Install On column.",
+        "D": "The global policy package will be added to the top of the ISFW policy package."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.58": {
+    "question": "전시물을 참조하라. / FortiManager는 / 안티바이러스 및 IPS 업데이트를 / 어떻게 가져오는가? (하나 선택)",
+    "options": {
+      "A": "fds 호스트 이름을 포함하는 / 목록의 모든 URL을 사용한다.",
+      "B": "IP 주소 10.0.1.50인 / 서버에서 업데이트를 가져온다.",
+      "C": "FortiGuard 배포 네트워크로 표시된 / 모든 서버에 / 인터넷 FDNI를 통해 연결한다.",
+      "D": "구성에 나열된 / 공개 FortiGuard 서버에 연결한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. How does FortiManager get antivirus and IPS updates? Choose one answer.",
+      "options": {
+        "A": "It uses all URLs in the list that contain the fds host name.",
+        "B": "It gets updates from the server with IP address 10.0.1.50.",
+        "C": "It connects to all servers marked as FortiGuard Distribution Network through Internet FDNI.",
+        "D": "It connects to the public FortiGuard servers listed in the configuration."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.59": {
+    "question": "관리자가 / 정책 패키지 레이어에 / 정책을 가져온 후 / 가져오기 보고서를 받았다. / 중복 값에 대해 / FortiManager는 어떻게 했는가?",
+    "options": {
+      "A": "FortiManager가 / 데이터베이스에서 / 중복 값을 삭제했다.",
+      "B": "FortiManager가 / 데이터베이스에서 / 새 서비스 카테고리를 생성했다.",
+      "C": "FortiManager가 / 중복 값으로 / 데이터베이스를 업데이트하지 않았다.",
+      "D": "FortiManager가 / FortiGate 데이터베이스에서 / 중복 값을 업데이트했다."
+    },
+    "_src": {
+      "question": "An administrator receives the import report after importing policies into the policy package layer. What did FortiManager do with duplicate values?",
+      "options": {
+        "A": "FortiManager deleted the duplicate value from its database.",
+        "B": "FortiManager created a new service category in its database.",
+        "C": "FortiManager did not update its database with the value.",
+        "D": "FortiManager updated the duplicate value in the FortiGate database."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.60": {
+    "question": "FortiGate가 / FortiAnalyzer 및 FortiManager와 통합되어 있다. / 방화벽 정책 생성 시 / FortiAnalyzer에 저장되는 / 고유 식별자는?",
+    "options": {
+      "A": "정책 ID(Policy ID)",
+      "B": "로그 ID(Log ID)",
+      "C": "범용 고유 식별자(Universally Unique Identifier)",
+      "D": "순서 ID(Sequence ID)"
+    },
+    "_src": {
+      "question": "FortiGate is integrated with FortiAnalyzer and FortiManager. When creating a firewall policy, which unique identifier is stored in FortiAnalyzer?",
+      "options": {
+        "A": "Policy ID",
+        "B": "Log ID",
+        "C": "Universally Unique Identifier",
+        "D": "Sequence ID"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.61": {
+    "question": "ISFW 장치를 / 다른 ADOM으로 이동한 직후 / 표시되는 출력은?",
+    "options": {
+      "A": "[이미지 참조]",
+      "B": "[이미지 참조]",
+      "C": "[이미지 참조]",
+      "D": "[이미지 참조]"
+    },
+    "_src": {
+      "question": "Which output is displayed right after moving the ISFW device from one ADOM to another?",
+      "options": {
+        "A": "[Exhibit A]",
+        "B": "[Exhibit B]",
+        "C": "[Exhibit C]",
+        "D": "[Exhibit D]"
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.62": {
+    "question": "관리자가 / Collector Agent가 / 로그인 이벤트를 FortiGate로 전달하지 않고 있다고 의심한다. / 어떻게 확인하는가?",
+    "options": {
+      "A": "FortiGate에서 / DC 에이전트가 활성화되어 있는지 / 확인한다.",
+      "B": "도메인 컨트롤러를 재시작하여 / 인증 서비스를 새로 고친다.",
+      "C": "FortiGate가 / FSSO 대신 LDAP 인증을 사용하도록 / 설정되어 있는지 확인한다.",
+      "D": "Collector Agent와 FortiGate 사이에 / TCP 포트 8000이 열려 있는지 확인한다."
+    },
+    "_src": {
+      "question": "An administrator suspects that the Collector Agent is not forwarding login events to FortiGate. How to verify?",
+      "options": {
+        "A": "Verify if DC agent is enabled on the FortiGate.",
+        "B": "Restart the domain controller to refresh authentication services.",
+        "C": "Verify if FortiGate is set to use LDAP authentication instead of FSSO.",
+        "D": "Check if TCP port 8000 is open between the collector agent and FortiGate."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.63": {
+    "question": "관리자가 / 헤더 정책과 푸터 정책을 포함하는 / 새 글로벌 정책 패키지를 생성했다. / ADOM2에서 / 어떤 작업을 수행할 수 있는가?",
+    "options": {
+      "A": "ADOM2 객체를 / 글로벌 객체로 승격할 수 있다.",
+      "B": "글로벌 정책 패키지를 / ADOM2 내의 모든 또는 선택된 정책 패키지에 / 할당할 수 있다.",
+      "C": "Automatically install 옵션을 사용할 때 / ADOM2 레이어에서 / FortiGate로 설치해야 한다.",
+      "D": "ADOM2 정책 패키지에서 / 글로벌로 가져오기하여 / 정책 패키지를 동기화할 수 있다."
+    },
+    "_src": {
+      "question": "An administrator created a new global policy package that includes both header policies and footer policies. What can be done in ADOM2?",
+      "options": {
+        "A": "They can promote ADOM2 objects to global objects.",
+        "B": "They can assign the global policy package to all or selected policy packages within ADOM2.",
+        "C": "They must install from the ADOM2 layer to FortiGate when using the Automatically install policies option.",
+        "D": "They can synchronize policy packages by importing from the ADOM2 policy package into the global."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.64": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 구성에서 / 스크립트를 실행하면 / 어떤 두 가지 결과가 발생하는가? (두 개 선택)",
+    "options": {
+      "A": "장치 Config Status가 / Modified로 표시된다.",
+      "B": "스크립트 기록에 / 원격 FortiGate에 스크립트가 성공적으로 설치되었음이 / 표시된다.",
+      "C": "장치 데이터베이스에서 / 스크립트가 성공적으로 실행되면 / 새 리비전 기록이 생성된다.",
+      "D": "관리자는 / Install Wizard를 사용하여 / 관리 장치에 변경 사항을 설치해야 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Which two results occur if you run the script from the configuration shown in the exhibit? (Choose two.)",
+      "options": {
+        "A": "The device Config Status is tagged as Modified.",
+        "B": "The script history shows the successful installation of the script on the remote FortiGate.",
+        "C": "The successful execution of a script on the Device Database creates a new revision history.",
+        "D": "The administrator must install these changes on a managed device using the Install Wizard."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.65": {
+    "question": "전시물을 참조하라. / FortiGate에서 / FortiGuard 서비스 오류가 발생한 원인은?",
+    "options": {
+      "A": "FortiGate는 / 서버 목록의 FortiManager IP 주소 192.168.1.120에 대해 / 평가를 활성화해야 한다.",
+      "B": "FortiManager와 FortiGate의 / IPS 데이터베이스 버전이 / 다르다.",
+      "C": "관리자는 / FortiManager에서 / FortiGuard 서비스에 대한 / IPv6 연결을 활성화해야 한다.",
+      "D": "관리자는 / 모든 시그니처를 올바르게 다운로드하려면 / fortiguard-anycast 옵션을 활성화해야 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. What is the cause of the FortiGuard service error on FortiGate?",
+      "options": {
+        "A": "FortiGate must enable rating for the FortiManager IP address, 192.168.1.120, in server list.",
+        "B": "FortiManager and FortiGate have different IPS database versions.",
+        "C": "The administrator must enable IPv6 connections for FortiGuard services on FortiManager.",
+        "D": "The administrator must enable the fortiguard-anycast option to correctly download all signatures."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.66": {
+    "question": "ADOM 리비전의 목적은 무엇인가?",
+    "options": {
+      "A": "ADOM 리비전은 / 사용하지 않거나 중복되거나 불필요한 / 방화벽 정책과 객체를 찾는다.",
+      "B": "ADOM 리비전은 / 정책 패키지가 설치될 때 / 특정 변경 사항을 보여준다.",
+      "C": "ADOM 리비전은 / 정책 패키지와 ADOM 레벨 객체의 / 이전 스냅샷을 현재와 비교한다.",
+      "D": "ADOM 리비전은 / ADOM의 모든 정책 패키지와 객체의 / 현재 상태를 저장한다."
+    },
+    "_src": {
+      "question": "What is the purpose of ADOM revisions?",
+      "options": {
+        "A": "ADOM revisions find unused, duplicate, and unnecessary firewall policies and objects.",
+        "B": "ADOM revisions show specific changes in a policy package when it is installed.",
+        "C": "ADOM revisions compare previous snapshots of the Policy Package and ADOM-level objects with the current.",
+        "D": "ADOM revisions save the current state of all policy packages and objects for an ADOM."
+      }
+    }
+  },
+  "FCP_FMG_AD-7.6 V13.35.pdf::NO.67": {
+    "question": "다음 구성을 참조하라. / FortiManager # config system global / global# set workspace-mode ... / 이 구성에서 / 어떤 두 가지 결과가 발생하는가?",
+    "options": {
+      "A": "동일한 관리자가 / 동시에 / 하나 이상의 ADOM을 잠글 수 있다.",
+      "B": "여러 관리자가 / 동시에 / 별도의 ADOM을 잠그고 작업할 수 있다.",
+      "C": "모든 변경 사항은 / 장치에 설치하기 전에 / 승인을 받아야 한다.",
+      "D": "ADOM에 대한 / 동시 읽기-쓰기 접근이 / 비활성화된다."
+    },
+    "_src": {
+      "question": "Refer to the following configuration. FortiManager # config system global global# set workspace-mode ... What two results occur with this configuration?",
+      "options": {
+        "A": "The same administrator can lock more than one ADOM at the same time.",
+        "B": "Multiple administrators can lock and work on separate ADOMs at the same time.",
+        "C": "All changes must be approved before they can be installed on a device.",
+        "D": "Concurrent read-write access to an ADOM is disabled."
+      }
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.1": {
+    "question": "전시물을 참조하라. / FortiGate GUI에서 / SD-WAN 영역 구성이 표시된다. / 전시물에 따라, / 어느 설명이 옳은가?",
+    "options": {
+      "A": "Underlay 영역에 / 멤버가 없다.",
+      "B": "virtual-wan-link와 overlay 영역은 / 삭제할 수 있다.",
+      "C": "Underlay 영역이 / 기본 영역이다.",
+      "D": "port2와 port3이 / 영역에 / 할당되지 않았다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. An SD-WAN zone configuration on the FortiGate GUI is shown. Based on the exhibit, which statement is true?",
+      "A": "The Underlay zone contains no member.",
+      "B": "The virtual-wan-link and overlay zones can be deleted",
+      "C": "The Underlay zone is the zone by default.",
+      "D": "port2 and port3 are not assigned to a zone."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.2": {
+    "question": "에이전트 없는 / 보안 웹 게이트웨이(SWG) 엔드포인트를 / 보안 인터넷 접근(SIA)을 위해 / 온보딩하고 있다. / 사용자의 비웹 트래픽에는 / 어떤 일이 발생하는가?",
+    "options": {
+      "A": "모든 비웹 트래픽은 / FortiSASE를 / 우회한다.",
+      "B": "FortiSASE는 / FWaaS를 사용하여 / 비웹 트래픽을 / 리디렉션한다.",
+      "C": "FortiSASE는 / SWG를 사용하여 / 비웹 트래픽을 / FortiExtender로 / 리디렉션한다.",
+      "D": "엔드포인트는 / 스플릿 터널링을 사용하여 / 비웹 트래픽을 / FortiSASE로 / 리디렉션한다."
+    },
+    "_src": {
+      "question": "You are onboarding an agentless, secure web gateway (SWG) endpoint for secure internet access (SIA). What will happen to the user's nonweb traffic?",
+      "A": "All the nonweb traffic will bypass FortiSASE.",
+      "B": "FortiSASE will use Firewall-as-a-Service (FWaaS) to redirect nonweb traffic.",
+      "C": "FortiSASE will use SWG to redirect nonweb traffic to FortiExtender.",
+      "D": "The endpoint will use split tunneling to redirect nonweb traffic to FortiSASE."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.3": {
+    "question": "방화벽 정책을 구성할 때, / 정책 ID에 관해 / 다음 중 옳은 것은? (두 가지 선택)",
+    "options": {
+      "A": "GUI 또는 CLI에 관계없이 / 방화벽 정책 생성 시 / 정책 ID 제공이 / 필수이다.",
+      "B": "방화벽 정책 ID는 / 방화벽 정책에서 / 정책 실행 순서를 / 식별한다.",
+      "C": "정책 ID는 / 정책이 생성된 후 / 수정할 수 없다.",
+      "D": "CLI에서 / 정책 ID 0으로 / 정책을 생성할 수 있다."
+    },
+    "_src": {
+      "question": "When configuring firewall policies which of the following is true regarding the policy ID? (Choose two.)",
+      "A": "It is mandatory to provide a policy ID while creating a firewall policy regardless of GUI or CLI.",
+      "B": "A firewall policy ID identifies the order of policy execution in firewall policies.",
+      "C": "A policy ID cannot be modified once a policy is created.",
+      "D": "You can create a policy in CLI with policy ID 0"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.4": {
+    "question": "관리자가 / add-route를 활성화하여 / FortiGate에서 / 다이얼업 IPsec VPN을 / 구성했다. / 그러나 정적 경로가 / 라우팅 테이블에 / 표시되지 않는다. / 이 시나리오에서 / 옳은 두 설명은?",
+    "options": {
+      "A": "관리자는 / add-route가 제대로 작동하려면 / 정적 경로 대신 / 정책 경로를 사용해야 한다.",
+      "B": "관리자는 / 2단계가 성공적으로 / 설정되었는지 / 확인해야 한다.",
+      "C": "관리자는 / 2단계 셀렉터에서 / 원격 네트워크를 / 올바르게 정의해야 한다.",
+      "D": "관리자는 / 다이얼업 인터페이스에서 / 동적 라우팅 프로토콜을 / 활성화해야 한다."
+    },
+    "_src": {
+      "question": "An administrator has configured a dialup IPsec VPN on FortiGate with add-route enabled. However, the static route is not showing in the routing table. Which two statements about this scenario are correct? (Choose two.)",
+      "A": "The administrator must use a policy route instead of a static route for add-route to work properly.",
+      "B": "The administrator must ensure phase 2 is successfully established",
+      "C": "The administrator must define the remote network correctly in the phase 2 selectors.",
+      "D": "The administrator must enable a dynamic routing protocol on the dialup interface."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.5": {
+    "question": "전시물을 참조하라. / RADIUS 서버 구성이 표시된다. / 관리자가 / 새 RADIUS 서버 구성을 추가하면서 / \"모든 사용자 그룹에 포함\"을 / 활성화했다. / 이 옵션을 활성화하면 / 어떤 영향이 있는가?",
+    "options": {
+      "A": "이 옵션은 / RADIUS 서버와 / 해당 서버에 인증할 수 있는 / 모든 사용자를 / 모든 FortiGate 사용자 그룹에 / 배치한다.",
+      "B": "이 옵션은 / 모든 FortiGate 사용자를 / RADIUS 서버가 / 모든 사용자 그룹에 인증할 수 있도록 한다.",
+      "C": "이 옵션은 / RADIUS 서버가 / 모든 FortiGate 관리자 그룹에 / 포함되도록 한다.",
+      "D": "이 옵션은 / RADIUS 서버에 / 성공적으로 인증된 사용자만 / FortiGate 사용자 그룹에 / 추가한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. A RADIUS server configuration is shown. An administrator added a configuration for a new RADIUS server. While configuring, the administrator enabled Include in every user group. What is the impact of enabling Include in every user group in a RADIUS configuration?",
+      "A": "This option places the RADIUS server, and all users who can authenticate against that server, into every FortiGate user group.",
+      "B": "This option places all FortiGate users so the RADIUS server can authenticate them in every user group.",
+      "C": "This option ensures the RADIUS server is included in every FortiGate administrator group.",
+      "D": "This option adds only users who have successfully authenticated against the RADIUS server to FortiGate user groups."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.6": {
+    "question": "\"restrict_media-profile\"이라는 / 웹 필터 프로파일을 / 일일 카테고리 사용 할당량으로 / 생성했다. / 방화벽 정책에 프로파일을 추가할 때 / restrict_media-profile이 / 사용 가능한 웹 프로파일 드롭다운에 / 표시되지 않는다. / 이유가 무엇인가?",
+    "options": {
+      "A": "웹 필터 프로파일이 / 이미 다른 방화벽 정책에서 / 참조되고 있다.",
+      "B": "방화벽 정책이 / deep-inspection 대신 / no-inspection 모드이다.",
+      "C": "웹 필터 프로파일에 사용된 / 명명 규칙이 / 방화벽 정책에서 / 이를 제한하고 있다.",
+      "D": "방화벽 정책의 / 검사 모드가 / 웹 필터 프로파일과 / 일치하지 않는다."
+    },
+    "_src": {
+      "question": "You have created a web filter profile named restrict_media-profile with a daily category usage quota. When you are adding the profile to the firewall policy, the restrict_media-profile is not listed in the available web profile drop down. What could be the reason?",
+      "A": "The web filter profile is already referenced in another firewall policy.",
+      "B": "The firewall policy is in no-inspection mode instead of deep-inspection.",
+      "C": "The naming convention used in the web filter profile is restricting it in the firewall policy.",
+      "D": "The inspection mode in the firewall policy is not matching with web filter profile"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.7": {
+    "question": "전시물을 참조하라. / FortiGate 장치가 / 네트워크에 연결된 다이어그램과 / 방화벽 정책 및 IP 풀 구성이 표시된다. / PC3이 인터넷에 연결할 수 없을 때 / 관리자가 사용할 수 있는 / 두 가지 구성 옵션은?",
+    "options": {
+      "A": "시스템 설정에서 / 다중 인터페이스 정책을 / enable로 설정한다.",
+      "B": "IP 풀 구성에서 / end ip를 / 100.65.0.112로 설정한다.",
+      "C": "방화벽 정책에서 / CLI를 사용하여 / match-vip를 / enable로 설정한다.",
+      "D": "IP 풀 구성에서 / type을 / overload로 설정한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. Based on the information shown in the exhibit, which two configuration options can the administrator use to fix the connectivity issue for PC3? (Choose two.)",
+      "A": "In the system settings, set Multiple Interface Policies to enable.",
+      "B": "In the IP pool configuration, set end ip to 100.65.0.112.",
+      "C": "In the firewall policy, set match-vip to enable using CLI.",
+      "D": "In the IP pool configuration, set type to overload."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.8": {
+    "question": "FortiGate 장치가 / 절약 모드(conserve mode)에 진입할 때 / 옳은 두 설명은?",
+    "options": {
+      "A": "FortiGate는 / 구성 변경 수락을 / 거부한다.",
+      "B": "FortiGate는 / 완전한 시스템 작동을 중단하고 / 가용 리소스를 회복하려면 / 재부팅이 필요하다.",
+      "C": "IPS의 fail-open 전역 설정이 / 활성화된 경우 / FortiGate는 / IPS 검사 없이 / 패킷을 계속 전송한다.",
+      "D": "FortiGate는 / 격리와 같은 / 중요 보안 작업을 / 계속 실행한다."
+    },
+    "_src": {
+      "question": "Which two statements are correct when the FortiGate device enters conserve mode? (Choose two.)",
+      "A": "FortiGate refuses to accept configuration changes.",
+      "B": "FortiGate halts complete system operation and requires a reboot to regain available resources.",
+      "C": "FortiGate continues to transmit packets without IPS inspection when the fail-open global setting in IPS is enabled.",
+      "D": "FortiGate continues to run critical security actions, such as quarantine."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.9": {
+    "question": "전시물을 참조하라. / 현재 HA 상태를 기반으로 / 관리자가 / HQ-NGFW-1과 HQ-NGFW-2에서 / override 및 priority 파라미터를 / 업데이트했다. / HA 클러스터에서 / 예상되는 결과는?",
+    "options": {
+      "A": "HQ-NGFW-2가 / override enable 설정과 / HQ-NGFW-1보다 높은 우선순위로 인해 / 기본(primary)으로 전환된다.",
+      "B": "HQ-NGFW-1은 / HQ-NGFW-2의 우선순위가 낮기 때문에 / 기본(primary)으로 유지된다.",
+      "C": "override 설정이 / 모든 HA 멤버에서 / 일치해야 하기 때문에 / HA 클러스터가 / 동기화 불일치 상태가 된다.",
+      "D": "HQ-NGFW-1이 / HQ-NGFW-2의 설정을 / 동기화하고 / 기본(primary)으로 유지된다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. Based on the current HA status, an administrator updates the override and priority parameters on HQ-NGFW-1 and HQ-NGFW-2. What would be the expected outcome in the HA cluster?",
+      "A": "HQ-NGFW-2 will take over as the primary because it has the override enable setting and higher priority than HQ-NGFW-1.",
+      "B": "HQ-NGFW-1 will remain the primary because HQ-NGFW-2 has lower priority",
+      "C": "The HA cluster will become out of sync because the override setting must match on all HA members.",
+      "D": "HQ-NGFW-1 will synchronize the settings of HQ-NGFW-2 and remain the primary."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.10": {
+    "question": "전시물을 참조하라. / 능동 인증을 활성화하는 / 방화벽 정책이 표시된다. / 능동 인증 방법으로 / 외부 웹사이트에 접근하려 할 때 / 사용자에게 / 로그인 프롬프트가 / 표시되지 않는다. / 가장 가능한 이유는?",
+    "options": {
+      "A": "이 사용자에 대한 / 일치하는 사용자 계정이 / 존재하지 않는다.",
+      "B": "Remote-users 그룹이 / FSSO 구성에서 / 올바르게 설정되어야 한다.",
+      "C": "Remote-users 그룹이 / 목적지에 / 추가되지 않았다.",
+      "D": "방화벽 정책에 / 서비스 DNS가 / 필요하다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. A firewall policy to enable active authentication is shown. When attempting to access an external website using an active authentication method, the user is not presented with a login prompt. What is the most likely reason for this situation?",
+      "A": "No matching user account exists for this user.",
+      "B": "The Remote-users group must be set up correctly in the FSSO configuration.",
+      "C": "The Remote-users group is not added to the Destination",
+      "D": "The Service DNS is required in the firewall policy."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.11": {
+    "question": "방화벽 정책을 구성할 때 / 정책 ID에 관해 / 옳은 것은? (두 가지 선택)",
+    "options": {
+      "A": "방화벽 정책 ID는 / 방화벽 정책에서 / 정책 실행 순서를 / 식별한다.",
+      "B": "정책 ID는 / 정책이 생성된 후 / 수정할 수 없다.",
+      "C": "CLI에서 / 정책 ID 0으로 / 정책을 생성할 수 있다.",
+      "D": "GUI 또는 CLI에 관계없이 / 방화벽 정책 생성 시 / 정책 ID 제공이 / 필수이다."
+    },
+    "_src": {
+      "question": "When configuring firewall policies which of the following is true regarding the policy ID? (Choose two.)",
+      "A": "A firewall policy ID identifies the order of policy execution in firewall policies.",
+      "B": "A policy ID cannot be modified once a policy is created.",
+      "C": "You can create a policy in CLI with policy ID 0",
+      "D": "It is mandatory to provide a policy ID while creating a firewall policy regardless of GUI or CLI."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.12": {
+    "question": "전시물을 참조하라. / WAN(port2) 인터페이스 IP는 100.65.0.101/24, / LAN(port4) 인터페이스 IP는 10.0.11.254/24이다. / HQ-PC-1(10.0.11.50)이 / BR-FGT(100.65.1.111)에 / 핑을 보낼 때 / SNAT에 사용될 IP 주소는?",
+    "options": {
+      "A": "100.65.0.101",
+      "B": "100.65.0.49",
+      "C": "100.65.0.149",
+      "D": "100.65.0.99"
+    },
+    "_src": {
+      "question": "Refer to the exhibits. Which IP address will be used to source NAT (SNAT) the traffic, if the user on HQ-PC-1 (10.0.11.50) pings the IP address of BR-FGT (100.65.1.111)?",
+      "A": "100.65.0.101",
+      "B": "100.65.0.49",
+      "C": "100.65.0.149",
+      "D": "100.65.0.99"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.13": {
+    "question": "NTurbo를 지원하는 / FortiGate 모델을 관리한다. / NTurbo 가속화가 / 안티바이러스 성능을 / 어떻게 향상시키는가?",
+    "options": {
+      "A": "플로우 기반 검사의 경우, / NTurbo는 / IPS 엔진과 / FortiGate 수신·발신 인터페이스 간에 / 트래픽을 리디렉션하는 / 전용 데이터 경로를 설정한다.",
+      "B": "플로우 기반 검사의 경우, / NTurbo는 / FortiGate 장치에서 / 두 개의 검사 세션을 생성한다.",
+      "C": "프록시 기반 검사의 경우, / NTurbo는 / 트래픽을 / 콘텐츠 프로세서로 / 오프로드한다.",
+      "D": "프록시 기반 검사의 경우, / NTurbo는 / 전체 파일을 / 버퍼링한 후 / 안티바이러스 엔진으로 / 전송한다."
+    },
+    "_src": {
+      "question": "An administrator manages a FortiGate model that supports NTurbo. How does NTurbo acceleration enhance antivirus performance?",
+      "A": "For flow-based inspection. NTurbo establishes a dedicated data path to redirect traffic between the IPS engine and FortiGate ingress and egress interfaces.",
+      "B": "For flow-based inspection. NTurbo creates two inspection sessions on the FortiGate device.",
+      "C": "For proxy-based inspection. NTurbo offloads traffic to the content processor.",
+      "D": "For proxy-based inspection. NTurbo buffers the whole file and then sends it to the antivirus engine."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.14": {
+    "question": "관리자가 / 죽은 터널을 감지하기 위해 / IPsec VPN에서 / DPD(Dead Peer Detection)를 / 구성하려 한다. / 인바운드 트래픽이 없을 때만 / FortiGate가 DPD 프로브를 / 전송하는 / DPD 모드는?",
+    "options": {
+      "A": "On Demand",
+      "B": "Enabled",
+      "C": "On Idle",
+      "D": "Disabled"
+    },
+    "_src": {
+      "question": "An administrator wants to configure dead peer detection (DPD) on IPsec VPN for detecting dead tunnels. The requirement is that FortiGate sends DPD probes only when there is no inbound traffic. Which DPD mode on FortiGate meets this requirement?",
+      "A": "On Demand",
+      "B": "Enabled",
+      "C": "On Idle",
+      "D": "Disabled"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.15": {
+    "question": "전시물을 참조하라. / 관리자가 IPS 프로파일을 생성했으나 / 예상대로 작동하지 않는다. / 테스트 중 전시물의 출력이 나타났다. / 진단 출력의 가능한 원인은?",
+    "options": {
+      "A": "IPS 보안 프로파일이 / 구성된 방화벽 정책이 / 없다.",
+      "B": "관리자가 / diagnose test application ipsmonitor 5 / 명령을 입력했다.",
+      "C": "FortiGate가 / IPS fail open 상태에 / 진입했다.",
+      "D": "관리자가 / diagnose test application ipsmonitor 99 / 명령을 입력했다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. As an administrator you have created an IPS profile, but it is not performing as expected. While testing you got the output as shown in the exhibit. What could be the possible reason of the diagnose output shown in the exhibit?",
+      "A": "There is a no firewall policy configured with an IPS security profile.",
+      "B": "Administrator entered the command diagnose test application ipsmonitor 5.",
+      "C": "FortiGate entered into IPS fail open state.",
+      "D": "Administrator entered the command diagnose test application ipsmonitor 99."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.16": {
+    "question": "전시물을 참조하라. / 전시물에 표시된 로그 메시지를 / 어떤 두 가지 방법으로 / 볼 수 있는가?",
+    "options": {
+      "A": "암묵적 거부 정책을 / 우클릭하여",
+      "B": "FortiGate CLI 명령 / diagnose log test를 사용하여",
+      "C": "로그 항목에서 / 정책 UUID와 / 애플리케이션 이름으로 / 필터링하여",
+      "D": "포워드 트래픽 섹션에서"
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Which two ways can you view the log messages shown in the exhibit? (Choose two.)",
+      "A": "By right clicking the implicit deny policy",
+      "B": "Using the FortiGate CLI command diagnose log test",
+      "C": "By filtering by policy universally unique identifier (UUID) and application name in the log entry",
+      "D": "In the Forward Traffic section"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.17": {
+    "question": "전시물을 참조하라. / 관리자가 SD-WAN 규칙을 구성하고 / FortiGate 트래픽 로그 페이지에 / SD-WAN Quality와 / SD-WAN Rule Name 열을 설정했다. / 그러나 트래픽 로그에 / SD-WAN 규칙 이름이 표시되지 않는다. / 이유가 무엇인가?",
+    "options": {
+      "A": "SD-WAN 규칙 이름은 / 즉시 표시되지 않는다. / 관리자가 페이지를 / 새로고침해야 한다.",
+      "B": "방화벽 정책에 / 애플리케이션 컨트롤 프로파일이 / 적용되지 않았다.",
+      "C": "SD-WAN 규칙의 목적지가 / 각 애플리케이션별로 구성되었으나 / 기능 가시성이 / 활성화되지 않았다.",
+      "D": "FortiGate가 / SD-WAN 규칙을 우회하여 / 트래픽을 / 로드 밸런싱했다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. The administrator configured SD-WAN rules and set the FortiGate traffic log page to display SD-WAN-specific columns. Despite these settings, the traffic logs do not show the name of the SD-WAN rule used to steer those traffic flows. What could be the reason?",
+      "A": "SD-WAN rule names do not appear immediately. The administrator must refresh the page.",
+      "B": "There is no application control profile applied to the firewall policy.",
+      "C": "Destinations in the SD-WAN rules are configured for each application, but feature visibility is not enabled.",
+      "D": "FortiGate load balanced the traffic according to SD-WAN rules bypassing rule names."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.18": {
+    "question": "전시물을 참조하라. / WAN(port2) IP: 100.65.0.101/24, / LAN(port4) IP: 10.0.11.254/24. / 호스트 100.65.1.111이 / 포트 443으로 / 100.65.0.200에 / TCP SYN 패킷을 보낼 때, / FortiGate가 패킷을 전달할 때의 / 소스·목적지 주소·목적지 포트는?",
+    "options": {
+      "A": "10.0.11.254, 100.65.0.200, 443 (각각)",
+      "B": "10.0.11.254, 10.0.15.50, 4443 (각각)",
+      "C": "100.65.1.111, 10.0.11.50, 4443 (각각)",
+      "D": "100.65.1.111, 10.0.11.50, 443 (각각)"
+    },
+    "_src": {
+      "question": "Refer to the exhibits. If the host 100.65.1.111 sends a TCP SYN packet on port 443 to 100.65.0.200, what will the source address, destination address, and destination port of the packet be at the time FortiGate forwards the packet to the destination?",
+      "A": "10.0.11.254, 100.65.0.200, and 443, respectively",
+      "B": "10.0.11.254, 10.0.15.50, and 4443, respectively",
+      "C": "100.65.1.111, 10.0.11.50, and 4443, respectively",
+      "D": "100.65.1.111, 10.0.11.50, and 443, respectively"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.19": {
+    "question": "네트워크 관리자가 / Interface Pair View와 / By Sequence View 모두에서 / 방화벽 정책을 검토하고 있다. / 각 뷰에서 / 정책 순서가 다르게 나타난다. / 왜 정책 순서가 / 다른 두 뷰에서 / 다른가?",
+    "options": {
+      "A": "By Sequence View는 / 규칙 우선순위에 따라 / 정책을 그룹화하고, / Interface Pair View는 / 항상 트래픽 로그 순서를 따른다.",
+      "B": "방화벽은 / Interface Pair View에서 / 최근 트래픽 패턴에 따라 / 정책을 동적으로 재정렬하지만, / By Sequence View는 정적이다.",
+      "C": "Interface Pair View는 / 일치하는 인터페이스에 따라 / 정책을 정렬하고, / By Sequence View는 / 실제 처리 순서를 표시한다.",
+      "D": "Interface Pair View의 정책은 / 보안 수준에 따라 / 우선순위가 정해지고, / By Sequence View는 / 관리자의 수동 순서를 따른다."
+    },
+    "_src": {
+      "question": "A network administrator is reviewing firewall policies in both Interface Pair View and By Sequence View. The policies appear in a different order in each view. Why is the policy order different in these two views?",
+      "A": "By Sequence View groups policies based on rule priority, while Interface Pair View always follows the order of traffic logs.",
+      "B": "The firewall dynamically reorders policies in Interface Pair View based on recent traffic patterns, but By Sequence View remains static.",
+      "C": "Interface Pair View sorts policies based on matching interfaces, while By Sequence View shows the actual processing order of rules.",
+      "D": "Policies in Interface Pair View are prioritized by security levels, while By Sequence View strictly follows the administrator's manual order."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.20": {
+    "question": "새 관리자가 / DC 에이전트 모드를 사용하여 / FortiGate에서 / FSSO 인증을 구성하고 있다. / 예상 프로세스에 / 포함되지 않는 단계는?",
+    "options": {
+      "A": "DC 에이전트가 / 로그인 이벤트 데이터를 / FortiGate로 / 직접 전송한다.",
+      "B": "FortiGate가 / FSSO 목록의 / IP 주소를 기반으로 / 사용자 ID를 / 결정한다.",
+      "C": "수집기 에이전트가 / 로그인 이벤트 데이터를 / FortiGate로 / 전달한다.",
+      "D": "사용자가 / Windows 도메인에 / 로그인한다."
+    },
+    "_src": {
+      "question": "A new administrator is configuring FSSO authentication on FortiGate using DC Agent Mode. Which step is not part of the expected process?",
+      "A": "The DC agent sends login event data directly to FortiGate.",
+      "B": "FortiGate determines user identity based on the IP address in the FSSO list.",
+      "C": "The collector agent forwards login event data to FortiGate.",
+      "D": "The user logs into the windows domain."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.21": {
+    "question": "FSSO 수집기 에이전트의 / NetAPI 폴링 모드를 / 올바르게 설명하는 설명은?",
+    "options": {
+      "A": "수집기 에이전트는 / Windows API를 사용하여 / DC에 사용자 로그인을 / 쿼리한다.",
+      "B": "NetSessionEnum 함수는 / 사용자 로그아웃을 / 추적하는 데 사용된다.",
+      "C": "NetAPI 폴링은 / 대규모 네트워크에서 / 대역폭 사용량을 / 증가시킬 수 있다.",
+      "D": "수집기 에이전트는 / Windows 애플리케이션 이벤트 로그를 / 검색해야 한다."
+    },
+    "_src": {
+      "question": "Which statement correctly describes NetAPI polling mode for the FSSO collector agent?",
+      "A": "The collector agent uses a Windows API to query DCs for user logins.",
+      "B": "The NetSessionEnum function is used to track user logouts.",
+      "C": "NetAPI polling can increase bandwidth usage in large networks.",
+      "D": "The collector agent must search Windows application event logs."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.22": {
+    "question": "전시물을 참조하라. / 관리자가 / HA 클러스터의 성능 상태 출력을 / 55초 동안 관찰했다. / 어느 FortiGate가 / 기본(primary)인가?",
+    "options": {
+      "A": "memory-failover-flip-timeout 파라미터를 가진 / HQ-NGFW-1",
+      "B": "priority 파라미터를 가진 / HQ-NGFW-2",
+      "C": "override 파라미터를 가진 / HQ-NGFW-1",
+      "D": "memory-failover-threshold 파라미터를 가진 / HQ-NGFW-2"
+    },
+    "_src": {
+      "question": "Refer to the exhibits. An administrator has observed the performance status outputs on an HA cluster for 55 seconds. Which FortiGate is the primary?",
+      "A": "HQ-NGFW-1 with the parameter memory-failover-flip-timeout setting",
+      "B": "HQ-NGFW-2 with the parameter priority setting",
+      "C": "HQ-NGFW-1 with the parameter override setting",
+      "D": "HQ-NGFW-2 with the parameter memory-failover-threshold setting"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.23": {
+    "question": "전시물을 참조하라. / AWS에 / FortiGate CNF(Cloud-Native Firewall)를 배포했다. / 배포 중 / EC2 인스턴스의 트래픽을 처리하기 위해 / FortiGate CNF가 / 생성해야 하는 구성 요소는?",
+    "options": {
+      "A": "고객 VPC와 GWLBe",
+      "B": "고객 VPC의 / 게이트웨이 로드 밸런서 엔드포인트(GWLBe)",
+      "C": "CNF VPC, 고객 VPC, GWLB",
+      "D": "고객 VPC의 / GWLB, GWLBe, 인터넷 게이트웨이(IGW)"
+    },
+    "_src": {
+      "question": "Refer to the exhibit. You deployed a FortiGate Cloud-Native Firewall (CNF) in AWS. During the deployment, which components must the FortiGate CNF create to handle traffic from the EC2 instance?",
+      "A": "The customer VPC and GWLBe",
+      "B": "The gateway load balancer endpoint (GWLBe) in the customer virtual private cloud (VPC)",
+      "C": "The CNF VPC, customer VPC, and GWLB",
+      "D": "The GWLB, GWLBe, and the internet gateway (IGW) in the customer VPC"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.24": {
+    "question": "전시물을 참조하라. / 관리자가 / ABC.Com 애플리케이션 시그니처에 대해 / 애플리케이션 오버라이드를 구성하고 / 작업을 Allow로 설정했다. / ABC.Com에 / 여러 번 접근했는데도 / 보안 로그에 / 로그가 생성되지 않는 이유는?",
+    "options": {
+      "A": "ABC.Com이 / Excessive-Bandwidth 카테고리에 / 해당된다.",
+      "B": "ABC.Com 타입이 / Filter 대신 / Application으로 설정되어 있다.",
+      "C": "ABC.Com이 / 애플리케이션 및 필터 오버라이드에서 / 잘못 구성되어 있다.",
+      "D": "방화벽 정책에서 / 로깅이 / 활성화되지 않았다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. An administrator has configured an Application Overrides for the ABC.Com application signature and set the Action to Allow. Why are there no logs generated under security logs for ABC.Com?",
+      "A": "The ABC.Com is hitting the category Excessive-Bandwidth.",
+      "B": "The ABC.Com Type is set as Application instead of Filter.",
+      "C": "The ABC.Com is configured incorrectly in the Application and Filter Overrides.",
+      "D": "Logging is not enabled in the firewall policy."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.25": {
+    "question": "전시물을 참조하라. / FortiGuard 연결에 관해 / 옳은 두 설명은?",
+    "options": {
+      "A": "실패한 패킷 수가 / 증가할수록 / 가중치가 증가한다.",
+      "B": "FortiGuard 서버와 통신하기 위해 / 신뢰할 수 없는 프로토콜을 / 구성할 수 있다.",
+      "C": "FortiGate는 / DNS 조회를 사용하여 / FortiGuard 서버를 / 식별했다.",
+      "D": "FortiGate는 / FortiGuard 통신에 / 기본 포트를 사용하고 있다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Which two statements about the FortiGuard connection are true? (Choose two.)",
+      "A": "The weight increases as the number of failed packets rises",
+      "B": "You can configure unreliable protocols to communicate with FortiGuard Server.",
+      "C": "FortiGate identified the FortiGuard Server using DNS lookup.",
+      "D": "FortiGate is using the default port for FortiGuard communication."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.26": {
+    "question": "전시물을 참조하라. / FortiGate 장치의 / 시스템 성능 출력과 / 높은 메모리 사용 임계값의 / 기본 구성이 표시된다. / 시스템 성능 출력에 따라 / 가능한 두 가지 결과는?",
+    "options": {
+      "A": "관리자는 / 콘솔 포트를 통해서만 / FortiGate에 접근할 수 있다.",
+      "B": "FortiGate가 / 절약 모드(conserve mode)에 / 진입했다.",
+      "C": "FortiGate가 / 새 세션을 / 드롭한다.",
+      "D": "관리자가 / 구성을 / 변경할 수 있다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. Based on the system performance output, what are the two possible outcomes? (Choose two.)",
+      "A": "Administrators can access FortiGate only through the console port.",
+      "B": "FortiGate has entered conserve mode.",
+      "C": "FortiGate drops new sessions.",
+      "D": "Administrators can change the configuration."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.27": {
+    "question": "FortiSASE의 / 에이전트 기반 보안 인터넷 접근(SIA) 모드에서 / 어느 두 구성 요소가 / 포함되는가?",
+    "options": {
+      "A": "FortiSASE FWaaS(Firewall-as-a-Service)",
+      "B": "PAC(프록시 자동 구성) 파일",
+      "C": "VPN 정책",
+      "D": "FortiExtender"
+    },
+    "_src": {
+      "question": "Which two components are part of the secure internet access (SIA) agent-based mode on FortiSASE? (Choose two.)",
+      "A": "FortiSASE Firewall-as-a-Service (FWaaS)",
+      "B": "The proxy auto-configuration (PAC) file",
+      "C": "VPN policies",
+      "D": "FortiExtender"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.28": {
+    "question": "전시물을 참조하라. / 애플리케이션 센서와 / 해당 방화벽 정책을 구현했다. / 이 구성에서 / 관찰할 수 있는 두 가지 요소는?",
+    "options": {
+      "A": "YouTube 접근은 / Excessive-Bandwidth 애플리케이션 및 / 필터 오버라이드 설정에 따라 / 차단된다.",
+      "B": "Facebook 접근은 / 카테고리 필터 설정에 따라 / 차단된다.",
+      "C": "Facebook 접근은 허용되지만 / Video/Audio 카테고리 필터 설정에 따라 / Facebook 동영상을 / 재생할 수 없다.",
+      "D": "YouTube 검색은 / Google 애플리케이션 및 / 필터 오버라이드 설정에 따라 / 허용된다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. Which two factors can you observe from these configurations? (Choose two.)",
+      "A": "YouTube access is blocked based on Excessive-Bandwidth Application and Filter override settings.",
+      "B": "Facebook access is blocked based on the category filter settings.",
+      "C": "Facebook access is allowed but you cannot play Facebook videos based on Video/Audio category filter settings.",
+      "D": "YouTube search is allowed based on the Google Application and Filter override settings."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.29": {
+    "question": "SD-WAN 성능 SLA에 관해 / 옳은 세 가지 설명은?",
+    "options": {
+      "A": "세션 손실과 지터에 / 의존한다.",
+      "B": "FortiGate 장치의 / 상태를 모니터링한다.",
+      "C": "모든 SLA 대상을 / 구성할 수 있다.",
+      "D": "SD-WAN 규칙의 / 최저 비용 전략에서 / 적용된다.",
+      "E": "능동적으로 또는 수동적으로 / 측정할 수 있다."
+    },
+    "_src": {
+      "question": "Which three statements about SD-WAN performance SLAs are true? (Choose three.)",
+      "A": "They rely on session loss and jitter.",
+      "B": "They monitor the state of the FortiGate device.",
+      "C": "All the SLA targets can be configured.",
+      "D": "They are applied in a SD-WAN rule lowest cost strategy.",
+      "E": "They can be measured actively or passively."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.30": {
+    "question": "전시물을 참조하라. / NOC 팀이 / NOC_Access 관리자 프로파일로 / FortiGate GUI에 연결한다. / 비활성 상태에서 / GUI 세션이 / 너무 일찍 끊기지 않도록 / 관리자가 구성해야 하는 것은?",
+    "options": {
+      "A": "config system accprofile NOC_Access에서 / admintimeout 값을 / 증가시킨다.",
+      "B": "NOC_Access 관리자 프로파일의 / Override Idle Timeout 파라미터에서 / offline 값을 / 증가시킨다.",
+      "C": "NOC_Access를 / 목록 상단으로 이동하여 / 모든 프로파일 설정이 / 적용되도록 한다.",
+      "D": "NOC_Access 사용자 모두에게 / super_admin 역할이 / 할당되도록 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. The NOC team connects to the FortiGate GUI with the NOC_Access admin profile. They request that their GUI sessions do not disconnect too early during inactivity. What must the administrator configure to answer this specific request from the NOC team?",
+      "A": "Increase the admintimeout value under config system accprofile NOC_Access.",
+      "B": "Increase the offline value of the override idle Timeout parameter in the NOC_Access admin profile.",
+      "C": "Move NOC_Access to the top of the list to ensure all profile settings take effect.",
+      "D": "Ensure that all NOC_Access users are assigned the super_admin role."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.31": {
+    "question": "전시물을 참조하라. / HQ-NGFW-1(IP: 10.0.13.254)이 / FortiAnalyzer(IP: 10.0.13.125)로 / 로그를 전송한다. / 신뢰할 수 있는 로깅이 / HQ-NGFW-1에서 / 활성화되어 있는지 / 확인하는 데 / 도움이 되는 전시물은?",
+    "options": {
+      "A": "[이미지 참조]",
+      "B": "[이미지 참조]",
+      "C": "[이미지 참조]",
+      "D": "[이미지 참조]"
+    },
+    "_src": {
+      "question": "The FortiGate device HQ-NGFW-1 with the IP address 10.0.13.254 sends logs to the FortiAnalyzer device with the IP address 10.0.13.125. The administrator wants to verify that reliable logging is enabled on HQ-NGFW-1. Which exhibit helps with the verification?",
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.32": {
+    "question": "전시물을 참조하라. / 사전 정의된 deep-inspection과 / custom-deep-inspection 프로파일이 / 일부 웹 카테고리를 / SSL 검사에서 / 제외한다. / 이 웹 카테고리들이 / 제외되는 두 가지 이유는?",
+    "options": {
+      "A": "이 웹사이트들이 / FortiGate의 신뢰 도메인 목록에 있어 / 리소스 활용이 최적화된다.",
+      "B": "법적 규정이 / 이 웹사이트들에 대해 / 사용자 개인 정보 보호와 / 민감한 정보 보호를 / 우선시한다.",
+      "C": "이 웹사이트들은 / FortiGuard가 관리하는 / 평판 좋은 도메인 이름 / 허용 목록에 있다.",
+      "D": "FortiGate 임시 인증서가 / HTTP Strict Transport Security를 사용하는 / 웹사이트에 대한 / 브라우저 접근을 / 거부한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. For which two reasons are these web categories exempted from SSL inspection? (Choose two.)",
+      "A": "The resources utilization is optimized because these websites are in the trusted domain list on FortiGate.",
+      "B": "The legal regulation aims to prioritize user privacy and protect sensitive information for these websites.",
+      "C": "These websites are in an allowlist of reputable domain names maintained by FortiGuard.",
+      "D": "The FortiGate temporary certificate denies the browser's access to websites that use HTTP Strict Transport Security."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.33": {
+    "question": "전시물을 참조하라. / FTP에 대한 / 새 안티바이러스 프로파일을 생성할 때 / 안티바이러스 스캔 스위치가 / 회색으로 표시되는 이유는?",
+    "options": {
+      "A": "안티바이러스 스캔이 / 시스템 -> 기능 가시성에서 / 비활성화되었다.",
+      "B": "이 프로파일에서 / 검사할 프로토콜이 / 활성화되지 않았다.",
+      "C": "프로파일의 기능 세트가 / Flow-based이지만 / Proxy-based여야 한다.",
+      "D": "2GB 미만의 RAM을 가진 / FortiGate는 / 안티바이러스 스캔 기능을 / 지원하지 않는다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Why is the Antivirus scan switch grayed out when you are creating a new antivirus profile for FTP?",
+      "A": "Antivirus scan is disabled under System -> Feature visibility",
+      "B": "None of the inspected protocols are active in this profile.",
+      "C": "The Feature Set for the profile is Flow-based but it must be Proxy-based",
+      "D": "FortiGate with less than 2 GB RAM does not support the Antivirus scan feature."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.34": {
+    "question": "FortiGate가 / FortiAnalyzer 및 FortiManager와 / 통합되어 있다. / 방화벽 정책을 생성할 때 / FortiAnalyzer와 FortiManager에서 / 기능을 향상시키고 / 로그 기록을 가능하게 하려면 / 관리자가 포함해야 하는 속성은?",
+    "options": {
+      "A": "UUID(범용 고유 식별자)",
+      "B": "정책 ID",
+      "C": "시퀀스 ID",
+      "D": "로그 ID"
+    },
+    "_src": {
+      "question": "FortiGate is integrated with FortiAnalyzer and FortiManager. When creating a firewall policy, which attribute must an administrator include to enhance functionality and enable log recording on FortiAnalyzer and FortiManager?",
+      "A": "Universally Unique Identifier",
+      "B": "Policy ID",
+      "C": "Sequence ID",
+      "D": "Log ID"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.35": {
+    "question": "FortiExtender가 / 사이트 기반 원격 인터넷 접근 방법으로 / FortiSASE에 어떻게 연결되는가?",
+    "options": {
+      "A": "FortiExtender는 / VXLAN-over-IPsec 연결을 / 사용한다.",
+      "B": "FortiExtender는 / FortiClient를 사용하여 / 보안 SSL 연결을 / 설정한다.",
+      "C": "FortiExtender는 / 먼저 보안 웹 게이트웨이(SWG)를 통해 / FortiGate LAN 확장에 / 연결한다.",
+      "D": "FortiExtender는 / PAC 파일과 / 명시적 웹 프록시를 사용하여 / 연결한다."
+    },
+    "_src": {
+      "question": "How does FortiExtender connect to FortiSASE in a site-based, remote internet access method?",
+      "A": "FortiExtender uses a Virtual Extensible LAN (VXLAN)-over-IPsec connection.",
+      "B": "FortiExtender establishes a secure SSL connection using FortiClient.",
+      "C": "FortiExtender first connects to a FortiGate LAN extension through a secure web gateway (SWG).",
+      "D": "FortiExtender uses the proxy auto-configuration (PAC) file and an explicit web proxy to connect."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.36": {
+    "question": "FortiGate FSSO 에이전트 없는 폴링 모드의 / 두 가지 기능은?",
+    "options": {
+      "A": "FortiGate는 / AD 서버를 / 수집기 에이전트로 사용한다.",
+      "B": "FortiGate는 / SMB 프로토콜을 사용하여 / DC에서 이벤트 뷰어 로그를 / 읽는다.",
+      "C": "FortiGate는 / 워크스테이션 확인을 / 지원하지 않는다.",
+      "D": "FortiGate는 / 수집기 에이전트가 / 원격 LDAP 서버를 사용하도록 / 지시한다."
+    },
+    "_src": {
+      "question": "What are two features of FortiGate FSSO agentless polling mode? (Choose two.)",
+      "A": "FortiGate uses the AD server as the collector agent.",
+      "B": "FortiGate uses the SMB protocol to read the event viewer logs from the DCs.",
+      "C": "FortiGate does not support workstation check.",
+      "D": "FortiGate directs the collector agent to use a remote LDAP server."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.37": {
+    "question": "수집기 에이전트 고급 모드의 / 두 가지 기능은?",
+    "options": {
+      "A": "고급 모드에서 / 보안 프로파일은 / 개별 사용자가 아닌 / 사용자 그룹에만 / 적용할 수 있다.",
+      "B": "고급 모드에서 / FortiGate를 LDAP 클라이언트로 구성하고 / FortiGate에서 / 그룹 필터를 구성할 수 있다.",
+      "C": "고급 모드는 / Windows 규약인 / NetBios: Domain\\Username을 / 사용한다.",
+      "D": "고급 모드는 / 중첩 또는 상속 그룹을 / 지원한다."
+    },
+    "_src": {
+      "question": "What are two features of collector agent advanced mode? (Choose two.)",
+      "A": "In advanced mode, security profiles can be applied only to user groups, not individual users.",
+      "B": "In advanced mode. FortiGate can be configured as an LDAP client and group filters can be configured on FortiGate.",
+      "C": "Advanced mode uses the Windows convention-NetBios: Domain\\Username.",
+      "D": "Advanced mode supports nested or inherited groups."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.38": {
+    "question": "전시물을 참조하라. / FortiGate에서 / 아래 명령을 구성했다. / 이 구성이 / FortiGate에 미치는 영향은?",
+    "options": {
+      "A": "FortiGate는 / 모든 인터페이스에 strict RPF를 활성화하고 / port1은 RPF 검사에서 / 제외된다.",
+      "B": "FortiGate는 / 모든 인터페이스에 strict RPF를 활성화하고 / port1은 비대칭 라우팅에 / 활성화된다.",
+      "C": "전역 구성이 / 우선 적용되어 / FortiGate는 / 모든 인터페이스에 strict RPF를 / 활성화한다.",
+      "D": "port1에는 / flexible RPF가 활성화되고, / 다른 모든 인터페이스에는 / strict RPF가 활성화된다."
+    },
+    "_src": {
+      "question": "You have configured the below commands on a FortiGate. What would be the impact of this configuration on FortiGate?",
+      "A": "FortiGate will enable strict RPF on all its interfaces and port1 will be exempted from RPF checks.",
+      "B": "FortiGate will enable strict RPF on all its interfaces and port1 will be enabled for asymmetric routing.",
+      "C": "The global configuration will take precedence and FortiGate will enable strict RPF on all interfaces.",
+      "D": "Port1 will be enabled with flexible RPF, and all other interfaces will be enabled for strict RPF"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.39": {
+    "question": "전시물을 참조하라. / 라우팅 테이블이 표시된다. / 관리자가 / 172.20.1.0/24 서브넷 트래픽을 / port2를 통해서만 / 라우팅하는 / 새 정적 경로를 생성하려 한다. / 이 목표를 달성하기 위한 / 두 가지 조건은?",
+    "options": {
+      "A": "새 정적 경로의 / 우선순위를 3으로 / 설정해야 한다.",
+      "B": "새 정적 경로의 / 메트릭을 1로 / 설정해야 한다.",
+      "C": "port3을 통한 / 기존 정적 경로의 / 거리를 11로 / 설정해야 한다.",
+      "D": "새 정적 경로의 / 거리를 9로 / 설정해야 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. An administrator wants to create a new static route so the traffic to the subnet 172.20.1.0/24 is routed through port2 only. What are the two criteria that the administrator can use to achieve this objective? (Choose two.)",
+      "A": "The new static route must have the priority set to 3.",
+      "B": "The new static route must have the metric set to 1.",
+      "C": "The existing static route through port3 must have the distance set to 11.",
+      "D": "The new static route must have the distance set to 9"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.40": {
+    "question": "HQ FortiGate에서 / 공격적(aggressive) 모드로 / 여러 다이얼업 IPsec VPN이 / 구성되어 있다. / 다이얼업 사용자를 / 각자의 부서 VPN 터널에 / 연결하는 요구사항이 있다. / 사용자를 터널과 / 매핑하기 위해 / 구성할 수 있는 / 1단계 설정은?",
+    "options": {
+      "A": "로컬 게이트웨이",
+      "B": "데드 피어 감지",
+      "C": "피어 ID",
+      "D": "IKE 모드 구성"
+    },
+    "_src": {
+      "question": "There are multiple dialup IPsec VPNs configured in aggressive mode on the HQ FortiGate. The requirement is to connect dial-up users to their respective department VPN tunnels. Which phase 1 setting you can configure to match the user to the tunnel?",
+      "A": "Local Gateway",
+      "B": "Dead Peer Detection",
+      "C": "Peer ID",
+      "D": "IKE Mode Config"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.41": {
+    "question": "네트워크 관리자가 / FortiGate에서 / 전체 SSL 검사와 / 웹 필터링을 활성화했다. / HTTPS 웹사이트 방문 시 / 브라우저가 / 인증서 경고 오류를 보고한다. / HTTP 웹사이트는 / 오류 없이 표시된다. / 인증서 경고 오류의 이유는?",
+    "options": {
+      "A": "SSL/SSH 검사 프로파일에서 / 잘못된 SSL 인증서 옵션이 / allow로 설정되었다.",
+      "B": "매칭 방화벽 정책이 / 프록시 검사 모드로 / 설정되었다.",
+      "C": "브라우저가 / FortiGate가 SSL 검사에 사용하는 / 인증서를 / 신뢰하지 않는다.",
+      "D": "사용된 인증서가 / 만료되었거나 / 올바르지 않다."
+    },
+    "_src": {
+      "question": "A network administrator has enabled full SSL inspection and web filtering on FortiGate. When visiting any HTTPS websites, the browser reports certificate warning errors. What is the reason for the certificate warning errors?",
+      "A": "The option invalid SSL certificates is set to allow on the SSL/SSH inspection profile.",
+      "B": "The matching firewall policy is set to proxy inspection mode.",
+      "C": "The browser does not trust the certificate used by FortiGate for SSL inspection.",
+      "D": "The certificate used is expired or incorrect."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.42": {
+    "question": "애플리케이션 컨트롤 프로파일을 구성하고 / 카테고리 탭에서 / P2P 트래픽을 차단으로 설정하여 / 방화벽 정책에 적용했다. / 그러나 알려진 포트의 / P2P 트래픽이 / FortiGate를 통과하고 있다. / 이 문제를 해결하기 위해 / 확인해야 할 / FortiGate 설정은?",
+    "options": {
+      "A": "FortiGuard 카테고리 등급",
+      "B": "네트워크 프로토콜 적용",
+      "C": "UDP 기반 애플리케이션의 / 대체 메시지",
+      "D": "애플리케이션 및 필터 오버라이드"
+    },
+    "_src": {
+      "question": "You have configured an application control profile, set peer-to-peer traffic to Block under the Categories tab, and applied it to the firewall policy. However, your peer-to-peer traffic on known ports is passing through the FortiGate without being blocked. What FortiGate settings should you check to resolve this issue?",
+      "A": "FortiGuard category ratings",
+      "B": "Network Protocol Enforcement",
+      "C": "Replacement Messages for UDP-based Applications",
+      "D": "Application and Filter Overrides"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.43": {
+    "question": "FortiGate 장치의 / HA 클러스터 하트비트 IP 주소에 관한 / 두 가지 특성은?",
+    "options": {
+      "A": "하트비트 IP 주소는 / 클러스터 멤버를 / 구별하는 데 사용된다.",
+      "B": "클러스터의 / 기본 장치 하트비트 인터페이스에는 / 항상 169.254.0.1이 / 할당된다.",
+      "C": "하트비트 IP 주소의 변경은 / FortiGate 장치가 / 클러스터에 가입하거나 / 탈퇴할 때 / 발생한다.",
+      "D": "하트비트 인터페이스에는 / 수동으로 할당된 / 가상 IP 주소가 있다."
+    },
+    "_src": {
+      "question": "What are two characteristics of HA cluster heartbeat IP addresses in a FortiGate device? (Choose two.)",
+      "A": "Heartbeat IP addresses are used to distinguish between cluster members.",
+      "B": "The heartbeat interface of the primary device in the cluster is always assigned IP address 169.254.0.1.",
+      "C": "A change in the heartbeat IP address happens when a FortiGate device joins or leaves the cluster.",
+      "D": "Heartbeat interfaces have virtual IP addresses that are manually assigned."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.44": {
+    "question": "전시물을 참조하라. / 라우팅 테이블이 표시된다. / 옳은 두 설명은?",
+    "options": {
+      "A": "strict RPF가 비활성화된 경우 / port2로 들어오는 / 소스 IP 10.0.13.10 패킷이 / 허용된다.",
+      "B": "strict RPF가 활성화된 경우 / port2로 들어오는 / 소스 IP 10.100.110.10 패킷이 / 허용된다.",
+      "C": "strict RPF가 비활성화된 경우 / port3로 들어오는 / 소스 IP 10.100.110.10 패킷이 / 허용된다.",
+      "D": "strict RPF가 활성화된 경우 / port2로 들어오는 / 소스 IP 10.10.10.10 패킷이 / 허용된다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Based on the routing table shown in the exhibit, which two statements are true? (Choose two.)",
+      "A": "A packet with the source IP address 10.0.13.10 arriving on port2 is allowed if strict RPF is disabled.",
+      "B": "A packet with the source IP address 10.100.110.10 arriving on port2 is allowed if strict RPF is enabled.",
+      "C": "A packet with the source IP address 10.100.110.10 arriving on port3 is allowed if strict RPF is disabled.",
+      "D": "A packet with the source IP address 10.10.10.10 arriving on port2 is allowed if strict RPF is enabled."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.45": {
+    "question": "FortiGate가 / NAT 모드로 작동하며 / LAN과 DMZ 네트워크에 / 각각 연결된 / 두 물리 인터페이스가 있다. / 연결된 물리 인터페이스 요구사항에 관한 / 옳은 두 설명은?",
+    "options": {
+      "A": "두 인터페이스 모두 / DHCP가 활성화되고 / LAN 및 DMZ 역할이 / 할당되어야 한다.",
+      "B": "두 인터페이스 모두 / 인터페이스 역할이 / 할당되어야 한다.",
+      "C": "두 인터페이스 모두 / 라우팅 테이블에 / 직접 연결 경로가 / 있어야 한다.",
+      "D": "두 인터페이스 모두 / IP 주소가 / 할당되어야 한다."
+    },
+    "_src": {
+      "question": "FortiGate is operating in NAT mode and has two physical interfaces connected to the LAN and DMZ networks respectively. Which two statements about the requirements of connected physical interfaces on FortiGate are true? (Choose two.)",
+      "A": "Both interfaces must have DHCP enabled and interfaces set to LAN and DMZ roles assigned.",
+      "B": "Both interfaces must have the interface role assigned.",
+      "C": "Both interfaces must have directly connected routes on the routing table.",
+      "D": "Both interfaces must have IP addresses assigned."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.46": {
+    "question": "전시물을 참조하라. / 웹 필터 프로파일과 / 방화벽 정책 구성이 표시된다. / www.facebook.com에 접근하려 하지만 / FortiGuard 웹 필터링 차단 페이지로 / 리디렉션된다. / 이 문제의 가능한 원인은?",
+    "options": {
+      "A": "웹 등급 오버라이드 구성이 / 잘못되었다.",
+      "B": "웹 필터 프로파일의 / 기능 세트가 / 잘못 구성되었다.",
+      "C": "방화벽 정책의 / 검사 모드가 / 잘못되었다.",
+      "D": "www.facebook.com에 대한 / URL 필터 작업이 / 잘못되었다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. You are trying to access www.facebook.com, but you are redirected to a FortiGuard web filtering block page. Based on the exhibits, what is the possible cause of the issue?",
+      "A": "The web rating override configuration is incorrect.",
+      "B": "The web filter profile feature set is configured incorrectly.",
+      "C": "The firewall policy inspection mode is incorrect.",
+      "D": "For www.facebook.com, the URL filter action is incorrect."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.47": {
+    "question": "관리자가 / FGCP 프로토콜을 사용하여 / HA 클러스터를 구성하려 한다. / 두 멤버 모두 / 충족해야 하는 / 두 가지 요구사항은?",
+    "options": {
+      "A": "동일한 HA 그룹 ID를 / 가져야 한다.",
+      "B": "하트비트 인터페이스가 / 동일한 서브넷에 / 있어야 한다.",
+      "C": "구성된 VDOM 수가 / 동일해야 한다.",
+      "D": "동일한 하드 드라이브 구성을 / 가져야 한다."
+    },
+    "_src": {
+      "question": "An administrator wants to form an HA cluster using the FGCP protocol. Which two requirements must the administrator ensure both members fulfill? (Choose two.)",
+      "A": "They must have the same HA group ID.",
+      "B": "They must have the heartbeat interfaces in the same subnet.",
+      "C": "They must have the same number of configured VDOMs.",
+      "D": "They must have the same hard drive configuration."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.48": {
+    "question": "FortiGate가 / 절약 모드(conserve mode)에 진입할 때 / 옳은 두 설명은?",
+    "options": {
+      "A": "FortiGate는 / 격리와 같은 / 중요 보안 작업을 / 계속 실행한다.",
+      "B": "FortiGate는 / 구성 변경 수락을 / 거부한다.",
+      "C": "FortiGate는 / 완전한 시스템 작동을 중단하고 / 가용 리소스를 회복하려면 / 재부팅이 필요하다.",
+      "D": "IPS의 fail-open 전역 설정이 / 활성화된 경우 / FortiGate는 / IPS 검사 없이 / 패킷을 계속 전송한다."
+    },
+    "_src": {
+      "question": "Which two statements are correct when FortiGate enters conserve mode? (Choose two.)",
+      "A": "FortiGate continues to run critical security actions, such as quarantine.",
+      "B": "FortiGate refuses to accept configuration changes.",
+      "C": "FortiGate halts complete system operation and requires a reboot to regain available resources.",
+      "D": "FortiGate continues to transmit packets without IPS inspection when the fail-open global setting in IPS is enabled."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.49": {
+    "question": "전시물을 참조하라. / NOC 팀이 / NOC_Access 관리자 프로파일로 / FortiGate GUI에 연결한다. / 비활성 상태에서 / GUI 세션이 너무 일찍 끊기지 않도록 / 관리자가 구성해야 하는 것은?",
+    "options": {
+      "A": "NOC_Access를 / 목록 상단으로 이동하여 / 모든 프로파일 설정이 적용되도록 한다.",
+      "B": "NOC_Access 관리자 프로파일의 / Override Idle Timeout 파라미터에서 / offline 값을 / 증가시킨다.",
+      "C": "NOC_Access 사용자 모두에게 / super_admin 역할이 / 할당되도록 한다.",
+      "D": "admintimeout 값을 / 증가시킨다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. The NOC team connects to the FortiGate GUI with the NOC_Access admin profile. They request that their GUI sessions do not disconnect too early during inactivity. What must the administrator configure to answer this specific request from the NOC team?",
+      "A": "Move NOC_Access to the top of the list to ensure all profile settings take effect.",
+      "B": "Increase the offline value of the Override Idle Timeout parameter in the NOC_Access admin profile.",
+      "C": "Ensure that all NOC_Access users are assigned the super_admin role to guarantee access.",
+      "D": "Increase the admintimeout"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.50": {
+    "question": "전시물을 참조하라. / 애플리케이션 센서 구성과 / Excessive-Bandwidth 및 Apple 필터 세부 정보가 표시된다. / 통화가 몇 건만 발생할 때 / Apple FaceTime에 / 어떤 일이 발생하는가?",
+    "options": {
+      "A": "Apple FaceTime은 / Video/Audio 카테고리 구성에 따라 / 허용된다.",
+      "B": "Apple FaceTime은 / Excessive-Bandwidth 필터 구성에 따라 / 차단된다.",
+      "C": "Apple FaceTime은 / Apple 필터 구성에 따라 / 허용된다.",
+      "D": "Apple FaceTime은 / 애플리케이션 및 필터 오버라이드의 / Apple 필터가 Allow로 설정된 경우에만 / 허용된다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. What will happen to Apple FaceTime if there are only a few calls originating or incoming?",
+      "A": "Apple FaceTime will be allowed, based on the Video/Audio category configuration.",
+      "B": "Apple FaceTime will be blocked, based on the Excessive-Bandwidth filter configuration.",
+      "C": "Apple FaceTime will be allowed, based on the Apple filter configuration.",
+      "D": "Apple FaceTime will be allowed only if the Apple filter in Application and Filter Overrides is set to Allow."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.51": {
+    "question": "HA 클러스터에 관한 / 옳은 두 설명은?",
+    "options": {
+      "A": "HA 클러스터는 / 동시에 / 인밴드와 아웃오브밴드 / 관리 인터페이스를 / 가질 수 없다.",
+      "B": "링크 장애 조치는 / 관리자가 기본 장치의 / 인터페이스를 다운시키면 / 장애 조치를 트리거한다.",
+      "C": "하트비트 인터페이스를 스니핑할 때 / 관리자는 / IP 주소 169.254.0.2를 / 확인해야 한다.",
+      "D": "HA 증분 동기화에는 / FIB 항목과 IPsec SA가 / 포함된다."
+    },
+    "_src": {
+      "question": "Which two statements are true about an HA cluster? (Choose two.)",
+      "A": "An HA cluster cannot have both in-band and out-of-band management interfaces at the same time.",
+      "B": "Link failover triggers a failover if the administrator sets the interface down on the primary device.",
+      "C": "When sniffing the heartbeat interface, the administrator must see the IP address 169.254.0.2.",
+      "D": "HA incremental synchronization includes FIB entries and IPsec SAs."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.52": {
+    "question": "자동화 스티치의 특성을 설명하는 / 두 설명은?",
+    "options": {
+      "A": "작업은 / 보안 패브릭에 포함된 / 장치만 포함한다.",
+      "B": "자동화 스티치는 / 여러 트리거를 / 가질 수 있다.",
+      "C": "여러 작업이 / 병렬로 실행될 수 있다.",
+      "D": "트리거는 / 외부 커넥터를 / 포함할 수 있다."
+    },
+    "_src": {
+      "question": "Which two statements describe characteristics of automation stitches? (Choose two.)",
+      "A": "Actions involve only devices included in the Security Fabric.",
+      "B": "An automation stitch can have multiple triggers.",
+      "C": "Multiple actions can run in parallel.",
+      "D": "Triggers can involve external connectors."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.53": {
+    "question": "SD-WAN 규칙에서 / 멤버 선택을 위한 / 유효한 세 가지 전략은?",
+    "options": {
+      "A": "로드 밸런싱 없는 / 최저 비용(SLA)",
+      "B": "로드 밸런싱이 있는 / 수동",
+      "C": "로드 밸런싱이 있는 / 최저 품질(SLA)",
+      "D": "로드 밸런싱이 있는 / 최저 비용(SLA)",
+      "E": "로드 밸런싱이 있는 / 최고 품질"
+    },
+    "_src": {
+      "question": "Which three strategies are valid SD-WAN rule strategies for member selection? (Choose three.)",
+      "A": "Lowest Cost (SLA) without load balancing",
+      "B": "Manual with load balancing",
+      "C": "Lowest Quality (SLA) with load balancing",
+      "D": "Lowest Cost (SLA) with load balancing",
+      "E": "Best Quality with load balancing"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.54": {
+    "question": "전시물을 참조하라. / 디버그 플로우 출력이 표시된다. / 디버그 플로우 출력에서 / 도출할 수 있는 두 가지 결론은?",
+    "options": {
+      "A": "기본 게이트웨이가 / port2에 구성되어 있다.",
+      "B": "RPF 검사가 / 실패한다.",
+      "C": "디버그 플로우는 / UDP 트래픽에 대한 것이다.",
+      "D": "매칭 방화벽 정책이 / 트래픽을 거부한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit showing a debug flow output. Which two conclusions can you make from the debug flow output? (Choose two.)",
+      "A": "The default gateway is configured on port2.",
+      "B": "The RPF check fails.",
+      "C": "The debug flow is for UDP traffic.",
+      "D": "The matching firewall policy denies the traffic."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.55": {
+    "question": "플로우 기반 안티바이러스 프로파일을 설명하는 / 세 가지 설명은?",
+    "options": {
+      "A": "FortiGate는 / 전체 파일을 버퍼링하면서 / 동시에 클라이언트에 / 전송한다.",
+      "B": "플로우 기반 검사는 / 프록시 기반 검사에서 / 사용 가능한 스캐닝 모드의 / 하이브리드를 사용한다.",
+      "C": "바이러스가 감지되면 / 마지막 패킷이 / 클라이언트에 전달된다.",
+      "D": "플로우 기반 검사는 / 프록시 기반 검사에 비해 / 성능을 최적화한다.",
+      "E": "IPS 엔진이 / 독립 실행형으로 / 처리를 담당한다."
+    },
+    "_src": {
+      "question": "Which three statements explain a flow-based antivirus profile? (Choose three.)",
+      "A": "FortiGate buffers the whole file but transmits to the client at the same time.",
+      "B": "Flow-based inspection uses a hybrid of the scanning modes available in proxy-based inspection.",
+      "C": "If a virus is detected, the last packet is delivered to the client.",
+      "D": "Flow-based inspection optimizes performance compared to proxy-based inspection.",
+      "E": "The IPS engine handles the process as a standalone."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.56": {
+    "question": "전시물을 참조하라. / 관리자가 / 보안 패브릭에 / HQ-ISFW-2를 추가하려 한다. / HQ-ISFW-2는 / HQ-ISFW와 동일한 서브넷에 있다. / 보안 패브릭 설정을 구성한 후 / 상태가 Pending으로 유지된다. / 가능한 두 가지 이유는?",
+    "options": {
+      "A": "업스트림 FortiGate IP를 / 10.0.11.254로 / 설정해야 한다.",
+      "B": "SAML Single Sign-On을 / 수동으로 / 설정해야 한다.",
+      "C": "HQ-ISFW-2가 / HQ-ISFW에서 / 승인되어야 한다.",
+      "D": "관리 IP를 / 10.0.13.254로 / 설정해야 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. What can be the two possible reasons why HQ-ISFW-2 status stays Pending? (Choose two.)",
+      "A": "Upstream FortiGate IP must be set to 10.0.11.254.",
+      "B": "SAML Single Sign-On must be set to Manual.",
+      "C": "HQ-ISFW-2 must be authorized on HQ-ISFW.",
+      "D": "Management IP must be set to 10.0.13.254."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.57": {
+    "question": "HA override 설정이 / 활성화된 경우 / 기본 FortiGate 선출 프로세스는?",
+    "options": {
+      "A": "연결된 모니터링 포트 > 우선순위 > HA 가동 시간 > FortiGate 시리얼 번호",
+      "B": "연결된 모니터링 포트 > 우선순위 > 시스템 가동 시간 > FortiGate 시리얼 번호",
+      "C": "연결된 모니터링 포트 > HA 가동 시간 > 우선순위 > FortiGate 시리얼 번호",
+      "D": "연결된 모니터링 포트 > 시스템 가동 시간 > 우선순위 > FortiGate 시리얼 번호"
+    },
+    "_src": {
+      "question": "What is the primary FortiGate election process when the HA override setting is enabled?",
+      "A": "Connected monitored ports > Priority > HA uptime > FortiGate serial number",
+      "B": "Connected monitored ports > Priority > System uptime > FortiGate serial number",
+      "C": "Connected monitored ports > HA uptime > Priority > FortiGate serial number",
+      "D": "Connected monitored ports > System uptime > Priority > FortiGate serial number"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.58": {
+    "question": "전시물을 참조하라. / 네트워크 관리자가 / 두 FortiGate 장치 간의 / IPsec 터널을 문제 해결하고 있다. / 1단계 상태는 up이지만 / 2단계가 올라오지 않는다. / 2단계를 올리기 위한 / 두 가지 구성 변경은?",
+    "options": {
+      "A": "BR1-FGT에서 / Remote Address를 / 10.0.11.0/255.255.255.0으로 설정한다.",
+      "B": "HQ-NGFW에서 / Diffie-Hellman 그룹 2를 / 활성화한다.",
+      "C": "BR1-FGT에서 / Seconds를 / 43200으로 설정한다.",
+      "D": "HQ-NGFW에서 / Encryption을 / AES256으로 설정한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Which two configuration changes will bring phase 2 up? (Choose two.)",
+      "A": "On BR1-FGT, set Remote Address to 10.0.11.0/255.255.255.0.",
+      "B": "On HQ-NGFW, enable Diffie-Hellman Group 2.",
+      "C": "On BR1-FGT, set Seconds to 43200",
+      "D": "On HQ-NGFW, set Encryption to AES256."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.59": {
+    "question": "전시물을 참조하라. / 방화벽 정책을 확인하라. / 왜 방화벽 정책이 / EICAR 같은 잘 알려진 바이러스를 / 차단하지 않는가?",
+    "options": {
+      "A": "방화벽 정책의 / 작업이 / DENY로 설정되지 않았다.",
+      "B": "웹 필터가 / 활성화되지 않아 / 방화벽 정책이 / 안티바이러스 프로파일을 / 보완하지 않는다.",
+      "C": "방화벽 정책이 / 프록시 기반 검사 모드로 / 구성되지 않았다.",
+      "D": "방화벽 정책에 / 심층 콘텐츠 검사가 / 적용되지 않았다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Why would the firewall policy not block a well-known virus, for example EICAR?",
+      "A": "The action on the firewall policy is not set to DENY.",
+      "B": "Web filter is not enabled, so the firewall policy does not complement the antivirus profile.",
+      "C": "The firewall policy is not configured in proxy-based inspection mode.",
+      "D": "The firewall policy does not apply deep content inspection."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.60": {
+    "question": "전시물을 참조하라. / 원격 인증 서버의 / 부분 구성이 표시된다. / FortiGate 관리자가 / 이 구성을 필요로 하는 이유는?",
+    "options": {
+      "A": "Training 사용자 그룹만 / 인증하기 위해",
+      "B": "RADIUS 서버 시크릿을 / 설정하기 위해",
+      "C": "RADIUS 서버의 / Training OU와 / 인증 및 매핑하기 위해",
+      "D": "모든 FortiGate 사용자 그룹을 / 인증하기 위해"
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Why does the FortiGate administrator need this configuration?",
+      "A": "To authenticate only the Training user group.",
+      "B": "To set up a RADIUS server Secret.",
+      "C": "To authenticate and match the Training OU on the RADIUS server.",
+      "D": "To authenticate Any FortiGate user groups."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.61": {
+    "question": "수집기 에이전트가 / AD 폴링에 사용하는 / 세 가지 방법은?",
+    "options": {
+      "A": "NetAPI",
+      "B": "WMI",
+      "C": "WinSecLog",
+      "D": "DNS 역방향 조회",
+      "E": "FSSO REST API"
+    },
+    "_src": {
+      "question": "Which three methods are used by the collector agent for AD polling? (Choose three.)",
+      "A": "NetAPI",
+      "B": "WMI",
+      "C": "WinSecLog",
+      "D": "DNS reverse lookup",
+      "E": "FSSO REST API"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.62": {
+    "question": "수집기 에이전트가 / AD 폴링에 사용하는 / 세 가지 방법은?",
+    "options": {
+      "A": "NetAPI",
+      "B": "WMI",
+      "C": "WinSecLog",
+      "D": "DNS 역방향 조회",
+      "E": "FSSO REST API"
+    },
+    "_src": {
+      "question": "Which three methods are used by the collector agent for AD polling? (Choose three.)",
+      "A": "NetAPI",
+      "B": "WMI",
+      "C": "WinSecLog",
+      "D": "DNS reverse lookup",
+      "E": "FSSO REST API"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.63": {
+    "question": "관리자가 / FGCP 프로토콜을 사용하여 / HA 클러스터를 구성하려 한다. / 두 FortiGate 모두 / set override enable 명령으로 구성되어 있다. / FGCP 프로토콜이 / 기본 FortiGate를 선출하는 / 순서대로 / 기준을 배열하라.",
+    "options": {
+      "A": "[순서 배열 문제 - 이미지 참조]",
+      "B": "[순서 배열 문제 - 이미지 참조]",
+      "C": "[순서 배열 문제 - 이미지 참조]",
+      "D": "[순서 배열 문제 - 이미지 참조]"
+    },
+    "_src": {
+      "question": "An administrator wants to form an HA cluster using the FGCP protocol. Both FortiGate devices are configured with the set override enable command. Arrange the criteria in the order in which the FGCP protocol uses them to elect the primary FortiGate.",
+      "A": "Drag and drop ordering question",
+      "B": "",
+      "C": "",
+      "D": ""
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.64": {
+    "question": "전시물을 참조하라. / 관리자가 / HA 클러스터의 두 멤버를 / 동시에 구성했다. / 일주일 모니터링 후 / HA 장애 조치 성능을 / 확인하려 한다. / 관리자가 / 장애 조치를 강제하는 방법은?",
+    "options": {
+      "A": "관리자가 / HQ-NGFW-1의 / HA 가동 시간을 / 리셋해야 한다.",
+      "B": "관리자가 / HQ-NGFW-2에서 / override 파라미터를 / enable로 설정해야 한다.",
+      "C": "관리자가 / HQ-NGFW-2의 / HA 우선순위를 / 증가시켜야 한다.",
+      "D": "관리자가 / HQ-NGFW-1에서 / 모니터링된 port1을 / 다운시켜야 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. How can the administrator force a failover?",
+      "A": "The administrator must reset the HA uptime on HQ-NGFW-1.",
+      "B": "The administrator must set the parameter override to enable on HQ-NGFW-2.",
+      "C": "The administrator must increase the HA priority on HQ-NGFW-2.",
+      "D": "The administrator must set the monitored port1 to down on HQ-NGFW-1."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.65": {
+    "question": "SD-WAN의 / 세 가지 핵심 라우팅 원칙은?",
+    "options": {
+      "A": "기본적으로 / 포함된 SD-WAN 멤버가 / 목적지로의 유효한 경로가 없으면 / SD-WAN 규칙이 건너뛰어진다.",
+      "B": "SD-WAN 규칙은 / 다른 모든 유형의 경로보다 / 우선한다.",
+      "C": "일반 정책 경로가 / SD-WAN 규칙보다 / 우선한다.",
+      "D": "기본적으로 / 목적지로의 경로가 / 하나만 있으면 / SD-WAN 규칙이 건너뛰어진다.",
+      "E": "기본적으로 / 목적지로의 최적 경로가 / SD-WAN 멤버가 아니면 / SD-WAN 규칙이 건너뛰어진다."
+    },
+    "_src": {
+      "question": "What are three key routing principles in SD-WAN? (Choose three.)",
+      "A": "By default, SD-WAN rules are skipped if the included SD-WAN members do not have a valid route to the destination.",
+      "B": "SD-WAN rules have precedence over any other type of routes.",
+      "C": "Regular policy routes have precedence over SD-WAN rules.",
+      "D": "By default, SD-WAN rules are skipped if only one route to the destination is available.",
+      "E": "By default, SD-WAN rules are skipped if the best route to the destination is not an SD-WAN member."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.66": {
+    "question": "전시물을 참조하라. / download.com을 차단하면서 / 동일 카테고리의 다른 웹사이트는 / 허용해야 한다. / 요구사항을 충족하는 / 두 가지 솔루션은?",
+    "options": {
+      "A": "download.com에 대해 / 정적 URL 필터 항목을 구성하고 / Type을 Wildcard, Action을 Block으로 설정한다.",
+      "B": "download.com에 대해 / 웹 오버라이드 등급을 구성하고 / Malicious Websites를 / 하위 카테고리로 선택한다.",
+      "C": "*.download.com을 / 목적지 주소로 하는 / FQDN 주소 개체로 / Deny 작업의 / 별도 방화벽 정책을 구성한다.",
+      "D": "Freeware and Software Downloads 카테고리 / 작업을 Warning으로 설정한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. What are two solutions for satisfying the requirement to block download.com while allowing other websites in the same category? (Choose two.)",
+      "A": "Configure a static URL filter entry for download.com with Type and Action set to Wildcard and Block, respectively.",
+      "B": "Configure a web override rating for download.com and select Malicious Websites as the subcategory.",
+      "C": "Configure a separate firewall policy with action Deny and an FQDN address object for *.download.com as destination address.",
+      "D": "Set the Freeware and Software Downloads category Action to Warning."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.67": {
+    "question": "전시물을 참조하라. / 애플리케이션 센서와 / 방화벽 정책을 구현했다. / Google 애플리케이션에 / 접근할 수 없지만 / www.fortinet.com은 / 접근 가능하다. / 이 문제를 해결하려면 / 어떻게 해야 하는가?",
+    "options": {
+      "A": "검사 모드를 / Proxy-based로 변경한다.",
+      "B": "SSL 검사를 / deep-content-inspection으로 설정한다.",
+      "C": "애플리케이션 및 필터 오버라이드 섹션에서 / Google을 위로 이동하여 / 우선순위를 1로 설정한다.",
+      "D": "보안 프로파일의 / URL 카테고리에 / Google.com을 추가한다."
+    },
+    "_src": {
+      "question": "You cannot access any of the Google applications, but you are able to access www.fortinet.com. What would you do to resolve this issue?",
+      "A": "Change the Inspection mode to Proxy-based.",
+      "B": "Set SSL inspection to deep-content-inspection.",
+      "C": "Move up Google in the Application and Filter Overrides section to set its priority to 1.",
+      "D": "Add Google.com to the URL category in the security profile."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.68": {
+    "question": "FortiGate의 / ECMP(등비용 다중 경로) 구성에 관한 / 옳은 두 설명은?",
+    "options": {
+      "A": "SD-WAN이 활성화된 경우 / load-balance-mode 파라미터로 / 로드 밸런싱 알고리즘을 / 제어한다.",
+      "B": "SD-WAN이 비활성화된 경우 / v4-ecmp-mode 파라미터를 / volume-based로 구성할 수 있다.",
+      "C": "SD-WAN이 활성화된 경우 / 불균등한 거리와 우선순위 값의 / 경로를 ECMP의 / 일부로 구성할 수 있다.",
+      "D": "SD-WAN이 비활성화된 경우 / config system settings에서 / 로드 밸런싱 알고리즘을 / 구성한다."
+    },
+    "_src": {
+      "question": "Which two statements about equal-cost multi-path (ECMP) configuration on FortiGate are true? (Choose two.)",
+      "A": "If SD-WAN is enabled, you control the load balancing algorithm with the parameter load-balance-mode.",
+      "B": "If SD-WAN is disabled, you can configure the parameter v4-ecmp-mode to volume-based.",
+      "C": "If SD-WAN is enabled, you can configure routes with unequal distance and priority values to be part of ECMP.",
+      "D": "If SD-WAN is disabled, you configure the load balancing algorithm in config system settings."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.69": {
+    "question": "전시물을 참조하라. / FortiGate의 / Server Certificate SNI 검사 구성에서 / 이 설정이 미치는 영향은?",
+    "options": {
+      "A": "SNI가 CN 또는 SAN 필드와 / 일치하지 않으면 / FortiGate는 / URL 필터링을 위해 / 서버 인증서의 CN을 / 수락하고 사용한다.",
+      "B": "SNI가 CN 또는 SAN 필드와 / 일치하지 않으면 / FortiGate는 / 경고와 함께 / 연결을 수락한다.",
+      "C": "SNI가 CN 또는 SAN 필드와 / 일치하지 않으면 / FortiGate는 / 연결을 닫는다.",
+      "D": "SNI가 CN과 SAN 필드 모두와 / 일치하지 않으면 / FortiGate는 / 연결을 닫는다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. What would be the impact of these settings on the Server certificate SNI check configuration on FortiGate?",
+      "A": "FortiGate will accept and use the CN in the server certificate for URL filtering if the SNI does not match the CN or SAN fields.",
+      "B": "FortiGate will accept the connection with a warning if the SNI does not match the CN or SAN fields.",
+      "C": "FortiGate will close the connection if the SNI does not match the CN or SAN fields.",
+      "D": "FortiGate will close the connection if the SNI does not match the CN and SAN fields"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.70": {
+    "question": "관리자가 / 보안 패브릭의 / 루트 FortiGate(HQ-NGFW-1)에서 / 새 주소 개체를 생성했다. / 동기화 후 / 다운스트림 FortiGate(HQ-ISFW)에서 / 이 개체를 사용할 수 없다. / 관리자가 / 주소 개체를 동기화하려면 / 어떻게 해야 하는가?",
+    "options": {
+      "A": "HQ-ISFW(다운스트림)에서 / csf 설정을 / set configuration-sync local로 변경한다.",
+      "B": "HQ-ISFW(다운스트림)에서 / csf 설정을 / set saml-configuration-sync default로 변경한다.",
+      "C": "HQ-NGFW-1(루트)에서 / csf 설정을 / set fabric-object-unification default로 변경한다.",
+      "D": "두 장치 모두에서 / csf 설정을 / set downstream-access enable로 변경한다."
+    },
+    "_src": {
+      "question": "An administrator creates a new address object on the root FortiGate (HQ-NGFW-1) in the Security Fabric. After synchronization, this object is not available on the downstream FortiGate (HQ-ISFW). What must the administrator do to synchronize the address object?",
+      "A": "Change the csf setting on HQ-ISFW (downstream) to set configuration-sync local.",
+      "B": "Change the csf setting on HQ-ISFW (downstream) to set saml-configuration-sync default.",
+      "C": "Change the csf setting on HQ-NGFW-1 (root) to set fabric-object-unification default.",
+      "D": "Change the csf setting on both devices to set downstream-access enable."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.71": {
+    "question": "관리자가 / 섀도우 IT 가시성 문제를 해결하고 / 사용자가 / 승인 없이 조직 외부로 / 민감한 파일을 전송하는 것을 / 방지하려 한다. / 어느 FortiSASE 방법을 / 구현해야 하는가?",
+    "options": {
+      "A": "보안 SD-WAN 접근(SSD-WAN)",
+      "B": "보안 프라이빗 접근(SPA)",
+      "C": "보안 SaaS 접근(SSA)",
+      "D": "보안 인터넷 접근(SIA)"
+    },
+    "_src": {
+      "question": "An administrator wants to address shadow IT visibility challenges and prevent users from sending sensitive files outside the organization without proper approval. Which FortiSASE method should the administrator implement to achieve these goals?",
+      "A": "Secure SD-WAN access (SSD-WAN)",
+      "B": "Secure private access (SPA)",
+      "C": "Secure SaaS access (SSA)",
+      "D": "Secure internet access (SIA)"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.72": {
+    "question": "관리자가 / IPS 센서를 구성하여 / 특정 시간 동안 / 지정된 횟수만큼 / 시그니처를 트리거하는 / 트래픽을 차단하려 한다. / 이 목표를 달성하는 방법은?",
+    "options": {
+      "A": "IPS 그룹 시그니처를 사용하고 / rate-mode 60을 설정한다.",
+      "B": "IPS 패킷 로깅 옵션과 / 주기적 필터 옵션을 사용한다.",
+      "C": "IPS 시그니처를 사용하고 / rate-mode periodical 옵션을 사용한다.",
+      "D": "IPS 필터를 사용하고 / rate-mode periodical 옵션을 사용한다."
+    },
+    "_src": {
+      "question": "An administrator wanted to configure an IPS sensor to block traffic that triggers the signature set number of times during a specific time period. How can the administrator achieve the objective?",
+      "A": "Use IPS group signatures, set rate-mode 60.",
+      "B": "Use IPS packet logging option with periodical filter option.",
+      "C": "Use IPS signatures, rate-mode periodical option.",
+      "D": "Use IPS filter, rate-mode periodical option."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.73": {
+    "question": "FortiGate와 FortiAnalyzer 간의 / 연결을 구성할 때 / 신뢰할 수 있는 트래픽이 / 활성화되어 있음을 / 나타내는 옵션은?",
+    "options": {
+      "A": "연결 상태에 / 녹색 체크 아이콘이 표시된다.",
+      "B": "인터페이스 상태가 / up으로 설정되어 있다.",
+      "C": "연결 설정에 / 자물쇠 아이콘이 나타난다.",
+      "D": "로깅 모드가 / 실시간으로 설정되어 있다."
+    },
+    "_src": {
+      "question": "When configuring the connection between FortiGate and FortiAnalyzer, which option indicates that reliable traffic is enabled?",
+      "A": "The connection status shows a green check icon",
+      "B": "The interface status is set to up",
+      "C": "A padlock icon appears in the connection settings",
+      "D": "The logging mode is set to real-time"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.74": {
+    "question": "FortiGate를 FSSO용으로 구성했다. / 사용자가 Windows에 / 성공적으로 로그인했지만 / 인터넷 접근이 / 거부된다. / 관리자가 / 먼저 확인해야 할 것은?",
+    "options": {
+      "A": "사용자가 / 올바른 AD 그룹에 / 할당되었는지 여부",
+      "B": "SSL 암호화를 위한 / FortiGate 방화벽 정책 설정",
+      "C": "사용자 IP 주소에 대한 / FortiGate FSSO 활성 사용자 목록",
+      "D": "실패한 로그인 시도에 대한 / Windows 이벤트 뷰어"
+    },
+    "_src": {
+      "question": "You have configured the FortiGate device for FSSO. A user is successful in log-in to Windows, but their access to the internet is denied. What should the administrator check first?",
+      "A": "Whether the user is assigned to the correct AD group.",
+      "B": "The FortiGate firewall policy settings for SSL decryption.",
+      "C": "The FortiGate FSSO active users list for user's IP address.",
+      "D": "The Windows event viewer for failed login attempts."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.75": {
+    "question": "멀티 WAN 설정에서 / FortiGate를 구성할 때 / 관리자가 / 인터페이스에서 / 세션 보존을 활성화하는 이유는?",
+    "options": {
+      "A": "WAN 링크가 실패할 때 / FortiGate가 / 모든 활성 세션의 / 인터페이스를 동적으로 변경하도록 허용하기 위해",
+      "B": "소스 NAT가 활성화되지 않은 / 모든 세션이 / 항상 기본 WAN 링크를 / 사용하도록 보장하기 위해",
+      "C": "WAN 링크가 변경될 때 / 사용자가 다시 인증하도록 / 강제하여 / 보안을 향상시키기 위해",
+      "D": "경로 변경이 발생하더라도 / 기존 SSL VPN 연결이 / 동일한 인터페이스에 / 유지되도록 보장하기 위해"
+    },
+    "_src": {
+      "question": "When configuring a FortiGate in a multi-WAN setup, why would an administrator enable session preservation on an interface?",
+      "A": "To allow the FortiGate to dynamically change interfaces for all active sessions when a WAN link fails",
+      "B": "To make sure all sessions without source NAT enabled always use the primary WAN link",
+      "C": "To improve security by forcing users to authenticate again when the WAN link changes",
+      "D": "To ensure that existing SSL VPN connections remain on the same interface even if route changes occur"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.76": {
+    "question": "전시물을 참조하라. / FTP, HTTP, HTTPS를 통해 / 다운로드된 파일에 대한 / 안티바이러스 프로파일을 / 구현하도록 요청받았다. / HTTP와 FTP는 성공하지만 / HTTPS에서는 / FortiGate가 / 파일 다운로드를 / 차단하지 않는다. / 원인은?",
+    "options": {
+      "A": "안티바이러스 프로파일의 / 기능 세트가 / Flow-based로 설정되지 않았다.",
+      "B": "방화벽 정책에서 / 웹 필터가 / 활성화되지 않아 / 안티바이러스 프로파일을 / 보완하지 않는다.",
+      "C": "방화벽 정책의 / 작업이 / deny로 설정되지 않았다.",
+      "D": "방화벽 정책의 / SSL 검사 모드가 / deep content inspection이 / 아니다."
+    },
+    "_src": {
+      "question": "You are asked to implement an antivirus profile for files downloaded through FTP, HTTP, and HTTPS. FortiGate does not block the file download over HTTPS. What could be the cause?",
+      "A": "The feature set in the antivirus profile is not set to Flow-based.",
+      "B": "Web filter is not enabled on the firewall policy to complement the antivirus profile.",
+      "C": "The action on the firewall policy is not set to deny.",
+      "D": "The SSL inspection mode in the firewall policy is not deep content inspection."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.77": {
+    "question": "네트워크 관리자가 / 안티바이러스와 / SSL 검사 프로파일을 / 방화벽 정책에 활성화했다. / HTTP를 통한 EICAR 파일 다운로드 시 / FortiGate가 바이러스를 탐지하고 / 파일을 차단한다. / HTTPS를 통한 동일 파일 다운로드 시 / FortiGate가 탐지하지 못한다. / FortiGate의 바이러스 탐지 실패의 / 두 가지 이유는?",
+    "options": {
+      "A": "선택된 SSL 검사 프로파일에 / 인증서 검사가 / 활성화되어 있다.",
+      "B": "웹사이트가 / SSL 검사에서 / 제외되어 있다.",
+      "C": "EICAR 테스트 파일이 / 프로토콜 옵션의 / 과크기 제한을 / 초과한다.",
+      "D": "브라우저가 / FortiGate 자체 서명 CA 인증서를 / 신뢰하지 않는다."
+    },
+    "_src": {
+      "question": "A network administrator enabled antivirus and selected an SSL inspection profile on a firewall policy. FortiGate does not detect the virus and does not block the file when downloading through HTTPS. What are two reasons for the failed virus detection by FortiGate? (Choose two.)",
+      "A": "The selected SSL inspection profile has certificate inspection enabled.",
+      "B": "The website is exempted from SSL inspection.",
+      "C": "The EICAR test file exceeds the protocol options oversize limit.",
+      "D": "The browser does not trust the FortiGate self-signed CA certificate."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.78": {
+    "question": "에이전트 없는 / SWG 엔드포인트를 / SIA를 위해 / 온보딩하고 있다. / 사용자의 비웹 트래픽에는 / 어떤 일이 발생하는가?",
+    "options": {
+      "A": "모든 비웹 트래픽은 / FortiSASE를 / 우회한다.",
+      "B": "엔드포인트는 / 스플릿 터널링을 사용하여 / 비웹 트래픽을 / FortiSASE로 / 리디렉션한다.",
+      "C": "FortiSASE는 / FWaaS를 사용하여 / 비웹 트래픽을 / 리디렉션한다.",
+      "D": "FortiSASE는 / SWG를 사용하여 / 비웹 트래픽을 / FortiExtender로 / 리디렉션한다."
+    },
+    "_src": {
+      "question": "You are onboarding an agentless, secure web gateway (SWG) endpoint for secure internet access (SIA). What will happen to the user's nonweb traffic?",
+      "A": "All the nonweb traffic will bypass FortiSASE.",
+      "B": "The endpoint will use split tunneling to redirect nonweb traffic to FortiSASE.",
+      "C": "FortiSASE will use Firewall-as-a-Service (FWaaS) to redirect nonweb traffic.",
+      "D": "FortiSASE will use SWG to redirect nonweb traffic to FortiExtender."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.79": {
+    "question": "전시물을 참조하라. / 관리자가 / 정적 경로의 목적지로 사용할 / 새 방화벽 주소를 생성했다. / 새 정적 경로의 / Destination 필드에서 / 새 주소를 선택할 수 없는 이유는?",
+    "options": {
+      "A": "새 정적 경로에서 / 관리자가 / Named Address를 선택해야 한다.",
+      "B": "새 방화벽 주소에서 / FQDN 주소를 / 먼저 해석해야 한다.",
+      "C": "새 정적 경로에서 / 관리자가 / 먼저 인터페이스를 port2로 설정해야 한다.",
+      "D": "새 방화벽 주소에서 / 라우팅 구성을 / 활성화해야 한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Why is the administrator not able to select the new address in the Destination field of the new static route?",
+      "A": "In the new static route, the administrator must select Named Address.",
+      "B": "In the new firewall address, the FQDN address must first be resolved.",
+      "C": "In the new static route, the administrator must first set the interface to port2.",
+      "D": "In the new firewall address, Routing configuration must be enabled."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.80": {
+    "question": "전시물을 참조하라. / Google 애플리케이션에 접근할 수 없지만 / www.fortinet.com은 접근 가능하다. / 이 문제를 해결하기 위한 / 두 가지 조치는?",
+    "options": {
+      "A": "SSL 검사를 / deep-content inspection으로 설정한다.",
+      "B": "애플리케이션 및 필터 오버라이드 섹션에서 / Google을 위로 이동하여 / 우선순위를 1로 설정한다.",
+      "C": "보안 프로파일의 / URL 카테고리에 / \"Google\".com을 추가한다.",
+      "D": "검사 모드를 / Flow-based로 변경한다.",
+      "E": "애플리케이션 및 필터 오버라이드 섹션에서 / Google의 작업을 / Allow로 설정한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. Which two actions would you take to resolve the issue? (Choose two.)",
+      "A": "Set SSL inspection to deep-content inspection.",
+      "B": "Move up Google in the Application and Filter Overrides section to set its priority to 1.",
+      "C": "Add \"Google\".com to the URL category in the security profile.",
+      "D": "Change the Inspection mode to Flow-based",
+      "E": "Set the action for Google in the Application and Filter Overrides section to Allow"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.81": {
+    "question": "관리자가 / 기본 설정을 사용하여 / FortiGate에서 / FortiGuard 서버를 / DNS 서버로 구성했다. / FortiGuard 서버에 대한 / DNS 연결에 관해 / 옳은 것은?",
+    "options": {
+      "A": "UDP 53을 사용한다.",
+      "B": "HTTPS를 통한 DNS를 사용한다.",
+      "C": "TLS를 통한 DNS를 사용한다.",
+      "D": "UDP 8888을 사용한다."
+    },
+    "_src": {
+      "question": "An administrator configures FortiGuard servers as DNS servers on FortiGate using default settings. What is true about the DNS connection to a FortiGuard server?",
+      "A": "It uses UDP 53.",
+      "B": "It uses DNS over HTTPS.",
+      "C": "It uses DNS over TLS.",
+      "D": "It uses UDP 8888."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.82": {
+    "question": "전시물을 참조하라. / IPS 프로파일 시그니처 설정이 표시된다. / IPS 센서 프로파일에 / FTP.Login.Failed 시그니처를 추가할 때 / 시그니처에 대해 / 결론을 내릴 수 있는 것은?",
+    "options": {
+      "A": "시그니처 설정이 / 사용자 정의 등급 임계값을 / 사용한다.",
+      "B": "FortiGate는 / 이 낮은 심각도의 / 시그니처 패킷을 허용하고 / 로그를 생성한다.",
+      "C": "FortiGate는 / 시그니처와 일치하는 / 패킷의 로컬 복사본을 / 저장한다.",
+      "D": "시그니처 설정에는 / 다른 시그니처 그룹이 / 포함된다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. What can you conclude about the signature when adding the FTP.Login.Failed signature to the IPS Sensor profile?",
+      "A": "The signature setting uses a custom rating threshold.",
+      "B": "FortiGate allows this low severity signature packet and creates a log.",
+      "C": "FortiGate stores a local copy of the packet that matches the signature.",
+      "D": "The signature setting includes a group of other signatures."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.83": {
+    "question": "애플리케이션 컨트롤 프로파일을 구성하고 / P2P 트래픽을 차단으로 설정하여 / 방화벽 정책에 적용했다. / 알려진 포트의 P2P 트래픽이 / 차단되지 않고 통과한다. / 이 문제를 해결하기 위해 / 확인할 FortiGate 설정은?",
+    "options": {
+      "A": "UDP 기반 애플리케이션의 / 대체 메시지",
+      "B": "네트워크 프로토콜 적용",
+      "C": "애플리케이션 및 필터 오버라이드",
+      "D": "FortiGuard 카테고리 등급"
+    },
+    "_src": {
+      "question": "You have configured an application control profile, set peer-to-peer traffic to Block under the Categories tab, and applied it to the firewall policy. However, you peer-to-peer traffic on known ports is passing through the FortiGate without being blocked. What FortiGate settings should you check to resolve this issue?",
+      "A": "Replacement Messages for UDP-based Applications",
+      "B": "Network Protocol Enforcement",
+      "C": "Application and Filter Overrides",
+      "D": "FortiGuard category ratings"
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.84": {
+    "question": "전시물을 참조하라. / FortiGate에 / Sales와 Engineering이 / 동일한 웹 서버에 접근하는 / 두 개의 별도 방화벽 정책이 있다. / 두 정책을 하나로 통합하려면 / 관리자가 / 어떤 조치를 취해야 하는가?",
+    "options": {
+      "A": "단일 방화벽 정책에서 / port1과 port2 서브넷을 / 선택한다.",
+      "B": "port1과 port2를 포함하는 / 집계 인터페이스를 생성하여 / 단일 방화벽 정책을 만든다.",
+      "C": "단일 방화벽 정책에서 / port1과 port2를 / any 인터페이스로 대체한다.",
+      "D": "다중 인터페이스 정책을 활성화하여 / 동일한 방화벽 정책에서 / port1과 port2를 / 선택한다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Which action must the administrator perform to consolidate the two policies into one?",
+      "A": "Select port1 and port2 subnets in a single firewall policy.",
+      "B": "Create an Aggregate interface that includes port1 and port2 to create a single firewall policy.",
+      "C": "Replace port1 and port2 with the any interface in a single firewall policy.",
+      "D": "Enable Multiple Interface Policies to select port1 and port2 in the same firewall policy."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.85": {
+    "question": "전시물을 참조하라. / 시스템 성능 출력과 / 높은 메모리 사용 임계값의 / 기본 구성이 표시된다. / 시스템 성능 출력에 따라 / 가능한 두 가지 결과는?",
+    "options": {
+      "A": "FortiGate가 / 새 세션을 / 드롭한다.",
+      "B": "관리자는 / 콘솔 포트를 통해서만 / FortiGate에 접근할 수 있다.",
+      "C": "관리자가 / 구성을 / 변경할 수 있다.",
+      "D": "FortiGate가 / 절약 모드(conserve mode)에 / 진입했다."
+    },
+    "_src": {
+      "question": "Refer to the exhibits. Based on the system performance output, what are the two possible outcomes? (Choose two.)",
+      "A": "FortiGate drops new sessions.",
+      "B": "Administrators can access FortiGate only through the console port.",
+      "C": "Administrators can change the configuration.",
+      "D": "FortiGate has entered conserve mode."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.86": {
+    "question": "전시물을 참조하라. / 전시물의 로그에서 / 결론을 내릴 수 있는 것은?",
+    "options": {
+      "A": "IPS 소켓 버퍼가 / 가득 차 있고 / IPS 엔진이 / 새 세션을 생성하는 데 / 더 많은 메모리가 필요하다.",
+      "B": "IPS 소켓 버퍼가 / 가득 차 있고 / IPS 엔진이 / 패킷을 디코딩할 수 없다.",
+      "C": "IPS 스캔이 / IPS 진단 명령의 / 바이패스 모드 옵션 5로 / 일시 중지되었다.",
+      "D": "IPS 세션 스캔이 / 더티 플래그로 인해 / 일시 중지되고 / 패킷을 재평가하고 있다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. What can you conclude from the log shown in the exhibit?",
+      "A": "The IPS socket buffer is full and IPS engine needs more memory to create new sessions.",
+      "B": "The IPS socket buffer is full and IPS engine cannot decode a packet.",
+      "C": "The IPS scan is paused by the IPS diagnostic command with bypass mode option 5.",
+      "D": "The IPS session scan is paused and reevaluating the packet because of a dirty flag."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.87": {
+    "question": "전시물을 참조하라. / FortiGate 장치가 / 패킷을 드롭한 이유는?",
+    "options": {
+      "A": "기본 암묵적 방화벽 정책과 / 일치했다.",
+      "B": "RPF 검사에 / 실패했다.",
+      "C": "DENY 작업이 있는 / 명시적으로 구성된 / 방화벽 정책과 / 일치했다.",
+      "D": "다음 홉 IP에 / 도달할 수 없다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Why did the FortiGate device drop the packet?",
+      "A": "It matched the default implicit firewall policy.",
+      "B": "It failed the RPF check.",
+      "C": "It matched an explicitly configured firewall policy with the action DENY.",
+      "D": "It cannot reach the next-hop IP."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.88": {
+    "question": "관리자가 / 다음 설정을 구성했다. / (ses-denied-traffic enable, block-session-timer 30) / 이 구성의 / 두 가지 결과는?",
+    "options": {
+      "A": "거부된 트래픽에 의해 / 생성되는 로그 수가 / 줄어든다.",
+      "B": "거부된 트래픽에 대한 / 세션이 생성된다.",
+      "C": "거부된 사용자는 / 30분 동안 / 차단된다.",
+      "D": "거부된 트래픽에 대해 / 세션 헬퍼가 / 비활성화된다."
+    },
+    "_src": {
+      "question": "An administrator has configured ses-denied-traffic enable and block-session-timer 30. What are the two results of this configuration? (Choose two.)",
+      "A": "The number of logs generated by denied traffic is reduced.",
+      "B": "A session for denied traffic is created.",
+      "C": "Denied users are blocked for 30 minutes.",
+      "D": "Session helpers are disabled for denied traffic."
+    }
+  },
+  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.89": {
+    "question": "전시물을 참조하라. / 이 부분 구성에 따라 / FortiGate가 / 절약 모드(conserve mode)에 진입할 때 / 가능한 두 가지 결과는?",
+    "options": {
+      "A": "FortiGate는 / 검사가 필요한 / 새 세션을 / 드롭한다.",
+      "B": "관리자는 / 새 세션을 허용하기 위해 / FortiGate를 재시작해야 한다.",
+      "C": "관리자는 / 구성을 / 변경할 수 없다.",
+      "D": "FortiGate는 / 격리 작업을 / 건너뛴다."
+    },
+    "_src": {
+      "question": "Refer to the exhibit. Based on this partial configuration, what are the two possible outcomes when FortiGate enters conserve mode? (Choose two.)",
+      "A": "FortiGate drops new sessions requiring inspection.",
+      "B": "Administrators must restart FortiGate to allow new sessions.",
+      "C": "Administrators cannot change the configuration.",
+      "D": "FortiGate skips quarantine actions."
+    }
   }
 }

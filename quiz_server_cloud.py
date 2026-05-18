@@ -1047,26 +1047,23 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
             next_has_qs = _page_has_questions(doc[next_pg_idx]) if next_pg_idx < doc.page_count else True
 
             if no_image_in_range:
-                # Preferred order depends on whether this is the 2nd question on the page.
-                # When a page has [NO.A, NO.B]:
-                #   - NO.A's exhibit is on the PREV page (dedicated exhibit page)
-                #   - NO.B's exhibit is on the NEXT page (not the prev which belongs to NO.A)
-                # So if is_second_on_page: check NEXT first.
-                # Otherwise: check PREV first if it has no questions (dedicated exhibit page).
+                # exhibit이 현재 페이지에 없는 경우:
+                # 문제가 없는 페이지(전용 exhibit 페이지)만 탐색한다.
+                # 다른 문제가 있는 인접 페이지는 절대 사용하지 않음 —
+                # 그 페이지의 이미지는 해당 페이지 문제에 귀속되므로
+                # 잘못 가져올 위험이 크다.
                 if is_second_on_page:
-                    # This question's exhibit is on the NEXT page
-                    if next_pg_idx < total_pages:
+                    # 2번째 이후 문제: exhibit은 NEXT 전용 페이지에 있을 가능성이 높음
+                    if next_pg_idx < total_pages and not next_has_qs:
                         candidates.append(('next', next_pg_idx))
-                    if prev_pg_idx >= 0:
+                    if prev_pg_idx >= 0 and not prev_has_qs:
                         candidates.append(('prev', prev_pg_idx))
                 else:
-                    # Original logic: PREV-first if prev is a dedicated exhibit page
+                    # 1번째 문제: exhibit은 PREV 전용 페이지에 있을 가능성이 높음
                     if not prev_has_qs and prev_pg_idx >= 0:
                         candidates.append(('prev', prev_pg_idx))
-                    if next_pg_idx < total_pages:
+                    if not next_has_qs and next_pg_idx < total_pages:
                         candidates.append(('next', next_pg_idx))
-                    if prev_has_qs and prev_pg_idx >= 0:
-                        candidates.append(('prev', prev_pg_idx))
             else:
                 if page_num > 1:
                     candidates.append(('prev', prev_pg_idx))

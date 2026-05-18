@@ -4696,8 +4696,7 @@
         "A": "Each member of the Security Fabric maintains the shared Security Fabric map.",
         "B": "Only the root FortiGate collects network topology information and forwards it to FortiAnalyzer.",
         "C": "FortiGate uses the FortiTelemetry protocol to communicate with FortiAnalyzer.",
-        "D": "Each FortiGate device in the Security Fabric must have bidirectional FortiTelemetry connectivity.",
-        "E": "Only FortiGate devices with configuration-sync sel to Local receive and synchronize the global"
+        "D": "Each FortiGate device in the Security Fabric must have bidirectional FortiTelemetry connectivity."
       }
     }
   },
@@ -5716,6 +5715,15 @@
       "B": "FortiGate_B의 / BGP 섹션에서 / Redistribute Connected 활성화",
       "C": "FortiGate_B의 / BGP Networks 섹션에 / 172.16.1.248/30 프리픽스 추가",
       "D": "FortiGate_B에서 / 172.16.1.248/30에 대한 / BGP route map out 설정"
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\nThe routing tables of FortiGate_A and FortiGate_B are shown. FortiGate_A and FortiGate_B are in the\nsame autonomous system.\nThe administrator wants to dynamically add only route 172.16.1.248/30 on FortiGate_A.\nWhat must the administrator configure?",
+      "options": {
+        "A": "A BGP route map in for 172.16.1.248/30 on FortiGate_A",
+        "B": "Enable Redistribute Connected in the BGP section on FortiGate_",
+        "C": "The prefix 172.16.1.248/30 in the BGP Networks section on FortiGate_B",
+        "D": "A BGP route map out for 172.16.1.248/30 on FortiGate_B"
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.4": {
@@ -5725,6 +5733,15 @@
       "B": "update-source",
       "C": "ibgp-enforce-multihop",
       "D": "recursive-next-hop"
+    },
+    "_src": {
+      "question": "You must configure a loopback as a BGP source to connect to the ISP. Which two commands must you use to establish the connection? (Choose two.)",
+      "options": {
+        "A": "ebgp-enforce-multihop",
+        "B": "update-source",
+        "C": "ibgp-enforce-multihop",
+        "D": "recursive-next-hop"
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.9": {
@@ -5734,6 +5751,15 @@
       "B": "특정 VLAN 내에서 / 브로드캐스트 도메인을 할당하여 / 트래픽을 격리한다",
       "C": "지정된 VLAN에서 오는 / 트래픽만 관리하도록 / 인터페이스를 제한한다",
       "D": "인터페이스에 / 고유한 도메인 ID를 할당하여 / 여러 도메인에서 동작하게 한다"
+    },
+    "_src": {
+      "question": "What does the command set forward-domain < domain_ID > in a transparent VDOM interface\ndo?",
+      "options": {
+        "A": "It configures the interface to prioritize traffic based on the domain ID, enhancing quality of service for specified VLANs.",
+        "B": "It isolates traffic within a specific VLAN by assigning a broadcast domain to an interface based on the VLAN ID.",
+        "C": "It restricts the interface to managing traffic only from the specified VLAN, effectively segregating network traffic.",
+        "D": "It assigns a unique domain ID to the interface, allowing it to operate across multiple VLANs within the same VDOM."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.13": {
@@ -5743,6 +5769,15 @@
       "B": "FortiGate_B의 / BGP 섹션에서 / Redistribute Connected 활성화",
       "C": "FortiGate_B의 / BGP Networks 섹션에 / 172.16.1.248/30 프리픽스 추가",
       "D": "FortiGate_B에서 / 172.16.1.248/30에 대한 / BGP route map out 설정"
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\nThe routing tables of FortiGate_A and FortiGate_B are shown. FortiGate_A and FortiGate_B are in the\nsame autonomous system.\nThe administrator wants to dynamically add only route 172.16.1.248/30 on FortiGate_A.\nWhat must the administrator configure?",
+      "options": {
+        "A": "A BGP route map in for 172.16.1.248/30 on FortiGate_A",
+        "B": "Enable Redistribute Connected in the BGP section on FortiGate_",
+        "C": "The prefix 172.16.1.248/30 in the BGP Networks section on FortiGate_B",
+        "D": "A BGP route map out for 172.16.1.248/30 on FortiGate_B 6IT Certification Guaranteed, The Easy Way!"
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.14": {
@@ -5752,6 +5787,15 @@
       "B": "단편화된 패킷은 / 암호화되어야 하며 / 애플리케이션 연결을 위해 조정이 필요하다",
       "C": "FortiGate는 / do not fragment 비트를 존중하고 / 패킷이 드롭된다 / 사용자는 MTU를 줄여야 한다",
       "D": "path MTU discovery가 / 다르게 동작하므로 / 사용자가 다른 트래픽을 발생시켜야 한다"
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\nThe configuration of a user ' s Windows PC, which has a default MTU of 1500 bytes, along with\nFortiGate interfaces set to an MTU of 1000 bytes, and the results of PC1 pinging server 172.16.0.254\nare shown.\nWhy is the user in Windows PC1 unable to ping server 172.16.0.254 and is seeing the message:\nPacket needs to be fragmented but DF set?",
+      "options": {
+        "A": "Option ip.flags.mf must be set to enable on FortiGate. The user has to adjust the ping MTU to 1000 to succeed.",
+        "B": "Fragmented packets must be encrypted. To connect any application successfully, the user must install the Fortinet_CA certificate in the Microsoft Management Console.",
+        "C": "FortiGate honors the do not fragment bit and the packets are dropped. The user has to adjust the ping MTU to 972 to succeed.",
+        "D": "The user must trigger different traffic because path MTU discovery techniques do not recognize ICMP payloads."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.15": {
@@ -5761,6 +5805,15 @@
       "B": "SSL/SSH Inspection Profile의 / Protocol Port Mapping 섹션에 / 포트 8443을 추가로 입력한다",
       "C": "웹 필터 프로파일에서 / 비표준 포트를 분석하려면 / SSL/SSH에서 TLSv1.3을 사용한다",
       "D": "SNI 검사를 활성화하여 / 관리자가 / 비표준 포트의 트래픽을 차단할 수 있다"
+    },
+    "_src": {
+      "question": "A company ' s guest internet policy, operating in proxy mode, blocks access to Artificial\nIntelligence Technology sites using FortiGuard. However, a guest user accessed a page in this\ncategory using port 8443.\nWhich configuration changes are required for FortiGate to analyze HTTPS traffic on nonstandard\nports like\n8443 when full SSL inspection is active in the guest policy?",
+      "options": {
+        "A": "Add a URL wildcard domain to the website CA certificate and use it in the SSL/SSH Inspection Profile.",
+        "B": "In the Protocol Port Mapping section of the SSL/SSH Inspection Profile, enter 443, 8443 to analyze both standard (443) and non-standard (8443) HTTPS ports.",
+        "C": "To analyze nonstandard ports in web filter profiles, use TLSv1.3 in the SSL/SSH Inspection Profile.",
+        "D": "Administrators can block traffic on nonstandard ports by enabling the SNI check in the SSL/SSH Inspection Profile."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.31": {
@@ -5770,6 +5823,15 @@
       "B": "이 트래픽에 / web filtering 프로파일을 / 효과적으로 적용할 수 있다",
       "C": "보안 프로파일 적용을 위해 / SAN(subject alternative name)이 / 필요하다",
       "D": "클라이언트는 / TLS 버전 1.2와 1.3만 / 지원한다"
+    },
+    "_src": {
+      "question": "Refer to the exhibit. The packet capture output of a client hello message is shown.\nYou are updating a firewall policy that includes SSL certificate inspection. You are capturing packets\nfrom the traffic passing through this firewall policy.\nWhich two statements about the packet capture are correct? (Choose two.)",
+      "options": {
+        "A": "You can effectively apply an antivirus security profile to this traffic.",
+        "B": "You can effectively apply a web filtering profile to this traffic.",
+        "C": "The subject alternative name (SAN) is necessary to apply security profiles.",
+        "D": "The client supports only TLS versions 1.2 and 1.3."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.43": {
@@ -5779,6 +5841,15 @@
       "B": "FortiGate는 / SD-WAN 타입 인터페이스를 사용하여 / 하나의 FortiSwitch에 연결하고 있다",
       "C": "연결은 / FortiLink 인터페이스를 / 사용하고 있다",
       "D": "FortiGate와 FortiSwitch 모두에서 / STP 또는 RSTP를 / 활성화해야 한다"
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\nA LAN interface connected from FortiGate to two FortiSwitch devices is shown.\nWhich two statements about the LAN interface connection shown in the exhibit are correct? (Choose\ntwo.)",
+      "options": {
+        "A": "The LAN interface must use an 802.3ad type interface.",
+        "B": "FortiGate is using an SD-WAN-type interface to connect to one FortiSwitch device with MCLAG.",
+        "C": "The connection is using a FortiLink interface.",
+        "D": "You must enable Spanning Tree Protocol (STP) or Rapid STP (RSTP) on FortiGate and FortiSwitch to avoid layer 2 loopbacks."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.49": {
@@ -5788,6 +5859,15 @@
       "B": "FortiGate는 / OSPF ECMP를 지원한다",
       "C": "FortiGate는 / area 0.0.0.5에 있다",
       "D": "FortiGate는 / 외부 라우팅 정보를 주입할 수 있다"
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\nThe partial output of an OSPF command is shown. You are checking the OSPF status of a FortiGate\ndevice when you receive the output shown in the exhibit. Based on the output, which two\nstatements about FortiGate are correct? (Choose two answers)",
+      "options": {
+        "A": "FortiGate is a backup designated router.",
+        "B": "FortiGate supports OSPF ECMP. C. FortiGate is in the area 0.0.0.5.",
+        "D": "FortiGate can inject external routing information.",
+        "C": "FortiGate is in the area 0.0.0.5."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.54": {
@@ -5797,6 +5877,15 @@
       "B": "FortiGate는 / backup designated router이다",
       "C": "FortiGate는 / 외부 라우팅 정보를 주입한다",
       "D": "FortiGate는 / 여러 영역에 연결되어 있다"
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\nThe partial output of an OSPF command is shown. While checking the OSPF status of FortiGate, you\nreceive the output shown in the exhibit. Based on the output, which two statements about FortiGate\nare correct?\n(Choose two answers)",
+      "options": {
+        "A": "FortiGate has OSPF ECMP enabled.",
+        "B": "FortiGate is a backup designated router.",
+        "C": "FortiGate injects external routing information.",
+        "D": "FortiGate is connected to multiple areas."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.66": {
@@ -5806,6 +5895,15 @@
       "B": "downstream FortiGate가 / AdminSSO에 대한 / SSO administrator 계정을 생성한다 / (다른 특정 권한으로)",
       "C": "사용자는 / AdminSSO에 대한 / administrator 계정을 생성하라는 / 프롬프트를 받는다",
       "D": "downstream FortiGate는 / root FortiGate에 의존하며 / administrator 계정을 생성하지 않는다"
+    },
+    "_src": {
+      "question": "Refer to the exhibits. The system administrator settings configured on a root FortiGate and the Security Fabric settings\nconfigured on a downstream FortiGate are shown.\nWhen prompted to sign in with Security Fabric to the downstream FortiGate, a user enters the single\nsign-on (SSO) provider credentials.\nWhat is the result?",
+      "options": {
+        "A": "The downstream FortiGate creates an SSO administrator account for AdminSSO with the super_admin profile.",
+        "B": "The downstream FortiGate creates an SSO administrator account for AdminSSO with the super_admin_readonly profile.",
+        "C": "The user is prompted to create an administrator account for AdminSSO.",
+        "D": "The downstream FortiGate relies on the root FortiGate and does not create an administrator account."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.72": {
@@ -5815,6 +5913,15 @@
       "B": "서브넷 10.0.11.0/24가 / FortiGate_B 영역에 / 없다",
       "C": "FortiGate_A가 / FortiGate_B에 / 하나의 외부 경로만 광고한다",
       "D": "FortiGate_B에 표시된 / 100.75.5.1/32 경로가 / 가장 낮은 비용을 가진다"
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\nThe routing tables of FortiGate_A and FortiGate_B, and a network topology are shown.\nWhy does FortiGate_B have only one external route available to 100.75.5.1/32?",
+      "options": {
+        "A": "rf c-1583-compatible is not set to enable on FortiGate_B.",
+        "B": "The subnet 10.0.11.0/24 is not located in the FortiGate_B area.",
+        "C": "FortiGate_A advertises only one external route to FortiGate_B",
+        "D": "The route to 100.75.5.1/32 shown on FortiGate B has the lowest cost."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.81": {
@@ -5824,6 +5931,15 @@
       "B": "FortiGate_B에서 / 172.16.1.248/30에 대한 / BGP route map out 설정",
       "C": "FortiGate_B의 / BGP 섹션에서 / Redistribute Connected 활성화",
       "D": "FortiGate_A에서 / 172.16.1.248/30에 대한 / BGP route map in 설정"
+    },
+    "_src": {
+      "question": "Refer to the exhibit.\nThe routing tables of FortiGate_A and FortiGate_B are shown. FortiGate_A and FortiGate_B are in the\nsame autonomous system.\nThe administrator wants to dynamically add only route 172.16.1.248/30 on FortiGate_A.\nWhat must the administrator configure?",
+      "options": {
+        "A": "The prefix 172.16.1.248/30 in the BGP Networks section on FortiGate_B",
+        "B": "A BGP route map out for 172.16.1.248/30 on FortiGate_B",
+        "C": "Enable Redistribute Connected in the BGP section on FortiGate_B.",
+        "D": "A BGP route map in for 172.16.1.248/30 on FortiGate_A"
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.92": {
@@ -5833,6 +5949,15 @@
       "B": "FortiGate에서 / 고유하게 명명된 객체를 생성하고 / 정책 패키지에 재임포트한다",
       "C": "FortiManager 설정을 선택하여 / FortiManager의 변경을 수락하고 / 진행한다",
       "D": "기본값이 아닌 객체 값을 사용한다 / FortiManager는 / 기본 값을 변경할 수 없다"
+    },
+    "_src": {
+      "question": "Refer to the exhibits.\nA policy package conflict status and information from the import device wizard in the Core1 VDOM\nare shown. When you import a policy package, the following message appears for the\nWeb_restrictions web filter profile and the deep-inspection SSL-SSH profile: \" The following objects\nwere found having conflicts. Please confirm your settings, then continue. \" The Web_restrictions and\ndeep-inspection profiles are used by other FortiGate devices within FortiManager. Which step must\nyou take to resolve the issue? (Choose one answer)",
+      "options": {
+        "A": "Retrieve the FortiGate configuration to automatically export correct objects and policies.",
+        "B": "Create uniquely named objects on FortiGate and reimport them into the policy package.",
+        "C": "Select the FortiManager configuration that accepts changes on FortiManager and preserves existing configurations on FortiGate devices.",
+        "D": "Use non-default object values because FortiManager is unable to alter default values."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.101": {
@@ -5842,6 +5967,15 @@
       "B": "최신 펌웨어를 지원하는 / 모든 FortiGate 장치의 / 인터페이스 MTU를 조정한다",
       "C": "경로상 모든 장치가 / 지원하는 / 통제된 환경에서만 / 인터페이스 MTU를 조정한다",
       "D": "PPPoE, 광섬유 같은 / 유선 연결에서만 / 인터페이스 MTU를 조정한다"
+    },
+    "_src": {
+      "question": "A company ' s users on an IPsec VPN between FortiGate A and B have experienced\nintermittent issues since implementing VXLAN. The administrator suspects that packets exceeding\nthe 1500-byte default MTU are causing the problems.\nIn which situation would adjusting the interface's maximum MTU value help resolve issues caused by\nprotocols that add extra headers to IP packets?",
+      "options": {
+        "A": "Adjust the MTU on interfaces only if FortiGate has the FortiGuard enterprise bundle, which allows MTU modification.",
+        "B": "Adjust the MTU on interfaces in all FortiGate devices that support the latest family of Fortinet SPUs: NP7, CP9 and SP5.",
+        "C": "Adjust the MTU on interfaces in controlled environments where all devices along the path allow MTU interface changes.",
+        "D": "Adjust the MTU on interfaces only in wired connections like PPPoE, optic fiber, and ethernet cable ."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.106": {
@@ -5851,6 +5985,15 @@
       "B": "NTurbo",
       "C": "CP10",
       "D": "NPU7"
+    },
+    "_src": {
+      "question": "Which hardware improves VXLAN performance? A. CPU",
+      "options": {
+        "B": "NTurbo",
+        "C": "CP10",
+        "D": "NPU7",
+        "A": "CPU"
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.112": {
@@ -5860,6 +6003,15 @@
       "B": "FortiOS에서 / 프로토콜 HTTPS로 / 포트 8443에 대한 / network protocol enforcement를 활성화한다",
       "C": "Protocol Port Mapping에 / 443과 8443을 입력하여 / 표준(443)과 비표준(8443) / HTTPS 포트를 모두 분석한다",
       "D": "SSL/SSH inspection profile에서 / 신뢰할 수 없는 SSL 인증서를 / 차단한다"
+    },
+    "_src": {
+      "question": "An organization ' s guest Internet policy, operating in proxy mode, blocks access to artificial\nintelligence technology sites using FortiGuard. However, a guest user accessed a page in this category\nusing port 8443.\nWhich configuration change must you make for FortiGate to analyze HTTPS traffic on nonstandard\nports like\n8443, when full SSL inspection is active in the guest policy?",
+      "options": {
+        "A": "Block traffic on nonstandard ports by enabling server certificate SNI check in the SSL/SSH inspection profile.",
+        "B": "Enable network protocol enforcement for port 8443 with the protocol HTTPS in FortiGuard application control.",
+        "C": "Enter 443, 8443 to analyze both standard (443) and non-standard (8443) HTTPS ports in the protocol port mapping section of the SSL/SSH inspection profile.",
+        "D": "Block untrusted SSL certificates in the SSL/SSH inspection profile."
+      }
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.113": {
@@ -5869,6 +6021,15 @@
       "B": "사용자는 / 인증 실패 메시지를 / 받는다",
       "C": "사용자는 / super_admin_readonly 권한으로 / downstream FortiGate에 접근한다",
       "D": "사용자는 / super_admin 권한으로 / downstream FortiGate에 접근한다"
+    },
+    "_src": {
+      "question": "Refer to the exhibits. The Administrators section of a root FortiGate device and the Security Fabric Settings section of a\ndownstream FortiGate device are shown.\nWhen prompted to sign in with Security Fabric in the downstream FortiGate device, a user enters the\nAdminSSO credentials.\nWhat is the next status for the user?",
+      "options": {
+        "A": "The user is prompted to create an SSO administrator account for AdminSSO.",
+        "B": "The user receives an authentication failure message.",
+        "C": "The user accesses the downstream FortiGate with super_admin_readonly privileges.",
+        "D": "The user accesses the downstream FortiGate with super_admin privileges."
+      }
     }
   },
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.1": {

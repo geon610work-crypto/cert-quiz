@@ -4845,7 +4845,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.61": {
-    "question": "전시물을 참조하라. 전시물은 / ADVPN 네트워크를 보여준다. / Spoke-1 뒤의 클라이언트가 / Spoke-2 뒤에 위치한 장치로 / 트래픽을 발생시킨다. / 허브는 어떤 두 가지 메시지를 보내는가? (두 개 선택)",
+    "question": "Exhibit 참조. / ADVPN 네트워크를 보여준다. / Spoke-1 뒤의 클라이언트가 / Spoke-2 뒤에 위치한 장치로 / 트래픽을 발생시킨다. / 동적 터널을 활성화하기 위해 / 허브가 Spoke-1에 / 보내는 첫 번째 메시지는 무엇인가?",
     "options": {
       "A": "숏컷 쿼리(Shortcut query)",
       "B": "숏컷 오퍼(Shortcut offer)",
@@ -5709,7 +5709,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.2": {
-    "question": "Exhibit 참조. / FortiGate_A와 FortiGate_B의 / 라우팅 테이블이 표시되어 있다. / FortiGate_A와 FortiGate_B는 / 동일한 autonomous system에 있다. / 관리자는 / 172.16.1.248/30 경로만 / 동적으로 추가하려 한다.",
+    "question": "Exhibit 참조. / FortiGate_A와 FortiGate_B의 / 라우팅 테이블이 표시되어 있다. / FortiGate_A와 FortiGate_B는 / 동일한 autonomous system에 있다. / 관리자는 / 172.16.1.248/30 경로만 / 동적으로 추가하려 한다. / 관리자가 구성해야 할 것은 무엇인가?",
     "options": {
       "A": "FortiGate_A에서 / 172.16.1.248/30에 대한 / BGP route map in 설정",
       "B": "FortiGate_B의 / BGP 섹션에서 / Redistribute Connected 활성화",
@@ -5763,7 +5763,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.13": {
-    "question": "Exhibit 참조. / FortiGate_A와 FortiGate_B의 / 라우팅 테이블이 표시되어 있다. / FortiGate_A와 FortiGate_B는 / 동일한 autonomous system에 있다. / 관리자는 / 172.16.1.248/30 경로만 / 동적으로 추가하려 한다.",
+    "question": "Exhibit 참조. / FortiGate_A와 FortiGate_B의 / 라우팅 테이블이 표시되어 있다. / FortiGate_A와 FortiGate_B는 / 동일한 autonomous system에 있다. / 관리자는 / 172.16.1.248/30 경로만 / 동적으로 추가하려 한다. / 관리자가 구성해야 할 것은 무엇인가?",
     "options": {
       "A": "FortiGate_A에서 / 172.16.1.248/30에 대한 / BGP route map in 설정",
       "B": "FortiGate_B의 / BGP 섹션에서 / Redistribute Connected 활성화",
@@ -5781,7 +5781,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.14": {
-    "question": "Exhibit 참조. / 기본 MTU 1500바이트인 / 사용자 Windows PC 설정과 / MTU 1000바이트로 설정된 / FortiGate 인터페이스, / 그리고 PC1이 / 서버에 ping한 결과가 표시되어 있다.",
+    "question": "Exhibit 참조. / 기본 MTU 1500바이트인 / 사용자 Windows PC 설정과 / MTU 1000바이트로 설정된 / FortiGate 인터페이스, / 그리고 PC1이 / 서버에 ping한 결과가 표시되어 있다. / Windows PC1의 사용자가 / 서버 172.16.0.254에 ping할 수 없고 / '패킷 단편화 필요' 메시지가 표시되는 / 이유는 무엇인가?",
     "options": {
       "A": "ip.flags.mf를 / FortiGate에서 활성화해야 하며 / 사용자가 MTU를 조정해야 한다",
       "B": "단편화된 패킷은 / 암호화되어야 하며 / 애플리케이션 연결을 위해 조정이 필요하다",
@@ -5799,7 +5799,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.15": {
-    "question": "회사의 / proxy 모드로 운영되는 / 게스트 인터넷 정책이 / FortiGuard를 사용하여 / AI 기술 사이트 접근을 차단한다. / 그러나 게스트 사용자가 / 포트 8443을 통해 / 이 카테고리의 페이지에 접근했다.",
+    "question": "회사의 / proxy 모드로 운영되는 / 게스트 인터넷 정책이 / FortiGuard를 사용하여 / AI 기술 사이트 접근을 차단한다. / 그러나 게스트 사용자가 / 포트 8443을 통해 / 이 카테고리의 페이지에 접근했다. / 게스트 정책에서 / full SSL 검사가 활성화된 경우 / FortiGate가 / 8443과 같은 비표준 포트의 / HTTPS 트래픽을 분석하기 위해 / 어떤 구성 변경이 필요한가?",
     "options": {
       "A": "웹사이트 CA 인증서에 / URL 와일드카드 도메인을 추가하고 / SSL/SSH 검사에 사용한다",
       "B": "SSL/SSH Inspection Profile의 / Protocol Port Mapping 섹션에 / 포트 8443을 추가로 입력한다",
@@ -5817,7 +5817,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.31": {
-    "question": "Exhibit 참조. / client hello 메시지의 / 패킷 캡처 출력이 표시되어 있다. / SSL 인증서 검사를 포함하는 / 방화벽 정책을 업데이트 중이다.",
+    "question": "Exhibit 참조. / client hello 메시지의 / 패킷 캡처 출력이 표시되어 있다. / SSL 인증서 검사를 포함하는 / 방화벽 정책을 업데이트 중이다. / 이 패킷 캡처에 대한 / 올바른 두 가지 설명은 무엇인가? (두 개 선택)",
     "options": {
       "A": "이 트래픽에 / antivirus 보안 프로파일을 / 효과적으로 적용할 수 있다",
       "B": "이 트래픽에 / web filtering 프로파일을 / 효과적으로 적용할 수 있다",
@@ -5925,7 +5925,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.81": {
-    "question": "Exhibit 참조. / FortiGate_A와 FortiGate_B의 / 라우팅 테이블이 표시되어 있다. / FortiGate_A와 FortiGate_B는 / 동일한 autonomous system에 있다. / 관리자는 / 172.16.1.248/30 경로만 / 동적으로 추가하려 한다.",
+    "question": "Exhibit 참조. / FortiGate_A와 FortiGate_B의 / 라우팅 테이블이 표시되어 있다. / FortiGate_A와 FortiGate_B는 / 동일한 autonomous system에 있다. / 관리자는 / 172.16.1.248/30 경로만 / 동적으로 추가하려 한다. / 관리자가 구성해야 할 것은 무엇인가?",
     "options": {
       "A": "FortiGate_B의 / BGP Networks 섹션에 / 172.16.1.248/30 프리픽스 추가",
       "B": "FortiGate_B에서 / 172.16.1.248/30에 대한 / BGP route map out 설정",
@@ -5943,7 +5943,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.92": {
-    "question": "Exhibit 참조. / Core1 VDOM의 / import device wizard에서 / 정책 패키지 충돌 상태와 / 정보가 표시되어 있다. / 정책 패키지를 import할 때 / 특정 정책에 대해 / 다음 메시지가 나타난다.",
+    "question": "Exhibit 참조. / Core1 VDOM의 / import device wizard에서 / 정책 패키지 충돌 상태와 / 정보가 표시되어 있다. / 정책 패키지를 import할 때 / 특정 정책에 대해 / 다음 메시지가 나타난다. / 이 문제를 해결하기 위해 / 어떤 단계를 수행해야 하는가?",
     "options": {
       "A": "FortiGate 설정을 검색하여 / 올바른 객체를 자동으로 내보내고 / 재임포트한다",
       "B": "FortiGate에서 / 고유하게 명명된 객체를 생성하고 / 정책 패키지에 재임포트한다",
@@ -5997,7 +5997,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.112": {
-    "question": "조직의 / proxy 모드로 운영되는 / 게스트 인터넷 정책이 / FortiGuard를 사용하여 / AI 기술 사이트 접근을 차단한다. / 그러나 게스트 사용자가 / 포트 8443을 통해 / 이 카테고리의 페이지에 접근했다.",
+    "question": "조직의 / proxy 모드로 운영되는 / 게스트 인터넷 정책이 / FortiGuard를 사용하여 / AI 기술 사이트 접근을 차단한다. / 그러나 게스트 사용자가 / 포트 8443을 통해 / 이 카테고리의 페이지에 접근했다. / 게스트 정책에서 / full SSL 검사가 활성화된 경우 / FortiGate가 / 8443과 같은 비표준 포트의 / HTTPS 트래픽을 분석하기 위해 / 필요한 구성 변경 사항은 무엇인가?",
     "options": {
       "A": "SSL/SSH inspection profile의 / server certificate SNI check을 활성화하여 / 비표준 포트 트래픽을 차단한다",
       "B": "FortiOS에서 / 프로토콜 HTTPS로 / 포트 8443에 대한 / network protocol enforcement를 활성화한다",
@@ -6015,7 +6015,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.113": {
-    "question": "Exhibit 참조. / root FortiGate 장치의 / Administrators 섹션과 / downstream FortiGate 장치의 / Security Fabric Settings 섹션이 표시되어 있다.",
+    "question": "Exhibit 참조. / root FortiGate 장치의 / Administrators 섹션과 / downstream FortiGate 장치의 / Security Fabric Settings 섹션이 표시되어 있다. / Security Fabric으로 / 로그인하라는 메시지가 표시될 때 / 해당 사용자의 / 다음 상태는 무엇인가?",
     "options": {
       "A": "사용자는 / AdminSSO에 대한 / SSO administrator 계정을 생성하라는 / 프롬프트를 받는다",
       "B": "사용자는 / 인증 실패 메시지를 / 받는다",

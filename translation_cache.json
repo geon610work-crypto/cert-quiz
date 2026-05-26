@@ -5817,7 +5817,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.31": {
-    "question": "Exhibit 참조. / client hello 메시지의 / 패킷 캡처 출력이 표시되어 있다. / SSL 인증서 검사를 포함하는 / 방화벽 정책을 업데이트 중이다. / 이 패킷 캡처에 대한 / 올바른 두 가지 설명은 무엇인가? (두 개 선택)",
+    "question": "Exhibit 참조. / client hello 메시지의 / 패킷 캡처 출력이 표시되어 있다. / SSL 인증서 검사를 포함하는 / 방화벽 정책을 업데이트 중이다. / 이 방화벽 정책을 통과하는 / 트래픽에서 / 패킷을 캡처하고 있다. / 이 패킷 캡처에 대한 / 올바른 두 가지 설명은 무엇인가? (두 개 선택)",
     "options": {
       "A": "이 트래픽에 / antivirus 보안 프로파일을 / 효과적으로 적용할 수 있다",
       "B": "이 트래픽에 / web filtering 프로파일을 / 효과적으로 적용할 수 있다",
@@ -5889,7 +5889,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.66": {
-    "question": "Exhibit 참조. / root FortiGate에 설정된 / system administrator 설정과 / downstream FortiGate에 설정된 / Security Fabric 설정이 표시되어 있다.",
+    "question": "Exhibit 참조. / root FortiGate에 설정된 / system administrator 설정과 / downstream FortiGate에 설정된 / Security Fabric 설정이 표시되어 있다. / downstream FortiGate에 / Security Fabric으로 / 로그인하라는 프롬프트를 받았을 때 / 사용자가 / SSO(single sign-on) 공급자 / 자격 증명을 입력한다. / 결과는 무엇인가?",
     "options": {
       "A": "downstream FortiGate가 / AdminSSO에 대한 / SSO administrator 계정을 생성한다 / (특정 권한으로)",
       "B": "downstream FortiGate가 / AdminSSO에 대한 / SSO administrator 계정을 생성한다 / (다른 특정 권한으로)",
@@ -5943,7 +5943,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.92": {
-    "question": "Exhibit 참조. / Core1 VDOM의 / import device wizard에서 / 정책 패키지 충돌 상태와 / 정보가 표시되어 있다. / 정책 패키지를 import할 때 / 특정 정책에 대해 / 다음 메시지가 나타난다. / 이 문제를 해결하기 위해 / 어떤 단계를 수행해야 하는가?",
+    "question": "Exhibit 참조. / Core1 VDOM의 / import device wizard에서 / 정책 패키지 충돌 상태와 / 정보가 표시되어 있다. / 정책 패키지를 import할 때 / Web_restrictions 웹 필터 프로필과 / deep-inspection SSL-SSH 프로필에 대해 / 다음 메시지가 나타난다: / \"충돌이 발견된 오브젝트가 있습니다. / 설정을 확인한 후 계속하십시오.\" / Web_restrictions 및 deep-inspection 프로필은 / FortiManager 내 / 다른 FortiGate 장치들이 / 사용하고 있다. / 이 문제를 해결하기 위해 / 어떤 단계를 수행해야 하는가?",
     "options": {
       "A": "FortiGate 설정을 검색하여 / 올바른 객체를 자동으로 내보내고 / 재임포트한다",
       "B": "FortiGate에서 / 고유하게 명명된 객체를 생성하고 / 정책 패키지에 재임포트한다",
@@ -5961,7 +5961,7 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.65.pdf::NO.101": {
-    "question": "FortiGate A와 B 간 / IPsec VPN 사용자들이 / VXLAN 구현 이후 / 간헐적인 문제를 경험했다. / 관리자는 / 1500바이트 기본 MTU를 초과하는 / 패킷이 원인이라고 의심한다.",
+    "question": "FortiGate A와 B 간 / IPsec VPN 사용자들이 / VXLAN 구현 이후 / 간헐적인 문제를 경험했다. / 관리자는 / 1500바이트 기본 MTU를 초과하는 / 패킷이 원인이라고 의심한다. / 어떤 상황에서 / 인터페이스의 최대 MTU 값 조정이 / IP 패킷에 추가 헤더를 더하는 / 프로토콜로 인한 문제를 / 해결하는 데 도움이 되는가?",
     "options": {
       "A": "FortiGate에 / FortiGuard enterprise bundle이 있는 경우에만 / 인터페이스 MTU를 조정한다",
       "B": "최신 펌웨어를 지원하는 / 모든 FortiGate 장치의 / 인터페이스 MTU를 조정한다",

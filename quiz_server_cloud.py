@@ -1430,9 +1430,11 @@ class QuizHandler(BaseHTTPRequestHandler):
                 if len(vers) >= 2:
                     # 버전 내림차순 정렬 → [최신, 구버전, ...]
                     vers_sorted = sorted(vers, key=lambda x: _ver_tuple(x[0]), reverse=True)
-                    ver_str = '+'.join(v[0] for v in vers_sorted)
+                    # 최신 2개 버전만 통합 (3개 이상일 경우 구버전 제외)
+                    vers_to_combine = vers_sorted[:2]
+                    ver_str = '+'.join(v[0] for v in vers_to_combine)
                     # sentinel path: __COMBINED__EFW|path1|path2
-                    combined_path = sentinel + '|' + '|'.join(v[1] for v in vers_sorted)
+                    combined_path = sentinel + '|' + '|'.join(v[1] for v in vers_to_combine)
                     combined_entry = {
                         'key': prod_key + '_COMBINED',
                         'label': comb_label,

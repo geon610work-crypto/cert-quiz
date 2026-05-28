@@ -1404,11 +1404,14 @@ class QuizHandler(BaseHTTPRequestHandler):
                 return tuple(int(x) for x in v.lstrip('V').split('.'))
             all_pdfs = find_pdfs()
             products = {}
+            # key → {version: ..., all_versions: [(ver, path, name), ...]}
+            all_versions: dict = {}
             for p in all_pdfs:
                 m = _pat.match(os.path.basename(p['path']))
                 if not m: continue
                 key = next(g for g in m.groups()[:-1] if g).upper()
                 ver = m.group(4)
+                all_versions.setdefault(key, []).append((ver, p['path'], p['name']))
                 if key not in products or _ver_tuple(ver) > _ver_tuple(products[key]['version']):
                     label, order = _PRODUCT_MAP.get(key, (key, 99))
                     products[key] = {
@@ -1416,11 +1419,125 @@ class QuizHandler(BaseHTTPRequestHandler):
                         'path': p['path'], 'name': p['name'], 'order': order,
                     }
             result = sorted(products.values(), key=lambda x: x['order'])
+
+            # 버전이 2개 이상인 제품에 대해 통합 모드 가상 항목 추가
+            _COMBINED_DEFS = {
+                # key: (label, base_order, sentinel_prefix)
+                'EFW': ('FCSS EFW AD-7.6 (통합)', 0.5, '__COMBINED__EFW'),
+            }
+            for prod_key, (comb_label, comb_order, sentinel) in _COMBINED_DEFS.items():
+                vers = all_versions.get(prod_key, [])
+                if len(vers) >= 2:
+                    # 버전 내림차순 정렬 → [최신, 구버전, ...]
+                    vers_sorted = sorted(vers, key=lambda x: _ver_tuple(x[0]), reverse=True)
+                    ver_str = '+'.join(v[0] for v in vers_sorted)
+                    # sentinel path: __COMBINED__EFW|path1|path2
+                    combined_path = sentinel + '|' + '|'.join(v[1] for v in vers_sorted)
+                    combined_entry = {
+                        'key': prod_key + '_COMBINED',
+                        'label': comb_label,
+                        'version': ver_str,
+                        'path': combined_path,
+                        'name': comb_label,
+                        'order': comb_order,
+                        'combined': True,
+                    }
+                    # 최신 단독 항목 뒤에 삽입
+                    insert_idx = next((i for i, x in enumerate(result)
+                                       if x['key'] == prod_key), len(result))
+                    result.insert(insert_idx + 1, combined_entry)
+
             self.send_json(result)
 
         elif path == '/api/quiz':
             pdf_path = params.get('path', [''])[0]
             count    = int(params.get('count', ['30'])[0])
+            order    = params.get('order', [''])[0]
+
+            # ── 통합 모드: __COMBINED__KEY|path1|path2|... ──────────────────
+            _is_combined = pdf_path.startswith('__COMBINED__')
+            if _is_combined:
+                _parts     = pdf_path.split('|')
+                _pdf_paths = _parts[1:]   # [최신 PDF, 구버전 PDF, ...]
+
+                def _load_qs(pp):
+                    with _question_cache_lock:
+                        if pp not in question_cache:
+                            print(f"  ⏳ Extracting: {os.path.basename(pp)}")
+                            question_cache[pp] = extract_questions_from_pdf(pp)
+                            print(f"  ✅ {len(question_cache[pp])} questions")
+                    return question_cache[pp]
+
+                # 최신(주) 버전 문제 전부 포함
+                primary_path  = _pdf_paths[0]
+                primary_name  = os.path.basename(primary_path)
+                primary_qs    = [dict(q) for q in _load_qs(primary_path)]
+
+                # 주 버전의 선택지 집합 (중복 판별용)
+                def _opts_frozenset(q):
+                    return frozenset(
+                        re.sub(r'\s+', ' ', v.strip().lower())
+                        for v in q.get('options', {}).values() if v.strip()
+                    )
+                primary_opts_sets = {_opts_frozenset(q) for q in primary_qs}
+
+                # 구버전들에서 고유 문제만 추가
+                extra_qs = []
+                for sec_path in _pdf_paths[1:]:
+                    sec_name = os.path.basename(sec_path)
+                    sec_ver  = re.search(r'(V[\d.]+)\.pdf$', sec_name, re.IGNORECASE)
+                    sec_ver  = sec_ver.group(1) if sec_ver else sec_name
+                    for q in _load_qs(sec_path):
+                        if _opts_frozenset(q) not in primary_opts_sets:
+                            qc = dict(q)
+                            qc['source_version'] = sec_ver
+                            qc['pdf_path']       = sec_path
+                            qc['pdf_name']       = sec_name
+                            extra_qs.append(qc)
+                            primary_opts_sets.add(_opts_frozenset(q))  # 중복 방지
+
+                # 주 버전 문제에 pdf_path/pdf_name 설정
+                for q in primary_qs:
+                    q['pdf_path'] = primary_path
+                    q['pdf_name'] = primary_name
+
+                all_q = primary_qs + extra_qs
+                if not all_q:
+                    self.send_json({'error': 'No questions found'}, 400)
+                    return
+
+                if order == '1':
+                    selected = list(all_q)
+                else:
+                    selected = random.sample(all_q, min(count, len(all_q)))
+
+                # 각 문제 메타 채우기
+                def _enrich_q(q):
+                    _pname = q.get('pdf_name', primary_name)
+                    _ppath = q.get('pdf_path', primary_path)
+                    q['explanation_ko'] = _lookup_cache(_pname, q['num'])
+                    trans = _lookup_translation(_pname, q['num'])
+                    q['question_ko'] = trans.get('question') or None
+                    q['options_ko']  = trans.get('options') or {}
+                    _ov = _lookup_override(_pname, q['num'])
+                    if _ov.get('answer_conflict'):
+                        q['answer_conflict'] = _ov['answer_conflict']
+                    _stem = os.path.splitext(_pname)[0]
+                    _ex_dir = os.path.join(EXHIBIT_DIR, _stem)
+                    if q.get('has_exhibit') and os.path.isdir(_ex_dir):
+                        _n = q['num']
+                        if (not os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.jpg")) and
+                                not os.path.exists(os.path.join(_ex_dir, f"{_n}_n2.jpg")) and
+                                os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))):
+                            q['missing_exhibit'] = True
+
+                for q in selected:
+                    _enrich_q(q)
+
+                self.send_json({'questions': selected, 'total': len(all_q),
+                                'has_fitz': HAS_FITZ, 'combined': True})
+                return
+            # ── 일반 단일 PDF 모드 ──────────────────────────────────────────
 
             if not pdf_path or not os.path.exists(pdf_path):
                 self.send_json({'error': 'PDF not found'}, 404)
@@ -1439,7 +1556,6 @@ class QuizHandler(BaseHTTPRequestHandler):
                 return
 
             pdf_name = os.path.basename(pdf_path)
-            order = params.get('order', [''])[0]
             if order == '1':
                 selected = all_q
             else:
@@ -1469,6 +1585,7 @@ class QuizHandler(BaseHTTPRequestHandler):
             for q in selected:
                 q['explanation_ko'] = _lookup_cache(pdf_name, q['num'])
                 q['pdf_name'] = pdf_name
+                q['pdf_path'] = pdf_path
                 trans = _lookup_translation(pdf_name, q['num'])
                 q['question_ko'] = trans.get('question') or None
                 q['options_ko']  = trans.get('options') or {}
@@ -2055,9 +2172,9 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
         {/* Exhibit: n=1 먼저(PDF 순서 첫 번째), n=2 나중(두 번째) */}
         {q.has_exhibit && !q.missing_exhibit && (
           <>
-            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
+            <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} />
             {q.page_num > 0 && (
-              <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
+              <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
           </>
         )}
@@ -2114,7 +2231,7 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
 
         {/* opts exhibit (이미지 선택지) — 모든 선택지가 이미지일 때만 표시 */}
         {opts.every(letter => q.options[letter] === '[옵션 텍스트가 Exhibit 이미지에 포함됨]') && opts.length > 0 && (
-          <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} optsMode={true} />
+          <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} optsMode={true} />
         )}
 
         {q.answer_conflict && (
@@ -2277,15 +2394,16 @@ function PracticeScreen({ questions, onExit, pdfPath }){
           <span className="badge" style={{background:'#7c3aed22',color:'#a78bfa',border:'1px solid #7c3aed',fontSize:'11px'}}>
             🎯 연습 모드
           </span>
+          {q.source_version && <span className="badge" style={{background:'#f0fdf4',color:'#16a34a',border:'1px solid #86efac',fontSize:'11px'}}>{q.source_version}</span>}
           {q.is_multiple && <span className="badge b-blue">복수 선택 ({q.num_to_choose}개)</span>}
           {q.has_exhibit  && <span className="badge b-yellow">📊 Exhibit</span>}
         </div>
 
         {q.has_exhibit && !q.missing_exhibit && q.page_num>0 && (
           <>
-            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
+            <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} />
             {q.page_num > 0 && (
-              <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
+              <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
           </>
         )}
@@ -2448,6 +2566,7 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
             ← 홈
           </button>
           <span className="badge b-blue">{q.num}</span>
+          {q.source_version && <span className="badge" style={{background:'#f0fdf4',color:'#16a34a',border:'1px solid #86efac',fontSize:'11px'}}>{q.source_version}</span>}
           <span className="muted sm">{idx+1} / {total}</span>
         </div>
         <div style={{display:'flex',gap:'12px',alignItems:'center'}}>
@@ -2464,9 +2583,9 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
       <div className="card">
         {q.has_exhibit && q.page_num > 0 && (
           <>
-            <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} />
+            <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} />
             {q.page_num > 0 && (
-              <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
+              <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
             )}
           </>
         )}
@@ -2486,7 +2605,7 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
         {/* When ALL options are image-placeholders, load a "options area" exhibit */}
         {q.page_num > 0 && opts.length > 0 &&
           opts.every(o => o.text === '[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
-          <ExhibitImage pdfPath={pdfPath} pageNum={q.page_num} qNum={q.num} optsMode={true} />
+          <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} optsMode={true} />
         )}
 
         {opts.map(({displayLetter, origLetter, text})=>(
@@ -2649,9 +2768,9 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               {/* exhibit image */}
               {r.has_exhibit && !r.missing_exhibit && r.page_num > 0 && (
                 <>
-                  <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
+                  <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} />
                   {r.page_num > 0 && (
-                    <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
+                    <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
                   )}
                 </>
               )}
@@ -2665,7 +2784,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               {/* options-area exhibit when ALL options are images */}
               {!r.missing_exhibit && r.page_num > 0 && Object.keys(r.options).length > 0 &&
                 Object.values(r.options).every(v=>v==='[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
-                <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />
+                <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />
               )}
               {/* options highlight */}
               <div style={{marginBottom:'12px'}}>
@@ -2734,9 +2853,9 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               <div className="divider" />
               {r.has_exhibit && !r.missing_exhibit && r.page_num > 0 && (
                 <>
-                  <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} />
+                  <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} />
                   {r.page_num > 0 && (
-                    <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
+                    <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
                   )}
                 </>
               )}
@@ -2749,7 +2868,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               )}
               {!r.missing_exhibit && r.page_num > 0 && Object.keys(r.options).length > 0 &&
                 Object.values(r.options).every(v=>v==='[옵션 텍스트가 Exhibit 이미지에 포함됨]') && (
-                <ExhibitImage pdfPath={pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />
+                <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} optsMode={true} />
               )}
               <div style={{marginBottom:'12px'}}>
                 {Object.keys(r.options).sort().map(letter=>{

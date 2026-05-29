@@ -316,8 +316,8 @@
     "options": {
       "A": "로컬 FortiGate는 / broadcast 네트워크에 참여하는 / 인터페이스가 최소 하나 있다.",
       "B": "로컬 FortiGate는 / point-to-point 네트워크에 참여하는 / 인터페이스가 최소 하나 있다.",
-      "C": "이웃 0.0.0.18이 / 지정 라우터(DR)이다.",
-      "D": "로컬 FortiGate가 / DR이다."
+      "C": "로컬 FortiGate가 / DR이다.",
+      "D": "이웃 0.0.0.18이 / 지정 라우터(DR)이다."
     },
     "_src": {
       "question": "",
@@ -857,8 +857,8 @@
     "options": {
       "A": "현재 primary FortiGate에서 / 구성 변경이 이루어지면 / secondary가 동기화 재설정을 시작한다.",
       "B": "secondary에서 / port 7이 끊기면 / 두 FortiGate 장치 모두 / 스스로 primary로 선출될 것이다.",
-      "C": "조치를 취하지 않으면 / 현재 동기화 상태로 인해 / primary FortiGate가 / 클러스터를 떠날 것이다.",
-      "D": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 재합류해도 / 그 역할을 유지한다."
+      "C": "FGVM...649가 재부팅되면 / FGVM...650이 primary가 되고 / FGVM...649가 재합류해도 / 그 역할을 유지한다.",
+      "D": "조치를 취하지 않으면 / 현재 동기화 상태로 인해 / primary FortiGate가 / 클러스터를 떠날 것이다."
     },
     "_src": {
       "question": "",
@@ -1781,9 +1781,9 @@
   "FCSS_NST_SE-7.6 V13.35.pdf::NO.99": {
     "question": "regular bind 타입을 사용한 / LDAP 인증에 대한 / 정확한 설명은?",
     "options": {
-      "A": "regular bind 타입은 / FortiOS에서 구성하기 / 가장 쉬운 bind 타입이다.",
-      "B": "regular bind 타입은 / LDAP 서버에 접근하기 위해 / FortiGate super admin 계정이 / 필요하다.",
-      "C": "regular bind는 / 클라이언트가 / 전체 식별 이름(DN)을 / 전송해야 한다.",
+      "A": "regular bind는 / 클라이언트가 / 전체 식별 이름(DN)을 / 전송해야 한다.",
+      "B": "regular bind 타입은 / FortiOS에서 구성하기 / 가장 쉬운 bind 타입이다.",
+      "C": "regular bind 타입은 / LDAP 서버에 접근하기 위해 / FortiGate super admin 계정이 / 필요하다.",
       "D": "bind 타입으로 / 자주 사용되지 않는다."
     },
     "_src": {
@@ -1979,10 +1979,10 @@
   "FCSS_EFW_AD-7.6 V13.35.pdf::NO.71": {
     "question": "전시물을 참조하라. / 동일한 HA 업타임을 가진 / active-active (A-A) 클러스터의 HA 구성이 표시되어 있다. / HQ-NGFW-2가 / Core2 VDOM 트래픽을 처리하게 하려면 / 어떤 수정을 해야 하는가?",
     "options": {
-      "A": "HQ-NGFW-2의 / virtual cluster 2에서 / override를 활성화한다.",
-      "B": "HQ-NGFW-2의 / 우선순위를 120에서 200으로 변경한다.",
-      "C": "HQ-NGFW-2의 / 우선순위를 100에서 160으로 변경한다.",
-      "D": "HQ-NGFW-2를 / 재부팅한다."
+      "A": "HQ-NGFW-2를 / 재부팅한다.",
+      "B": "HQ-NGFW-2의 / 우선순위를 100에서 160으로 변경한다.",
+      "C": "HQ-NGFW-2의 / 우선순위를 120에서 200으로 변경한다.",
+      "D": "HQ-NGFW-2의 / virtual cluster 2에서 / override를 활성화한다."
     },
     "_src": {
       "question": "",
@@ -6036,9 +6036,9 @@
     "question": "SNI가 / 서버 인증서의 CN 또는 SAN 중 어느 것과도 / 일치하지 않는 시나리오를 고려하라. / SSL 인증서 검사의 기본 설정 사용 시 / FortiGate가 취할 / 두 가지 동작은?",
     "options": {
       "A": "FortiGate는 / 사용자의 웹 브라우저에서 / SNI를 사용한다.",
-      "B": "FortiGate는 / 트래픽이 웹 필터 프로파일에 의해 차단되면 / 트래픽을 복호화하지 않는다.",
-      "C": "FortiGate는 / 서버 인증서의 Subject 필드에서 / CN 정보를 사용한다.",
-      "D": "FortiGate는 / 트래픽이 웹 필터 프로파일에 의해 허용되면 / 트래픽을 복호화하지 않는다."
+      "B": "FortiGate는 / 유효하지 않은 SSL/TLS 구성으로 간주하여 / 연결을 종료한다.",
+      "C": "FortiGate는 / 서버 인증서의 SAN 필드에 나열된 / 첫 번째 항목을 사용한다.",
+      "D": "FortiGate는 / 서버 인증서의 Subject 필드에서 / CN 정보를 사용한다."
     },
     "_src": {
       "question": "",
@@ -6109,10 +6109,10 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.16": {
     "question": "automation stitch의 / 두 가지 기능은?",
     "options": {
-      "A": "Security Fabric 환경의 / 모든 FortiGate 장치에서 / automation stitch를 구성할 수 있다.",
-      "B": "이전 동작의 결과를 / 현재 동작의 입력으로 사용해 / 동작을 순차적으로 실행하는 / automation stitch를 구성할 수 있다.",
+      "A": "CPU 또는 메모리 사용률이 / 지정된 임계값을 초과할 때 / 진단 명령을 실행하고 결과를 / 이메일에 첨부하는 automation stitch를 만들 수 있다.",
+      "B": "특정 트래픽이 / anomaly IPS 이벤트를 트리거하면 / 패킷 헤더와 페이로드를 수정하도록 / automation stitch를 구성할 수 있다.",
       "C": "동작을 병렬로 실행하도록 구성된 / automation stitch에서 / 동작 간에 특정 지연을 / 삽입할 수 있다.",
-      "D": "CPU 또는 메모리 사용률이 / 지정된 임계값을 초과할 때 / 진단 명령을 실행하고 결과를 / 이메일에 첨부하는 automation stitch를 만들 수 있다."
+      "D": "이전 동작의 결과를 / 현재 동작의 입력으로 사용해 / 동작을 순차적으로 실행하는 / automation stitch를 구성할 수 있다."
     },
     "_src": {
       "question": "",
@@ -6163,10 +6163,10 @@
   "FCSS_NST_SE-7.6 V13.65.pdf::NO.32": {
     "question": "automation stitch의 / 두 가지 기능은?",
     "options": {
-      "A": "Security Fabric 환경의 / 모든 FortiGate 장치에서 / automation stitch를 구성할 수 있다.",
-      "B": "이전 동작의 결과를 / 현재 동작의 입력으로 사용해 / 동작을 순차적으로 실행하는 / automation stitch를 구성할 수 있다.",
+      "A": "CPU 또는 메모리 사용률이 / 지정된 임계값을 초과할 때 / 진단 명령을 실행하고 결과를 / 이메일에 첨부하는 automation stitch를 만들 수 있다.",
+      "B": "특정 트래픽이 / anomaly IPS 이벤트를 트리거하면 / 패킷 헤더와 페이로드를 수정하도록 / automation stitch를 구성할 수 있다.",
       "C": "동작을 병렬로 실행하도록 구성된 / automation stitch에서 / 동작 간에 특정 지연을 / 삽입할 수 있다.",
-      "D": "CPU 또는 메모리 사용률이 / 지정된 임계값을 초과할 때 / 진단 명령을 실행하고 결과를 / 이메일에 첨부하는 automation stitch를 만들 수 있다."
+      "D": "이전 동작의 결과를 / 현재 동작의 입력으로 사용해 / 동작을 순차적으로 실행하는 / automation stitch를 구성할 수 있다."
     },
     "_src": {
       "question": "",
@@ -6817,8 +6817,8 @@
     "options": {
       "A": "로컬 FortiGate는 / broadcast 네트워크에 참여하는 / 인터페이스가 최소 하나 있다.",
       "B": "로컬 FortiGate는 / point-to-point 네트워크에 참여하는 / 인터페이스가 최소 하나 있다.",
-      "C": "이웃 0.0.0.18이 / 지정 라우터(DR)이다.",
-      "D": "로컬 FortiGate가 / DR이다."
+      "C": "로컬 FortiGate가 / DR이다.",
+      "D": "이웃 0.0.0.18이 / 지정 라우터(DR)이다."
     },
     "_src": {
       "question": "",

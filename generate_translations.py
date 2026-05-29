@@ -83,6 +83,12 @@ def main():
 
     added = 0
     skipped = 0
+    drifted = []   # _src(번역 당시 원문)가 현재 추출과 달라진 항목
+
+    def _opts_set(opts):
+        import re as _re
+        return frozenset(_re.sub(r'\s+', ' ', v.strip().lower())
+                         for v in (opts or {}).values() if v and v.strip())
 
     for pdf_name in PDFS:
         pdf_path = os.path.join(WORKSPACE, pdf_name)
@@ -101,6 +107,11 @@ def main():
             # 이미 번역 값이 채워진 항목은 건드리지 않음
             if existing.get('question') or any(existing.get('options', {}).values()):
                 skipped += 1
+                # ⚠️ drift 감지: 번역 당시 원문(_src)이 현재 추출과 다르면
+                #    한국어 라벨이 영어와 어긋났을 수 있음 → 경고 후 검증 권고
+                src_opts = (existing.get('_src') or {}).get('options')
+                if src_opts and _opts_set(src_opts) != _opts_set(q['options']):
+                    drifted.append(key)
                 continue
 
             # 빈 템플릿 생성 (원문은 참고용으로 주석처럼 _src 에 보관)
@@ -121,6 +132,14 @@ def main():
     print(f"\n✅ 완료!")
     print(f"   추가: {added}개 / 기존 유지: {skipped}개 / 전체: {len(cache)}개")
     print(f"   → {TRANS_FILE}")
+
+    if drifted:
+        print(f"\n⚠️  원문 변동(drift) 감지: {len(drifted)}개")
+        print("   아래 항목은 번역 당시 영어 원문과 현재 추출 결과가 다릅니다.")
+        print("   선택지 라벨(A/B/C/D)이 어긋났을 수 있으니 점검하세요:")
+        for k in drifted:
+            print(f"     - {k}")
+        print("\n   → 정합성 검증: python3 validate_translations.py")
     print()
     print("다음 단계: translation_cache.json 을 열어")
     print("  'question' 과 'options' 값을 직독직해 번역으로 채워 넣으세요.")

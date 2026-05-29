@@ -10,6 +10,21 @@
     },
     "NO.72": {
       "answer_conflict": "한국어 해설은 C, D가 정답이라고 설명합니다. (덤프: A, B) — 해설 내용은 A, B와 동일하나 알파벳 라벨이 수정되었습니다."
+    },
+    "NO.3": {
+      "answer_conflict": "한국어 해설은 A, D가 정답이라고 설명합니다. (덤프: C, D) — fssod 디버그 출력(exhibit) 해석 차이: 폴링으로 로그아웃 확인 가능 여부(A vs C). agentless 폴링(D)은 공통."
+    },
+    "NO.47": {
+      "answer_conflict": "한국어 해설은 B, D가 정답이라고 설명합니다. (덤프: A, D) — LDAP 디버그(exhibit)에서 서버명이 Lab(A)인지 사용자 CN=John Smith(B)인지에 대한 해석 차이. Search Request 단계(D)는 공통."
+    },
+    "NO.113": {
+      "answer_conflict": "한국어 해설은 A가 정답이라고 설명합니다. (덤프: C) — conserve mode exhibit 해석 차이: 검사 필요 새 세션을 '검사 없이 허용'(C)으로 볼지 'flow 허용·proxy 차단'(A)으로 볼지. av-failopen 기본 동작 해석에 따라 달라짐."
+    },
+    "NO.122": {
+      "answer_conflict": "한국어 해설은 D가 정답이라고 설명합니다. (덤프: C) — conserve mode가 로깅/AV 등 비필수 프로세스를 임의 중단(C)하는지에 대한 기술적 이견. 해설은 핵심 동작을 새 세션 드롭(D)으로 봄."
+    },
+    "NO.126": {
+      "answer_conflict": "한국어 해설은 B가 정답이라고 설명합니다. (덤프: A — 208.91.112.194) — 208.91.112.194는 알려진 FortiGuard anycast IP이며, exhibit의 실제 DNS 응답값에 따라 결정되는 exhibit 의존 문제."
     }
   },
   "NSE4_FGT_AD-7.6 V13.95": {
@@ -26,6 +41,14 @@
     },
     "NO.56": {
       "answer_conflict": "한국어 해설은 A, C가 정답이라고 설명합니다. (덤프: A, D) — 조건부 스크립트(C) vs 버전별 스크립트 그룹(D) 해석 차이"
+    }
+  },
+  "FCSS_EFW_AD-7.6 V13.35": {
+    "NO.28": {
+      "answer_conflict": "한국어 해설은 A, C가 정답이라고 설명합니다. (덤프: A, D) — 의심 MAC(e0:23:ff:fc:00:86) 마지막 옥텟(0x86) 해석에서 group-id<255(C)로 볼지 port 7(D)로 볼지에 대한 차이. exhibit 없이는 확정 불가."
+    },
+    "NO.31": {
+      "answer_conflict": "한국어 해설은 B(두 IPsec SA가 NPU에 복사됨)가 정답이라고 설명합니다. (덤프: A — IPsec SA 오프로드 불가) — exhibit의 npu_flag 값에 따라 결론이 달라지는 exhibit 의존 문제."
     }
   }
 }

@@ -10361,22 +10361,6 @@
       "E": "FSSO REST API"
     }
   },
-  "NSE4_FGT_AD-7.6 V13.95.pdf::NO.63": {
-    "question": "관리자가 / FGCP 프로토콜을 사용하여 / HA 클러스터를 구성하려 한다. / 두 FortiGate 모두 / set override enable 명령으로 구성되어 있다. / FGCP 프로토콜이 / 기본 FortiGate를 선출하는 / 순서대로 / 기준을 배열하라.",
-    "options": {
-      "A": "[순서 배열 문제 - 이미지 참조]",
-      "B": "[순서 배열 문제 - 이미지 참조]",
-      "C": "[순서 배열 문제 - 이미지 참조]",
-      "D": "[순서 배열 문제 - 이미지 참조]"
-    },
-    "_src": {
-      "question": "An administrator wants to form an HA cluster using the FGCP protocol. Both FortiGate devices are configured with the set override enable command. Arrange the criteria in the order in which the FGCP protocol uses them to elect the primary FortiGate.",
-      "A": "Drag and drop ordering question",
-      "B": "",
-      "C": "",
-      "D": ""
-    }
-  },
   "NSE4_FGT_AD-7.6 V13.95.pdf::NO.64": {
     "question": "전시물을 참조하라. / 관리자가 / HA 클러스터의 두 멤버를 / 동시에 구성했다. / 일주일 모니터링 후 / HA 장애 조치 성능을 / 확인하려 한다. / 관리자가 / 장애 조치를 강제하는 방법은?",
     "options": {

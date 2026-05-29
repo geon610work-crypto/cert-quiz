@@ -10,21 +10,6 @@
     },
     "NO.72": {
       "answer_conflict": "한국어 해설은 C, D가 정답이라고 설명합니다. (덤프: A, B) — 해설 내용은 A, B와 동일하나 알파벳 라벨이 수정되었습니다."
-    },
-    "NO.3": {
-      "answer_conflict": "한국어 해설은 A, D가 정답이라고 설명합니다. (덤프: C, D) — fssod 디버그 출력(exhibit) 해석 차이: 폴링으로 로그아웃 확인 가능 여부(A vs C). agentless 폴링(D)은 공통."
-    },
-    "NO.47": {
-      "answer_conflict": "한국어 해설은 B, D가 정답이라고 설명합니다. (덤프: A, D) — LDAP 디버그(exhibit)에서 서버명이 Lab(A)인지 사용자 CN=John Smith(B)인지에 대한 해석 차이. Search Request 단계(D)는 공통."
-    },
-    "NO.113": {
-      "answer_conflict": "한국어 해설은 A가 정답이라고 설명합니다. (덤프: C) — conserve mode exhibit 해석 차이: 검사 필요 새 세션을 '검사 없이 허용'(C)으로 볼지 'flow 허용·proxy 차단'(A)으로 볼지. av-failopen 기본 동작 해석에 따라 달라짐."
-    },
-    "NO.122": {
-      "answer_conflict": "한국어 해설은 D가 정답이라고 설명합니다. (덤프: C) — conserve mode가 로깅/AV 등 비필수 프로세스를 임의 중단(C)하는지에 대한 기술적 이견. 해설은 핵심 동작을 새 세션 드롭(D)으로 봄."
-    },
-    "NO.126": {
-      "answer_conflict": "한국어 해설은 B가 정답이라고 설명합니다. (덤프: A — 208.91.112.194) — 208.91.112.194는 알려진 FortiGuard anycast IP이며, exhibit의 실제 DNS 응답값에 따라 결정되는 exhibit 의존 문제."
     }
   },
   "NSE4_FGT_AD-7.6 V13.95": {
@@ -44,20 +29,11 @@
     }
   },
   "FCSS_EFW_AD-7.6 V13.35": {
-    "NO.28": {
-      "answer_conflict": "한국어 해설은 A, C가 정답이라고 설명합니다. (덤프: A, D) — 의심 MAC(e0:23:ff:fc:00:86) 마지막 옥텟(0x86) 해석에서 group-id<255(C)로 볼지 port 7(D)로 볼지에 대한 차이. exhibit 없이는 확정 불가."
-    },
-    "NO.31": {
-      "answer_conflict": "한국어 해설은 B(두 IPsec SA가 NPU에 복사됨)가 정답이라고 설명합니다. (덤프: A — IPsec SA 오프로드 불가) — exhibit의 npu_flag 값에 따라 결론이 달라지는 exhibit 의존 문제."
-    },
     "NO.6": {
       "answer_conflict": "한국어 해설은 A, C가 정답이라고 설명합니다. (덤프: A) — 'choose two' 문제인데 덤프에는 1개(A)만 추출됨. 해설 A(802.3ad)+C(FortiLink)가 정확하며 동일 유형 문제(NO.110)의 정답과 일치. 덤프 정답 추출 누락으로 판단."
     },
-    "NO.73": {
-      "answer_conflict": "한국어 해설은 A, C가 정답이라고 설명합니다. (덤프: A, D) — OSPF 상태 exhibit 해석 차이: A(ECMP)는 공통이며, 외부 라우팅 주입=ASBR(C)로 볼지 다중 area 연결=ABR(D)로 볼지는 exhibit에 의존."
-    },
     "NO.89": {
-      "answer_conflict": "한국어 해설은 A가 정답이라고 설명합니다. (덤프: A, D) — OSPF exhibit 해석 차이: 해설은 A(ASBR)만 다루며 덤프는 D(area 0.0.0.5 소속)를 추가. area 정보는 exhibit 의존으로 확정 불가."
+      "answer_conflict": "한국어 해설은 A(ASBR)가 정답이라고 설명합니다. (덤프: A, D) — 이 문제 페이지에는 exhibit가 없으며, 동일 덤프의 관련 문제 NO.73 OSPF 출력 exhibit는 'This router is an ABR'와 Router ID 0.0.0.5를 보여줍니다. 즉 라우터는 ASBR이 아닌 ABR이고 0.0.0.5는 area가 아닌 Router ID이므로 덤프의 A(ASBR)·D(area 0.0.0.5) 모두 근거가 약합니다. exhibit 부재로 확정 불가."
     }
   }
 }

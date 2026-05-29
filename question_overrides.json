@@ -49,6 +49,15 @@
     },
     "NO.31": {
       "answer_conflict": "한국어 해설은 B(두 IPsec SA가 NPU에 복사됨)가 정답이라고 설명합니다. (덤프: A — IPsec SA 오프로드 불가) — exhibit의 npu_flag 값에 따라 결론이 달라지는 exhibit 의존 문제."
+    },
+    "NO.6": {
+      "answer_conflict": "한국어 해설은 A, C가 정답이라고 설명합니다. (덤프: A) — 'choose two' 문제인데 덤프에는 1개(A)만 추출됨. 해설 A(802.3ad)+C(FortiLink)가 정확하며 동일 유형 문제(NO.110)의 정답과 일치. 덤프 정답 추출 누락으로 판단."
+    },
+    "NO.73": {
+      "answer_conflict": "한국어 해설은 A, C가 정답이라고 설명합니다. (덤프: A, D) — OSPF 상태 exhibit 해석 차이: A(ECMP)는 공통이며, 외부 라우팅 주입=ASBR(C)로 볼지 다중 area 연결=ABR(D)로 볼지는 exhibit에 의존."
+    },
+    "NO.89": {
+      "answer_conflict": "한국어 해설은 A가 정답이라고 설명합니다. (덤프: A, D) — OSPF exhibit 해석 차이: 해설은 A(ASBR)만 다루며 덤프는 D(area 0.0.0.5 소속)를 추가. area 정보는 exhibit 의존으로 확정 불가."
     }
   }
 }

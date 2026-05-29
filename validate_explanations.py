@@ -37,9 +37,16 @@ OVERRIDES_FILE = os.path.join(WORKSPACE, 'question_overrides.json')
 def extract_correct_letters(exp):
     """해설에서 정답으로 표시된 알파벳 집합 추출."""
     letters = set()
-    # "정답: A, B" / "정답：A,B"
-    for m in re.findall(r'정답\s*[:：]\s*([A-F](?:\s*,\s*[A-F])*)', exp):
-        letters |= set(re.findall(r'[A-F]', m))
+    # "정답:" 선언 라인에서 정답 알파벳 추출.
+    # 포맷 다양성 대응: "정답: A, B" / "정답: **A, B**" /
+    #   "정답: **C (인증 사용자), D (TCP 세션)**" (괄호 설명이 알파벳 사이에 낀 경우)
+    # 줄 끝까지 스캔하되, 좌우가 영문자가 아닌 '독립' A-F 토큰만 추출
+    # → TCP의 C, SSL/NPU 등 영어 단어 속 글자를 정답으로 오인하지 않음.
+    # 경계에 영문자뿐 아니라 숫자·밑줄도 포함 → "FortiGate_B", "DH_A1" 같은
+    # 식별자 속 글자를 정답 알파벳으로 오인하지 않음.
+    for seg in re.findall(r'정답\s*[:：]([^\n]*)', exp):
+        for lm in re.findall(r'(?<![A-Za-z0-9_])([A-F])(?![A-Za-z0-9_])', seg):
+            letters.add(lm)
     # "✅ X가 정답" / "✅ X." / "✅ **X**" / "✅ **A, D가 정답**" (콤마 나열 포함)
     # 단, 알파벳이 단독 토큰일 때만 (뒤가 글자면 'FGSP'의 F 같은 오인 방지)
     for m in re.finditer(r'✅\s*\**\s*([A-F](?:\s*,\s*[A-F])*)(?![A-Za-z])', exp):

@@ -253,12 +253,20 @@ def _load_preextracted_exhibit(pdf_path: str, question_num: str, exhibit_n: int)
         return None
 
 
+# 앱에서 노출하지 않을 PDF (파일은 보존하되 목록/풀이에서 제외).
+# - V12.95: 구버전 EFW 덤프. 신버전 V13.35·V13.65가 한국어 해설 100%로
+#   대체하므로, 해설 없는 구버전을 사용자에게 노출하지 않는다.
+EXCLUDED_PDFS = {
+    'FCSS_EFW_AD-7.6 V12.95.pdf',
+}
+
+
 def find_pdfs():
     pdfs = []
     for root, dirs, files in os.walk(WORKSPACE):
         dirs[:] = [d for d in dirs if not d.startswith('.')]
         for f in files:
-            if f.lower().endswith('.pdf'):
+            if f.lower().endswith('.pdf') and f not in EXCLUDED_PDFS:
                 full = os.path.join(root, f)
                 rel  = os.path.relpath(full, WORKSPACE)
                 pdfs.append({'name': f, 'path': full, 'rel': rel})

@@ -1629,11 +1629,18 @@ class QuizHandler(BaseHTTPRequestHandler):
             else:
                 # pre-extracted 파일 먼저 확인 (빠른 파일 서빙)
                 b64 = _load_preextracted_exhibit(pdf_path, question_num, exhibit_n)
+                # '' 센티넬 = 사전추출 단계에서 "실제 exhibit 이미지 없음"으로 확정.
+                # 로딩 '실패'가 아니라 원본 PDF에 그림이 없는 문제이므로 no_exhibit로 응답.
+                if b64 == '':
+                    self.send_json({'no_exhibit': True})
+                    return
                 if b64 is None:
                     b64 = render_page_base64(pdf_path, page_num, question_num, exhibit_n=exhibit_n)
             if b64:
                 self.send_json({'image': b64})
-            elif exhibit_n >= 2:
+            elif exhibit_n >= 2 or HAS_FITZ:
+                # 두 번째 exhibit이 없거나, 렌더 엔진은 정상이지만 실제 그림이
+                # 발견되지 않은 경우 → 로딩 실패가 아닌 "exhibit 없는 문제"로 처리.
                 self.send_json({'no_exhibit': True})
             else:
                 self.send_json({'error': 'render failed or PyMuPDF not available'}, 500)
@@ -1814,7 +1821,17 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode, exhibitN=1 }) {
 
   const [zoomed, setZoomed] = useState(false);
 
-  if (absent) return null;  // 두 번째 exhibit 없음 — 조용히 숨김
+  if (absent) {
+    // 두 번째(이상) exhibit이 없는 경우는 조용히 숨김
+    if (exhibitN > 1) return null;
+    // 기본 exhibit이 원본 PDF에 포함되어 있지 않은 문제 — 로딩 실패가 아님을 분명히 안내
+    return (
+      <div style={{textAlign:'center',padding:'12px',color:'var(--c5)',fontSize:'13px',
+        background:'var(--c0)',borderRadius:'8px',marginBottom:'16px',border:'1px dashed var(--c3)'}}>
+        🖼️ 이 문제는 원본 자료에 Exhibit 그림이 포함되어 있지 않습니다. 본문 내용만으로 풀 수 있습니다.
+      </div>
+    );
+  }
   if (loading) return (
     <div style={{textAlign:'center',padding:'16px',color:'var(--c5)',fontSize:'13px',
       background:'var(--c0)',borderRadius:'8px',marginBottom:'16px',border:'1px solid #334155'}}>

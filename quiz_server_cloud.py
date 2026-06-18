@@ -92,11 +92,11 @@ class _LRUCache:
 
 # page image cache: {(pdf_path, page_num): base64_str}
 # 빈 문자열('')은 "두 번째 exhibit 없음" 센티넬 (캐시 히트 시 즉시 None 반환)
-image_cache = _LRUCache(maxsize=200)
+image_cache = _LRUCache(maxsize=40)
 
-# 동시 fitz 렌더링 수 제한 — Render.com 무료 플랜은 CPU가 약하므로
-# 동시 렌더 2개 초과 시 CPU 포화 → 모든 요청이 느려지는 문제 방지
-_render_semaphore = threading.Semaphore(4)
+# 동시 fitz 렌더링 수 제한 — Render.com 무료 플랜은 CPU/메모리(512MB)가 약하므로
+# 동시 렌더 2개 초과 시 CPU 포화 + pixmap 메모리 급증 → OOM/지연 방지
+_render_semaphore = threading.Semaphore(2)
 
 # fitz Document cache: 스레드당 별도 Document (fitz는 멀티스레드 비안전)
 # ThreadingHTTPServer에서 각 요청 스레드가 자체 doc을 유지
@@ -661,7 +661,7 @@ def _get_nth_exhibit_image(pg, n=0, y_min=None, y_max=None):
         return None
 
 
-def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n=1):
+def render_page_base64(pdf_path, page_num, question_num=None, dpi=120, exhibit_n=1):
     """Extract the exhibit image for a specific question from a PDF page.
 
     Strategy:
@@ -1167,9 +1167,9 @@ def render_page_base64(pdf_path, page_num, question_num=None, dpi=150, exhibit_n
         _render_semaphore.release()
 
 
-options_area_cache = _LRUCache(maxsize=100)
+options_area_cache = _LRUCache(maxsize=25)
 
-def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=150):
+def render_options_area_base64(pdf_path, page_num, question_num=None, dpi=120):
     """Render the answer-options area for questions whose options are images.
 
     When A/B/C/D option texts are embedded as images (not extractable as text),
@@ -1585,7 +1585,7 @@ class QuizHandler(BaseHTTPRequestHandler):
                     def _render_one(_q, _path=pdf_path):
                         render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=1)
                         render_page_base64(_path, _q['page_num'], _q['num'], exhibit_n=2)
-                    with ThreadPoolExecutor(max_workers=4) as _ex:
+                    with ThreadPoolExecutor(max_workers=2) as _ex:
                         list(_ex.map(_render_one, _exhibit_qs))
                     print(f"  ✅ Exhibit pre-render done")
 

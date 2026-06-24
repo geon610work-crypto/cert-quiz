@@ -19,3 +19,6 @@ no*.jpeg
 
 # 업로드 임시 파일
 *.tmp
+
+# 신규 덤프 원본 PDF (오프라인 변환 후 런타임 불필요 — brave_questions.json + exhibits 로 대체)
+_NSE 4 - FortiOS 7.6 Administrator (FCP - Fortigate 7.6) Exam Materials.pdf

@@ -1,0 +1,1392 @@
+{
+  "source_pdf": "_NSE 4 - FortiOS 7.6 Administrator (FCP - Fortigate 7.6) Exam Materials.pdf",
+  "stem": "NSE4_FGT_AD-7.6 Brave",
+  "count": 100,
+  "questions": [
+    {
+      "num": 1,
+      "question": "An administrator wants to configure dead peer detection (DPD) on IPsec\nVPN for detecting dead tunnels. The requirement is that FortiGate sends DPD probes\nonly when there is no inbound traffic.\nWhich DPD mode on FortiGate meets this requirement?\n(Choose one answer)",
+      "options": {
+        "A": "Enabled",
+        "B": "On Idle",
+        "C": "Disabled",
+        "D": "On Demand"
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 2,
+      "question": "Which two statements about equal-cost multi-path (ECMP) configuration\non FortiGate are true?\n(Choose two answers)",
+      "options": {
+        "A": "If SD-WAN is enabled, you control the load balancing algorithm with the parameter load-balance-mode.",
+        "B": "If SD-WAN is disabled, you can configure the parameter v4-ecmp-mode to volume-based.",
+        "C": "If SD-WAN is enabled, you can configure routes with unequal distance and priority values to be part of ECMP",
+        "D": "If SD-WAN is disabled, you configure the load balancing algorithm in config system settings."
+      },
+      "answer": "A,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 3,
+      "question": "You have created a web filter profile named restrict_media-profile with a\ndaily category usage quota.\nWhen you are adding the profile to the firewall policy, the restrict_media-profile is not\nlisted in the available web profile drop down.\nWhat could be the reason?\n.\n(Choose one answer)",
+      "options": {
+        "A": "The firewall policy is in no-inspection mode instead of deep-inspection.",
+        "B": "The inspection mode in the firewall policy is not matching with web filter profile feature set.",
+        "C": "The web filter profile is already referenced in another firewall policy.",
+        "D": "The naming convention used in the web filter profile is restricting it in the firewall policy"
+      },
+      "answer": "B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 4,
+      "question": "Refer to the exhibit,\nAs an administrator you have created an IPS profile, but it is not performing as\nexpected. While testing you got the output as shown in the exhibit.\nWhat could be the possible reason of the diagnose output shown in the exhibit?\n(Choose one answer)",
+      "options": {
+        "A": "There is no firewall policy configured with an IPS security profile.",
+        "B": "FortiGate entered into IPS fail open state.",
+        "C": "Administrator entered the command diagnose test application ipsmonitor 5.",
+        "D": "Administrator entered the command diagnose test application ipsmonitor 99."
+      },
+      "answer": "A",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "4_n1.jpg"
+      ]
+    },
+    {
+      "num": 5,
+      "question": "Refer to the exhibit.\nThe predefined deep-inspection and custom-deep-inspection profiles exclude some\nweb categories from SSL inspection, as shown in the exhibit.\nFor which two reasons are these web categories exempted?\n(Choose two answers)",
+      "options": {
+        "A": "The FortiGate temporary certificate denies the browser's access to websites that use HTTP Strict Transport Security.",
+        "B": "These websites are in an allowlist of reputable domain names maintained by FortiGuard.",
+        "C": "The resources utilization is optimized because these websites are in the trusted domain list on FortiGate.",
+        "D": "The legal regulation aims to prioritize user privacy and protect sensitive information for these websites."
+      },
+      "answer": "A,D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "5_n1.jpg"
+      ]
+    },
+    {
+      "num": 6,
+      "question": "Refer to the exhibit.\nThe NOC team connects to the FortiGate GUI with the NOC_Access admin profile. They\nrequest that their GUI sessions do not disconnect too early during inactivity.\nWhat must the administrator configure to answer this specific request from the NOC\nteam?\n(Choose one answer)",
+      "options": {
+        "A": "Move NOC_Access to the top of the list to ensure all profile settings take effect.",
+        "B": "Increase the offline value of the Override Idle Timeout parameter in the NOC_Access admin profile.",
+        "C": "Ensure that all NOC_Access users are assigned the super_admin role to guarantee access.",
+        "D": "Increase the admintimeout value under config system accprofile NOC_Access."
+      },
+      "answer": "B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "6_n1.jpg"
+      ]
+    },
+    {
+      "num": 7,
+      "question": "Refer to the exhibit.\nBased on this partial configuration, what are the two possible outcomes when\nFortiGate enters conserve mode?\n(Choose two answers)",
+      "options": {
+        "A": "Administrators cannot change the configuration.",
+        "B": "FortiGate skips quarantine actions.",
+        "C": "Administrators must restart FortiGate to allow new sessions.",
+        "D": "FortiGate drops new sessions requiring inspection."
+      },
+      "answer": "A,B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "7_n1.jpg"
+      ]
+    },
+    {
+      "num": 8,
+      "question": "What is the primary FortiGate election process when the HA override\nsetting is enabled?\n(Choose one answer)",
+      "options": {
+        "A": "Connected monitored ports > Priority > HA uptime > FortiGate serial number",
+        "B": "Connected monitored ports > Priority > System uptime > FortiGate serial number",
+        "C": "Connected monitored ports > HA uptime > Priority > FortiGate serial number",
+        "D": "Connected monitored ports > System uptime > Priority > FortiGate serial number"
+      },
+      "answer": "A",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 9,
+      "question": "An administrator wanted to configure an IPS sensor to block traffic that\ntriggers a signature a set number of times during a specific time period.\nHow can the administrator achieve the objective?\n(Choose one answer)",
+      "options": {
+        "A": "Use IPS group signatures, set rate-mode 60.",
+        "B": "Use IPS packet logging option with periodical filter option.",
+        "C": "Use IPS filter, rate-mode periodical option.",
+        "D": "Use IPS signatures, rate-mode periodical option."
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 10,
+      "question": "A FortiGate firewall policy is configured with active authentication,\nhowever, the user cannot authenticate when accessing a website.\nWhich protocol must FortiGate allow even though the user cannot authenticate?\n(Choose one answer)",
+      "options": {
+        "A": "LDAP",
+        "B": "TACACS+",
+        "C": "Kerberos",
+        "D": "DNS"
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 11,
+      "question": "Refer to the exhibit, which shows a partial configuration from the\nremote authentication server.\nWhy does the FortiGate administrator need this configuration?\n(Choose one answer)",
+      "options": {
+        "A": "To authenticate only the Training user group.",
+        "B": "To set up a RADIUS server Secret.",
+        "C": "To authenticate and match the Training OU on the RADIUS server.",
+        "D": "To authenticate Any FortiGate user groups."
+      },
+      "answer": "A",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "11_n1.jpg"
+      ]
+    },
+    {
+      "num": 12,
+      "question": "Refer to the exhibit,\nwhich shows an SD-WAN zone configuration on the FortiGate GUI.\nBased on the exhibit, which statement is true?\n(Choose one answer)",
+      "options": {
+        "A": "The Underlay zone is the zone by default.",
+        "B": "The Underlay zone contains no member.",
+        "C": "port2 and port3 are not assigned to a zone.",
+        "D": "The virtual-wan-link and overlay zones can be deleted."
+      },
+      "answer": "B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "12_n1.jpg"
+      ]
+    },
+    {
+      "num": 13,
+      "question": "Which three statements explain a flow-based antivirus profile?\n(Choose three answers)",
+      "options": {
+        "A": "FortiGate buffers the whole file but transmits to the client at the same time.",
+        "B": "Flow-based inspection uses a hybrid of the scanning modes available in proxy-based inspection.",
+        "C": "If a virus is detected, the last packet is delivered to the client.",
+        "D": "Flow-based inspection optimizes performance compared to proxy-based inspection.",
+        "E": "The IPS engine handles the process as a standalone."
+      },
+      "answer": "A,B,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 14,
+      "question": "Refer to the exhibit.\nAn administrator has configured an Application Overrides for the ABC.Com application\nsignature and set the Action to Allow. This application control profile is then applied to\na firewall policy that is scanning all outbound traffic. Logging is enabled in the firewall\npolicy. To test the configuration, the administrator accessed the ABC.Com web site\nseveral times.\nWhy are there no logs generated under security logs for ABC.Com?\n(Choose one answer)",
+      "options": {
+        "A": "The ABC.Com Type is set as Application instead of Filter.",
+        "B": "The ABC.Com is configured under application profile, which must be configured as a web filter profile.",
+        "C": "The ABC.Com Action is set to Allow.",
+        "D": "The ABC.Com is hitting the category Excessive-Bandwidth."
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "14_n1.jpg"
+      ]
+    },
+    {
+      "num": 15,
+      "question": "Which two statements describe characteristics of automation stitches?\n(Choose two answers)",
+      "options": {
+        "A": "Actions involve only devices included in the Security Fabric.",
+        "B": "An automation stitch can have multiple triggers.",
+        "C": "Multiple actions can run in parallel.",
+        "D": "Triggers can involve external connectors."
+      },
+      "answer": "C,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 16,
+      "question": "Which three statements about SD-WAN performance SLAs are true?\n(Choose three answers)",
+      "options": {
+        "A": "They rely on session loss and jitter.",
+        "B": "They can be measured actively or passively.",
+        "C": "They are applied in a SD-WAN rule lowest cost strategy.",
+        "D": "They monitor the state of the FortiGate device.",
+        "E": "All the SLA targets can be configured."
+      },
+      "answer": "A,B,E",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 17,
+      "question": "Which two statements are true about an HA cluster?\n(Choose two answers)",
+      "options": {
+        "A": "An HA cluster cannot have both in-band and out-of-band management interfaces at the same time.",
+        "B": "Link failover triggers a failover if the administrator sets the interface down on the primary device.",
+        "C": "When sniffing the heartbeat interface, the administrator must see the IP address 169.254.0.2.",
+        "D": "HA incremental synchronization includes FIB entries and IPsec SAs."
+      },
+      "answer": "B,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 18,
+      "question": "A network administrator enabled antivirus and selected an SSL\ninspection profile on a firewall policy.\nWhen downloading an EICAR test file through HTTP, FortiGate detects the virus and\nblocks the file. When downloading the same file through HTTPS, FortiGate does not\ndetect the virus and does not block the file, allowing it to be downloaded.\nThe administrator confirms that the traffic matches the configured firewall policy.\nWhat are two reasons for the failed virus detection by FortiGate?\n(Choose two answers)",
+      "options": {
+        "A": "The selected SSL inspection profile has certificate inspection enabled.",
+        "B": "The website is exempted from SSL inspection.",
+        "C": "The EICAR test file exceeds the protocol options oversize limit.",
+        "D": "The browser does not trust the FortiGate self-signed CA certificate."
+      },
+      "answer": "A,B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 19,
+      "question": "You have configured the below commands on a FortiGate.\nWhat would be the impact of this configuration on FortiGate?\n(Choose one answer)",
+      "options": {
+        "A": "FortiGate will enable strict RPF on all its interfaces and port1 will be enable for asymmetric routing.",
+        "B": "FortiGate will enable strict RPF on all its interfaces and port1 will be exempted from RPF checks.",
+        "C": "Port1 will be enabled with flexible RPF, and all other interfaces will be enabled for strict RPF.",
+        "D": "The global configuration will take precedence and FortiGate will enable strict RPF on all interfaces."
+      },
+      "answer": "B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 20,
+      "question": "Refer to the exhibit.\nWhat would be the impact of these settings on the Server certificate SNI check\nconfiguration on FortiGate?\n(Choose one answer)",
+      "options": {
+        "A": "FortiGate will accept and use the CN in the server certificate for URL filtering if the SNI does not match the CN or SAN fields.",
+        "B": "FortiGate will accept the connection with a warning if the SNI does not match the CN or SAN fields.",
+        "C": "FortiGate will close the connection if the SNI does not match the CN or SAN fields.",
+        "D": "FortiGate will close the connection if the SNI does not match the CN and SAN fields."
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "20_n1.jpg"
+      ]
+    },
+    {
+      "num": 21,
+      "question": "A new administrator is configuring FSSO authentication on FortiGate\nusing DC Agent Mode.\nWhich step is NOT part of the expected process?\n(Choose one answer)",
+      "options": {
+        "A": "The DC agent sends login event data directly to FortiGate.",
+        "B": "The user logs into the windows domain.",
+        "C": "The collector agent forwards login event data to FortiGate.",
+        "D": "FortiGate determines user identity based on the IP address in the FSSO list."
+      },
+      "answer": "A",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 22,
+      "question": "A network administrator is reviewing firewall policies in both Interface\nPair View and By Sequence View. The policies appear in a different order in each view.\nWhy is the policy order different in these two views?\n(Choose one answer)",
+      "options": {
+        "A": "Policies in Interface Pair View are prioritized by security levels, while By Sequence View strictly follows the administrator's manual ordering.",
+        "B": "By Sequence View groups policies based on rule priority, while Interface Pair View always follows the order of traffic logs.",
+        "C": "The firewall dynamically reorders policies in Interface Pair View based on recent traffic patterns, but By Sequence View remains static.",
+        "D": "Interface Pair View sorts policies based on matching interfaces, while By Sequence View shows the actual processing order of rules."
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 23,
+      "question": "An administrator notices that some users are unable to establish SSL\nVPN connections, while others can connect without any issues.\nWhat should the administrator check first?\n(Choose one answer)",
+      "options": {
+        "A": "Ensure that the affected users are using the correct port number",
+        "B": "Ensure that user traffic is hitting the firewall policy",
+        "C": "Ensure that forced tunneling is enabled to reroute all traffic through the SSL VPN",
+        "D": "Ensure that the HTTPS service is enabled on SSL VPN tunnel interface"
+      },
+      "answer": "A",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 24,
+      "question": "Refer to the exhibit.\nAn administrator has created a new firewall address to use as the destination for a\nstatic route.\nWhy is the administrator not able to select the new address in the Destination field of\nthe new static route?\n(Choose one answer)",
+      "options": {
+        "A": "In the new static route, the administrator must select Named Address.",
+        "B": "In the new firewall address, the FQDN address must first be resolved.",
+        "C": "In the new static route, the administrator must first set the interface to port2.",
+        "D": "In the new firewall address, Routing configuration must be enabled."
+      },
+      "answer": "D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "24_n1.jpg"
+      ]
+    },
+    {
+      "num": 25,
+      "question": "FortiGate is operating in NAT mode and has two physical interfaces\nconnected to the LAN and DMZ networks respectively.\nWhich two statements about the requirements of connected physical interfaces on\nFortiGate are true?\n(Choose two answers)",
+      "options": {
+        "A": "Both interfaces must have the interface role assigned.",
+        "B": "Both interfaces must have directly connected routes on the routing table.",
+        "C": "Both interfaces must have DHCP enabled and interfaces set to LAN and DMZ roles assigned.",
+        "D": "Both interfaces must have IP addresses assigned."
+      },
+      "answer": "B,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 26,
+      "question": "When configuring a FortiGate in a multi-WAN setup, why would an\nadministrator enable session preservation on an interface?\n(Choose one answer)",
+      "options": {
+        "A": "To allow the FortiGate to dynamically change interfaces for all active sessions when a WAN link fails",
+        "B": "To make sure all sessions without source NAT enabled always use the primary WAN link",
+        "C": "To improve security by forcing users to authenticate again when the WAN link changes",
+        "D": "To ensure that existing SSL VPN connections remain on the same interface even if route changes occur"
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 27,
+      "question": "Refer to the exhibit.\nFortiGate has two separate firewall policies for Sales and Engineering to access the\nsame web server with the same security profiles.\nWhich action must the administrator perform to consolidate the two policies into one?\n(Choose one answer)",
+      "options": {
+        "A": "Create an Aggregate interface that includes port1 and port2 to create a single firewall policy.",
+        "B": "Select port1 and port2 subnets in a single firewall policy.",
+        "C": "Replace port1 and port2 with the any interface in a single firewall policy.",
+        "D": "Enable Multiple Interface Policies to select port1 and port2 in the same firewall policy."
+      },
+      "answer": "D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "27_n1.jpg"
+      ]
+    },
+    {
+      "num": 28,
+      "question": "You have configured an application control profile, set peer-to-peer\ntraffic to Block under the Categories tab, and applied it to the firewall policy. However,\nyour peer-to-peer traffic on known ports is passing through the FortiGate without\nbeing blocked.\nWhat FortiGate settings should you check to resolve this issue?\n(Choose one answer)",
+      "options": {
+        "A": "FortiGuard category ratings",
+        "B": "Application and Filter Overrides",
+        "C": "Network Protocol Enforcement",
+        "D": "Replacement Messages for UDP-based Applications"
+      },
+      "answer": "C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 29,
+      "question": "When configuring firewall policies which of the following is true\nregarding the policy ID?\n(Choose two answers)",
+      "options": {
+        "A": "It is mandatory to provide a policy ID while creating a firewall policy regardless of GUI or CLI.",
+        "B": "A firewall policy ID identifies the order of policy execution in firewall policies.",
+        "C": "You can create a policy in CLI with policy ID 0.",
+        "D": "A policy ID cannot be edited once a policy is created."
+      },
+      "answer": "C,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 30,
+      "question": "Which two statements are correct when FortiGate enters conserve\nmode?\n(Choose two answers)",
+      "options": {
+        "A": "FortiGate continues to run critical security actions, such as quarantine.",
+        "B": "FortiGate refuses to accept configuration changes.",
+        "C": "FortiGate halts complete system operation and requires a reboot to regain available resources.",
+        "D": "FortiGate continues to transmit packets without IPS inspection when the fail-open global setting in IPS is enabled."
+      },
+      "answer": "B,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 31,
+      "question": "A remote user reports slow SSL VPN performance and frequent\ndisconnections. The user is located in an area with poor internet connectivity.\nWhat setting should the administrator adjust to improve the user’s experience?\n(Choose one answer)",
+      "options": {
+        "A": "Enable split tunneling to reduce VPN traffic.",
+        "B": "Change the SSL VPN port to a non-standard port.",
+        "C": "Increase the session timeout for inactive sessions.",
+        "D": "Configure the DTLS timeout to accommodate high-latency connections."
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 32,
+      "question": "An administrator wants to analyze and manage digital certificates to\nprevent browser warnings when users connect to the SSL VPN portal.\nWhich two statements describe how to correctly do this?\n(Choose two answers)",
+      "options": {
+        "A": "The administrator can rely on the default FortiGate self-signed certificate to prevent all security warnings in the browser.",
+        "B": "The administrator must disable HTTPS administrative access entirely to avoid certificate warnings.",
+        "C": "The administrator can use a publicly trusted certificate from a known certificate authority (CA) to stop browser warnings.",
+        "D": "The administrator can import the FortiGate self-signed certificate into each user’s browser as a trusted certificate."
+      },
+      "answer": "C,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 33,
+      "question": "An administrator suspects that the Collector Agent is not forwarding\nlogin events to FortiGate.\nWhat is the most effective troubleshooting step?\n(Choose one answer)",
+      "options": {
+        "A": "Verify if DC agent is enabled on the FortiGate",
+        "B": "Restart the domain controller to refresh authentication services.",
+        "C": "Verify if FortiGate is set to use LDAP authentication instead of FSSO.",
+        "D": "Check if TCP port 8000 is open between the collector agent and FortiGate."
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 34,
+      "question": "Refer to the exhibit.\nA network administrator is troubleshooting an IPsec tunnel between two FortiGate\ndevices. The administrator has determined that phase 1 status is up, but phase 2 fails\nto come up.\nBased on the phase 2 configuration shown in the exhibit, which two configuration\nchanges will bring phase 2 up?\n(Choose two answers)",
+      "options": {
+        "A": "On BR1-FGT, set Seconds to 43200.",
+        "B": "On HQ-NGFW, enable Diffie-Hellman Group 2.",
+        "C": "On BR1-FGT, set Remote Address to 10.0.11.0/255.255.255.0.",
+        "D": "On HQ-NGFW, set Encryption to AES256."
+      },
+      "answer": "C,D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "34_n1.jpg"
+      ]
+    },
+    {
+      "num": 35,
+      "question": "Refer to the exhibits.\nThe exhibits show a diagram of a FortiGate device connected to the network, as well\nas the firewall policy and IP pool configuration on the FortiGate device.\nTwo PCs, PC1 and PC2, are connected behind FortiGate and can access the internet\nsuccessfully. However, when the administrator adds a third PC to the network (PC3),\nthe PC cannot connect to the internet.\nBased on the information shown in the exhibit, which two configuration options can\nthe administrator use to fix the connectivity issue for PC3?\n(Choose two answers)",
+      "options": {
+        "A": "In the system settings, set Multiple Interface Policies to enable.",
+        "B": "In the IP pool configuration, set endip to 100.65.0.112.",
+        "C": "In the firewall policy, set match-vip to enable using CLI.",
+        "D": "In the IP pool configuration, set type to overload."
+      },
+      "answer": "B,D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "35_n1.jpg"
+      ]
+    },
+    {
+      "num": 36,
+      "question": "Refer to the exhibits.\nAn administrator has observed the performance status outputs on an HA cluster for 55\nseconds.\nWhich FortiGate is the primary?\n(Choose one answer)",
+      "options": {
+        "A": "HQ-NGFW-2 with the parameter memory-failover-threshold setting",
+        "B": "HQ-NGFW-2 with the parameter priority setting",
+        "C": "HQ-NGFW-1 with the parameter memory-failover-flip-timeout setting",
+        "D": "HQ-NGFW-1 with the parameter override setting"
+      },
+      "answer": "A",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "36_n1.jpg"
+      ]
+    },
+    {
+      "num": 37,
+      "question": "Which statement correctly describes NetAPI polling mode for the FSSO\ncollector agent?\n(Choose one answer)",
+      "options": {
+        "A": "The collector agent uses a Windows API to query DCs for user logins.",
+        "B": "NetAPI polling can increase bandwidth usage in large networks.",
+        "C": "The NetSessionEnum function is used to track user logouts.",
+        "D": "The collector agent must search Windows application event logs."
+      },
+      "answer": "C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 38,
+      "question": "You have configured the FortiGate device for FSSO. A user is successful\nin log-in to Windows, but their access to the internet is denied.\nWhat should the administrator check first?\n(Choose one answer)",
+      "options": {
+        "A": "Whether the user is assigned to the correct AD group.",
+        "B": "The FortiGate firewall policy settings for SSL decryption.",
+        "C": ". The FortiGate FSSO active users list for user's IP address.",
+        "D": "The Windows event viewer for failed login attempts."
+      },
+      "answer": "C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 39,
+      "question": "What are three key routing principles in SD-WAN?\n(Choose three answers)",
+      "options": {
+        "A": "By default, SD-WAN rules are skipped if the included SD-WAN members do not have a valid route to the destination.",
+        "B": "SD-WAN rules have precedence over any other type of routes.",
+        "C": "Regular policy routes have precedence over SD-WAN rules.",
+        "D": "By default, SD-WAN rules are skipped if only one route to the destination is available.",
+        "E": "By default, SD-WAN rules are skipped if the best route to the destination is not an SD-WAN member."
+      },
+      "answer": "A,C,E",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 40,
+      "question": "Refer to the exhibits.\nAn administrator configured the Web Filter Profile to block access to all social\nnetworking sites except Facebook. However, when users try to access facebook.com,\nthey are redirected to a FortiGuard web filtering block page.\nBased on the exhibits, which configuration change must the administrator make to\nallow Facebook while blocking all other social networking sites?\n(Choose one answer)",
+      "options": {
+        "A": "Change the Feature set of Web Filter Profile as Proxy-based.",
+        "B": "Change the type as Simple in the Static URL Filter section.",
+        "C": "Set the Action as Exempt for www.facebook.com in the Static URL Filter.",
+        "D": "Set the Social Networking action as warning in the FortiGuard Category Based Filter."
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "40_n1.jpg"
+      ]
+    },
+    {
+      "num": 41,
+      "question": "Refer to the exhibit.\nYou are asked to implement an antivirus profile for files downloaded through FTP,\nHTTP, and HTTPS.\nWhile testing, you are successful with HTTP and FTP protocols, but FortiGate does not\nblock the file download over HTTPS.\nWhat could be the cause?\n(Choose one answer)",
+      "options": {
+        "A": "Web filter is not enabled on the firewall policy to complement the antivirus profile.",
+        "B": "The feature set in the antivirus profile is not set to Flow-based.",
+        "C": "The SSL inspection mode in the firewall policy is not deep content inspection.",
+        "D": "The action on the firewall policy is not set to deny."
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "41_n1.jpg"
+      ]
+    },
+    {
+      "num": 42,
+      "question": "Refer to the exhibits.\nThe exhibits show a diagram of a FortiGate device connected to the network, as well\nas the IP pool configuration and firewall policy objects.\nThe WAN (port2) interface has the IP address 100.65.0.101/24.\nThe LAN (port4) interface has the IP address 10.0.11.254/24.\nWhich IP address will be used to source NAT (SNAT) the traffic, if the user on HQ-PC-1\n(10.0.11.50) pings the IP address of BR-FGT (100.65.1.111)?\n(Choose one answer)",
+      "options": {
+        "A": "100.65.0.101",
+        "B": "100.65.0.49",
+        "C": "100.65.0.99",
+        "D": "100.65.0.149"
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "42_n1.jpg"
+      ]
+    },
+    {
+      "num": 43,
+      "question": "Refer to the exhibits.\nThe exhibits show a diagram of a FortiGate device connected to the network, and the\nfirewall configuration.\nAn administrator created a Deny policy with default settings to deny Webserver access\nfor Remote-User2.\nThe policy should work such that Remote-User1 must be able to access the Webserver\nwhile preventing Remote-User2 from accessing the Webserver.\nWhich additional configuration can the administrator add to a deny firewall policy,\nbeyond the default behavior, to block Remote-User2 from accessing the Webserver?\n(Choose one answer)",
+      "options": {
+        "A": "Disable match-vip in the Allow_access policy.",
+        "B": "Configure a One-to-One IP Pool object in a new policy.",
+        "C": "Set the Destination address as Webserver in the Deny policy.",
+        "D": "Set the Destination address as Deny_IP in the Allow_access policy."
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "43_n1.jpg"
+      ]
+    },
+    {
+      "num": 44,
+      "question": "Refer to the exhibits.\nThe exhibits show the system performance output and default configuration of high\nmemory usage thresholds on a FortiGate device.\nBased on the system performance output, what are the two possible outcomes?\n(Choose two answers)",
+      "options": {
+        "A": "FortiGate has entered conserve mode.",
+        "B": "Administrators can access FortiGate only through the console port.",
+        "C": "Administrators can change the configuration.",
+        "D": "FortiGate drops new sessions."
+      },
+      "answer": "A,D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "44_n1.jpg"
+      ]
+    },
+    {
+      "num": 45,
+      "question": "Refer to the exhibits.\nBased on the current HA status, an administrator updates the override and priority\nparameters on HQ-NGFW-1 and HQ-NGFW-2 as shown in the exhibit.\nWhat would be the expected outcome in the HA cluster?\n(Choose one answer)",
+      "options": {
+        "A": "HQ-NGFW-1 will synchronize the override disable setting with HQ-NGFW-2.",
+        "B": "HQ-NGFW-2 will take over as the primary because it has the override enable setting and higher priority than HQ-NGFW-1.",
+        "C": "HQ-NGFW-1 will remain the primary because HQ-NGFW-2 has lower priority.",
+        "D": "The HA cluster will become out of sync because the override setting must match on all HA members."
+      },
+      "answer": "B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "45_n1.jpg"
+      ]
+    },
+    {
+      "num": 46,
+      "question": "Refer to the exhibits.\nAn administrator wants to add HQ-ISFW-2 in the Security Fabric. HQ-ISFW-2 is in the\nsame subnet as HQ-ISFW. After configuring the Security Fabric settings on HQ-ISFW-2,\nthe status stays Pending.\nWhat can be the two possible reasons?\n(Choose two answers)",
+      "options": {
+        "A": "Upstream FortiGate IP must be set to 10.0.11.254.",
+        "B": "SAML Single Sign-On must be set to Manual.",
+        "C": "HQ-ISFW-2 must be authorized on HQ-ISFW.",
+        "D": "Management IP must be set to 10.0.13.254."
+      },
+      "answer": "A,C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "46_n1.jpg"
+      ]
+    },
+    {
+      "num": 47,
+      "question": "Refer to the exhibit.\nThe exhibit shows the FortiGuard Category Based Filter section of a corporate web\nfilter profile.\nAn administrator must block access to download.com, which belongs to the Freeware\nand Software Downloads category. The administrator must also allow other websites\nin the same category.\nWhat are two solutions for satisfying the requirement?\n(Choose two answers)",
+      "options": {
+        "A": "Configure a static URL filter entry for download.com with Type and Action set to Wildcard and Block, respectively.",
+        "B": "Configure a web override rating for download.com and select Malicious Websites as the subcategory.",
+        "C": "Configure a separate firewall policy with action Deny and an FQDN address object for *.download.com as destination address.",
+        "D": "Set the Freeware and Software Downloads category Action to Warning."
+      },
+      "answer": "A,B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "47_n1.jpg"
+      ]
+    },
+    {
+      "num": 48,
+      "question": "You are encountering connectivity problems caused by intermediate\ndevices blocking IPsec traffic.\nIn which two ways can you effectively resolve the problem?\n(Choose two answers)",
+      "options": {
+        "A": "You can use SSL VPN tunnel mode to prevent problems with blocked ESP and UDP ports (500 or 4500).",
+        "B": "You can turn on fragmentation to fix large certificate negotiation problems.",
+        "C": "You can configure a hub-and-spoke topology with SSL VPN tunnels to bypass blocked UDP ports.",
+        "D": "You should use the protocol IKEv2."
+      },
+      "answer": "A,B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 49,
+      "question": "You have implemented the application sensor and the corresponding\nfirewall policy as shown in the exhibits.\nYou cannot access any of the Google applications, but you are able to access\nwww.fortinet.com.\nWhich two actions would you take to resolve the issue?\n(Choose two answers)",
+      "options": {
+        "A": "Add *Google*.com to the URL category in the security profile.",
+        "B": "Change the Inspection mode to Flow-based.",
+        "C": "Set the action for Google in the Application and Filter Overrides section to Allow.",
+        "D": "Move up Google in the Application and Filter Overrides section to set its priority to 1.",
+        "E": "Set SSL inspection to deep-content inspection."
+      },
+      "answer": "B,E",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 50,
+      "question": "Refer to the exhibits.\nYou have implemented the application sensor and the corresponding firewall policy as\nshown in the exhibits.\nWhich two factors can you observe from these configurations?\n(Choose two answers)",
+      "options": {
+        "A": "YouTube search is allowed based on the Google Application and Filter override settings.",
+        "B": "Facebook access is allowed but you cannot play Facebook videos based on Video/Audio category filter settings.",
+        "C": "Facebook access is blocked based on the category filter settings.",
+        "D": "YouTube access is blocked based on Excessive-Bandwidth Application and Filter override settings."
+      },
+      "answer": "A,C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "50_n1.jpg"
+      ]
+    },
+    {
+      "num": 51,
+      "question": "Refer to the exhibit, which contains a RADIUS server configuration.\nAn administrator added a configuration for a new RADIUS server. While configuring,\nthe administrator enabled Include in every user group.\nWhat is the impact of enabling Include in every user group in a RADIUS configuration?\n(Choose one answer)",
+      "options": {
+        "A": "This option places the RADIUS server, and all users who can authenticate against that server, into every FortiGate user group.",
+        "B": "This option places the RADIUS server, and all users who can authenticate against that server, into every RADIUS group.",
+        "C": "This option places all users into every RADIUS user group, including groups that are used for the LDAP server on FortiGate.",
+        "D": "This option places all FortiGate users and groups required to authenticate into the RADIUS server, which, in this case, is FortiAuthenticator."
+      },
+      "answer": "A",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "51_n1.jpg"
+      ]
+    },
+    {
+      "num": 52,
+      "question": "Refer to the exhibits.\nAn administrator creates a new address object on the root FortiGate (HQ-NGFW-1) in\nthe Security Fabric. After synchronization, this object is not available on the\ndownstream FortiGate (HQ-ISFW).\nWhat must the administrator do to synchronize the address object?\n(Choose one answer)",
+      "options": {
+        "A": "Change the csf setting on HQ-ISFW (downstream) to set configuration-sync local.",
+        "B": "Change the csf setting on HQ-ISFW (downstream) to set saml-configuration-sync default.",
+        "C": "Change the csf setting on HQ-NGFW-1 (root) to set fabric-object-unification default.",
+        "D": "Change the csf setting on both devices to set downstream-access enable."
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "52_n1.jpg"
+      ]
+    },
+    {
+      "num": 53,
+      "question": "Which three strategies are valid SD-WAN rule strategies for member\nselection?\n(Choose three answers)",
+      "options": {
+        "A": "Lowest Cost (SLA) without load balancing",
+        "B": "Manual with load balancing",
+        "C": "Lowest Quality (SLA) with load balancing",
+        "D": "Lowest Cost (SLA) with load balancing",
+        "E": "Best Quality with load balancing"
+      },
+      "answer": "B,D,E",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 54,
+      "question": "What are two characteristics of HA cluster heartbeat IP addresses in a\nFortiGate device?\n(Choose two answers)",
+      "options": {
+        "A": "Heartbeat interfaces have virtual IP addresses that are manually assigned.",
+        "B": "Heartbeat IP addresses are used to distinguish between cluster members.",
+        "C": "The heartbeat interface of the primary device in the cluster is always assigned IP address 169.254.0.1.",
+        "D": "A change in the heartbeat IP address happens when a FortiGate device joins or leaves the cluster."
+      },
+      "answer": "B,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 55,
+      "question": "Refer to the exhibit showing a debug flow output.\nWhich two conclusions can you make from the debug flow output?\n(Choose two answers)",
+      "options": {
+        "A": "The default gateway is configured on port2.",
+        "B": "The RPF check fails.",
+        "C": "The debug flow is for UDP traffic.",
+        "D": "The matching firewall policy denies the traffic."
+      },
+      "answer": "A,D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "55_n1.jpg"
+      ]
+    },
+    {
+      "num": 56,
+      "question": "When FortiGate performs SSL/SSH full inspection, you can decide how\nit should react when it detects an invalid certificate.\nWhich three actions are valid actions that FortiGate can perform when it detects an\ninvalid certificate?\n(Choose three answers)",
+      "options": {
+        "A": "Allow",
+        "B": "Trust & Allow",
+        "C": "Allow & Warning",
+        "D": "Block",
+        "E": "Block & Warning"
+      },
+      "answer": "A,B,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 57,
+      "question": "You want to ensure that an SSL VPN user's authenticated session does\nnot remain active after they disconnect from the VPN.\nWhich configuration will ensure this?\n(Choose one answer)",
+      "options": {
+        "A": "Configure the firewall authentication session timeout to be lower than the SSL VPN session timeout.",
+        "B": "Manually clear active firewall authentication sessions after a user disconnects.",
+        "C": "Increase the SSL VPN idle timeout to reduce the chance of early disconnections.",
+        "D": "Enable settings to force the firewall authentication session to end when the SSL VPN session ends."
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 58,
+      "question": "Refer to the exhibit, which shows a firewall policy to enable active\nauthentication.\nWhen attempting to access an external website using an active authentication\nmethod, the user is not presented with a login prompt.\nWhat is the most likely reason for this situation?\n(Choose one answer)",
+      "options": {
+        "A": "The Service DNS is required in the firewall policy.",
+        "B": "The Remote-users group must be set up correctly in the FSSO configuration.",
+        "C": "No matching user account exists for this user.",
+        "D": "The Remote-users group is not added to the Destination."
+      },
+      "answer": "A",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "58_n1.jpg"
+      ]
+    },
+    {
+      "num": 59,
+      "question": "Refer to the exhibit.\nWhy did the FortiGate device drop the packet?\n(Choose one answer)",
+      "options": {
+        "A": "It matched the default implicit firewall policy.",
+        "B": "It matched an explicitly configured firewall policy with the action DENY.",
+        "C": "It cannot reach the next-hop IP.",
+        "D": "It failed the RPF check."
+      },
+      "answer": "A",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "59_n1.jpg"
+      ]
+    },
+    {
+      "num": 60,
+      "question": "Refer to the exhibit, which shows a routing table.\nAn administrator wants to create a new static route so the traffic to the subnet\n172.20.1.0/24 is routed through port2 only.\nWhat are the two criteria that the administrator can use to achieve this objective?\n(Choose two answers)",
+      "options": {
+        "A": "The new static route must have the distance set to 9.",
+        "B": "The existing static route through port3 must have the distance set to 11.",
+        "C": "The new static route must have the priority set to 3.",
+        "D": "The new static route must have the metric set to 1."
+      },
+      "answer": "A,B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "60_n1.jpg"
+      ]
+    },
+    {
+      "num": 61,
+      "question": "Refer to the exhibit.\nWhy is the Antivirus scan switch grayed out when you are creating a new antivirus\nprofile for FTP?\n(Choose one answer)",
+      "options": {
+        "A": "None of the inspected protocols are active in this profile.",
+        "B": "FortiGate, with less than 2 GB RAM, does not support the Antivirus scan feature.",
+        "C": "Antivirus scan is disabled under System -> Feature visibility.",
+        "D": "The Feature Set for the profile is Flow-based but it must be Proxy-based."
+      },
+      "answer": "A",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "61_n1.jpg"
+      ]
+    },
+    {
+      "num": 62,
+      "question": "An administrator has configured a dialup IPsec VPN on FortiGate with\nadd-route enabled. However, the static route is not showing in the routing table.\nWhich two statements about this scenario are correct?\n(Choose two answers)",
+      "options": {
+        "A": "The administrator must enable a dynamic routing protocol on the dialup interface.",
+        "B": "The administrator must use a policy route instead of a static route for add-route to work properly.",
+        "C": "The administrator must ensure phase 2 is successfully established.",
+        "D": "The administrator must define the remote network correctly in the phase 2 selectors."
+      },
+      "answer": "C,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 63,
+      "question": "An administrator configured a FortiGate device to act as a collector for\nagentless polling mode.\nWhat must the administrator add to the FortiGate device to retrieve AD user group\ninformation?\n(Choose one answer)",
+      "options": {
+        "A": "TACACS server",
+        "B": "LDAP server",
+        "C": "RADIUS server",
+        "D": "Keycloak server"
+      },
+      "answer": "B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 64,
+      "question": "What are two features of FortiGate FSSO agentless polling mode?\n(Choose two answers)",
+      "options": {
+        "A": "FortiGate directs the collector agent to use a remote LDAP server.",
+        "B": "FortiGate uses the SMB protocol to read the event viewer logs from the DCs.",
+        "C": "FortiGate does not support workstation check.",
+        "D": "FortiGate uses the AD server as the collector agent."
+      },
+      "answer": "B,C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 65,
+      "question": "A network administrator has enabled full SSL inspection and web\nfiltering on FortiGate. When visiting any HTTPS websites, the browser reports\ncertificate warning errors. When visiting HTTP websites, the browser does not report\nerrors.\nWhat is the reason for the certificate warning errors?\n(Choose one answer)",
+      "options": {
+        "A": "The matching firewall policy is set to proxy inspection mode.",
+        "B": "The certificate used by FortiGate for SSL inspection does not contain the required certificate extensions.",
+        "C": "The full SSL inspection feature does not have a valid license.",
+        "D": "The browser does not trust the certificate used by FortiGate for SSL inspection."
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 66,
+      "question": "A network administrator wants to set up redundant IPsec VPN tunnels\non FortiGate by using two IPsec VPN tunnels and static routes.\nAll traffic must be routed through the primary tunnel when both tunnels are up. The\nsecondary tunnel must be used only if the primary tunnel goes down. In addition,\nFortiGate should be able to detect a dead tunnel to speed up tunnel failover.\nWhich two key configuration changes must the administrator make on FortiGate to\nmeet the requirements?\n(Choose two answers)",
+      "options": {
+        "A": "In the phase1-interface, enable npu-offload to detect a dead tunnel.",
+        "B": "Configure a lower distance on the static route for the primary tunnel, and a higher distance on the static route for the secondary tunnel.",
+        "C": "Enable Dead Peer Detection.",
+        "D": "Use the VPN wizard to create an IPsec template for a redundant IPsec VPN tunnel."
+      },
+      "answer": "B,C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 67,
+      "question": "An administrator wants to form an HA cluster using the FGCP protocol.\nWhich two requirements must the administrator ensure both members fulfill?\n(Choose two answers)",
+      "options": {
+        "A": "They must have the same HA group ID.",
+        "B": "They must have the heartbeat interfaces in the same subnet.",
+        "C": "They must have the same number of configured VDOMs.",
+        "D": "They must have the same hard drive configuration."
+      },
+      "answer": "A,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 68,
+      "question": "FortiGate is integrated with FortiAnalyzer and FortiManager.\nWhen creating a firewall policy, which attribute must an administrator include to\nenhance functionality and enable log recording on FortiAnalyzer and FortiManager?\n(Choose one answer)",
+      "options": {
+        "A": "Policy ID",
+        "B": "Log ID",
+        "C": "Universally Unique Identifier",
+        "D": "Sequence ID"
+      },
+      "answer": "C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 69,
+      "question": "Refer to the exhibit.\nThe administrator configured SD-WAN rules and set the FortiGate traffic log page to\ndisplay SD-WAN-specific columns: SD-WAN Quality and SD-WAN Rule Name.\nFortiGate allows the traffic according to policy ID 1 placed at the top. This is the policy\nthat allows SD-WAN traffic. Despite these settings, the traffic logs do not show the\nname of the SD-WAN rule used to steer those traffic flows.\nWhat could be the reason?\n(Choose one answer)",
+      "options": {
+        "A": "SD-WAN rule names do not appear immediately. The administrator must refresh the page.",
+        "B": "There is no application control profile applied to the firewall policy.",
+        "C": "FortiGate load balanced the traffic according to the implicit SD-WAN rule.",
+        "D": "Destinations in the SD-WAN rules are configured for each application, but feature visibility is not enabled."
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "69_n1.jpg"
+      ]
+    },
+    {
+      "num": 70,
+      "question": "An administrator manages a FortiGate model that supports NTurbo.\nHow does NTurbo acceleration enhance antivirus performance?\n(Choose one answer)",
+      "options": {
+        "A": "For proxy-based inspection, NTurbo offloads traffic to the content processor.",
+        "B": "For flow-based inspection, NTurbo establishes a dedicated data path to redirect traffic between the IPS engine and FortiGate ingress and egress interfaces.",
+        "C": "For proxy-based inspection, NTurbo buffers the whole file and then sends it to the antivirus engine.",
+        "D": "For flow-based inspection, NTurbo creates two inspection sessions on the FortiGate device."
+      },
+      "answer": "B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 71,
+      "question": "Refer to the exhibit.\nReview the intrusion prevention system (IPS) profile signature settings shown in the\nexhibit.\nWhat can you conclude about the signature when adding the FTP.Login.Failed\nsignature to the IPS Sensor profile?\n(Choose one answer)",
+      "options": {
+        "A": "The signature setting includes a group of other signatures.",
+        "B": "FortiGate stores a local copy of the packet that matches the signature.",
+        "C": "FortiGate allows this low-severity signature packet and creates a log.",
+        "D": "The signature setting uses a custom rating threshold."
+      },
+      "answer": "B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "71_n1.jpg"
+      ]
+    },
+    {
+      "num": 72,
+      "question": "Refer to the exhibits.\nA diagram of a FortiGate device connected to the network VIP object and firewall\npolicy configurations are shown.\nThe WAN (port2) interface has the IP address 100.65.0.101/24.\nThe LAN (port4) interface has the IP address 10.0.11.254/24.\nIf the host 100.65.1.111 sends a TCP SYN packet on port 443 to 100.65.0.200, what\nwill the source address, destination address, and destination port of the packet be at\nthe time FortiGate forwards the packet to the destination?\n(Choose one answer)",
+      "options": {
+        "A": "10.0.11.254, 10.0.15.50, and 4443, respectively",
+        "B": "100.65.1.111, 10.0.11.50, and 443, respectively",
+        "C": "10.0.11.254, 100.65.0.200, and 443, respectively",
+        "D": "100.65.1.111, 10.0.11.50, and 4443, respectively"
+      },
+      "answer": "D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "72_n1.jpg"
+      ]
+    },
+    {
+      "num": 73,
+      "question": "Refer to the exhibits.\nThe exhibits show a diagram of a FortiGate device connected to the network, and the\nfirewall policies, VIP, and IP pool configurations on the FortiGate device.\nThe WAN (port2) interface has the IP address 100.65.0.101/24.\nThe LAN (port4) interface has the IP address 10.0.11.254/24.\nThe first firewall policy has NAT enabled using the IP pool. The second firewall policy is\nconfigured with a VIP as the destination address.\nWhich IP address will be used to source NAT (SNAT) the internet traffic coming from a\nworkstation with the IP address 10.0.11.50?\n(Choose one answer)",
+      "options": {
+        "A": "100.65.0.101",
+        "B": "100.65.0.200",
+        "C": "100.65.0.102",
+        "D": "10.0.11.254"
+      },
+      "answer": "C",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "73_n1.jpg"
+      ]
+    },
+    {
+      "num": 74,
+      "question": "Based on the routing table shown in the exhibit, which two statements\nare true?\n(Choose two answers)",
+      "options": {
+        "A": "A packet with the source IP address 10.100.110.10 arriving on port3 is allowed if strict RPF is disabled.",
+        "B": "A packet with the source IP address 10.100.110.10 arriving on port2 is allowed if strict RPF is enabled.",
+        "C": "A packet with the source IP address 10.0.13.10 arriving on port2 is allowed if strict RPF is disabled.",
+        "D": "A packet with the source IP address 10.10.10.10 arriving on port2 is allowed if strict RPF is enabled."
+      },
+      "answer": "B,C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 75,
+      "question": "An administrator configures FortiGuard servers as DNS servers on\nFortiGate using default settings.\nWhat is true about the DNS connection to a FortiGuard server?\n(Choose one answer)",
+      "options": {
+        "A": "It uses DNS over TLS.",
+        "B": "It uses DNS over HTTPS.",
+        "C": "It uses UDP 8888.",
+        "D": "It uses UDP 53."
+      },
+      "answer": "A",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 76,
+      "question": "What are two features of collector agent advanced mode?\n(Choose two answers)",
+      "options": {
+        "A": "dvanced mode supports nested or inherited groups.",
+        "B": "In advanced mode, security profiles can be applied only to user groups, not individual users.",
+        "C": "In advanced mode, FortiGate can be configured as an LDAP client and group filters can be configured on FortiGate.",
+        "D": "Advanced mode uses the Windows convention—NetBios: Domain\\Username."
+      },
+      "answer": "A,C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 77,
+      "question": "Refer to the exhibits.\nAn administrator configured both members of an HA cluster at the same time. After\none week of monitoring, the administrator wants to verify the HA failover\nperformance.\nHow can the administrator force a failover?\n(Choose one answer)",
+      "options": {
+        "A": "The administrator must reset the HA uptime on HQ-NGFW-1.",
+        "B": "The administrator must set the parameter override to enable on HQ-NGFW-2.",
+        "C": "The administrator must increase the HA priority on HQ-NGFW-2.",
+        "D": "The administrator must set the monitored port1 to down on HQ-NGFW-1."
+      },
+      "answer": "D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "77_n1.jpg"
+      ]
+    },
+    {
+      "num": 78,
+      "question": "An administrator needs to analyze and resolve port conflicts between\nSSL VPN and HTTPS administrative access on the same interface.\nIn which two ways can this be done?\n(Choose two answers)",
+      "options": {
+        "A": "Disable SSL VPN if HTTPS administrative access is using port 443 on any interface.",
+        "B": "Keep port 443 for both SSL VPN and HTTPS administrative access on the same interface without any problems.",
+        "C": "Run SSL VPN on one interface using port 443 and enable HTTPS administrative access on a different interface, also using port 443.",
+        "D": "Change the port number for either the SSL VPN service or the HTTPS administrative service if both are on the same interface."
+      },
+      "answer": "C,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 79,
+      "question": "Refer to the exhibit.\nWhat can you conclude from the log shown in the exhibit?\n(Choose one answer)",
+      "options": {
+        "A": "The IPS scan is paused by the IPS diagnostic command with bypass mode option 5.",
+        "B": "The IPS socket buffer is full and IPS engine needs more memory to create new sessions.",
+        "C": "The IPS session scan is paused and reevaluating the packet because of a dirty flag.",
+        "D": "The IPS socket buffer is full and IPS engine cannot decode a packet."
+      },
+      "answer": "B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "79_n1.jpg"
+      ]
+    },
+    {
+      "num": 80,
+      "question": "Refer to the exhibits.\nYou have implemented the application sensor and the corresponding firewall policy as\nshown in the exhibits.\nYou cannot access any of the Google applications, but you are able to access\nwww.fortinet.com.\nWhat would you do to resolve this issue?\n(Choose one answer)",
+      "options": {
+        "A": "Change the Inspection mode to Proxy-based.",
+        "B": "Set SSL inspection to deep-content-inspection.",
+        "C": "Move up Google in the Application and Filter Overrides section to set its priority to 1.",
+        "D": "Add Google.com to the URL category in the security profile"
+      },
+      "answer": "B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "80_n1.jpg"
+      ]
+    },
+    {
+      "num": 81,
+      "question": "Refer to the exhibits.\nA web filter profile configuration and firewall policy configuration are shown.\nYou are trying to access www.facebook.com, but you are redirected to a FortiGuard\nweb filtering block page.\nBased on the exhibits, what is the possible cause of the issue?\n(Choose one answer)",
+      "options": {
+        "A": "The web filter profile feature set is configured incorrectly.",
+        "B": "The web rating override configuration is incorrect.",
+        "C": "The firewall policy inspection mode is incorrect.",
+        "D": "For www.facebook.com, the URL filter action is incorrect."
+      },
+      "answer": "D",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "81_n1.jpg"
+      ]
+    },
+    {
+      "num": 82,
+      "question": "Which two statements about the Security Fabric rating are true?\n(Choose two answers)",
+      "options": {
+        "A": "A license is required to obtain an executive summary in the Security Rating section.",
+        "B": "The root FortiGate provides executive summaries of all the FortiGate devices in the Security Fabric.",
+        "C": "The Security Posture category provides PCI compliance results.",
+        "D": "Security Rating Insights are available only in the Security Rating page."
+      },
+      "answer": "B,C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 83,
+      "question": "An administrator has configured the following settings:\nconfig system settings\nset ses-denied-traffic enable\nend\nconfig system global\nset block-session-timer 30\nend\nWhat are the two results of this configuration?\n(Choose two answers)",
+      "options": {
+        "A": "Denied users are blocked for 30 minutes.",
+        "B": "A session for denied traffic is created.",
+        "C": "Session helpers are disabled for denied traffic.",
+        "D": "The number of logs generated by denied traffic is reduced."
+      },
+      "answer": "B,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 84,
+      "question": "A FortiGate administrator is required to reduce the attack surface on\nthe SSL VPN portal.\nWhich SSL timer can you use to mitigate a denial of service (DoS) attack?\n(Choose one answer)",
+      "options": {
+        "A": "SSL VPN http-request-header-timeout",
+        "B": "SSL VPN dtls-hello-timeout",
+        "C": "SSL VPN login-timeout",
+        "D": "SSL VPN idle-timeout"
+      },
+      "answer": "A",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 85,
+      "question": "Which two statements about the FortiGuard connection are true?\n(Choose two answers)",
+      "options": {
+        "A": "FortiGate is using the default port for FortiGuard communication.",
+        "B": "FortiGate identified the FortiGuard Server using DNS lookup.",
+        "C": "The weight increases as the number of failed packets rises.",
+        "D": "You can configure unreliable protocols to communicate with FortiGuard Server."
+      },
+      "answer": "A,C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 86,
+      "question": "Refer to the exhibits.\nThe exhibits show the application sensor configuration and the Excessive-Bandwidth\nand Apple filter details.\nBased on the configuration, what will happen to Apple FaceTime if there are only a few\ncalls originating or incoming?\n(Choose one answer)",
+      "options": {
+        "A": "Apple FaceTime will be allowed, based on the Video/Audio category configuration.",
+        "B": "Apple FaceTime will be blocked, based on the Excessive-Bandwidth filter configuration.",
+        "C": "Apple FaceTime will be allowed, based on the Apple filter configuration.",
+        "D": "Apple FaceTime will be allowed only if the Apple filter in Application and Filter Overrides is set to Allow."
+      },
+      "answer": "B",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "86_n1.jpg"
+      ]
+    },
+    {
+      "num": 87,
+      "question": "How can the administrator view the log messages shown in the exhibit?\n(Choose two answers)",
+      "options": {
+        "A": "Filtering by Policy UUID and Application Name in the log entry",
+        "B": "By right clicking the Implicit deny policy",
+        "C": "Through FortiGate CLI command diagnose log test",
+        "D": "Through Security event log page"
+      },
+      "answer": "A,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 88,
+      "question": "An administrator wants to address shadow IT visibility challenges and\nprevent users from sending sensitive files outside the organization without proper\napproval.\nWhich FortiSASE method should the administrator implement to achieve these goals?\n(Choose one answer)",
+      "options": {
+        "A": "Secure SD-WAN access (SSD-WAN)",
+        "B": "Secure private access (SPA)",
+        "C": "Secure SaaS access (SSA)",
+        "D": "Secure internet access (SIA)"
+      },
+      "answer": "C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 89,
+      "question": "You are configuring FortiAnalyzer on FortiGate.\nWhich step must you take to connect FortiAnalyzer to FortiGate?\n(Choose one answer)",
+      "options": {
+        "A": "Verify the FortiAnalyzer serial number.",
+        "B": "Authorize FortiGate on FortiAnalyzer.",
+        "C": "Enable disk logging on FortiGate.",
+        "D": "Configure UDP port 514 on FortiGate"
+      },
+      "answer": "B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 90,
+      "question": "Refer to the exhibit.\nYou deployed a FortiGate Cloud-Native Firewall (CNF) in AWS for FortiGate CNF policy\nenforcement for EC2 instance traffic.\nWhich path does the EC2 traffic take from the EC2 instance to the internet?\n(Choose one answer)",
+      "options": {
+        "A": "EC2 instance → internet gateway (IGW) → gateway load balancer (GWLB) → FortiGate CNF → internet",
+        "B": "EC2 instance → GWLB endpoint (GWLBe) → FortiGate CNF → IGW → internet",
+        "C": "EC2 instance → FortiGate CNF → GWLB → GWLBe → IGW → internet",
+        "D": "EC2 instance → GWLBe → FortiGate CNF → GWLBe → IGW → internet"
+      },
+      "answer": "D",
+      "has_exhibit": true,
+      "exhibit_files": [],
+      "missing_exhibit": true
+    },
+    {
+      "num": 91,
+      "question": "You are onboarding an agentless, secure web gateway (SWG) endpoint\nfor secure internet access (SIA).\nWhat will happen to the user's nonweb traffic?\n(Choose one answer)",
+      "options": {
+        "A": "All the nonweb traffic will bypass FortiSASE.",
+        "B": "The endpoint will use split tunneling to redirect nonweb traffic to FortiSASE.",
+        "C": "FortiSASE will use Firewall-as-a-Service (FWaaS) to redirect nonweb traffic.",
+        "D": "FortiSASE will use SWG to redirect nonweb traffic to FortiExtender."
+      },
+      "answer": "A",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 92,
+      "question": "Which two features of IPsec IKEv1 authentication are supported by\nFortiGate?\n(Choose two answers)",
+      "options": {
+        "A": "Extended authentication (XAuth) to request the remote peer to provide a username and password",
+        "B": "No certificate is required on the remote peer when you set the certificate signature as the authentication method",
+        "C": "Extended authentication (XAuth) for faster authentication because fewer packets are exchanged",
+        "D": "Pre-shared key and certificate signature as authentication methods"
+      },
+      "answer": "A,D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 93,
+      "question": "How does FortiExtender connect to FortiSASE in a site-based, remote\ninternet access method?\n(Choose one answer)",
+      "options": {
+        "A": "FortiExtender uses the proxy auto-configuration (PAC) file and an explicit web proxy to connect.",
+        "B": "FortiExtender first connects to a FortiGate LAN extension through a secure web gateway (SWG).",
+        "C": "FortiExtender establishes a secure SSL connection using FortiClient.",
+        "D": "FortiExtender uses a Virtual Extensible LAN (VXLAN)-over-IPsec connection."
+      },
+      "answer": "D",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 94,
+      "question": "Refer to the exhibit.\nA partial cloud topology is shown.\nYou deployed a FortiGate Cloud-Native Firewall (CNF) in AWS.\nDuring the deployment, which components must the FortiGate CNF create to handle\ntraffic from the EC2 instance?\n(Choose one answer)",
+      "options": {
+        "A": "The gateway load balancer endpoint (GWLBe) in the customer virtual private cloud (VPC)",
+        "B": "The GWLB, GWLBe, and the internet gateway (IGW) in the customer VPC",
+        "C": "The CNF VPC, customer VPC, and GWLB",
+        "D": "The customer VPC and GWLBe"
+      },
+      "answer": "A",
+      "has_exhibit": true,
+      "exhibit_files": [
+        "94_n1.jpg"
+      ]
+    },
+    {
+      "num": 95,
+      "question": "Which two ways can you view the log messages shown in the exhibit?\n(Choose two answers)",
+      "options": {
+        "A": "In the Forward Traffic section",
+        "B": "By right clicking the implicit deny policy",
+        "C": "Using the FortiGate CLI command diagnose log test",
+        "D": "By filtering by policy universally unique identifier (UUID) and application name in the log entry"
+      },
+      "answer": "A,C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 96,
+      "question": "Which two components are part of the secure internet access (SIA)\nagent-based mode on FortiSASE?\n(Choose two answers)",
+      "options": {
+        "A": "VPN policies",
+        "B": "FortiSASE Firewall-as-a-Service (FWaaS)",
+        "C": "The proxy auto-configuration (PAC) file",
+        "D": "FortiExtender"
+      },
+      "answer": "A,B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 97,
+      "question": "There are multiple dialup IPsec VPNs configured in aggressive mode on\nthe HQ FortiGate.\nThe requirement is to connect dial-up users to their respective department VPN\ntunnels.\nWhich phase 1 setting you can configure to match the user to the tunnel?\n(Choose one answer)",
+      "options": {
+        "A": "Peer ID",
+        "B": "Local Gateway",
+        "C": "Dead Peer Detection",
+        "D": "IKE Mode Config"
+      },
+      "answer": "A",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 98,
+      "question": "Which statement correctly describes Fortinet Security Intelligence\nAccess (SIA)?\n(Choose one answer)",
+      "options": {
+        "A": "It provides URL filtering based on static local categories only",
+        "B": "It uses FortiGuard threat intelligence to dynamically block malicious destinations",
+        "C": "It encrypts traffic between FortiGate and FortiAnalyzer",
+        "D": "It is used to authenticate users through FortiAuthenticator"
+      },
+      "answer": "B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 99,
+      "question": "What is the primary goal of Fortinet Secure Access Service Edge\n(SASE)?\n(Choose one answer)",
+      "options": {
+        "A": "To replace on-premises firewalls with standalone cloud firewalls",
+        "B": "To provide secure connectivity and security services from the cloud for remote users",
+        "C": "To manage FortiGate devices using FortiManager",
+        "D": "To analyze logs and events using FortiAnalyzer"
+      },
+      "answer": "B",
+      "has_exhibit": false,
+      "exhibit_files": []
+    },
+    {
+      "num": 100,
+      "question": "When configuring the connection between FortiGate and\nFortiAnalyzer, which option indicates that reliable traffic is enabled?\n(Choose one answer)",
+      "options": {
+        "A": "The connection status shows a green check icon",
+        "B": "The interface status is set to up",
+        "C": "A padlock icon appears in the connection settings",
+        "D": "The logging mode is set to real-time"
+      },
+      "answer": "C",
+      "has_exhibit": false,
+      "exhibit_files": []
+    }
+  ]
+}

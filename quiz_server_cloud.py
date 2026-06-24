@@ -129,6 +129,87 @@ if os.path.isfile(_CACHE_FILE):
 
 # Cloud 버전: API 기능 없음 — korean_cache.json 만 사용
 
+# ─────────────────────────────────────────
+# 신규 NSE4 덤프(Brave) — 기존 PDF 파이프라인과 분리된 추가 데이터
+#   · 문제/exhibit/해설을 오프라인(import_brave_dump.py)에서 변환해 둔 산출물 사용
+#   · korean_cache 에 해설을 "추가 키만" 병합 (기존 항목 불변)
+# ─────────────────────────────────────────
+BRAVE_PDFNAME = 'NSE4_FGT_AD-7.6 Brave.pdf'
+BRAVE_STEM    = 'NSE4_FGT_AD-7.6 Brave'
+_BRAVE_QFILE  = os.path.join(WORKSPACE, 'brave_questions.json')
+_BRAVE_KCACHE = os.path.join(WORKSPACE, 'brave_korean_cache.json')
+_brave_raw_questions = []
+
+if os.path.isfile(_BRAVE_KCACHE):
+    try:
+        with open(_BRAVE_KCACHE, encoding='utf-8') as _f:
+            _bk = json.load(_f)
+        korean_cache.update(_bk)   # 추가 키만 병합 (NSE4_FGT_AD-7.6 Brave.pdf::NO.X)
+        print(f"  📖 Brave 해설 병합: {len(_bk)} entries")
+    except Exception as _e:
+        print(f"  ⚠️  Failed to load brave_korean_cache.json: {_e}")
+
+if os.path.isfile(_BRAVE_QFILE):
+    try:
+        with open(_BRAVE_QFILE, encoding='utf-8') as _f:
+            _brave_raw_questions = json.load(_f).get('questions', [])
+        print(f"  📦 Brave 문제 로드: {len(_brave_raw_questions)} questions")
+    except Exception as _e:
+        print(f"  ⚠️  Failed to load brave_questions.json: {_e}")
+
+_brave_q_cache = None
+
+def _build_brave_questions():
+    """brave_questions.json → 표준 question dict 리스트 (extract_questions_from_pdf 동일 형식)."""
+    out = []
+    for q in _brave_raw_questions:
+        ans = sorted(set(re.findall(r'[A-F]', str(q.get('answer', '')).upper())))
+        opts = q.get('options') or {}
+        if not ans or not opts:
+            continue
+        n2c = len(ans)
+        out.append({
+            'num':           f"NO.{q['num']}",
+            'question':      q.get('question', ''),
+            'options':       opts,
+            'answer':        ans,
+            'explanation':   '',
+            'has_exhibit':   bool(q.get('has_exhibit')),
+            'exhibit_count': 1 if q.get('has_exhibit') else 0,
+            'page_num':      1,
+            'num_to_choose': n2c,
+            'is_multiple':   n2c > 1,
+        })
+    return out
+
+def _get_brave_questions():
+    global _brave_q_cache
+    if _brave_q_cache is None:
+        _brave_q_cache = _build_brave_questions()
+    return _brave_q_cache
+
+def _enrich_served_q(q, pdf_name, pdf_path):
+    """문제에 한글해설/번역/exhibit 메타를 채움 (Brave 단일·통합 서빙 공용)."""
+    q = dict(q)
+    q['pdf_name'] = pdf_name
+    q['pdf_path'] = pdf_path
+    q['explanation_ko'] = _lookup_cache(pdf_name, q['num'])
+    trans = _lookup_translation(pdf_name, q['num'])
+    q['question_ko'] = trans.get('question') or None
+    q['options_ko']  = trans.get('options') or {}
+    _ov = _lookup_override(pdf_name, q['num'])
+    if _ov.get('answer_conflict'):
+        q['answer_conflict'] = _ov['answer_conflict']
+    _stem = os.path.splitext(pdf_name)[0]
+    _ex_dir = os.path.join(EXHIBIT_DIR, _stem)
+    if q.get('has_exhibit') and os.path.isdir(_ex_dir):
+        _n = q['num']
+        if (not os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.jpg")) and
+                not os.path.exists(os.path.join(_ex_dir, f"{_n}_n2.jpg")) and
+                os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))):
+            q['missing_exhibit'] = True
+    return q
+
 # Question overrides: 번역 오류 등 특정 문제에 경고 노트
 _OVERRIDES_FILE = os.path.join(WORKSPACE, 'question_overrides.json')
 _question_overrides = {}
@@ -1457,12 +1538,87 @@ class QuizHandler(BaseHTTPRequestHandler):
                                        if x['key'] == prod_key), len(result))
                     result.insert(insert_idx + 1, combined_entry)
 
+            # ── 신규 NSE4 덤프(Brave) 시험 2개 추가 (기존 항목 불변) ──
+            if _brave_raw_questions:
+                result.append({
+                    'key': 'FGT_BRAVE', 'label': 'NSE4 FGT AD-7.6 (신규덤프)',
+                    'version': 'Brave', 'path': '__BRAVE__',
+                    'name': BRAVE_PDFNAME, 'order': 3.4,
+                })
+                _v1395 = next((p for p in all_pdfs
+                               if 'NSE4_FGT' in os.path.basename(p['path'])
+                               and 'V13.95' in p['path']), None)
+                if _v1395:
+                    result.append({
+                        'key': 'FGT_BRAVE_COMBINED',
+                        'label': 'NSE4 FGT AD-7.6 (통합)',
+                        'version': 'V13.95+Brave',
+                        'path': '__BRAVE_COMBINED__|' + _v1395['path'],
+                        'name': 'NSE4 FGT AD-7.6 (통합)', 'order': 3.5,
+                        'combined': True,
+                    })
+                result = sorted(result, key=lambda x: x.get('order', 99))
+
             self.send_json(result)
 
         elif path == '/api/quiz':
             pdf_path = params.get('path', [''])[0]
             count    = int(params.get('count', ['30'])[0])
             order    = params.get('order', [''])[0]
+
+            # ── 신규 Brave 덤프 (단독) ──────────────────────────────────────
+            if pdf_path == '__BRAVE__':
+                all_q = _get_brave_questions()
+                if not all_q:
+                    self.send_json({'error': 'No questions found'}, 400)
+                    return
+                if order == '1':
+                    selected = list(all_q)
+                else:
+                    selected = random.sample(all_q, min(count, len(all_q)))
+                selected = [_enrich_served_q(q, BRAVE_PDFNAME, BRAVE_PDFNAME)
+                            for q in selected]
+                self.send_json({'questions': selected, 'total': len(all_q),
+                                'has_fitz': HAS_FITZ})
+                return
+
+            # ── Brave 통합 (V13.95 + Brave 고유, 보기집합 중복 제거) ──────────
+            if pdf_path.startswith('__BRAVE_COMBINED__'):
+                _v_path = pdf_path.split('|', 1)[1] if '|' in pdf_path else ''
+                if not _v_path or not os.path.exists(_v_path):
+                    self.send_json({'error': 'V13.95 PDF not found'}, 404)
+                    return
+                _v_name = os.path.basename(_v_path)
+                with _question_cache_lock:
+                    if _v_path not in question_cache:
+                        question_cache[_v_path] = extract_questions_from_pdf(_v_path)
+                primary_qs = question_cache[_v_path]
+
+                def _opts_fs(q):
+                    return frozenset(
+                        re.sub(r'\s+', ' ', v.strip().lower())
+                        for v in q.get('options', {}).values() if v.strip())
+                _seen = {_opts_fs(q) for q in primary_qs}
+
+                extra = []
+                for q in _get_brave_questions():
+                    fs = _opts_fs(q)
+                    if fs not in _seen:
+                        _seen.add(fs)
+                        extra.append(q)
+
+                merged = ([_enrich_served_q(q, _v_name, _v_path) for q in primary_qs]
+                          + [_enrich_served_q(q, BRAVE_PDFNAME, BRAVE_PDFNAME) for q in extra])
+                if not merged:
+                    self.send_json({'error': 'No questions found'}, 400)
+                    return
+                if order == '1':
+                    selected = merged
+                else:
+                    selected = random.sample(merged, min(count, len(merged)))
+                self.send_json({'questions': selected, 'total': len(merged),
+                                'has_fitz': HAS_FITZ, 'combined': True})
+                return
 
             # ── 통합 모드: __COMBINED__KEY|path1|path2|... ──────────────────
             _is_combined = pdf_path.startswith('__COMBINED__')
@@ -1619,6 +1775,15 @@ class QuizHandler(BaseHTTPRequestHandler):
             question_num = params.get('q', [''])[0] or None  # e.g. "NO.84"
             opts_mode   = params.get('opts', ['0'])[0] == '1'
             exhibit_n   = int(params.get('n', ['1'])[0])
+
+            # ── 신규 Brave 덤프 exhibit (사전추출 전용, 실제 PDF·page 없음) ──
+            if os.path.basename(pdf_path) == BRAVE_PDFNAME:
+                b64 = _load_preextracted_exhibit(pdf_path, question_num, exhibit_n)
+                if b64:
+                    self.send_json({'image': b64})
+                else:
+                    self.send_json({'no_exhibit': True})
+                return
 
             if not pdf_path or not os.path.exists(pdf_path) or page_num <= 0:
                 self.send_json({'error': 'invalid params'}, 400)

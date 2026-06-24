@@ -217,7 +217,7 @@ def main():
                     pix = fitz.Pixmap(doc, xref)
                     if pix.n - pix.alpha >= 4:        # CMYK → RGB
                         pix = fitz.Pixmap(fitz.csRGB, pix)
-                    out = os.path.join(EX_DIR, f"{qn}_n{n}.jpg")
+                    out = os.path.join(EX_DIR, f"NO.{qn}_n{n}.jpg")
                     pix.save(out)
                     pix = None
                     saved.append(os.path.basename(out))
@@ -227,7 +227,7 @@ def main():
             ex_report[qn] = saved
         elif q['has_exhibit']:
             # 그림 참조하지만 임베드 이미지가 실제로 없음 → 기존 컨벤션대로 '그림 없음' 센티넬
-            with open(os.path.join(EX_DIR, f"{qn}_n1.absent"), 'w') as f:
+            with open(os.path.join(EX_DIR, f"NO.{qn}_n1.absent"), 'w') as f:
                 f.write('')
             q['exhibit_files'] = []
             q['missing_exhibit'] = True

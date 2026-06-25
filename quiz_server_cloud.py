@@ -208,6 +208,9 @@ def _enrich_served_q(q, pdf_name, pdf_path):
                 not os.path.exists(os.path.join(_ex_dir, f"{_n}_n2.jpg")) and
                 os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))):
             q['missing_exhibit'] = True
+        _cnt = _count_preextracted_exhibits(pdf_name, _n)
+        if _cnt is not None:
+            q['exhibit_imgs'] = _cnt
     return q
 
 # Question overrides: 번역 오류 등 특정 문제에 경고 노트
@@ -332,6 +335,22 @@ def _load_preextracted_exhibit(pdf_path: str, question_num: str, exhibit_n: int)
             return base64.b64encode(f.read()).decode()
     except Exception:
         return None
+
+
+def _count_preextracted_exhibits(pdf_name, question_num, maxn=6):
+    """사전추출 디렉터리에서 n1부터 연속으로 존재하는 exhibit jpg 개수를 센다.
+    사전추출 디렉터리가 없으면(업로드 PDF 등) None 반환 → 프론트는 기존 동작으로 폴백."""
+    stem = os.path.splitext(os.path.basename(pdf_name))[0]
+    d = os.path.join(EXHIBIT_DIR, stem)
+    if not os.path.isdir(d):
+        return None
+    c = 0
+    for k in range(1, maxn + 1):
+        if os.path.exists(os.path.join(d, f"{question_num}_n{k}.jpg")):
+            c += 1
+        else:
+            break
+    return c
 
 
 # 앱에서 노출하지 않을 PDF (파일은 보존하되 목록/풀이에서 제외).
@@ -1696,6 +1715,9 @@ class QuizHandler(BaseHTTPRequestHandler):
                                 not os.path.exists(os.path.join(_ex_dir, f"{_n}_n2.jpg")) and
                                 os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))):
                             q['missing_exhibit'] = True
+                        _cnt = _count_preextracted_exhibits(_pname, _n)
+                        if _cnt is not None:
+                            q['exhibit_imgs'] = _cnt
 
                 for q in selected:
                     _enrich_q(q)
@@ -1766,6 +1788,9 @@ class QuizHandler(BaseHTTPRequestHandler):
                     _n1_abs = os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))
                     if not _n1_jpg and not _n2_jpg and _n1_abs:
                         q['missing_exhibit'] = True
+                    _cnt = _count_preextracted_exhibits(pdf_name, _n)
+                    if _cnt is not None:
+                        q['exhibit_imgs'] = _cnt
             self.send_json({'questions': selected, 'total': len(all_q),
                             'has_fitz': HAS_FITZ})
 
@@ -2054,6 +2079,23 @@ function ExhibitImage({ pdfPath, pageNum, qNum, optsMode, exhibitN=1 }) {
       )}
     </>
   );
+}
+
+/* ── ExhibitImages: 한 문제의 exhibit 여러 장(n=1..N)을 순서대로 렌더 ──
+   서버가 exhibit_imgs(사전추출 이미지 개수)를 주면 그만큼, 없으면(업로드 등)
+   기존 동작(n=1 + page_num>0이면 n=2)으로 폴백. */
+function ExhibitImages({ q, pdfPath }) {
+  const path = q.pdf_path || pdfPath;
+  const cnt = (typeof q.exhibit_imgs === 'number' && q.exhibit_imgs > 0)
+    ? q.exhibit_imgs
+    : (q.page_num > 0 ? 2 : 1);
+  const imgs = [];
+  for (let i = 1; i <= cnt; i++) {
+    imgs.push(
+      <ExhibitImage key={i} pdfPath={path} pageNum={q.page_num} qNum={q.num} exhibitN={i} />
+    );
+  }
+  return <>{imgs}</>;
 }
 
 /* ── KoreanExplain: 캐시에서 즉시 표시 (Cloud 버전 — API 없음) ── */
@@ -2363,12 +2405,7 @@ function StudyDetailScreen({ questions, pdfPath, studyIdx, setStudyIdx, onBack }
       <div className="card">
         {/* Exhibit: n=1 먼저(PDF 순서 첫 번째), n=2 나중(두 번째) */}
         {q.has_exhibit && !q.missing_exhibit && (
-          <>
-            <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} />
-            {q.page_num > 0 && (
-              <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
-            )}
-          </>
+          <ExhibitImages q={q} pdfPath={pdfPath} />
         )}
         {q.missing_exhibit && (
           <div style={{marginBottom:'12px',padding:'10px 14px',borderRadius:'8px',
@@ -2592,12 +2629,7 @@ function PracticeScreen({ questions, onExit, pdfPath }){
         </div>
 
         {q.has_exhibit && !q.missing_exhibit && q.page_num>0 && (
-          <>
-            <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} />
-            {q.page_num > 0 && (
-              <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
-            )}
-          </>
+          <ExhibitImages q={q} pdfPath={pdfPath} />
         )}
         {q.has_exhibit && !q.missing_exhibit && q.page_num<=0 &&
           <div className="exhibit-warn">
@@ -2774,12 +2806,7 @@ function QuizScreen({ questions, onFinish, onExit, pdfPath }){
       {/* question */}
       <div className="card">
         {q.has_exhibit && q.page_num > 0 && (
-          <>
-            <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} />
-            {q.page_num > 0 && (
-              <ExhibitImage pdfPath={q.pdf_path||pdfPath} pageNum={q.page_num} qNum={q.num} exhibitN={2} />
-            )}
-          </>
+          <ExhibitImages q={q} pdfPath={pdfPath} />
         )}
         {q.has_exhibit && q.page_num <= 0 &&
           <div className="exhibit-warn">
@@ -2959,12 +2986,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
               <div className="divider" />
               {/* exhibit image */}
               {r.has_exhibit && !r.missing_exhibit && r.page_num > 0 && (
-                <>
-                  <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} />
-                  {r.page_num > 0 && (
-                    <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
-                  )}
-                </>
+                <ExhibitImages q={r} pdfPath={pdfPath} />
               )}
               {r.missing_exhibit && (
                 <div style={{marginBottom:'12px',padding:'10px 14px',borderRadius:'8px',
@@ -3044,12 +3066,7 @@ function ResultsScreen({ questions, answers, elapsed, onRetry, pdfPath }){
             {expandedCorrect===r.num && <>
               <div className="divider" />
               {r.has_exhibit && !r.missing_exhibit && r.page_num > 0 && (
-                <>
-                  <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} />
-                  {r.page_num > 0 && (
-                    <ExhibitImage pdfPath={r.pdf_path||pdfPath} pageNum={r.page_num} qNum={r.num} exhibitN={2} />
-                  )}
-                </>
+                <ExhibitImages q={r} pdfPath={pdfPath} />
               )}
               {r.missing_exhibit && (
                 <div style={{marginBottom:'12px',padding:'10px 14px',borderRadius:'8px',

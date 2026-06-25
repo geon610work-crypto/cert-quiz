@@ -202,15 +202,14 @@ def _enrich_served_q(q, pdf_name, pdf_path):
         q['answer_conflict'] = _ov['answer_conflict']
     _stem = os.path.splitext(pdf_name)[0]
     _ex_dir = os.path.join(EXHIBIT_DIR, _stem)
-    if q.get('has_exhibit') and os.path.isdir(_ex_dir):
+    if os.path.isdir(_ex_dir):
         _n = q['num']
-        if (not os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.jpg")) and
-                not os.path.exists(os.path.join(_ex_dir, f"{_n}_n2.jpg")) and
-                os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))):
-            q['missing_exhibit'] = True
         _cnt = _count_preextracted_exhibits(pdf_name, _n)
-        if _cnt is not None:
+        if _cnt:                       # 실제 추출 이미지가 있으면 = exhibit 있음(텍스트 미검출이어도 강제)
+            q['has_exhibit'] = True
             q['exhibit_imgs'] = _cnt
+        elif q.get('has_exhibit') and os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent")):
+            q['missing_exhibit'] = True
     return q
 
 # Question overrides: 번역 오류 등 특정 문제에 경고 노트
@@ -1709,15 +1708,14 @@ class QuizHandler(BaseHTTPRequestHandler):
                         q['answer_conflict'] = _ov['answer_conflict']
                     _stem = os.path.splitext(_pname)[0]
                     _ex_dir = os.path.join(EXHIBIT_DIR, _stem)
-                    if q.get('has_exhibit') and os.path.isdir(_ex_dir):
+                    if os.path.isdir(_ex_dir):
                         _n = q['num']
-                        if (not os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.jpg")) and
-                                not os.path.exists(os.path.join(_ex_dir, f"{_n}_n2.jpg")) and
-                                os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))):
-                            q['missing_exhibit'] = True
                         _cnt = _count_preextracted_exhibits(_pname, _n)
-                        if _cnt is not None:
+                        if _cnt:
+                            q['has_exhibit'] = True
                             q['exhibit_imgs'] = _cnt
+                        elif q.get('has_exhibit') and os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent")):
+                            q['missing_exhibit'] = True
 
                 for q in selected:
                     _enrich_q(q)
@@ -1780,17 +1778,15 @@ class QuizHandler(BaseHTTPRequestHandler):
                 _ov = _lookup_override(pdf_name, q['num'])
                 if _ov.get('answer_conflict'):
                     q['answer_conflict'] = _ov['answer_conflict']
-                # Exhibit missing: has_exhibit=True but all pre-extracted files are absent
-                if q.get('has_exhibit') and os.path.isdir(_ex_dir):
+                # 사전추출 이미지가 있으면 exhibit 있음(텍스트 미검출이어도 강제), 없고 absent면 missing
+                if os.path.isdir(_ex_dir):
                     _n = q['num']
-                    _n1_jpg = os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.jpg"))
-                    _n2_jpg = os.path.exists(os.path.join(_ex_dir, f"{_n}_n2.jpg"))
-                    _n1_abs = os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent"))
-                    if not _n1_jpg and not _n2_jpg and _n1_abs:
-                        q['missing_exhibit'] = True
                     _cnt = _count_preextracted_exhibits(pdf_name, _n)
-                    if _cnt is not None:
+                    if _cnt:
+                        q['has_exhibit'] = True
                         q['exhibit_imgs'] = _cnt
+                    elif q.get('has_exhibit') and os.path.exists(os.path.join(_ex_dir, f"{_n}_n1.absent")):
+                        q['missing_exhibit'] = True
             self.send_json({'questions': selected, 'total': len(all_q),
                             'has_fitz': HAS_FITZ})
 

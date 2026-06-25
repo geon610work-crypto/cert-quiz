@@ -255,6 +255,21 @@ if os.path.isfile(_TRANS_FILE):
     except Exception as _e:
         print(f"  ⚠️  Failed to load translation_cache.json: {_e}")
 
+# 신규 Brave 덤프 직독직해 — 추가 키만 병합 (기존 translation_cache 불변)
+_BRAVE_TRANS = os.path.join(WORKSPACE, 'brave_translation_cache.json')
+if os.path.isfile(_BRAVE_TRANS):
+    try:
+        with open(_BRAVE_TRANS, encoding='utf-8') as _f:
+            _bt = json.load(_f)
+        translation_cache.update(_bt)
+        for _k, _v in _bt.items():
+            if '::' in _k:
+                _fname, _qnum = _k.rsplit('::', 1)
+                _trans_norm_index[f"{_norm_pdf(_fname)}::{_qnum}"] = _v
+        print(f"  🌐 Brave 직독직해 병합: {len(_bt)} entries")
+    except Exception as _e:
+        print(f"  ⚠️  Failed to load brave_translation_cache.json: {_e}")
+
 def _lookup_translation(pdf_name, q_num):
     """번역 캐시 조회: 정확 일치 → 정규화 일치 순서로 탐색."""
     key = f"{pdf_name}::{q_num}"

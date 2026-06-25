@@ -15,6 +15,9 @@
     },
     "NO.89": {
       "answer_conflict": "한국어 해설은 A(ASBR)가 정답이라고 설명합니다. (덤프: A, D) — 이 문제 페이지에는 exhibit가 없으며, 동일 덤프의 관련 문제 NO.73 OSPF 출력 exhibit는 'This router is an ABR'와 Router ID 0.0.0.5를 보여줍니다. 즉 라우터는 ASBR이 아닌 ABR이고 0.0.0.5는 area가 아닌 Router ID이므로 덤프의 A(ASBR)·D(area 0.0.0.5) 모두 근거가 약합니다. exhibit 부재로 확정 불가."
+    },
+    "NO.65": {
+      "answer_conflict": "한국어 해설은 D(set route-overlap allow)가 정답이라고 설명합니다. (덤프: A) — 중복 서브넷 ECMP를 활성화하는 phase2 설정은 route-overlap allow뿐이며, use-new/use-old는 단일 경로만 남겨 ECMP가 성립하지 않습니다(적대적 재검증 통과). 덤프 정답은 틀린 것으로 판단."
     }
   }
 }

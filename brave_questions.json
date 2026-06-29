@@ -81,7 +81,7 @@
         "C": "Ensure that all NOC_Access users are assigned the super_admin role to guarantee access.",
         "D": "Increase the admintimeout value under config system accprofile NOC_Access."
       },
-      "answer": "B",
+      "answer": "D",
       "has_exhibit": true,
       "exhibit_files": [
         "NO.6_n1.jpg"
@@ -223,7 +223,7 @@
         "D": "They monitor the state of the FortiGate device.",
         "E": "All the SLA targets can be configured."
       },
-      "answer": "A,B,E",
+      "answer": "B,C,E",
       "has_exhibit": false,
       "exhibit_files": []
     },
@@ -682,7 +682,7 @@
         "D": "Move up Google in the Application and Filter Overrides section to set its priority to 1.",
         "E": "Set SSL inspection to deep-content inspection."
       },
-      "answer": "B,E",
+      "answer": "C,D",
       "has_exhibit": false,
       "exhibit_files": []
     },
@@ -1319,7 +1319,7 @@
         "C": "Using the FortiGate CLI command diagnose log test",
         "D": "By filtering by policy universally unique identifier (UUID) and application name in the log entry"
       },
-      "answer": "A,C",
+      "answer": "A,D",
       "has_exhibit": false,
       "exhibit_files": []
     },

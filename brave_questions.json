@@ -1130,7 +1130,7 @@
         "C": "The firewall policy inspection mode is incorrect.",
         "D": "For www.facebook.com, the URL filter action is incorrect."
       },
-      "answer": "D",
+      "answer": "C",
       "has_exhibit": true,
       "exhibit_files": [
         "NO.81_n1.jpg"
